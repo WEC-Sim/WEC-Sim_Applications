@@ -12,14 +12,20 @@ Node      Type      X        Y         Z        M        V        FX       FY   
 4         Fix      133.5   231.23   -70.00       0        0        0        0       0       0     0
 5         Vessel     1.5  -2.598    -10.00       0        0        0        0       0       0     0
 6         Fix      133.5  -231.23   -70.00       0        0        0        0       0       0     0
+7         Connect  -40.0     0      -10.00     16755   33.510      0        0       0    12.566   1
+8         Connect   20.0   34.642   -10.00     16755   33.510      0        0       0    12.566   1
+9         Connect   20.0  -34.642   -10.00     16755   33.510      0        0       0    12.566   1
 ---------------------- LINE PROPERTIES -----------------------------------------------------
 Line     LineType  UnstrLen  NumSegs   NodeAnch  NodeFair  Flags/Outputs
 (-)      (-)       (m)         (-)       (-)       (-)       (-)
-1        chain     280.0        20        2         1        tp
-2        chain     280.0        20        4         3        tp
-3        chain     280.0        20        6         5        tp
+1        chain     240.0        15        2         7        tp
+2        chain     240.0        15        4         8        tp
+3        chain     240.0        15        6         9        tp
+4        chain      40.0         5        7         1        tp
+5        chain      40.0         5        8         3        tp
+6        chain      40.0         5        9         5        tp
 ---------------------- SOLVER OPTIONS-----------------------------------------
-0.001    dtM          - time step to use in mooring integration
+0.0005   dtM          - time step to use in mooring integration
 0        WaveKin      - wave kinematics flag (0=neglect, the only option currently supported)
 3.0e6    kBot         - bottom stiffness
 3.0e5    cBot         - bottom damping
@@ -28,5 +34,5 @@ Line     LineType  UnstrLen  NumSegs   NodeAnch  NodeFair  Flags/Outputs
 0.001    threshIC     - threshold for IC con
 0        WriteUnits   - option to skip units line in output files if zero
 -------------------------- OUTPUTS --------------------------------
-FairTen1 FairTen2 FairTen3 Con2px Con2py Con2pz
+FairTen4 FairTen5 FairTen6
 --------------------- need this line ------------------
