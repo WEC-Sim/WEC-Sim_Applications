@@ -1,4 +1,4 @@
-# PTO-Sim_RM3_w_Mechanical_PTO
+# RM3_DD_PTO
 
 **Author:**          Ratanak So
 

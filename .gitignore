@@ -1,8 +1,6 @@
-view_html.sh
-*.sublime-workspace
-*.sublime-project
-*vis-temp*
+$ cat .gitignore
 
+# File Types
 *~
 *.acn
 *.acr
@@ -42,19 +40,25 @@ view_html.sh
 *.mtc3
 *.o
 *.obj
+*.png
+*.r2015b
 *.slx.r2015b
+*.sublime-workspace
+*.sublime-project
 *.synctex
 *.synctex.gz
 *.synctex.gz(busy)
 *.toc
 *.zip
 
-.DS_Store
-
 # MATLAB
-*/output/
-*/output_previous/
-*/slprj
+**/output/
+**/output_previous/
+**/slprj/
+**/mooring/
 *build_exception*
 
-
+# Other
+.DS_Store
+view_html.sh
+*vis-temp*
