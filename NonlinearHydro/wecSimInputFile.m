@@ -24,7 +24,7 @@ waves.T = 6;                              % Wave period [s]
 % waves.randPreDefined = 1;
 
 %Body Data
-body(1) = bodyClass('wamit/ellipsoid.h5');% Initialize bodyClass for Float
+body(1) = bodyClass('hydroData/ellipsoid.h5');% Initialize bodyClass for Float
 body(1).mass = 'equilibrium';               % Mass from WAMIT [kg]
 body(1).momOfInertia = ...                  % Moment of Inertia [kg-m^2]
     [1.375264e6 1.375264e6 1.341721e6];      

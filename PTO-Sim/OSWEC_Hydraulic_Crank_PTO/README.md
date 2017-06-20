@@ -1,4 +1,4 @@
-# PTO-Sim_OSWEC1_w_NCF_Hydraulic_PTO
+# OSWEC_Hydraulic_Crank_PTO
 
 **Author:**          Ratanak So
 
