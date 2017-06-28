@@ -4,8 +4,6 @@ clear all; close all; clc;
 i = 1:4;
 
 figure
-    f = gcf;
-    f.Position = [1 38.3333 1280 610];
     lin={'-','--','-','--'};
     col = {'b','b','k','k'};
 

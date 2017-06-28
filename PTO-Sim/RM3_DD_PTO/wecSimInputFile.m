@@ -1,18 +1,16 @@
 %% Simulation Data
-simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'RM3_DD_PTO.slx';      %Location of Simulink Model File
-simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer='on';                     % Turn SimMechanics Explorer (on/off)
-simu.startTime = 0;                     % Simulation Start Time [s]
-simu.rampT = 100;                       % Wave Ramp Time Length [s]
-simu.endTime=400;                       % Simulation End Time [s]
-simu.dt = 0.001;                        % Simulation Time-Step [s]
+simu = simulationClass();               
+simu.simMechanicsFile = 'RM3_DD_PTO.slx';      %Location of Simulink Model File with PTO-Sim                    
+simu.startTime = 0;                     
+simu.rampT = 100;                       
+simu.endTime=400;   
+simu.dt = 0.001;                       
 
 %% Wave Information
 % Regular Waves  
-waves = waveClass('regular');           % Initialize Wave Class and Specify Type   
-waves.H = 2.5;                          % Wave Height [m]
-waves.T = 8;                            % Wave Period [s]
+waves = waveClass('regular');            
+waves.H = 2.5;                          
+waves.T = 8;                            
 
 %% Body Data
 % Float
@@ -29,8 +27,8 @@ body(2).momOfInertia = [94419614.57 94407091.24 28542224.82];
 
 %% PTO and Constraint Parameters
 % Translational Constraint
-constraint(1) = constraintClass('Constraint1'); % Initialize Constraint Class for Constraint1
-constraint(1).loc = [0 0 0];           	% Constraint Location [m]
+constraint(1) = constraintClass('Constraint1'); 
+constraint(1).loc = [0 0 0]; 
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');           	% Initialize PTO Class for PTO1

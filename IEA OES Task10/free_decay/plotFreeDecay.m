@@ -4,9 +4,6 @@ clear all; close all; clc;
 offset = [0,1,3,5];
 
 figure
-    f = gcf;
-    f.Position = [1 38.3333 1280 610];
-
 
 for ii = 1:length(offset)
     cd([num2str(offset(ii),'%2g'),'m/output'])
