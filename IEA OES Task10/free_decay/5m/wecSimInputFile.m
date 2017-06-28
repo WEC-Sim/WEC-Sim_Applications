@@ -9,7 +9,7 @@ simu.explorer = 'off';
 simu.adjMassWeightFun = 0.47761120825;
 
 %% Wave Information  
-%% Regular Waves  
+% Regular Waves  
 waves = waveClass('noWaveCIC');        %Create the Wave Variable and Specify Type   
 waves.noWaveHydrodynamicCoeffT = 0;
 %waves.H = 2.5;                          %Wave Height [m]
@@ -26,7 +26,7 @@ body(1).geometryFile = 'geometry/sphere.stl';    %Geometry File
 body(1).initDisp.initLinDisp = [ 0 0 5];
 
 %% PTO and Constraint Parameters
-%% Floating (3DOF) Joint
+% Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); %Create Constraint Variable and Set Constraint Name
 constraint(1).loc = [0 0 0];                    %Constraint Location [m]
 
