@@ -58,6 +58,10 @@ $ cat .gitignore
 **/mooring/
 *build_exception*
 
+# Applications
+/RM3_MCR/**/*.mat
+!/RM3_MCR/RM3_MCROPT3/mcrExample.mat
+
 # Other
 .DS_Store
 view_html.sh

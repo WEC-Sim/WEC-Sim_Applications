@@ -4,9 +4,9 @@ simu.simMechanicsFile = 'RM3_cHydraulic_PTO.slx';      %Location of Simulink Mod
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer='on';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
+simu.rampT = 100;                       % Wave Ramp Time Length [s]
 simu.endTime=400;                       % Simulation End Time [s]
 simu.dt = 0.01;                         % Simulation Time-Step [s]
-simu.rampT = 100;                       % Wave Ramp Time Length [s]
 
 %% Wave Information
 % Irregular Waves using PM Spectrum

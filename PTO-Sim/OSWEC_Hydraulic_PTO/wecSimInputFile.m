@@ -4,13 +4,13 @@ simu.simMechanicsFile = 'OSWEC_Hydraulic_PTO.slx';          % Specify Simulink M
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer='on';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
-simu.endTime=400;
-simu.dt = 0.01;
-simu.rampT = 100;
-simu.CITime = 30;
+simu.rampT = 100;                       % Wave Ramp Time Length [s]
+simu.endTime=400;                       % Simulation End Time [s]
+simu.dt = 0.01;                         % Simulation Time-Step [s]
+simu.CITime = 30;                       % Simulation CI Time [s]
 
 %% Wave Information
-% %Irregular Waves using PM Spectrum
+%Irregular Waves using PM Spectrum
 waves = waveClass('irregular');
 waves.H = 2.5;
 waves.T = 8;
@@ -31,7 +31,7 @@ body(2).geometryFile = '../../../tutorials/OSWEC/geometry/base.stl';    % Geomet
 body(2).mass = 'fixed';                        % Creates Fixed Body
 
 %% PTO and Constraint Parameters
-% Fixed
+% Fixed Constraint
 constraint(1)= constraintClass('Constraint1');  % Initialize ConstraintClass for Constraint1
 constraint(1).loc = [0 0 -10];                  % Constraint Location [m]
 
