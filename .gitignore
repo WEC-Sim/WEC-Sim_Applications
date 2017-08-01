@@ -8,6 +8,7 @@ $ cat .gitignore
 *.asv
 *.autosave
 *.aux
+*.avi
 *.bak
 *.bat
 *.bbl
@@ -49,6 +50,7 @@ $ cat .gitignore
 *.synctex.gz
 *.synctex.gz(busy)
 *.toc
+*.vtp
 *.zip
 
 # MATLAB
@@ -61,6 +63,7 @@ $ cat .gitignore
 # Applications
 /RM3_MCR/**/*.mat
 !/RM3_MCR/RM3_MCROPT3/mcrExample.mat
+**/vtk/*
 
 # Other
 .DS_Store
