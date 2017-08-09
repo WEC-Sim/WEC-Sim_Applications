@@ -7,11 +7,11 @@ simu.startTime = 0;
 simu.rampT = 100;                       
 simu.endTime=400;                       
 simu.dt = 0.1; 	
-simu.b2b = 1;                       % Turn B2B interactions 'on/off'   
+simu.b2b = 1;                       % Turn B2B interactions 'on'   
 
 %% Wave Information 
 % Regular Waves  
-waves = waveClass('regular');           
+waves = waveClass('regular');      % Regular Waves     
 waves.H = 2.5;                          
 waves.T = 8;                            
 
