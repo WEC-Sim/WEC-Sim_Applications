@@ -4,7 +4,7 @@ simu.simMechanicsFile = 'OSWEC.slx';
 simu.mode = 'normal';                   
 simu.explorer='on';                     
 simu.startTime = 0;                    
-simu.rampT = 100;                       
+simu.rampTime = 100;                       
 simu.endTime=400;                       
 simu.dt = 0.1;                          
 

@@ -5,7 +5,7 @@ simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & 
 % simu.mode = 'rapid-accelerator';        % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer='off';                    % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
-simu.rampT = 100;                       % Wave Ramp Time Length [s]
+simu.rampTime = 100;                       % Wave Ramp Time Length [s]
 simu.endTime=400;                       % Simulation End Time [s]
 simu.dt = 0.1; 							% Simulation time-step [s]
 simu.mcrCaseFile = 'mcrExample.mat';

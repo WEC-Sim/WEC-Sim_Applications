@@ -3,14 +3,14 @@ simu = simulationClass();
 simu.simMechanicsFile = 'RM3MoorDyn.slx';      % Location of Simulink Model File with MoorDyn
 simu.mode='accelerator';                
 simu.explorer = 'off';
-simu.rampT = 40;                        
+simu.rampTime = 40;                        
 simu.endTime=400;                       
 simu.dt = 0.01;                          
 simu.dtCITime = 0.05;
 
 %% Wave Information
 % User-Defined Time-Series
-waves = waveClass('userDefined');               % Create the Wave Variable and Specify Type
+waves = waveClass('etaImport');               % Create the Wave Variable and Specify Type
 waves.etaDataFile = 'umpqua46229_6_2008.mat';   % Name of User-Defined Time-Series File [:,2] = [time, wave_elev]
 
 %% Body Data
