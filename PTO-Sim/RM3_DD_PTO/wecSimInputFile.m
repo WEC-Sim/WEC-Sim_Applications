@@ -2,7 +2,7 @@
 simu = simulationClass();               
 simu.simMechanicsFile = 'RM3_DD_PTO.slx';      %Location of Simulink Model File with PTO-Sim                    
 simu.startTime = 0;                     
-simu.rampT = 100;                       
+simu.rampTime = 100;                       
 simu.endTime=400;   
 simu.dt = 0.001;                       
 
@@ -14,14 +14,14 @@ waves.T = 8;
 
 %% Body Data
 % Float
-body(1) = bodyClass('../../../tutorials/RM3/hydroData/rm3.h5');             
-body(1).geometryFile = '../../../tutorials/RM3/geometry/float.stl';      
+body(1) = bodyClass('../hydroData/rm3.h5');             
+body(1).geometryFile = '../geometry/float.stl';      
 body(1).mass = 'equilibrium';                   
 body(1).momOfInertia = [20907301 21306090.66 37085481.11];     
 
 % Spar/Plate
-body(2) = bodyClass('../../../tutorials/RM3/hydroData/rm3.h5');     
-body(2).geometryFile = '../../../tutorials/RM3/geometry/plate.stl';  
+body(2) = bodyClass('../hydroData/rm3.h5');     
+body(2).geometryFile = '../geometry/plate.stl';  
 body(2).mass = 'equilibrium';                   
 body(2).momOfInertia = [94419614.57 94407091.24 28542224.82];
 

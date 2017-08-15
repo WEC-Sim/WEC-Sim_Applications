@@ -9,8 +9,7 @@ simu.adjMassWeightFun = 0.47761120825;
 
 %% Wave Information  
 % Regular Waves  
-waves = waveClass('noWaveCIC');        
-waves.noWaveHydrodynamicCoeffT = 0;
+waves = waveClass('noWaveCIC');    
 
 %% Body Data
 % Float
