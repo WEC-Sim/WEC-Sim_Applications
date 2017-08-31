@@ -58,11 +58,11 @@ $ cat .gitignore
 **/output/
 **/output_previous/
 **/slprj/
-**/mooring/
 *build_exception*
 
 # Applications
 /RM3_MCR/**/*.mat
+/mooring/*.out
 !/RM3_MCR/RM3_MCROPT3/mcrExample.mat
 **/vtk/*
 
