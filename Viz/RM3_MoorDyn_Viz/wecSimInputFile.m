@@ -18,8 +18,9 @@ waves = waveClass('irregular');             % Create the Wave Variable and Speci
 waves.H = 2;                        
 waves.T = 8;                          
 waves.spectrumType = 'JS';
-%waves.viz.numPointsX = 1000;
-%waves.viz.numPointsY = 2;
+waves.freqDisc = 'Traditional';
+waves.viz.numPointsX = 1000;
+waves.viz.numPointsY = 2;
 
 %% Body Data
 % Float
