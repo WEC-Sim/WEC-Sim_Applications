@@ -1,13 +1,14 @@
 %Example of B2B on/off with Regular and RegularCIC
 
 clear all; close all; clc;
-i = 1:4;
+cases = 1:6;
 
 figure
-    lin={'-','--','-','--'};
-    col = {'b','b','k','k'};
+    lin={'-','--','-','--','-','--'};
+%     col = {'b','b','k','k','c'};
+    col = {'b','b','k','k',[0 0.678 0.816],[0 0.678 0.816]};
 
-for i = 1:4
+for i = 1:length(cases)
     cd(['B2B_Case',num2str(i,'%2g'),'/output'])
     load RM3_matlabWorkspace.mat
     
@@ -28,6 +29,6 @@ for i = 1:4
     hold on
     cd ../..
 end
-legend('Regular','Regular B2B','RegularCIC','RegularCIC B2B',...
+legend('Regular','Regular B2B','RegularCIC','RegularCIC B2B','RegularCIC SS','RegularCIC B2B SS',...
     'Location','northwest','Orientation','horizontal')
     
