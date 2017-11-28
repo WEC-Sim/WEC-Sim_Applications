@@ -13,7 +13,7 @@ waves = waveClass('irregular');
 waves.H = 2.5;
 waves.T = 8;
 waves.spectrumType = 'PM';
-waves.randPreDefined=1;
+waves.phaseSeed=1;
 
 %% Body Data
 % Flap

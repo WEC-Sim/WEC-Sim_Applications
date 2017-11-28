@@ -28,7 +28,7 @@ body(2).nhBody = 1;                     % Turn non-hydro body on
 body(2).name = 'base';                  % Specify body name
 body(2).mass = 999;                     % Specify Mass  
 body(2).momOfInertia = [1 1 1];         % Specify MOI  
-body(2).cg = [0 0 0];                   % Specify Cg  
+body(2).cg = [0 0 -10.9];                   % Specify Cg  
 body(2).dispVol = 0;                    % Specify Displaced Volume  
 
 %% PTO and Constraint Parameters
