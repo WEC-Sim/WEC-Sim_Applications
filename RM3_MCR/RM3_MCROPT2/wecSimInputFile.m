@@ -12,8 +12,6 @@ simu.dt = 0.1; 							% Simulation time-step [s]
 %% Wave Information 
 % Regular Waves  
 waves = waveClass('regularCIC');        % Initialize Wave Class and Specify Type 
-% waves.H = 1.5;                          % Wave Height [m]
-% waves.T = 6;                            % Wave Period [s]
 waves.statisticsDataLoad = 'waveStatistic.xlsx';
 
 %% Body Data
