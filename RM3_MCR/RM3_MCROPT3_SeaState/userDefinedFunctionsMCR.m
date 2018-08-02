@@ -22,9 +22,6 @@ if imcr == length(mcr.cases)
             'linestyle',lin{i},'color',col{i})
         hold on
         ylabel('Wave Surface Elevation [m]')
-        legend('SS1','SS2','SS3',...
-        'Location','northwest','Orientation','horizontal')    
-        title('MCR for RM3 with 3 Sea States (SS1>SS2>SS3) and same phase ')
     
         subplot(2,1,2)
         plot(output.bodies(1).time,output.bodies(1).position(:,3),...
@@ -32,6 +29,11 @@ if imcr == length(mcr.cases)
         hold on
         ylabel('Float Heave Response[m]')
     end
+subplot(2,1,1)
+    title('MCR for RM3 with 3 Sea States (SS1<SS2<SS3) and same phase ')
+    legend('SS1','SS2','SS3',...
+        'Location','northwest','Orientation','horizontal')    
+subplot(2,1,2)    
     legend('SS1','SS2','SS3',...
         'Location','northwest','Orientation','horizontal')              
 end
