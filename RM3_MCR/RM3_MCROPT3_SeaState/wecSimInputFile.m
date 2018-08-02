@@ -13,7 +13,6 @@ simu.mcrCaseFile = 'mcrExample.mat';
 %% Wave Information 
 % Regular Waves  
 waves = waveClass('spectrumImport');        % Initialize Wave Class and Specify Type 
-% waves.freqDisc = 'Traditional';
 % waves.spectrumDataFile ='spectrumData.mat';
 
 %% Body Data
