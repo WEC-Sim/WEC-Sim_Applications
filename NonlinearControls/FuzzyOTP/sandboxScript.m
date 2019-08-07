@@ -1,3 +1,6 @@
+clear
+clc
+
 positionIn = -0.88;
 velocityIn = -1;
 waveHeightIn = 2.3;
@@ -233,11 +236,11 @@ if verbose
 end
 
 % organize by: outputs -> membership functions -> rules
-overdampingMultiplier.CMFs.overDamped = overDamped;
+overdampingMultiplier.baseMFs.overDamped = overDamped;
 overdampingMultiplier.CMFs.overDamped.ruleOne = ruleOne;
 overdampingMultiplier.CMFs.overDamped.ruleThree = ruleThree;
 
-overdampingMultiplier.CMFs.optimal = optimal;
+overdampingMultiplier.baseMFs.optimal = optimal;
 overdampingMultiplier.CMFs.optimal.ruleTwo = ruleTwo;
 
 % organize by: outputs -> membership functions -> rules
@@ -245,16 +248,10 @@ overdampingMultiplier.range = [1 2];
 
 %% Aggregate outputs for all rules %%
 
+overdampingMultiplier = aggregateCMFs(overdampingMultiplier, 'sum');
 
-% Collect the definingPoints (x axis) for all the memberships, and their truth value
-% Filter by min max range
 
-% find any intersections in the membership functions (interpolate)
-
-% add the intersection x values to all the defining points:
-% [ master list of definind points]
-% [ defining points MF1]
-% [ defining points Mf2]
+%% Defuzzify aggregated output membership functions
 
 
 damping = 0;
@@ -267,7 +264,7 @@ stiffnessExponent = 1;
 %% End of Main %%
 %%%%%%%%%%%%%%%%%%
 % begin functions
-function Evaluated_MFs = fuzzifyInputs(inValue, MFs)
+function fuzzufiedInput = fuzzifyInputs(inValue, MFs)
 % Function to fuzzify crisp input variables
 %
     verbose = 1;
@@ -305,67 +302,61 @@ function Evaluated_MFs = fuzzifyInputs(inValue, MFs)
             otherwise
                 disp('membership function type not defined');
         end
-
     end
 
-    Evaluated_MFs = MFs;
+    fuzzufiedInput = MFs;
 
 end
 
 function membership = tri_MF(inValue, begin, peak, finish, maxTruth)
-
 % Evaluate input according to triangular input MF
-if inValue < peak
-    if inValue <= begin
-        membership = 0;
+    if inValue < peak
+        if inValue <= begin
+            membership = 0;
+        else
+            membership = (maxTruth/(peak - begin)) * (inValue-peak) + maxTruth;
+        end
+    elseif inValue > peak
+        if inValue >= finish
+            membership = 0;
+        else
+            membership = ((-1*maxTruth)/(finish - peak)) * (inValue-peak) + maxTruth;
+        end
     else
-        membership = (maxTruth/(peak - begin)) * (inValue-peak) + maxTruth;
+        membership = maxTruth;
     end
-elseif inValue > peak
-    if inValue >= finish
-        membership = 0;
-    else
-        membership = ((-1*maxTruth)/(finish - peak)) * (inValue-peak) + maxTruth;
-    end
-else
-    membership = maxTruth;
-    
-end
-
 end
 
 function membership = open_trap_left(inValue, begin, finish, maxTruth)
-
-if inValue < begin
-     membership = maxTruth;
- elseif inValue > finish
-     membership = 0;
- else
-     membership = (maxTruth/(begin - finish))*(inValue - begin) + maxTruth;
-end
-
+    if inValue < begin
+        membership = maxTruth;
+    elseif inValue > finish
+        membership = 0;
+    else
+        membership = (maxTruth/(begin - finish))*(inValue - begin) + maxTruth;
+    end
 end
 
 function membership = open_trap_right(inValue, begin, finish, maxTruth)
- if inValue < begin
-     membership = 0;
- elseif inValue > finish
-     membership = maxTruth;
- else
-     membership = (maxTruth/(finish - begin))*(inValue - finish) + maxTruth;
- end
+    if inValue < begin
+        membership = 0;
+    elseif inValue > finish
+        membership = maxTruth;
+    else
+        membership = (maxTruth/(finish - begin))*(inValue - finish) + maxTruth;
+    end
 end
 
 function membership = trap(inValue, begin, asc, dec, finish, maxTruth)
- if ( inValue < begin ) || ( inValue > finish )
-     membership = 0;
- elseif inValue < asc
-     membership = (maxTruth/(asc-begin))*(inValue - begin);
- elseif inValue > dec
-     membership = (maxTruth/(dec-finish))*(inValue - finish);
- else
-     membership = maxTruth;
- end
+    if ( inValue < begin ) || ( inValue > finish )
+        membership = 0;
+    elseif inValue < asc
+        membership = (maxTruth/(asc-begin))*(inValue - begin);
+    elseif inValue > dec
+        membership = (maxTruth/(dec-finish))*(inValue - finish);
+    else
+        membership = maxTruth;
+    end
 end
 
 
@@ -430,6 +421,157 @@ function consequentMF = applyImplicationMethod(antecedent, outputMembership, imp
         disp('Specified implication method is not defined');
         consequentMF = 0;
     end
+end
+
+function mfTruth = evalMF(inValue, MF)
+% Function to fuzzify crisp input variables
+%
+mfType = MF.type;
+        %calculate its percentTrue strength based on
+        switch mfType
+            case 'triangle'
+                % TODO: sanitize inputs (if not start -> peak -> finish)
+                mfTruth = tri_MF(inValue,...
+                    MF.definingPoints(1), MF.definingPoints(2), MF.definingPoints(3),  MF.maxVal);
+            case 'step'
+                mfTruth = open_trap_right(inValue,...
+                     MF.definingPoints(1), MF.definingPoints(2), MF.maxVal);
+            case 'down step'
+                 %sanitize inputs (if not start -> peak -> finish)
+                 mfTruth = open_trap_left(inValue,...
+                     MF.definingPoints(1), MF.definingPoints(2), MF.maxVal);
+            case 'trap'
+                 %sanitize inputs (if not start -> peak -> finish)
+                 mfTruth = trap(inValue,...
+                     MF.definingPoints(1), MF.definingPoints(2), MF.definingPoints(3), MF.definingPoints(4), MF.maxVal);
+            otherwise
+                disp('membership function type not defined');
+        end
+end
+
+function singleTruthFunction = performAgg(truthMatrix, aggregationMethod)
+    switch aggregationMethod
+        case 'max'
+            singleTruthFunction = max(truthMatrix,[],1);
+        case 'min'
+            singleTruthFunction = min(truthMatrix,[],1);
+        case 'mean'
+            singleTruthFunction = mean(truthMatrix,[],1);
+        case 'prod'
+            singleTruthFunction = truthMatrix(1,:)
+            for r = 2:length(truthMatrix(:,1))
+                singleTruthFunction = truthMatrix(r,:).*singleTruthFunction;
+            end
+        case 'sum'
+            singleTruthFunction = truthMatrix(1,:)
+            for r = 2:length(truthMatrix(:,1))
+                singleTruthFunction = truthMatrix(r,:) + singleTruthFunction;
+            end
+        otherwise
+            disp('specified aggregation method not defined');
+    end
+end
+
+function aggregatedMF = aggregateCMFs(outputName, aggregationMethod)
+
+% aggregate rules for each MF of output
+% aggregate MFs for each output
+
+listStates = fieldnames(outputName.CMFs);
+outMin = outputName.range(1);
+outMax = outputName.range(2);
+
+%get these from struct
+
+% Loop to aggregate rules for each state/MF
+for p=1:numel(listStates)
+    thisCMF = outputName.CMFs.(listStates{p});
+    
+    listRules = fieldnames(thisCMF);
+    fullRuleRange = [];
+    
+    % get unique list of defining points for this state (from all rules for
+    % this state)
+    for s=1:numel(listRules)
+        thesePoints = outputName.CMFs.(listStates{p}).(listRules{s}).definingPoints;
+        fullRuleRange = unique([fullRuleRange thesePoints]);
+    end
+    
+    % loop through comparing each rule and add any intersections to
+    % defining points
+    for s=1:numel(listRules)
+        ruleOne = thisCMF.(listRules{s});
+        
+        for t = (s+1):numel(listRules)
+            ruleTwo = thisCMF.(listRules{t});
+            
+            ruleOneTruth = [];
+            ruleTwoTruth = [];
+            
+            % create y values for each rule MF
+            for m = 1:numel(fullRuleRange)
+               ruleOneTruth = [ruleOneTruth evalMF(fullRuleRange(m),ruleOne)];
+               ruleTwoTruth = [ruleTwoTruth evalMF(fullRuleRange(m),ruleTwo)];
+            end
+            
+            
+            ruleIntersections = InterX([fullRuleRange;ruleOneTruth],[fullRuleRange; ruleTwoTruth]);
+            
+            fullRuleRange = unique([fullRuleRange ruleIntersections(1,:)]);
+        
+            fullRuleRange = fullRuleRange(fullRuleRange >= outMin);
+            fullRuleRange = fullRuleRange(fullRuleRange <= outMax);
+        end
+    end
+    
+    stateRulesMat = zeros(numel(listRules),numel(fullRuleRange));
+    
+    for row=1:numel(listRules)
+        thisRule = thisCMF.(listRules{row});
+        for col = 1:numel(fullRuleRange)
+            stateRulesMat(row,col) = evalMF(fullRuleRange(col),thisRule);
+        end
+    end
+    
+    disp('rule range');
+    disp(fullRuleRange);
+    disp('state Rules Mat');
+    disp(stateRulesMat);
+    disp('aggregation');
+    disp(performAgg(stateRulesMat, aggregationMethod));
+    % aggregate them
+    outVari.(listStates{p}).func = [fullRuleRange; performAgg(stateRulesMat, aggregationMethod)];
+        
+end
+
+outRange = [outMin outMax];
+stateList = fieldnames(outVari)
+
+for p = 1:numel(stateList)
+    thisState = outVari.(stateList{p})
+    outRange = unique([outRange thisState.func(1,:)])
+end
+
+outRange = outRange(outRange >= outMin)
+outRange = outRange(outRange <= outMax)
+
+stateOutMat = zeros(numel(stateList),numel(outRange));
+for row = 1:numel(stateList)
+    thisFuncX = outVari.(stateList{row}).func(1,:)
+    thisFuncT = outVari.(stateList{row}).func(2,:)
+    for col = 1:numel(outRange)
+        if (outRange(col) <= max(thisFuncX)) || (outRange(col) >= min(thisFuncX))
+            stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,outRange(col),'linear');
+        else
+            stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,outRange(col),'nearest','extrap');
+        end
+    end
+end
+stateOutMat
+
+aggregatedMF = performAgg(stateOutMat, aggregationMethod);
+
+
 end
 
 % classdef generalMF
