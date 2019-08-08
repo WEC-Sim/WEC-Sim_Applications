@@ -1,69 +1,36 @@
-x1 = [ 00 03 05 08 10 15];
-y1 = [ 00 00 2 2 0 0];
+%x1 = [ 00 03 05 08 10 15];
+%y1 = [ 00 00 2 2 0 0];
 
-x2 = [0 6 11 15];
-y2 = [0 0 1 0];
+%x2 = [0 6 11 15];
+%y2 = [0 0 1 0];
 
-P = InterX([x1; y1],[x2; y2]);
+x1 = [-1 2 5 8];
+y1 = [0 3 3 0];
+
+x2 = -1*flip(x1);
+y2 = [0 3 3 0];
+
+P = InterX([x1; y1],[x2; y2])
 
 
-x3 = unique([x1 x2 P(1,:)]);
-y1 = [];
-y2 = [];
+%y3 = max(y1, y2);
 
-for i=1:numel(x3)
-    y1(i) = trap(x3(i), 3, 5, 8, 10, 2);
-    y2(i) = tri_MF(x3(i), 6, 11, 15, 1);
-end
 
-y3 = max(y1, y2);
+x3 = [-8 -5 -2 0 2 5 8];
+y3 = [0 3 3 1 3 3 0];
 
 figure
-plot(x3,y1,x3,y2); %P(1,:),P(2,:),'o',
-figure
-plot(x3,y3,':.');
-
+plot(x1,y1,x2,y2,P(1,:),P(2,:),'o',x3,y3);
 
 % for the max methods:
 % get the max y value of the function, check if it occurs more than once
 % if yes, get all corresponding x's
-% LOM
 
-if size(y3(y3 == max(y3))) == 1
-    ret = x3(find(y3==max(y3)))
-else
-    maxima = x3(find(y3==max(y3)))
-    %except I need to do some absing... but still return the potentially
-    %negative value. And handle the max mag being duplicated at pos and
-    %neg..
-    ret = max(maxima)
-end
-
-% SOM
-if size(y3(y3 == max(y3))) == 1
-    ret = x3(find(y3==max(y3)))
-else
-    maxima = x3(find(y3==max(y3)))
-    %except I need to do some absing... but still return the potentially
-    %negative value. And handle the max mag being duplicated at pos and
-    %neg..
-    ret = min(maxima)
-end
-
-% MOM
-if size(y3(y3 == max(y3))) == 1
-    ret = x3(find(y3==max(y3)))
-else
-    maxima = x3(find(y3==max(y3)))
-    %except I need to do some absing... but still return the potentially
-    %negative value. And handle the max mag being duplicated at pos and
-    %neg..
-    %suppose the max bars are broken, this should be a weighted average...
-    ret = (min(maxima) + max(maxima))/2 
-end
-
-
+ 
+ 
 % bisector method: gotta binary search??
+
+
     
 
 function membership = tri_MF(inValue, begin, peak, finish, maxTruth)
@@ -114,4 +81,40 @@ end
 % plot(xs,ys,'r*')
 % hold off
 % 
-
+% % LOM
+% 
+% if size(y3(y3 == max(y3))) == 1
+%     ret = x3(find(y3==max(y3)));
+% else
+%     maxima = x3(find(y3==max(y3)));
+%     maximaMag = abs(maxima);
+%     if size(maximaMag(maximaMag == max(maximaMag))) == 1
+%         ret = maxima(find(maxima==max(maximaMag)));
+%     else
+%         ret = maxima(find(maxima==-1*max(maximaMag)))
+%     end
+% end
+% 
+% % % SOM
+% if size(y3(y3 == max(y3))) == 1
+%     ret = x3(find(y3==max(y3)));
+% else
+%     maxima = x3(find(y3==max(y3)));
+%     maximaMag = abs(maxima);
+%     if size(maximaMag(maximaMag == min(maximaMag))) == 1
+%         ret = maxima(find(maxima==min(maximaMag)));
+%     else
+%         ret = maxima(find(maxima==-1*min(maximaMag)))
+%     end
+% end
+% 
+% % % MOM
+% if size(y3(y3 == max(y3))) == 1
+%     ret = x3(find(y3==max(y3)));
+% else
+%     maxima = x3(find(y3==max(y3)));
+%     ret = (max(maxima) + min(maxima))/2;
+%     %if there are two separate max plateaus, should their average be
+%     %weighted?, like find the middle of both plateaus, and take an average
+%     %of the MOMs weighted by their length?? too complicated
+% end

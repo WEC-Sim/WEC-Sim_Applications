@@ -1,14 +1,18 @@
 clear
 clc
 
+global verbose
+verbose = 0;
+
 positionIn = -0.88;
 velocityIn = -1;
 waveHeightIn = 2.3;
 averagePeriodIn = 4.5;
 
 
+
 %start = tic;
-verbose = 1;
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -266,8 +270,7 @@ stiffnessExponent = 1;
 function fuzzufiedInput = fuzzifyInputs(inValue, MFs)
 % Function to fuzzify crisp input variables
 %
-    verbose = 1;
-    
+    global verbose
     % list of memberships for this input
     listMFs = fieldnames(MFs);
 
@@ -462,7 +465,7 @@ function singleTruthFunction = performAgg(truthMatrix, aggregationMethod)
                 singleTruthFunction = truthMatrix(r,:).*singleTruthFunction;
             end
         case 'sum'
-            singleTruthFunction = truthMatrix(1,:)
+            singleTruthFunction = truthMatrix(1,:);
             for r = 2:length(truthMatrix(:,1))
                 singleTruthFunction = truthMatrix(r,:) + singleTruthFunction;
             end
@@ -475,7 +478,7 @@ function aggregatedMF = aggregateCMFs(outputName, aggregationMethod)
 
 % aggregate rules for each MF of output
 % aggregate MFs for each output
-
+global verbose
 listStates = fieldnames(outputName.CMFs);
 outMin = outputName.range(1);
 outMax = outputName.range(2);
@@ -484,7 +487,7 @@ outMax = outputName.range(2);
 
 % Loop to aggregate rules for each state/MF
 for p=1:numel(listStates)
-    thisCMF = outputName.CMFs.(listStates{p})
+    thisCMF = outputName.CMFs.(listStates{p});
     
     listRules = fieldnames(thisCMF.rules);
     if numel(listRules) > 1
@@ -541,32 +544,34 @@ for p=1:numel(listStates)
         end
     end
     
-    disp('rule range');
-    disp(fullRuleRange);
-    disp('state Rules Mat');
-    disp(stateRulesMat);
-    disp('aggregation');
-    disp(performAgg(stateRulesMat, aggregationMethod));
+    if verbose
+        disp('rule range');
+        disp(fullRuleRange);
+        disp('state Rules Mat');
+        disp(stateRulesMat);
+        disp('aggregation');
+        disp(performAgg(stateRulesMat, aggregationMethod));
+    end
     % aggregate them
     outVari.(listStates{p}).func = [fullRuleRange; performAgg(stateRulesMat, aggregationMethod)];
         
 end
 
 outRange = [outMin outMax];
-stateList = fieldnames(outVari)
+stateList = fieldnames(outVari);
 
 for p = 1:numel(stateList)
-    thisState = outVari.(stateList{p})
-    outRange = unique([outRange thisState.func(1,:)])
+    thisState = outVari.(stateList{p});
+    outRange = unique([outRange thisState.func(1,:)]);
 end
 
-outRange = outRange(outRange >= outMin)
-outRange = outRange(outRange <= outMax)
+outRange = outRange(outRange >= outMin);
+outRange = outRange(outRange <= outMax);
 
 stateOutMat = zeros(numel(stateList),numel(outRange));
 for row = 1:numel(stateList)
-    thisFuncX = outVari.(stateList{row}).func(1,:)
-    thisFuncT = outVari.(stateList{row}).func(2,:)
+    thisFuncX = outVari.(stateList{row}).func(1,:);
+    thisFuncT = outVari.(stateList{row}).func(2,:);
     for col = 1:numel(outRange)
         if (outRange(col) <= max(thisFuncX)) || (outRange(col) >= min(thisFuncX))
             stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,outRange(col),'linear');
@@ -575,10 +580,9 @@ for row = 1:numel(stateList)
         end
     end
 end
-stateOutMat
 
-aggregatedMF = performAgg(stateOutMat, aggregationMethod);
-
+aggregatedFunction = performAgg(stateOutMat, aggregationMethod);
+aggregatedMF = [outRange; aggregatedFunction];
 
 end
 
