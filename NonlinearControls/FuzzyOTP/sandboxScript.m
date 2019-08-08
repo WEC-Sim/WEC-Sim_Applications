@@ -243,7 +243,6 @@ overdampingMultiplier.CMFs.overDamped.rules.ruleThree = ruleThree;
 
 overdampingMultiplier.baseMFs.optimal = optimal;
 overdampingMultiplier.CMFs.optimal.rules.ruleTwo = ruleTwo;
-
 % organize by: outputs -> membership functions -> rules
 overdampingMultiplier.range = [1 2];
 
@@ -254,7 +253,11 @@ overdampingMultiplier = aggregateCMFs(overdampingMultiplier, 'sum');
 
 %% Defuzzify aggregated output membership functions
 
-
+damping = 0;
+overDamping = 0;
+stiffness = 0;
+dampingExponent = 1;
+stiffnessExponent = 1;
 
 %%%%%%%%%%%%%%%%%%
 %% End of Main %%
@@ -459,9 +462,9 @@ function singleTruthFunction = performAgg(truthMatrix, aggregationMethod)
                 singleTruthFunction = truthMatrix(r,:).*singleTruthFunction;
             end
         case 'sum'
-            singleTruthFunction = truthMatrix(1,:);
+            singleTruthFunction = truthMatrix(1,:)
             for r = 2:length(truthMatrix(:,1))
-                singleTruthFunction = truthMatrix(r,:) + singleTruthFunction
+                singleTruthFunction = truthMatrix(r,:) + singleTruthFunction;
             end
         otherwise
             disp('specified aggregation method not defined');
