@@ -9,12 +9,6 @@ velocityIn = -1;
 waveHeightIn = 2.3;
 averagePeriodIn = 4.5;
 
-
-
-%start = tic;
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define input membership functions %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
