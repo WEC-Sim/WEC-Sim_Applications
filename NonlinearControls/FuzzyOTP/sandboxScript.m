@@ -9,6 +9,8 @@ velocityIn = -1;
 waveHeightIn = 2.3;
 averagePeriodIn = 4.5;
 
+overDamping = 0;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define input membership functions %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -141,44 +143,44 @@ inputs.averagePeriod = averagePeriod;
 inputs.position = position;
 inputs.velocity = velocity;
 
-if verbose % print percentTrues
-    listInputs = fieldnames(inputs);
-    
-    for i=1:numel(listInputs)
-        thisInput = inputs.(listInputs{i});
-        disp(listInputs{i});
-        listMF = fieldnames(inputs.(listInputs{i}).MFs);
-        
-        for l=1:numel(listMF)
-             MF = inputs.(listInputs{i}).MFs.(listMF{l});
-             fprintf('%s %s degree of truth: %f\n',(listInputs{i}),(listMF{l}),(MF.percentTrue));
-
-        end
-    end 
-end
+% if verbose % print percentTrues
+%     listInputs = fieldnames(inputs);
+%     
+%     for i=1:numel(listInputs)
+%         thisInput = inputs.(listInputs{i});
+%         disp(listInputs{i});
+%         listMF = fieldnames(inputs.(listInputs{i}).MFs);
+%         
+%         for l=1:numel(listMF)
+%              MF = inputs.(listInputs{i}).MFs.(listMF{l});
+%              fprintf('%s %s degree of truth: %f\n',(listInputs{i}),(listMF{l}),(MF.percentTrue));
+% 
+%         end
+%     end 
+% end
 
 %% Define Rule antecedents and Apply Fuzzy Operators %%
 % Rule 1 antecedent: If velocity is fast positive and position is high
 ruleOneInputMFs = [inputs.velocity.MFs.fastPos.percentTrue  position.MFs.high.percentTrue];
 ruleOneAntecedent = applyFuzzyOperator(ruleOneInputMFs, 'minAnd');
-if verbose
-    disp(ruleOneAntecedent);
-end
+% if verbose
+%     disp(ruleOneAntecedent);
+% end
 
 % Rule 2 antecedent: If position is middle
 % Sinlge input rule does not require fuzzy operator
 ruleTwoInputMF = [position.MFs.middle.percentTrue];
 ruleTwoAntecedent = ruleTwoInputMF;
-if verbose
-    disp(ruleTwoAntecedent);
-end
+% if verbose
+%     disp(ruleTwoAntecedent);
+% end
 
 % Rule 1 antecedent: If velocity is fast positive and position is high
 ruleThreeInputMFs = [inputs.velocity.MFs.fastNeg.percentTrue  position.MFs.low.percentTrue];
 ruleThreeAntecedent = applyFuzzyOperator(ruleThreeInputMFs, 'minAnd');
-if verbose
-    disp(ruleThreeAntecedent);
-end
+% if verbose
+%     disp(ruleThreeAntecedent);
+% end
 
 
 %% Apply Implication for rules %%
@@ -193,27 +195,27 @@ overDamped.definingPoints = [begin peak finish];
 % Rule 1 Consequent Membership Function
 ruleOne = applyImplicationMethod(ruleOneAntecedent,overDamped,'min');
 
-if verbose
-    disp('rule one antecedent:')
-    disp(ruleOneAntecedent);
-    disp('rule one MF:');
-    disp(overDamped);
-    disp('Rule one implication: min');
-    disp(ruleOne);
-end
+% if verbose
+%     disp('rule one antecedent:')
+%     disp(ruleOneAntecedent);
+%     disp('rule one MF:');
+%     disp(overDamped);
+%     disp('Rule one implication: min');
+%     disp(ruleOne);
+% end
 
 % Rule 3: If velocity is fast positive and position is high damping is
 % overdamped
 ruleThree = applyImplicationMethod(ruleThreeAntecedent,overDamped,'min');
 
-if verbose
-    disp('rule three antecedent:')
-    disp(ruleThreeAntecedent);
-    disp('rule three MF:');
-    disp(overDamped);
-    disp('Rule three implication: min');
-    disp(ruleThree);
-end
+% if verbose
+%     disp('rule three antecedent:')
+%     disp(ruleThreeAntecedent);
+%     disp('rule three MF:');
+%     disp(overDamped);
+%     disp('Rule three implication: min');
+%     disp(ruleThree);
+% end
 
 % Rule 2:  If position is middle damping is optimal
 % Base Membership Function
@@ -224,14 +226,14 @@ optimal.definingPoints = [begin peak finish];
 % Rule 2 Consequent Membership Function
 ruleTwo = applyImplicationMethod(ruleTwoAntecedent,optimal,'min');
 
-if verbose
-    disp('rule two antecedent:')
-    disp(ruleTwoAntecedent);
-    disp('rule two MF:');
-    disp(optimal);
-    disp('Rule two implication: min');
-    disp(ruleTwo);
-end
+% if verbose
+%     disp('rule two antecedent:')
+%     disp(ruleTwoAntecedent);
+%     disp('rule two MF:');
+%     disp(optimal);
+%     disp('Rule two implication: min');
+%     disp(ruleTwo);
+% end
 
 % organize by: outputs -> membership functions -> rules
 overdampingMultiplier.baseMFs.overDamped = overDamped;
@@ -246,16 +248,17 @@ overdampingMultiplier.range = [1 2];
 
 %% Aggregate outputs for all rules %%
 
-overdampingMultiplier.aggregatedFunction = aggregateCMFs(overdampingMultiplier, 'sum');
+overdampingMultiplier2.aggregatedFunction = aggregateCMFs(overdampingMultiplier, 'sum');
 
 
 %% Defuzzify aggregated output membership functions
 
-damping = 0;
-overDamping = defuzzify(overdampingMultiplier, 'MOM');
-stiffness = 0;
-dampingExponent = 1;
-stiffnessExponent = 1;
+ damping = 0;
+ overDamping = 1%defuzzify(overdampingMultiplier, 'MOM');
+ stiffness = 0;
+ dampingExponent = 1;
+ stiffnessExponent = 1;
+
 
 %%%%%%%%%%%%%%%%%%
 %% End of Main %%
@@ -264,7 +267,6 @@ stiffnessExponent = 1;
 function fuzzufiedInput = fuzzifyInputs(inValue, MFs)
 % Function to fuzzify crisp input variables
 %
-    global verbose
     % list of memberships for this input
     listMFs = fieldnames(MFs);
 
@@ -273,10 +275,10 @@ function fuzzufiedInput = fuzzifyInputs(inValue, MFs)
         thisMF = MFs.(listMFs{k});
 
         mfType = thisMF.type;
-        if verbose
-            disp(mfType);
-            disp(thisMF);
-        end
+%         if verbose
+%             disp(mfType);
+%             disp(thisMF);
+%         end
 
         %calculate its percentTrue strength based on
         switch mfType
@@ -441,6 +443,7 @@ mfType = MF.type;
                  mfTruth = trap(inValue,...
                      MF.definingPoints(1), MF.definingPoints(2), MF.definingPoints(3), MF.definingPoints(4), MF.maxVal);
             otherwise
+                mfTruth = NaN;
                 disp('membership function type not defined');
         end
 end
@@ -460,8 +463,10 @@ function singleTruthFunction = performAgg(truthMatrix, aggregationMethod)
             end
         case 'sum'
             singleTruthFunction = truthMatrix(1,:);
-            for r = 2:length(truthMatrix(:,1))
-                singleTruthFunction = truthMatrix(r,:) + singleTruthFunction;
+            if length(truthMatrix(:,1)) > 1
+                for r = 2:length(truthMatrix(:,1))
+                    singleTruthFunction = truthMatrix(r,:) + singleTruthFunction;
+                end
             end
         otherwise
             disp('specified aggregation method not defined');
@@ -472,7 +477,7 @@ function aggregatedMF = aggregateCMFs(outputName, aggregationMethod)
 
 % aggregate rules for each MF of output
 % aggregate MFs for each output
-global verbose
+
 listStates = fieldnames(outputName.CMFs);
 outMin = outputName.range(1);
 outMax = outputName.range(2);
@@ -491,215 +496,271 @@ for p=1:numel(listStates)
             disp('If multiple rules affect a member function a rule aggregation must be specified');
         end
     end
-
-    fullRuleRange = [];
-    
     
     % get unique list of defining points for this state (from all rules for
     % this state)
+
+    ruleRangeMaxLength = 0;
+    % loop to get the length of all defining points for this state
     for s=1:numel(listRules)
         thesePoints = outputName.CMFs.(listStates{p}).rules.(listRules{s}).definingPoints;
-        fullRuleRange = unique([fullRuleRange thesePoints]);
+        ruleRangeMaxLength = ruleRangeMaxLength + numel(thesePoints);
     end
+    
+    %Assign all points to range vector
+    fullRuleRange = NaN(1,ruleRangeMaxLength);
+    fullRuleRangeIndex=1;
+    for s=1:numel(listRules)
+        thesePoints = outputName.CMFs.(listStates{p}).rules.(listRules{s}).definingPoints;
+        for t = 1:numel(thesePoints)
+            fullRuleRange(fullRuleRangeIndex) = thesePoints(t);
+            fullRuleRangeIndex = fullRuleRangeIndex+1;
+        end
+        
+    end
+    
+    % remove duplicates
+    uniqueRuleRange = unique(fullRuleRange(~isnan(fullRuleRange)));
+
     
     % loop through comparing each rule and add any intersections to
     % defining points
+    
+    % first count the max number of points the intersections could add
+    ruleIntersectionsMaxLength = 0;
+    disp('counting intersections');
     for s=1:numel(listRules)
-        ruleOne = thisCMF.rules.(listRules{s});
+        compareRuleOne = thisCMF.rules.(listRules{s})
         
         for t = (s+1):numel(listRules)
-            ruleTwo = thisCMF.rules.(listRules{t});
+            compareRuleTwo = thisCMF.rules.(listRules{t})
             
-            ruleOneTruth = [];
-            ruleTwoTruth = [];
+            ruleOneTruth = NaN(1,numel(uniqueRuleRange));
+            ruleTwoTruth = NaN(1,numel(uniqueRuleRange));
             
             % create y values for each rule MF
-            for m = 1:numel(fullRuleRange)
-               ruleOneTruth = [ruleOneTruth evalMF(fullRuleRange(m),ruleOne)];
-               ruleTwoTruth = [ruleTwoTruth evalMF(fullRuleRange(m),ruleTwo)];
+            for m = 1:numel(uniqueRuleRange)
+               uniqueRuleRange(m)
+               ruleOneTruth(m) = evalMF(uniqueRuleRange(m),compareRuleOne);
+               ruleTwoTruth(m) = evalMF(uniqueRuleRange(m),compareRuleTwo);
             end
             
             
-            ruleIntersections = InterX([fullRuleRange;ruleOneTruth],[fullRuleRange; ruleTwoTruth]);
-            
-            fullRuleRange = unique([fullRuleRange ruleIntersections(1,:)]);
-        
-            %fullRuleRange = fullRuleRange(fullRuleRange >= outMin);
-            %fullRuleRange = fullRuleRange(fullRuleRange <= outMax);
+            [ruleX, ~] = intersections(uniqueRuleRange, ruleOneTruth, uniqueRuleRange, ruleTwoTruth, true);
+            ruleIntersectionsMaxLength = ruleIntersectionsMaxLength + numel(ruleX);
         end
     end
     
-    stateRulesMat = zeros(numel(listRules),numel(fullRuleRange));
+    rangeWithIntersections = NaN(1,numel(ruleIntersectionsMaxLength));
+    
+    % Now go through and assign
+    intersectionIndex = 1;
+    disp('assigning intersections');
+    for s=1:numel(listRules)
+        compareRuleOne = thisCMF.rules.(listRules{s})
+        
+        for t = (s+1):numel(listRules)
+            compareRuleTwo = thisCMF.rules.(listRules{t})
+            
+            ruleOneTruth = NaN(1,numel(uniqueRuleRange));
+            ruleTwoTruth = NaN(1,numel(uniqueRuleRange));
+            
+            % create y values for each rule MF
+            for m = 1:numel(uniqueRuleRange)
+               uniqueRuleRange(m)
+               ruleOneTruth(m) = evalMF(uniqueRuleRange(m),compareRuleOne);
+               ruleTwoTruth(m) = evalMF(uniqueRuleRange(m),compareRuleTwo);
+            end
+            
+            
+            [ruleX, ~] = intersections(uniqueRuleRange, ruleOneTruth, uniqueRuleRange, ruleTwoTruth, true);
+            ruleIntersections = ruleX'
+            for n = 1:numel(ruleIntersections(1,:))
+                rangeWithIntersections(intersectionIndex) = ruleIntersections(1,n);
+            end
+        end
+    end
+    
+    % eliminate duplicates
+    uniqueRangeIntersections = unique(rangeWithIntersections( ~isnan(rangeWithIntersections)));
+    
+    % Now we have the list of output values which define the corners and
+    % possible intersections of all rules for this MF state
+    finalOutRange = [uniqueRangeIntersections  uniqueRuleRange];
+    uniqueFinalRange = unique(finalOutRange(~isnan(finalOutRange)));
+    
+    
+    stateRulesMat = zeros(numel(listRules),numel(uniqueFinalRange));
     
     for row=1:numel(listRules)
         thisRule = thisCMF.rules.(listRules{row});
-        for col = 1:numel(fullRuleRange)
-            stateRulesMat(row,col) = evalMF(fullRuleRange(col),thisRule);
+        for col = 1:numel(uniqueFinalRange)
+            stateRulesMat(row,col) = evalMF(uniqueFinalRange(col),thisRule)
         end
     end
     
-    if verbose
-        disp('rule range');
-        disp(fullRuleRange);
-        disp('state Rules Mat');
-        disp(stateRulesMat);
-        disp('aggregation');
-        disp(performAgg(stateRulesMat, aggregationMethod));
-    end
+%     if 1
+%         disp('rule range');
+%         disp(uniqueFinalRange);
+%         disp('state Rules Mat');
+%         disp(stateRulesMat);
+%         disp('aggregated');
+%         disp(performAgg(stateRulesMat, aggregationMethod));
+%     end
     % aggregate them
-    outVari.(listStates{p}).func = [fullRuleRange; performAgg(stateRulesMat, aggregationMethod)];
+    outVari.(listStates{p}).func = [uniqueFinalRange; performAgg(stateRulesMat, aggregationMethod)];
         
-end
-
-outRange = [outMin outMax];
-stateList = fieldnames(outVari);
-
-for p = 1:numel(stateList)
-    thisState = outVari.(stateList{p});
-    outRange = unique([outRange thisState.func(1,:)]);
-end
-
-%outRange = outRange(outRange >= outMin);
-%outRange = outRange(outRange <= outMax);
-
-stateOutMat = zeros(numel(stateList),numel(outRange));
-for row = 1:numel(stateList)
-    thisFuncX = outVari.(stateList{row}).func(1,:);
-    thisFuncT = outVari.(stateList{row}).func(2,:);
-    for col = 1:numel(outRange)
-        if (outRange(col) > max(thisFuncX)) || (outRange(col) < min(thisFuncX))
-            stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,outRange(col),'nearest','extrap');
-        else
-            stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,outRange(col),'linear');
-        end
-    end
-end
-
-aggregatedFunction = performAgg(stateOutMat, aggregationMethod);
-aggregatedMF = [outRange; aggregatedFunction];
-
-end
-
-function crisp = defuzzify(outputFun, defuzzificationMethod)
-outMin = outputFun.range(1);
-outMax = outputFun.range(2);
-func = outputFun.aggregatedFunction;
-switch defuzzificationMethod
-    case 'centroid'
-        crisp = getCentroidX(func);
-    case 'bisector'
-        crisp = bisectSearch(func,min(func(1,:)),max(func(1,:)));
-    case 'LOM'
-        crisp = maxima(func,'largest');
-    case 'MOM'
-        crisp = maxima(func,'mean');
-    case 'SOM'
-        crisp = maxima(func,'smallest');
-    otherwise disp('Specified defuzzification method not defined');
-end
-
-if crisp > outMax
-    crisp = outMax;
-elseif crisp < outMin
-    crisp = outMin;
-end
-
-end
-
-function centroX = getCentroidX(curve)
-
-    polyin = polyshape(curve','Simplify',true);
-    polyin = simplify(polyin,'KeepCollinearPoints',false);
-    [x,~] = centroid(polyin);    
-    centroX = x;
-end
-
-function xBisect = bisectSearch(curve,searchMin,seaarchMax)
-    
-    fullX = curve(1,:);
-    fullY = curve(2,:);
-
-    totalArea = trapz(fullX,fullY);
-    
-    midX = (searchMin + seaarchMax)/2;
-    midY = interp1(fullX,fullY,midX,'linear');
-    
-    
-    halfXTest = [fullX(fullX < midX) midX];
-    halfYTestLen = numel(fullX(fullX < midX));
-    halfYTest = [fullY(1:halfYTestLen) midY];
-    halfAreaTest = trapz(halfXTest,halfYTest);
-    
-    if round(halfAreaTest,4) == round(0.5*totalArea,4)
-        xBisect = midX;
-    elseif halfAreaTest > 0.5*totalArea
-        xBisect = bisectSearch(curve,searchMin,midX);
-    elseif halfAreaTest < 0.5*totalArea
-        xBisect = bisectSearch(curve,midX,seaarchMax);
-    end
-end
-
-function aMax = maxima(curve,type)
-
-fullX = curve(1,:);
-fullY = curve(2,:);
-
-% if there is a single most true point
-if size(fullY(fullY == max(fullY))) == 1
-    % return the x
-    aMax = fullX(find(fullY==max(fullY)));
-else
-    switch type
-        case 'largest'
-            % largest = highest absolute value 
-            maximaXs = fullX(find(fullY==max(fullY)));
-            maximaXsMag = abs(maximaXs);
-            
-            if size(maximaXsMag(maximaXsMag == max(maximaXsMag))) == 1
-                % if there's only 1, return the x
-                aMax = maximaXs(find(maximaXsMag==max(maximaXsMag)));
-            else
-                % if there's a tie (i.e. the corresponding positive and
-                % negative x are both the most true) return the negative
-                % one
-                aMax = maximaXs(find(maximaXs==-1*max(maximaXsMag)));
-            end
-        case 'mean'
-            maximaXs = fullX(find(fullY==max(fullY)));
-            aMax = (max(maximaXs) + min(maximaXs))/2;
-            %if there are two separate max plateaus, should their average be
-            %weighted?, like find the middle of both plateaus, and take an average
-            %of the MOMs weighted by their length?? too complicated
-        case 'smallest'
-            % smallest = lowest absolute value 
-            maximaXs = fullX(find(fullY==max(fullY)));
-            maximaXsMag = abs(maximaXs);
-            
-            if size(maximaXsMag(maximaXsMag == max(maximaXsMag))) == 1
-                % if there's only 1, return the x
-                aMax = maximaXs(find(maximaXsMag==max(maximaXsMag)));
-            else
-                % if there's a tie (i.e. the corresponding positive and
-                % negative x are both the most true values) return the 
-                % negative one
-                aMax = maximaXs(find(maximaXs==-1*max(maximaXsMag)));
-            end
-    end
-
-end
-
-end
-
-
-% classdef generalMF
-%     properties
+%end
+% TODO I'm going to need the intersections here too...?
+% outRange = [outMin outMax];
+% stateList = fieldnames(outVari);
+% 
+% for p = 1:numel(stateList)
+%     thisState = outVari.(stateList{p});
+%     outRange = unique([outRange thisState.func(1,:)]);
+% end
+% 
+% %outRange = outRange(outRange >= outMin);
+% %outRange = outRange(outRange <= outMax);
+% 
+% stateOutMat = zeros(numel(stateList),numel(outRange));
+% for row = 1:numel(stateList)
+%     thisFuncX = outVari.(stateList{row}).func(1,:);
+%     thisFuncT = outVari.(stateList{row}).func(2,:);
+%     for col = 1:numel(outRange)
+%         if (outRange(col) > max(thisFuncX)) || (outRange(col) < min(thisFuncX))
+%             stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,outRange(col),'nearest','extrap');
+%         else
+%             stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,outRange(col),'linear');
+%         end
 %     end
-%     methods
+ end
+% 
+% aggregatedFunction = performAgg(stateOutMat, aggregationMethod);
+% aggregatedMF = [outRange; aggregatedFunction];
+aggregatedMF = 0;
+ end
+% 
+% function crisp = defuzzify(outputFun, defuzzificationMethod)
+% outMin = outputFun.range(1);
+% outMax = outputFun.range(2);
+% func = outputFun.aggregatedFunction;
+% switch defuzzificationMethod
+%     case 'centroid'
+%         crisp = getCentroidX(func);
+%     case 'bisector'
+%         crisp = bisectSearch(func,min(func(1,:)),max(func(1,:)));
+%     case 'LOM'
+%         crisp = maxima(func,'largest');
+%     case 'MOM'
+%         crisp = maxima(func,'mean');
+%     case 'SOM'
+%         crisp = maxima(func,'smallest');
+%     otherwise disp('Specified defuzzification method not defined');
+% end
+% 
+% if crisp > outMax
+%     crisp = outMax;
+% elseif crisp < outMin
+%     crisp = outMin;
+% end
+% 
+% end
+% 
+% function centroX = getCentroidX(curve)
+% 
+%     polyin = polyshape(curve','Simplify',true);
+%     polyin = simplify(polyin,'KeepCollinearPoints',false);
+%     [x,~] = centroid(polyin);    
+%     centroX = x;
+% end
+% 
+% function xBisect = bisectSearch(curve,searchMin,seaarchMax)
+%     
+%     fullX = curve(1,:);
+%     fullY = curve(2,:);
+% 
+%     totalArea = trapz(fullX,fullY);
+%     
+%     midX = (searchMin + seaarchMax)/2;
+%     midY = interp1(fullX,fullY,midX,'linear');
+%     
+%     
+%     halfXTest = [fullX(fullX < midX) midX];
+%     halfYTestLen = numel(fullX(fullX < midX));
+%     halfYTest = [fullY(1:halfYTestLen) midY];
+%     halfAreaTest = trapz(halfXTest,halfYTest);
+%     
+%     if round(halfAreaTest,4) == round(0.5*totalArea,4)
+%         xBisect = midX;
+%     elseif halfAreaTest > 0.5*totalArea
+%         xBisect = bisectSearch(curve,searchMin,midX);
+%     elseif halfAreaTest < 0.5*totalArea
+%         xBisect = bisectSearch(curve,midX,seaarchMax);
 %     end
 % end
 % 
-% classdef consequentMF
+% function aMax = maxima(curve,type)
+% 
+% fullX = curve(1,:);
+% fullY = curve(2,:);
+% 
+% % if there is a single most true point
+% if size(fullY(fullY == max(fullY))) == 1
+%     % return the x
+%     aMax = fullX(find(fullY==max(fullY)));
+% else
+%     switch type
+%         case 'largest'
+%             % largest = highest absolute value 
+%             maximaXs = fullX(find(fullY==max(fullY)));
+%             maximaXsMag = abs(maximaXs);
+%             
+%             if size(maximaXsMag(maximaXsMag == max(maximaXsMag))) == 1
+%                 % if there's only 1, return the x
+%                 aMax = maximaXs(find(maximaXsMag==max(maximaXsMag)));
+%             else
+%                 % if there's a tie (i.e. the corresponding positive and
+%                 % negative x are both the most true) return the negative
+%                 % one
+%                 aMax = maximaXs(find(maximaXs==-1*max(maximaXsMag)));
+%             end
+%         case 'mean'
+%             maximaXs = fullX(find(fullY==max(fullY)));
+%             aMax = (max(maximaXs) + min(maximaXs))/2;
+%             %if there are two separate max plateaus, should their average be
+%             %weighted?, like find the middle of both plateaus, and take an average
+%             %of the MOMs weighted by their length?? too complicated
+%         case 'smallest'
+%             % smallest = lowest absolute value 
+%             maximaXs = fullX(find(fullY==max(fullY)));
+%             maximaXsMag = abs(maximaXs);
+%             
+%             if size(maximaXsMag(maximaXsMag == max(maximaXsMag))) == 1
+%                 % if there's only 1, return the x
+%                 aMax = maximaXs(find(maximaXsMag==max(maximaXsMag)));
+%             else
+%                 % if there's a tie (i.e. the corresponding positive and
+%                 % negative x are both the most true values) return the 
+%                 % negative one
+%                 aMax = maximaXs(find(maximaXs==-1*max(maximaXsMag)));
+%             end
+%     end
 % 
 % end
+% 
+% end
+% 
+% 
+% % classdef generalMF
+% %     properties
+% %     end
+% %     methods
+% %     end
+% % end
+% % 
+% % classdef consequentMF
+% % 
+% % end
 
 
