@@ -528,53 +528,54 @@ for p=1:numel(listStates)
     
     % first count the max number of points the intersections could add
     ruleIntersectionsMaxLength = 0;
-    disp('counting intersections');
+    % disp('counting intersections');
     for s=1:numel(listRules)
-        compareRuleOne = thisCMF.rules.(listRules{s})
+        compareRuleOne = thisCMF.rules.(listRules{s});
         
         for t = (s+1):numel(listRules)
-            compareRuleTwo = thisCMF.rules.(listRules{t})
+            compareRuleTwo = thisCMF.rules.(listRules{t});
             
             ruleOneTruth = NaN(1,numel(uniqueRuleRange));
             ruleTwoTruth = NaN(1,numel(uniqueRuleRange));
             
             % create y values for each rule MF
             for m = 1:numel(uniqueRuleRange)
-               uniqueRuleRange(m)
+               uniqueRuleRange(m);
                ruleOneTruth(m) = evalMF(uniqueRuleRange(m),compareRuleOne);
                ruleTwoTruth(m) = evalMF(uniqueRuleRange(m),compareRuleTwo);
             end
             
             
-            [ruleX, ~] = intersections(uniqueRuleRange, ruleOneTruth, uniqueRuleRange, ruleTwoTruth, true);
+            %[ruleX, ~] = intersections(uniqueRuleRange, ruleOneTruth, uniqueRuleRange, ruleTwoTruth, true);
+            ruleX = MFintersect(uniqueRuleRange, ruleOneTruth, ruleTwoTruth)
             ruleIntersectionsMaxLength = ruleIntersectionsMaxLength + numel(ruleX);
         end
     end
     
-    rangeWithIntersections = NaN(1,numel(ruleIntersectionsMaxLength));
+    rangeWithIntersections = NaN(1,numel(ruleIntersectionsMaxLength))
     
     % Now go through and assign
+    % TODO: if there aren't any skip this
     intersectionIndex = 1;
-    disp('assigning intersections');
+    % disp('assigning intersections');
     for s=1:numel(listRules)
-        compareRuleOne = thisCMF.rules.(listRules{s})
+        compareRuleOne = thisCMF.rules.(listRules{s});
         
         for t = (s+1):numel(listRules)
-            compareRuleTwo = thisCMF.rules.(listRules{t})
+            compareRuleTwo = thisCMF.rules.(listRules{t});
             
             ruleOneTruth = NaN(1,numel(uniqueRuleRange));
             ruleTwoTruth = NaN(1,numel(uniqueRuleRange));
             
             % create y values for each rule MF
             for m = 1:numel(uniqueRuleRange)
-               uniqueRuleRange(m)
+               uniqueRuleRange(m);
                ruleOneTruth(m) = evalMF(uniqueRuleRange(m),compareRuleOne);
                ruleTwoTruth(m) = evalMF(uniqueRuleRange(m),compareRuleTwo);
             end
             
-            
-            [ruleX, ~] = intersections(uniqueRuleRange, ruleOneTruth, uniqueRuleRange, ruleTwoTruth, true);
-            ruleIntersections = ruleX'
+            ruleX = MFintersect(uniqueRuleRange, ruleOneTruth, ruleTwoTruth);
+            ruleIntersections = ruleX
             for n = 1:numel(ruleIntersections(1,:))
                 rangeWithIntersections(intersectionIndex) = ruleIntersections(1,n);
             end
@@ -595,7 +596,7 @@ for p=1:numel(listStates)
     for row=1:numel(listRules)
         thisRule = thisCMF.rules.(listRules{row});
         for col = 1:numel(uniqueFinalRange)
-            stateRulesMat(row,col) = evalMF(uniqueFinalRange(col),thisRule)
+            stateRulesMat(row,col) = evalMF(uniqueFinalRange(col),thisRule);
         end
     end
     
@@ -751,7 +752,58 @@ aggregatedMF = 0;
 % 
 % end
 % 
-% 
+%MFIntersect Function
+function intersectionsX = MFintersect(X, Y1, Y2)
+
+% TODO: enforce X and Y's length
+% Define both functions for the same set of X, using interpolate if
+% necessary, actually this should already be done.
+
+
+% just loop through and see if who's on top changes at an x, or if the x
+% itself is an intersections (in which case I don't think we need to do
+% anything...
+
+
+% get two consecutive sets of truth values. subtract them from each other,
+% and compare the signs. if they're different, find the interesection
+
+% if it does, solve the 2 linear equations for the intersection.
+
+% will have to loop twice, first time to get the count of times it occurs...
+
+% intersections count
+intersectionsCount = 0;
+
+for i = 2:numel(X)
+    if (sign(Y1(i-1)-Y2(i-1)) ~= sign(Y1(i)-Y2(i)))
+        intersectionsCount = intersectionsCount + 1;
+    end
+end
+    
+intersectionsX = NaN(1,intersectionsCount);
+intersectionNumber = 1;
+    
+for i = 2:numel(X)
+    if (sign(Y1(i-1)-Y2(i-1)) ~= sign(Y1(i)-Y2(i)))
+        
+        % line slopes in intersection interval
+        M1 = (Y1(i-1)-Y1(i))/(X(i-1)-X(i));
+        M2 = (Y2(i-1)-Y2(i))/(X(i-1)-X(i));
+        
+        % X value of intersection
+        intersectionsX(intersectionNumber) = ...%find the x value of intersections
+            X(i) + (Y2(i)-Y1(i))/(M1-M2);
+        intersectionNumber = intersectionNumber + 1;
+    end
+    
+    if intersectionNumber > intersectionsCount
+        break;
+    end
+end    
+
+
+end 
 % % classdef generalMF
 % %     properties
 % %     end
