@@ -249,16 +249,15 @@ overdampingMultiplier.range = [1 2];
 %% Aggregate outputs for all rules %%
 
 overdampingMultiplier2.aggregatedFunction = aggregateCMFs(overdampingMultiplier, 'sum');
-
+overdampingMultiplier2.range = [1 2];
 
 %% Defuzzify aggregated output membership functions
 
  damping = 0;
- overDamping = 1%defuzzify(overdampingMultiplier, 'MOM');
+ overDamping = defuzzify(overdampingMultiplier2, 'MOM');
  stiffness = 0;
  dampingExponent = 1;
  stiffnessExponent = 1;
-
 
 %%%%%%%%%%%%%%%%%%
 %% End of Main %%
@@ -582,13 +581,13 @@ for p=1:numel(listStates)
         end
     end
     
-    % eliminate duplicates
-    uniqueRangeIntersections = unique(rangeWithIntersections( ~isnan(rangeWithIntersections)));
+    uniqueRangeIntersections = unique(rangeWithIntersections)
+    uniqueRuleRange
     
     % Now we have the list of output values which define the corners and
     % possible intersections of all rules for this MF state
-    finalOutRange = [uniqueRangeIntersections  uniqueRuleRange];
-    uniqueFinalRange = unique(finalOutRange(~isnan(finalOutRange)));
+    finalOutRange = [uniqueRangeIntersections  uniqueRuleRange]
+    uniqueFinalRange = unique(finalOutRange(~isnan(finalOutRange)))
     
     
     stateRulesMat = zeros(numel(listRules),numel(uniqueFinalRange));
@@ -611,148 +610,166 @@ for p=1:numel(listStates)
     % aggregate them
     outVari.(listStates{p}).func = [uniqueFinalRange; performAgg(stateRulesMat, aggregationMethod)];
         
-%end
-% TODO I'm going to need the intersections here too...?
-% outRange = [outMin outMax];
-% stateList = fieldnames(outVari);
-% 
-% for p = 1:numel(stateList)
-%     thisState = outVari.(stateList{p});
-%     outRange = unique([outRange thisState.func(1,:)]);
-% end
-% 
-% %outRange = outRange(outRange >= outMin);
-% %outRange = outRange(outRange <= outMax);
-% 
-% stateOutMat = zeros(numel(stateList),numel(outRange));
-% for row = 1:numel(stateList)
-%     thisFuncX = outVari.(stateList{row}).func(1,:);
-%     thisFuncT = outVari.(stateList{row}).func(2,:);
-%     for col = 1:numel(outRange)
-%         if (outRange(col) > max(thisFuncX)) || (outRange(col) < min(thisFuncX))
-%             stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,outRange(col),'nearest','extrap');
-%         else
-%             stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,outRange(col),'linear');
-%         end
-%     end
+end
+% TODO: I'm going to need the intersections here too...?
+
+stateList = fieldnames(outVari);
+
+% this loop get all the X over each state MF
+% TODO: add a loop that counts and preallocates
+maxDefiningPointsCount = 0;
+for p = 1:numel(stateList)
+    thisState = outVari.(stateList{p});
+    maxDefiningPointsCount = maxDefiningPointsCount + numel(thisState.func(1,:));
+end
+
+outRange = NaN(1,maxDefiningPointsCount);
+outRangeIndex = 1;
+
+for p = 1:numel(stateList)
+    thisState = outVari.(stateList{p});
+
+    for q = 1:numel(thisState.func(1,:))
+        outRange(outRangeIndex) = thisState.func(1,q);
+        outRangeIndex = outRangeIndex + 1;
+    end
+    
+end
+
+outRangeLimits = [outRange outMin outMax];
+uniqueOutRange = unique(outRangeLimits);
+
+stateOutMat = zeros(numel(stateList),numel(uniqueOutRange));
+for row = 1:numel(stateList)
+    thisFuncX = outVari.(stateList{row}).func(1,:);
+    thisFuncT = outVari.(stateList{row}).func(2,:);
+    for col = 1:numel(uniqueOutRange)
+        if (uniqueOutRange(col) > max(thisFuncX)) || (uniqueOutRange(col) < min(thisFuncX))
+            stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,uniqueOutRange(col),'nearest','extrap');
+        else
+            stateOutMat(row,col) = interp1(thisFuncX,thisFuncT,uniqueOutRange(col),'linear');
+        end
+    end
+end
+
+stateOutMat
+aggregatedFunction = performAgg(stateOutMat, aggregationMethod)
+
+aggregatedMF = [uniqueOutRange; aggregatedFunction]
+
  end
-% 
-% aggregatedFunction = performAgg(stateOutMat, aggregationMethod);
-% aggregatedMF = [outRange; aggregatedFunction];
-aggregatedMF = 0;
- end
-% 
-% function crisp = defuzzify(outputFun, defuzzificationMethod)
-% outMin = outputFun.range(1);
-% outMax = outputFun.range(2);
-% func = outputFun.aggregatedFunction;
-% switch defuzzificationMethod
-%     case 'centroid'
-%         crisp = getCentroidX(func);
-%     case 'bisector'
-%         crisp = bisectSearch(func,min(func(1,:)),max(func(1,:)));
-%     case 'LOM'
-%         crisp = maxima(func,'largest');
-%     case 'MOM'
-%         crisp = maxima(func,'mean');
-%     case 'SOM'
-%         crisp = maxima(func,'smallest');
-%     otherwise disp('Specified defuzzification method not defined');
-% end
-% 
-% if crisp > outMax
-%     crisp = outMax;
-% elseif crisp < outMin
-%     crisp = outMin;
-% end
-% 
-% end
-% 
-% function centroX = getCentroidX(curve)
-% 
-%     polyin = polyshape(curve','Simplify',true);
-%     polyin = simplify(polyin,'KeepCollinearPoints',false);
-%     [x,~] = centroid(polyin);    
-%     centroX = x;
-% end
-% 
-% function xBisect = bisectSearch(curve,searchMin,seaarchMax)
-%     
-%     fullX = curve(1,:);
-%     fullY = curve(2,:);
-% 
-%     totalArea = trapz(fullX,fullY);
-%     
-%     midX = (searchMin + seaarchMax)/2;
-%     midY = interp1(fullX,fullY,midX,'linear');
-%     
-%     
-%     halfXTest = [fullX(fullX < midX) midX];
-%     halfYTestLen = numel(fullX(fullX < midX));
-%     halfYTest = [fullY(1:halfYTestLen) midY];
-%     halfAreaTest = trapz(halfXTest,halfYTest);
-%     
-%     if round(halfAreaTest,4) == round(0.5*totalArea,4)
-%         xBisect = midX;
-%     elseif halfAreaTest > 0.5*totalArea
-%         xBisect = bisectSearch(curve,searchMin,midX);
-%     elseif halfAreaTest < 0.5*totalArea
-%         xBisect = bisectSearch(curve,midX,seaarchMax);
-%     end
-% end
-% 
-% function aMax = maxima(curve,type)
-% 
-% fullX = curve(1,:);
-% fullY = curve(2,:);
-% 
-% % if there is a single most true point
-% if size(fullY(fullY == max(fullY))) == 1
-%     % return the x
-%     aMax = fullX(find(fullY==max(fullY)));
-% else
-%     switch type
-%         case 'largest'
-%             % largest = highest absolute value 
-%             maximaXs = fullX(find(fullY==max(fullY)));
-%             maximaXsMag = abs(maximaXs);
-%             
-%             if size(maximaXsMag(maximaXsMag == max(maximaXsMag))) == 1
-%                 % if there's only 1, return the x
-%                 aMax = maximaXs(find(maximaXsMag==max(maximaXsMag)));
-%             else
-%                 % if there's a tie (i.e. the corresponding positive and
-%                 % negative x are both the most true) return the negative
-%                 % one
-%                 aMax = maximaXs(find(maximaXs==-1*max(maximaXsMag)));
-%             end
-%         case 'mean'
-%             maximaXs = fullX(find(fullY==max(fullY)));
-%             aMax = (max(maximaXs) + min(maximaXs))/2;
-%             %if there are two separate max plateaus, should their average be
-%             %weighted?, like find the middle of both plateaus, and take an average
-%             %of the MOMs weighted by their length?? too complicated
-%         case 'smallest'
-%             % smallest = lowest absolute value 
-%             maximaXs = fullX(find(fullY==max(fullY)));
-%             maximaXsMag = abs(maximaXs);
-%             
-%             if size(maximaXsMag(maximaXsMag == max(maximaXsMag))) == 1
-%                 % if there's only 1, return the x
-%                 aMax = maximaXs(find(maximaXsMag==max(maximaXsMag)));
-%             else
-%                 % if there's a tie (i.e. the corresponding positive and
-%                 % negative x are both the most true values) return the 
-%                 % negative one
-%                 aMax = maximaXs(find(maximaXs==-1*max(maximaXsMag)));
-%             end
-%     end
-% 
-% end
-% 
-% end
-% 
-%MFIntersect Function
+
+function crisp = defuzzify(outputFun, defuzzificationMethod)
+outMin = outputFun.range(1);
+outMax = outputFun.range(2);
+func = outputFun.aggregatedFunction;
+switch defuzzificationMethod
+    case 'centroid'
+        crisp = getCentroidX(func);
+    case 'bisector'
+        crisp = bisectSearch(func,min(func(1,:)),max(func(1,:)));
+    case 'LOM'
+        crisp = maxima(func,'largest');
+    case 'MOM'
+        crisp = maxima(func,'mean');
+    case 'SOM'
+        crisp = maxima(func,'smallest');
+    otherwise disp('Specified defuzzification method not defined');
+        crisp = NaN;
+end
+
+if crisp > outMax
+    crisp = outMax;
+elseif crisp < outMin
+    crisp = outMin;
+end
+
+end
+
+function centroX = getCentroidX(curve)
+
+    polyin = polyshape(curve','Simplify',true);
+    polyin = simplify(polyin,'KeepCollinearPoints',false);
+    [x,~] = centroid(polyin);    
+    centroX = x;
+end
+
+function xBisect = bisectSearch(curve,searchMin,seaarchMax)
+    
+    fullX = curve(1,:);
+    fullY = curve(2,:);
+
+    totalArea = trapz(fullX,fullY);
+    
+    midX = (searchMin + seaarchMax)/2;
+    midY = interp1(fullX,fullY,midX,'linear');
+    
+    
+    halfXTest = [fullX(fullX < midX) midX];
+    halfYTestLen = numel(fullX(fullX < midX));
+    halfYTest = [fullY(1:halfYTestLen) midY];
+    halfAreaTest = trapz(halfXTest,halfYTest);
+    
+    if round(halfAreaTest,4) == round(0.5*totalArea,4)
+        xBisect = midX;
+    elseif halfAreaTest > 0.5*totalArea
+        xBisect = bisectSearch(curve,searchMin,midX);
+    elseif halfAreaTest < 0.5*totalArea
+        xBisect = bisectSearch(curve,midX,seaarchMax);
+    end
+end
+
+function aMax = maxima(curve,type)
+
+fullX = curve(1,:);
+fullY = curve(2,:);
+
+% if there is a single most true point
+if size(fullY(fullY == max(fullY))) == 1
+    % return the x
+    aMax = fullX(find(fullY==max(fullY)));
+else
+    switch type
+        case 'largest'
+            % largest = highest absolute value 
+            maximaXs = fullX(find(fullY==max(fullY)));
+            maximaXsMag = abs(maximaXs);
+            
+            if size(maximaXsMag(maximaXsMag == max(maximaXsMag))) == 1
+                % if there's only 1, return the x
+                aMax = maximaXs(find(maximaXsMag==max(maximaXsMag)));
+            else
+                % if there's a tie (i.e. the corresponding positive and
+                % negative x are both the most true) return the negative
+                % one
+                aMax = maximaXs(find(maximaXs==-1*max(maximaXsMag)));
+            end
+        case 'mean'
+            maximaXs = fullX(find(fullY==max(fullY)));
+            aMax = (max(maximaXs) + min(maximaXs))/2;
+            %if there are two separate max plateaus, should their average be
+            %weighted?, like find the middle each plateaus, and take an average
+            %of the MOMs weighted by their length?? too complicated
+        case 'smallest'
+            % smallest = lowest absolute value 
+            maximaXs = fullX(find(fullY==max(fullY)));
+            maximaXsMag = abs(maximaXs);
+            
+            if size(maximaXsMag(maximaXsMag == max(maximaXsMag))) == 1
+                % if there's only 1, return the x
+                aMax = maximaXs(find(maximaXsMag==max(maximaXsMag)));
+            else
+                % if there's a tie (i.e. the corresponding positive and
+                % negative x are both the most true values) return the 
+                % negative one
+                aMax = maximaXs(find(maximaXs==-1*max(maximaXsMag)));
+            end
+    end
+
+end
+
+end
+
 function intersectionsX = MFintersect(X, Y1, Y2)
 
 % TODO: enforce X and Y's length
@@ -814,5 +831,4 @@ end
 % % classdef consequentMF
 % % 
 % % end
-
 
