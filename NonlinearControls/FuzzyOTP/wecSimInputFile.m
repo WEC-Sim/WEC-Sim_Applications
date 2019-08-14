@@ -1,13 +1,14 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'RM3.slx';      % Specify Simulink Model File
+simu.simMechanicsFile = 'RM3_FuzzyOTP_Bmod.slx';      % Specify Simulink Model File
+PTO_OTP_Bmod = readfis('PTO_OTP_Bmod');  % Fuzzy Inference System
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer='on';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
-simu.rampTime = 50;                   	% Wave Ramp Time [s]
-simu.endTime=300;                       % Simulation End Time [s]
-simu.solver = 'ode45';                  % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-simu.dt = 0.1; 							% Simulation time-step [s]
+simu.rampTime = 050;                   	% Wave Ramp Time [s]
+simu.endTime=72.5;                       % Simulation End Time [s]
+simu.solver = 'ode45';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
+%simu.dt = 0.001; 							% Simulation time-step [s]
 
 %% Wave Information 
 % % noWaveCIC, no waves with radiation CIC  
@@ -15,13 +16,27 @@ simu.dt = 0.1; 							% Simulation time-step [s]
 
 % % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.H = 1.5;                          % Wave Height [m]
-waves.T = 8;                            % Wave Period [s]
+waves.H = 2;                          % Wave Height [m]
+waves.T = 10;                            % Wave Period [s]
 
 % Regular Waves with CIC
 % waves = waveClass('regularCIC');           % Initialize Wave Class and Specify Type                                 
 % waves.H = 2.5;                          % Wave Height [m]
 % waves.T = 8;                            % Wave Period [s]
+
+% % Irregular Waves using PM Spectrum 
+% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
+% waves.H = 2.5;                          % Significant Wave Height [m]
+% waves.T = 8;                            % Peak Period [s]
+% waves.spectrumType = 'PM';              % Specify Wave Spectrum Type
+
+% % Irregular Waves using JS Spectrum with Equal Energy and Seeded Phase
+% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
+% waves.H = 2.5;                          % Significant Wave Height [m]
+% waves.T = 8;                            % Peak Period [s]
+% waves.spectrumType = 'JS';              % Specify Wave Spectrum Type
+% waves.freqDisc = 'EqualEnergy';         % Uses 'EqualEnergy' bins (default) 
+% waves.phaseSeed = 1;                    % Phase is seeded so eta is the same
 
 % % Irregular Waves using BS Spectrum with Traditional and State Space 
 % waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
@@ -30,19 +45,6 @@ waves.T = 8;                            % Wave Period [s]
 % waves.spectrumType = 'BS';              % Specify Wave Spectrum Type
 % simu.ssCalc = 1;                        % Turn on State Space
 % waves.freqDisc = 'Traditional';         % Uses 1000 frequnecies
-
-% Irregular Waves using PM Spectrum 
-% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-% waves.T = 8;                            % Peak Period [s]
-% waves.spectrumType = 'PM';              % Specify Wave Spectrum Type
-% waves.phaseSeed = 1;                    % Phase is seeded so eta is the same
-
-% % Irregular Waves using JS Spectrum with Equal Energy and Seeded Phase
-% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-% waves.T = 8;                            % Peak Period [s]
-% waves.spectrumType = 'JS';              % Specify Wave Spectrum Type
-% waves.freqDisc = 'EqualEnergy';         % Uses 'EqualEnergy' bins (default) 
-% waves.phaseSeed = 1;                    % Phase is seeded so eta is the same
 
 % % Irregular Waves with imported spectrum
 % waves = waveClass('spectrumImport');        % Create the Wave Variable and Specify Type
@@ -77,5 +79,5 @@ constraint(1).loc = [0 0 0];                    % Constraint Location [m]
 % Translational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize PTO Class for PTO1
 pto(1).k = 0;                                   % PTO Stiffness [N/m]
-pto(1).c = 0;                                   % PTO Damping [N/(m/s)]
+pto(1).c = 0;                             % PTO Damping [N/(m/s)]
 pto(1).loc = [0 0 0];                           % PTO Location [m]
