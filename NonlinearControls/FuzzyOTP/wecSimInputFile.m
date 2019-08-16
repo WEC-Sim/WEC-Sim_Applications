@@ -1,14 +1,13 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
 simu.simMechanicsFile = 'RM3_FuzzyOTP_Bmod.slx';      % Specify Simulink Model File
-PTO_OTP_Bmod = readfis('PTO_OTP_Bmod');  % Fuzzy Inference System
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer='on';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 050;                   	% Wave Ramp Time [s]
-simu.endTime=72.5;                       % Simulation End Time [s]
-simu.solver = 'ode45';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-%simu.dt = 0.001; 							% Simulation time-step [s]
+simu.endTime=72.5;                      % Simulation End Time [s]
+simu.solver = 'ode4';               % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
+simu.dt = 0.001;                        % Simulation time-step [s]
 
 %% Wave Information 
 % % noWaveCIC, no waves with radiation CIC  
