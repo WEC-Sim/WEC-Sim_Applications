@@ -4,10 +4,10 @@ simu.simMechanicsFile = 'RM3.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer='on';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
-simu.rampTime = 100;                   	% Wave Ramp Time [s]
-simu.endTime=400;                       % Simulation End Time [s]
-simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-simu.dt = 0.01; 							% Simulation time-step [s]
+simu.rampTime = 050;                   	% Wave Ramp Time [s]
+simu.endTime=72.5;                      % Simulation End Time [s]
+simu.solver = 'ode4';               % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
+simu.dt = 0.001;                        % Simulation time-step [s]
 
 %% Wave Information 
 % % noWaveCIC, no waves with radiation CIC  
@@ -78,5 +78,5 @@ constraint(1).loc = [0 0 0];                    % Constraint Location [m]
 % Translational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize PTO Class for PTO1
 pto(1).k = 0;                                   % PTO Stiffness [N/m]
-pto(1).c = 1200000;                             % PTO Damping [N/(m/s)]
+pto(1).c = 0;                             % PTO Damping [N/(m/s)]
 pto(1).loc = [0 0 0];                           % PTO Location [m]
