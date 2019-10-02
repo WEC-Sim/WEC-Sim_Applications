@@ -4,8 +4,8 @@ simu.simMechanicsFile = 'RM3_FLC.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer='on';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
-simu.rampTime = 100;                   	% Wave Ramp Time [s]
-simu.endTime=400;                       % Simulation End Time [s]
+simu.rampTime = 10;                   	% Wave Ramp Time [s]
+simu.endTime=200;                       % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01; 							% Simulation time-step [s]
 
@@ -13,10 +13,10 @@ simu.dt = 0.01; 							% Simulation time-step [s]
 % % noWaveCIC, no waves with radiation CIC  
 % waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
 
-% % Regular Waves  
-waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.H = 2;                          % Wave Height [m]
-waves.T = 10;                            % Wave Period [s]
+% % % Regular Waves  
+% waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
+% waves.H = 3;                          % Wave Height [m]
+% waves.T = 9;                            % Wave Period [s]
 
 % Regular Waves with CIC
 % waves = waveClass('regularCIC');           % Initialize Wave Class and Specify Type                                 
@@ -37,13 +37,14 @@ waves.T = 10;                            % Wave Period [s]
 % waves.freqDisc = 'EqualEnergy';         % Uses 'EqualEnergy' bins (default) 
 % waves.phaseSeed = 1;                    % Phase is seeded so eta is the same
 
-% % Irregular Waves using BS Spectrum with Traditional and State Space 
-% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-% waves.H = 2.5;                          % Significant Wave Height [m]
-% waves.T = 8;                            % Peak Period [s]
-% waves.spectrumType = 'BS';              % Specify Wave Spectrum Type
-% simu.ssCalc = 1;                        % Turn on State Space
-% waves.freqDisc = 'Traditional';         % Uses 1000 frequnecies
+% Irregular Waves using BS Spectrum with Traditional and State Space 
+waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
+waves.H = 3;                          % Significant Wave Height [m]
+waves.T = 9;                            % Peak Period [s]
+waves.spectrumType = 'BS';              % Specify Wave Spectrum Type
+simu.ssCalc = 1;                        % Turn on State Space
+waves.freqDisc = 'Traditional';         % Uses 1000 frequnecies
+waves.phaseSeed = 7;
 
 % % Irregular Waves with imported spectrum
 % waves = waveClass('spectrumImport');        % Create the Wave Variable and Specify Type
