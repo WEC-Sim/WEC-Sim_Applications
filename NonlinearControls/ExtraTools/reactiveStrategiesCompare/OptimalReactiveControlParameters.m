@@ -62,7 +62,6 @@ Cpto_opt_reactive = freq.*imag(Zt);
 %Apply limit
 for i = 1:numel(Cpto_opt_reactive) 
     if (Cpto_opt_reactive(i) < Cpto_stablelimit) || (isnan(Cpto_opt_reactive(i)))
-        %disp('Unstable stiffness...recalculating stiffness and damping')
         Cpto_opt_reactive(i) = 0.9*Cpto_stablelimit;
         Bpto_opt_reactive(i) = sqrt((imag(Zt(i)) - (1./freq(i)).*Cpto_opt_reactive(i)).^2 + real(Zt(i)).^2);
     end
