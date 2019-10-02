@@ -1,56 +1,29 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'RM3.slx';      % Specify Simulink Model File
+simu.simMechanicsFile = 'RM3_FLC.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer='on';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
-simu.rampTime = 50;                   	% Wave Ramp Time [s]
-simu.endTime=300;                       % Simulation End Time [s]
-simu.solver = 'ode45';                  % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-simu.dt = 0.1; 							% Simulation time-step [s]
+simu.rampTime = 100;                   	% Wave Ramp Time [s]
+simu.endTime=500;                       % Simulation End Time [s]
+simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
+simu.dt = 0.01; 							% Simulation time-step [s]
 
-%% Wave Information 
-% % noWaveCIC, no waves with radiation CIC  
-% waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
+%% Wave Information  
 
-% % Regular Waves  
+% Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.H = 1.5;                          % Wave Height [m]
-waves.T = 8;                            % Wave Period [s]
+waves.H = 4;                          % Wave Height [m]
+waves.T = 10;                            % Wave Period [s]
 
-% Regular Waves with CIC
-% waves = waveClass('regularCIC');           % Initialize Wave Class and Specify Type                                 
-% waves.H = 2.5;                          % Wave Height [m]
-% waves.T = 8;                            % Wave Period [s]
-
-% % Irregular Waves using BS Spectrum with Traditional and State Space 
+% Irregular Waves using BS Spectrum with Traditional and State Space 
 % waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-% waves.H = 2.5;                          % Significant Wave Height [m]
-% waves.T = 8;                            % Peak Period [s]
+% waves.H = 3;                          % Significant Wave Height [m]
+% waves.T = 10;                            % Peak Period [s]
 % waves.spectrumType = 'BS';              % Specify Wave Spectrum Type
 % simu.ssCalc = 1;                        % Turn on State Space
 % waves.freqDisc = 'Traditional';         % Uses 1000 frequnecies
-
-% Irregular Waves using PM Spectrum 
-% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-% waves.T = 8;                            % Peak Period [s]
-% waves.spectrumType = 'PM';              % Specify Wave Spectrum Type
-% waves.phaseSeed = 1;                    % Phase is seeded so eta is the same
-
-% % Irregular Waves using JS Spectrum with Equal Energy and Seeded Phase
-% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-% waves.T = 8;                            % Peak Period [s]
-% waves.spectrumType = 'JS';              % Specify Wave Spectrum Type
-% waves.freqDisc = 'EqualEnergy';         % Uses 'EqualEnergy' bins (default) 
-% waves.phaseSeed = 1;                    % Phase is seeded so eta is the same
-
-% % Irregular Waves with imported spectrum
-% waves = waveClass('spectrumImport');        % Create the Wave Variable and Specify Type
-% waves.spectrumDataFile = 'spectrumData.mat';  %Name of User-Defined Spectrum File [:,2] = [f, Sf]
-
-% % Waves with imported wave elevation time-history  
-% waves = waveClass('etaImport');         % Create the Wave Variable and Specify Type
-% waves.etaDataFile = 'etaData.mat'; % Name of User-Defined Time-Series File [:,2] = [time, eta]
+% waves.phaseSeed = 7;
 
 %% Body Data
 % Float
@@ -76,6 +49,6 @@ constraint(1).loc = [0 0 0];                    % Constraint Location [m]
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize PTO Class for PTO1
-pto(1).k = 0;                                   % PTO Stiffness [N/m]
-pto(1).c = 0;                                   % PTO Damping [N/(m/s)]
+pto(1).k = 0;                                   % PTO Stiffness applied via actuation force
+pto(1).c = 0;                                   % PTO Damping applied via actuation force
 pto(1).loc = [0 0 0];                           % PTO Location [m]
