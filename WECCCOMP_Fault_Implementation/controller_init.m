@@ -1,9 +1,7 @@
 % init file for the WecSim model of the Wavestart arm
 
 mc = 0;
-% Comment out the cc and kc lines if user runs the TestLoop.m to cycle
-% through various feedback gains.
-cc = 10.0; %13.7
+cc = 10.0;
 kc = 0;
 
 McSat = inf;
