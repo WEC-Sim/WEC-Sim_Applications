@@ -1,0 +1,1 @@
+Demonstration of period sensor for control input in wecSim
