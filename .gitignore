@@ -65,10 +65,14 @@ $ cat .gitignore
 /RM3_MCR/**/*.mat
 **/mooring/*.out
 !**/mooring/lines.txt
-!/RM3_MCR/RM3_MCROPT3/mcrExample.mat
-!/RM3_MCR/RM3_MCROPT3_SeaState/mcrExample.mat
-**/vtk/*
 
+
+# Exemptions
+!mcrExample.mat
+!spectrumData.mat
+!spectrumData1.mat
+!spectrumData2.mat
+!spectrumData3.mat
 # Other
 .DS_Store
 view_html.sh

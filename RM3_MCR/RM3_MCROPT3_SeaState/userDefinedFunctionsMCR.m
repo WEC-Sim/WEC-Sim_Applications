@@ -10,10 +10,31 @@ save (filename, 'mcr','output','waves');
 %% Plot 
 cases=1:length(mcr.cases);
 if imcr == length(mcr.cases)
-    figure
+    
     lin={'-','-','-'};
     col = {'b','k','c'};
 
+    figure
+    for i = 1:length(cases)
+        load(['savedData00' num2str(i) '.mat'])
+        
+            m0 = trapz(waves.w,waves.S);
+            HsTest = 4*sqrt(m0);
+            [~,I] = max(abs(waves.S));
+            wp = waves.w(I);
+            TpTest = 2*pi/wp;
+            
+            plot(waves.w,waves.S,'linestyle',lin{i},'color',col{i})
+            hold on     
+    end
+    xlim([0 max(waves.w)])
+    title([waves.spectrumType, ' MCR cases for RM3 with 3 Sea States (SS1<SS2<SS3)'])
+    xlabel('Frequency (rad/s)')
+    ylabel('Spectrum (m^2-s/rad)');
+    legend('SS1','SS2','SS3',...
+        'Location','northeast','Orientation','horizontal')   
+    
+    figure
     for i = 1:length(cases)
         load(['savedData00' num2str(i) '.mat'])
 
@@ -29,11 +50,11 @@ if imcr == length(mcr.cases)
         hold on
         ylabel('Float Heave Response[m]')
     end
-subplot(2,1,1)
-    title('MCR for RM3 with 3 Sea States (SS1<SS2<SS3) and same phase ')
+    subplot(2,1,1)
+    title('MCR results for RM3 with 3 Sea States (SS1<SS2<SS3) and same phase ')
     legend('SS1','SS2','SS3',...
         'Location','northwest','Orientation','horizontal')    
-subplot(2,1,2)    
+    subplot(2,1,2)    
     legend('SS1','SS2','SS3',...
         'Location','northwest','Orientation','horizontal')              
 end
