@@ -41,7 +41,6 @@ end
 if ~any(ismember(fList(1,:),'yawOn.mat')); 
     cd('./PassiveYawON')
     wecSim;
-    save('yawOff','output')
     close all;
     cd('..')
     save('yawOn','output')
