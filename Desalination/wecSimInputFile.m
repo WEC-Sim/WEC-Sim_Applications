@@ -10,7 +10,6 @@ simu.dt = 0.01;                             %Simulation time-step [s] for a conv
 simu.rampTime = 50;
 simu.CITime = 30;
 simu.morisonElement = 1;
-%simu.zeroCrossCont= 'EnableAll';           % Disable zero cross control 
 
 %% Wave Information
 %% Irregular Waves using PM Spectrum with Convolution Integral Calculation
