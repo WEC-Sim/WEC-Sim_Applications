@@ -6,8 +6,7 @@ simu.dt = 0.01;
 simu.CITime = 15;
 simu.explorer = 'off';
 simu.adjMassWeightFun = 0.47761120825;
-% Turn on Morison Element
-simu.morisonElement    = 1; 
+simu.morisonElement    = 1;                 % Turn Morison Element on 
 
 %% Wave Information  
 % Regular Waves  
