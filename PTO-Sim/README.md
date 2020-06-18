@@ -1,7 +1,9 @@
 # PTO-Sim
 
-**Author:**          Ratanak So
+**Author:**  	Ratanak So
 
-**WEC-Sim Version:** v2.0
+**Version:** 	WEC-Sim v2.0
 
-Example on using [PTO-Sim](http://wec-sim.github.io/WEC-Sim/features.html#power-take-off-pto-sim). Examples of WEC-Sim models using PTO-Sim are included for the [RM3 example](http://wec-sim.github.io/WEC-Sim/tutorials.html#two-body-point-absorber-rm3) and [OSWEC example](http://wec-sim.github.io/WEC-Sim/tutorials.html#oscillating-surge-wec-oswec)
+**Geometry**	OSWEC and RM3
+
+Examples using [PTO-Sim](http://wec-sim.github.io/WEC-Sim/features.html#power-take-off-pto-sim). Examples of WEC-Sim models using PTO-Sim are included for the [RM3](http://wec-sim.github.io/WEC-Sim/tutorials.html#two-body-point-absorber-rm3) geometry and [OSWEC](http://wec-sim.github.io/WEC-Sim/tutorials.html#oscillating-surge-wec-oswec) geometry.
