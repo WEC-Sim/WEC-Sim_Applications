@@ -2,12 +2,12 @@
 simu = simulationClass();               
 simu.simMechanicsFile = 'RM3.slx';      
 simu.solver = 'ode4';                   
-simu.explorer='on';                     
+simu.explorer='off';                     
 simu.startTime = 0;                     
 simu.rampTime = 100;                       
 simu.endTime=400;                       
 simu.dt = 0.1; 							
-simu.b2b = 0;                       % Turn B2B interactions 'off'   
+simu.b2b = 1;                       % Turn B2B interactions 'on'   
 simu.ssCalc = 1;
 
 %% Wave Information 

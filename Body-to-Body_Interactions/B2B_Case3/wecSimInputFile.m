@@ -2,17 +2,16 @@
 simu = simulationClass();               
 simu.simMechanicsFile = 'RM3.slx';      
 simu.solver = 'ode4';                   
-simu.explorer='on';                     
+simu.explorer='off';                                       
 simu.startTime = 0;                     
 simu.rampTime = 100;                       
 simu.endTime=400;                       
 simu.dt = 0.1; 							
-simu.b2b = 1;                       % Turn B2B interactions 'on'   
-simu.ssCalc = 1;
+simu.b2b = 0;                   	% Turn B2B interactions 'off'   
 
 %% Wave Information 
 % Regular Waves  
-waves = waveClass('regularCIC');    % Regular CIC           
+waves = waveClass('regularCIC');       % Regular CIC    
 waves.H = 2.5;                          
 waves.T = 8;                            
 

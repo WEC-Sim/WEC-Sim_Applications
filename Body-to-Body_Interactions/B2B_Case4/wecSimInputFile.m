@@ -2,7 +2,7 @@
 simu = simulationClass();               
 simu.simMechanicsFile = 'RM3.slx';      
 simu.solver = 'ode4';                   
-simu.explorer='on';                     
+simu.explorer='off';                                        
 simu.startTime = 0;                     
 simu.rampTime = 100;                       
 simu.endTime=400;                       

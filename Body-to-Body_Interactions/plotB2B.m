@@ -29,5 +29,5 @@ for i = 1:length(cases)
     cd ../..
 end
 legend('Regular','Regular B2B','RegularCIC','RegularCIC B2B','RegularCIC SS','RegularCIC B2B SS',...
-    'Location','northwest','Orientation','horizontal')
+    'Location','northwest')
     
