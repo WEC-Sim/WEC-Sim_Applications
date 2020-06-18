@@ -9,26 +9,18 @@ simu.endTime=600;                       % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01;                         % Simulation Time-Step [s]
 simu.CITime = 40;                       % Specify CI Time [s]
-%simu.dtCITime=0.001;
 simu.yawNonLin=0;
 simu.yawThresh=1;
 simu.nlHydro=0;
+
 %% Wave Information
-% % Regular Waves 
+% Regular Waves 
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
 waves.H = 2.5;                          % Wave Height [m]
 waves.T = 8;                            % Wave Period [s]
 waves.waveDir = [10];                   % Wave Directionality [deg]
 waves.waveSpread = [1];                 % Wave Directional Spreading [%}
 
-% % Irregular Waves- pierson moskowitz
-% waves = waveClass('irregular');           % Initialize Wave Class and Specify Type                                 
-% waves.H = 2.5;                          % Wave Height [m]
-% waves.T = 8;                            % Wave Period [s]
-% waves.waveDir = [10];                   % Wave Directionality [deg]
-% waves.waveSpread = [1];                 % Wave Directional Spreading [%}
-% waves.spectrumType='PM';
-% waves.phaseSeed= 1;
 
 %% Body Data
 % Flap

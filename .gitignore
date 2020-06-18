@@ -69,6 +69,7 @@ $ cat .gitignore
 !**/mooring/lines.txt
 **/vtk/*
 savedData*.mat
+yaw*.mat
 
 # BEM
 *.1
