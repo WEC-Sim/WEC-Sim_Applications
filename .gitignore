@@ -65,12 +65,10 @@ $ cat .gitignore
 *build_exception*
 
 # Applications
-/RM3_MCR/**/*.mat
 **/mooring/*.out
 !**/mooring/lines.txt
-!/RM3_MCR/RM3_MCROPT3/mcrExample.mat
-!/RM3_MCR/RM3_MCROPT3_SeaState/mcrExample.mat
 **/vtk/*
+savedData*.mat
 
 # BEM
 *.1
