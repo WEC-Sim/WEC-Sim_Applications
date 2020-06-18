@@ -82,7 +82,7 @@ $ cat .gitignore
 *.hst
 *.p2f
 *.pot
-! /Generalized Body Modes - barge/hydroData/WAMIT/*
+!/Generalized_Body_Modes/hydroData/WAMIT/*
 
 
 # Other

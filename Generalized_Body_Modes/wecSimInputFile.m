@@ -6,16 +6,14 @@ simu.explorer='on';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 100;                   	% Wave Ramp Time [s]
 simu.endTime=400;                       % Simulation End Time [s]
-simu.solver = 'ode45';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-simu.dt = 0.05; 							% Simulation time-step [s]
+simu.solver = 'ode45';                  % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
+simu.dt = 0.05; 						% Simulation time-step [s]
 
 %% Wave Information 
-% % noWaveCIC, no waves with radiation CIC  
-% waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
 
 % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.H = 2;                          % Wave Height [m]
+waves.H = 2;                            % Wave Height [m]
 waves.T = 8;                            % Wave Period [s]
 
 %% Body Data
