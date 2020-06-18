@@ -9,10 +9,10 @@ simu.endTime=600;                       % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01;                         % Simulation Time-Step [s]
 simu.CITime = 40;                       % Specify CI Time [s]
-%simu.dtCITime=0.001;
 simu.yawNonLin=1;
 simu.yawThresh=0.01;
 simu.nlHydro=0;
+
 %% Wave Information
 % % Regular Waves 
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
