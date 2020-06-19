@@ -1,8 +1,8 @@
 # WECCCOMP – WEC Control Competition Fault Implementation
 
-**Author:**          Erica Lindbeck (University of Central Florida) and Nathan Tom (NREL)
+**Author:**  	Erica Lindbeck (University of Central Florida) and Nathan Tom (NREL)
 
-**WEC-Sim Version:** v3.0 (or newer)
+**Version:** 	WEC-Sim v3.0 (or newer)
 
 **Matlab Version:** 2018b (or newer)
 
