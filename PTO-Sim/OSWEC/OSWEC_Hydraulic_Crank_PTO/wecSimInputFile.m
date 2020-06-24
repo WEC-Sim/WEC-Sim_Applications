@@ -21,7 +21,7 @@ body(1) = bodyClass('../hydroData/oswec.h5');
 body(1).geometryFile = '../geometry/flap.stl';    
 body(1).mass = 127000;                         
 body(1).momOfInertia = [1.85e6 1.85e6 1.85e6]; 
-body(1).linearDamping = [0, 0, 0, 0, 1*10^7, 0];    % Specify damping on body
+body(1).linearDamping(5,5) = 1*10^7;    % Specify damping on body 1 in pich
 
 % Base
 body(2) = bodyClass('../hydroData/oswec.h5');   
