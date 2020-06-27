@@ -1,6 +1,6 @@
 # WEC-Sim_Applications
 
-This repository contains applications of the WEC-Sim code, including turorials by the WEC-Sim team as well as user-shared examples. 
+This repository contains applications of the WEC-Sim code, including tutorials by the WEC-Sim team as well as user-shared examples. 
 
 To contribute an example follow these guidelines:
 * Create a folder on the top level with a single example. 
