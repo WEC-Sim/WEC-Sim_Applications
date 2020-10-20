@@ -1,12 +1,12 @@
 %Example of plottomg free decay
 
 clear all; close all; clc;
-offset = [0,1,3,5];
+casedir = {"0m","1m","1m-ME","3m","5m"};
 
 figure
 
-for ii = 1:length(offset)
-    cd([num2str(offset(ii),'%2g'),'m/output'])
+for ii = 1:length(casedir)
+    cd([string(casedir{ii}) + '/output'])
     load sphere_matlabWorkspace.mat
     plot(output.bodies.time,output.bodies.position(:,3)-body(1).cg(3))
     hold on
@@ -16,7 +16,7 @@ end
 title('IEA OES Task 10')
 xlabel('Time (s)')
 ylabel('Displacement (m)')
-for i = 1:length(offset)
-    leg{i} = ['z_0 = ' num2str(offset(i),3) ' m'];
+for i = 1:length(casedir)
+    leg{i} = ['z_0 = ' + casedir{i}];
 end
 legend(leg,'location','northeast')
