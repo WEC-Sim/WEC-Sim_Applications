@@ -1,4 +1,4 @@
-%Example of plottomg free decay
+%Example plotting free decay
 
 clear all; close all; clc;
 casedir = {"0m","1m","1m-ME","3m","5m"};
