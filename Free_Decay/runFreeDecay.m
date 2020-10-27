@@ -1,13 +1,13 @@
-%Example of running free decay
+%Example running free decay
 
 clear all; close all; clc;
-offset = [0,1,3,5];
+casedir = {"0m","1m","1m-ME","3m","5m"};
 
-for ii = 1:length(offset)
-    cd([num2str(offset(ii),'%2g'),'m'])
+for ii = 1:length(casedir)
+    cd(string(casedir{ii}))
     wecSim
     cd ..
-    offset = [0,1,3,5];
+    casedir = {"0m","1m","1m-ME","3m","5m"};
 end
 
 plotFreeDecay
