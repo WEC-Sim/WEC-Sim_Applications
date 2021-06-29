@@ -5,7 +5,8 @@ simu.startTime = 0;
 simu.rampTime = 100;                       
 simu.endTime=400;                       
 simu.dt = 0.01;                         
-simu.CITime = 30;                       
+simu.CITime = 30;
+simu.explorer = 'off';                     % Turn SimMechanics Explorer (on/off)
 
 %% Wave Information
 %Irregular Waves using PM Spectrum
