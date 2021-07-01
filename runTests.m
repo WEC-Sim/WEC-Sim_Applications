@@ -12,7 +12,7 @@ function results = runTests(testsPath)
     
     % Build the runner
     runner = TestRunner.withTextOutput;
-
+    
     % Run the tests
     results = runner.run(suite);
     
