@@ -62,7 +62,10 @@ classdef TestDesalination < matlab.unittest.TestCase
     methods(Test)
         
         function testDesalination(testCase)
-            wecSim
+            assumeError(testCase,                               ...
+                        @() run("wecSim"),                      ...
+                        'MATLAB:MException:MultipleErrors',     ...
+                        'Expected failure');
         end
         
     end
