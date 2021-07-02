@@ -2,7 +2,7 @@
 
 **Author:**  	Carlos Michelen
 
-**Version:** 	WEC-Sim v2.2
+**Version:** 	WEC-Sim v2.2 and Paraview 5.9.1
 
 **Geometry**	OSWEC and RM3
 
