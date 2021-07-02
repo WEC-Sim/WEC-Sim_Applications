@@ -67,6 +67,9 @@ classdef TestMoorDynViz < matlab.unittest.TestCase
     methods(Test)
         
         function testParaview_Visualization_RM3_MoorDyn_Viz(testCase)
+            assumeEqual(testCase,                           ...
+                        exist("MoorDyn_caller", "file"), 2, ...
+                        "MoorDyn is not installed");
             wecSim
         end
         

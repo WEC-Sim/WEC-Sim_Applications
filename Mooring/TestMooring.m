@@ -69,6 +69,9 @@ classdef TestMooring < matlab.unittest.TestCase
     methods(Test)
         
         function testMoorDyn(testCase)
+            assumeEqual(testCase,                           ...
+                        exist("MoorDyn_caller", "file"), 2, ...
+                        "MoorDyn is not installed");
             cd MoorDyn
             wecSim
             cd(testCase.testDir)
