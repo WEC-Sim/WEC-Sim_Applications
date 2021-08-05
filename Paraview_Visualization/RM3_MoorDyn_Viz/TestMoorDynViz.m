@@ -6,6 +6,7 @@ classdef TestMoorDynViz < matlab.unittest.TestCase
         h5Dir = fullfile("hydroData")
         h5Name = 'rm3.h5'
         outName = 'rm3.out'
+        hasH5 = false
     end
     
     
@@ -31,6 +32,10 @@ classdef TestMoorDynViz < matlab.unittest.TestCase
         
         function runBemio(testCase)
             
+            assumeEqual(testCase,                           ...
+                        exist("MoorDyn_caller", "file"), 2, ...
+                        "MoorDyn is not installed");
+            
             cd(testCase.h5Dir);
             hydro = struct();
             hydro = Read_WAMIT(hydro,testCase.outName,[]);
@@ -41,6 +46,8 @@ classdef TestMoorDynViz < matlab.unittest.TestCase
             
             Write_H5(hydro)
             cd(testCase.testDir)
+            
+            testCase.hasH5 = true;
             
         end
         
@@ -55,11 +62,15 @@ classdef TestMoorDynViz < matlab.unittest.TestCase
         end
         
         function removeH5(testCase)
-            delete(fullfile(testCase.h5Dir, testCase.h5Name));
+            if testCase.hasH5
+                delete(fullfile(testCase.h5Dir, testCase.h5Name));
+            end
         end
         
         function removeVTK(testCase)
-            rmdir(fullfile(testCase.testDir, 'vtk'), 's');
+            if testCase.hasH5
+                rmdir(fullfile(testCase.testDir, 'vtk'), 's');
+            end
         end
         
     end
@@ -67,9 +78,6 @@ classdef TestMoorDynViz < matlab.unittest.TestCase
     methods(Test)
         
         function testParaview_Visualization_RM3_MoorDyn_Viz(testCase)
-            assumeEqual(testCase,                           ...
-                        exist("MoorDyn_caller", "file"), 2, ...
-                        "MoorDyn is not installed");
             wecSim
         end
         

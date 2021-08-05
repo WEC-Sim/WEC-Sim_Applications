@@ -6,6 +6,7 @@ classdef TestDesalination < matlab.unittest.TestCase
         h5Dir = fullfile("hydroData")
         h5Name = 'oswec.h5'
         outName = 'oswec.out'
+        hasH5 = false
     end
     
     
@@ -31,6 +32,11 @@ classdef TestDesalination < matlab.unittest.TestCase
         
         function runBemio(testCase)
             
+            % Check for Simscape Fluids
+            assumeEqual(testCase,                               ...
+                        license('test', 'SimHydraulics'), 1,    ...
+                        "Simscape Fluids is not available");
+            
             cd(testCase.h5Dir);
             hydro = struct();
             hydro = Read_WAMIT(hydro,testCase.outName,[]);
@@ -40,6 +46,8 @@ classdef TestDesalination < matlab.unittest.TestCase
             
             Write_H5(hydro)
             cd(testCase.testDir)
+            
+            testCase.hasH5 = true;
             
         end
         
@@ -54,7 +62,11 @@ classdef TestDesalination < matlab.unittest.TestCase
         end
         
         function removeH5(testCase)
-            delete(fullfile(testCase.h5Dir, testCase.h5Name));
+            
+            if testCase.hasH5
+                delete(fullfile(testCase.h5Dir, testCase.h5Name));
+            end
+            
         end
         
     end
@@ -62,10 +74,7 @@ classdef TestDesalination < matlab.unittest.TestCase
     methods(Test)
         
         function testDesalination(testCase)
-            assumeError(testCase,                               ...
-                        @() run("wecSim"),                      ...
-                        'MATLAB:MException:MultipleErrors',     ...
-                        'Expected failure');
+            wecSim
         end
         
     end
