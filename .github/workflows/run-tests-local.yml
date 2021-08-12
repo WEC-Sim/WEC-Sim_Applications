@@ -35,10 +35,6 @@ jobs:
             ls WEC-Sim/source/functions/moorDyn
         shell: bash
         working-directory: './MoorDyn'
-        uses: actions/checkout@v2
-        with:
-          repository: WEC-Sim/MoorDyn
-          path: './MoorDyn'
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v1
       - name: Install WEC-Sim
