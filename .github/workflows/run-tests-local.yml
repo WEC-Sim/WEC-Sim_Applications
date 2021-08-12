@@ -1,0 +1,41 @@
+name: Run MATLAB tests on local changes
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the github_actions branch
+  push:
+    branches:
+      - github_actions
+  pull_request:
+    branches:
+      - github_actions
+jobs:
+  test:
+    name: Run MATLAB Tests and Generate Artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Checkout LFS objects
+        run: git lfs checkout
+      - name: Install MATLAB
+        uses: matlab-actions/setup-matlab@v1
+      - uses: actions/checkout@v2
+      - name: Check out WEC-Sim
+        uses: actions/checkout@v2
+        with:
+          repository: WEC-Sim/WEC-Sim
+          path: './WEC-Sim'
+      - name: Checkout LFS objects
+        working-directory: './WEC-Sim'
+        run: git lfs checkout
+      - name: Install WEC-Sim
+        uses: matlab-actions/run-command@v1
+        working-directory: './WEC-Sim'
+        with:
+          command: addpath(genpath('source'));, savepath pathdef.m;
+      - name: Run tests and generate artifacts
+        uses: matlab-actions/run-command@v1
+        with:
+          command: results = wecSimAppTest("End_Stops"), assertSuccess(results);
