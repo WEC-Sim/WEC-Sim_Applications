@@ -19,8 +19,10 @@ directory, with a file name like `Test<Something>.m`. These test files may test
 multiple application cases that use the same hydrodynamic data.
 
 To run the tests it is assumed that the latest version of [WEC-Sim](https://github.com/WEC-Sim/WEC-Sim)
-is installed. For tests in the `Mooring` directory, it is also necessary to 
+is installed. For tests containing the name "MoorDyn", it is also necessary to 
 install the [MoorDyn](https://github.com/WEC-Sim/MoorDyn) module into WEC-Sim.
+The tests in the `Desalination` folder require the 
+[Simscape Fluids](https://www.mathworks.com/products/simscape-fluids.html) toolbox.
 
 Assuming that the WEC-Sim_Applications source code is located at some path
 `\path\to\WEC-Sim_Applications`, then to test the Body-to-Body Interaction
@@ -37,8 +39,8 @@ then the tests can be run by selecting the `Run Tests` action in the `EDITOR`
 ribbon.
 
 A shortcut for running all the tests in the repository is provided at the 
-root level with the `wecSimAppTest.m` function. This function can simply be
-run from the root directory, as follows:
+root level with the `wecSimAppTest.m` function. This function can be run from 
+the root directory, as follows:
 
 ```
 >> cd \path\to\WEC-Sim_Applications
@@ -46,7 +48,7 @@ run from the root directory, as follows:
 ...
 ```
 
-Alternatively, the function can also be used to run all tests in a particular 
+Alternatively, the function can also be used to run tests in a particular 
 directory. For instance, run the tests in the `End_Stops` directory as follows:
 
 ```
