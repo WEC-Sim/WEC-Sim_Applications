@@ -31,8 +31,8 @@ jobs:
           path: './MoorDyn'
       - name: Copy MoorDyn Files
         run: |
-            cp * WEC-Sim/source/functions/moorDyn
-            ls WEC-Sim/source/functions/moorDyn
+            cp * ../WEC-Sim/source/functions/moorDyn
+            ls ../WEC-Sim/source/functions/moorDyn
         shell: bash
         working-directory: './MoorDyn'
       - name: Install MATLAB
