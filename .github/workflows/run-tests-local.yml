@@ -29,7 +29,6 @@ jobs:
                  WECCCOMP_Fault_Implementation,
                  write_hdf5]
     name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
-    runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
