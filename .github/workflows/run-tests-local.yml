@@ -40,7 +40,8 @@ jobs:
       - name: Check out WEC-Sim
         uses: actions/checkout@v2
         with:
-          repository: WEC-Sim/WEC-Sim
+          repository: H0R5E/WEC-Sim
+          ref: 'capital_em'
           path: './WEC-Sim'
       - name: Check out MoorDyn
         uses: actions/checkout@v2
