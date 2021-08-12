@@ -2,7 +2,7 @@
 simu = simulationClass();               
 simu.simMechanicsFile = 'OSWEC.slx';  	
 simu.mode = 'normal';                   
-simu.explorer='on';                     
+simu.explorer='off';                     
 simu.startTime = 0;                    
 simu.rampTime = 100;                       
 simu.endTime=400;                       

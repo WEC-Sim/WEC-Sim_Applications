@@ -5,6 +5,7 @@ simu.startTime = 0;
 simu.rampTime = 100;                       
 simu.endTime=400;   
 simu.dt = 0.001;                       
+simu.explorer = 'off';                     % Turn SimMechanics Explorer (on/off)
 
 %% Wave Information
 % Regular Waves  

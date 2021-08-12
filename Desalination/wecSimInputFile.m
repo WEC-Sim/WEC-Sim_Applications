@@ -2,7 +2,7 @@
 simu = simulationClass();
 simu.simMechanicsFile = 'OSWEC_RO.slx';     % Specify Simulink Model File
 %simu.mode = 'rapid-accelerator';           % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer='on';                         % Turn SimMechanics Explorer (on/off)
+simu.explorer='off';                        % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                         % Simulation Start Time [s]
 simu.endTime=300;
 simu.solver = 'ode4';                       %simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
