@@ -9,8 +9,26 @@ on:
     branches:
       - github_actions
 jobs:
-  test:
-    name: Run MATLAB Tests and Generate Artifacts
+  run_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        release: [R2020a, latest]
+        folder: [Body-to-Body_Interactions,
+                 Desalination,
+                 End_Stops,
+                 Free_Decay,
+                 Generalized_Body_Modes,
+                 Mooring,
+                 Multiple_Condition_Runs,
+                 Nonhydro_Body,
+                 Nonlinear_Hydro,
+                 Paraview_Visualization,
+                 Passive_Yaw,
+                 PTO-Sim,
+                 WECCCOMP_Fault_Implementation,
+                 write_hdf5]
+    name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -44,4 +62,4 @@ jobs:
       - name: Run tests and generate artifacts
         uses: matlab-actions/run-command@v1
         with:
-          command: results = wecSimAppTest("Mooring"), assertSuccess(results);
+          command: results = wecSimAppTest("${{ matrix.folder }}"), assertSuccess(results);
