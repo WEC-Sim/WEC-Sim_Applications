@@ -37,13 +37,19 @@ then the tests can be run by selecting the `Run Tests` action in the `EDITOR`
 ribbon.
 
 A shortcut for running all the tests in the repository is provided at the 
-root level with the `runTests.m` function. This function can simply be
+root level with the `wecSimAppTest.m` function. This function can simply be
 run from the root directory, as follows:
 
 ```
 >> cd \path\to\WEC-Sim_Applications
->> runTests
+>> wecSimAppTest
 ...
 ```
 
+Alternatively, the function can also be used to run all tests in a particular 
+directory. For instance, run the tests in the `End_Stops` directory as follows:
 
+```
+>> wecSimAppTest End_Stops
+...
+```
