@@ -32,9 +32,8 @@ jobs:
         run: git lfs checkout
       - name: Install WEC-Sim
         uses: matlab-actions/run-command@v1
-        working-directory: './WEC-Sim'
         with:
-          command: addpath(genpath('source'));, savepath pathdef.m;
+          command: addpath(genpath('WEC-Sim/source'));, savepath pathdef.m;
       - name: Run tests and generate artifacts
         uses: matlab-actions/run-command@v1
         with:
