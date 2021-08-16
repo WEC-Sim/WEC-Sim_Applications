@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: H0R5E/WEC-Sim
-          ref: 'capital_em'
+          ref: 'disable_moorDynInput'
           path: './WEC-Sim'
       - name: Check out MoorDyn
         uses: actions/checkout@v2

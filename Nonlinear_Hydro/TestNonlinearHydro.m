@@ -3,7 +3,7 @@ classdef TestNonlinearHydro < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = fullfile("hydroData")
+        h5Dir = "hydroData"
         h5Name = 'ellipsoid.h5'
         outName = 'ellipsoid.out'
     end

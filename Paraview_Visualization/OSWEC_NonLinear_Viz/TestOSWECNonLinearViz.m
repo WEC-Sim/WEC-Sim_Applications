@@ -3,7 +3,7 @@ classdef TestOSWECNonLinearViz < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = fullfile("hydroData")
+        h5Dir = "hydroData"
         h5Name = 'oswec.h5'
         outName = 'oswec.out'
     end
