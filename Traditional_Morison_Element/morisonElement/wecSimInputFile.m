@@ -4,25 +4,25 @@
 %% Simulation Data
 simu = simulationClass();                      % Initialize Simulation Class
 simu.simMechanicsFile = 'monopile.slx';        % Specify Simulink Model File
-simu.explorer = 'on';
+simu.explorer = 'off';
 simu.solver = 'ode4';
 simu.rho = 1025;
 simu.CITime = 30;
-simu.rampTime = 10;                           % Wave Ramp Time [s] 200
-simu.endTime = 40;                            % Simulation End Time [s] 400
-simu.dt = 0.001;
+simu.rampTime = 100;                           % Wave Ramp Time [s] 200
+simu.endTime = 400;                            % Simulation End Time [s] 400
+simu.dt = 0.01;
 simu.ssCalc = 1;
 simu.morisonElement = 1;
 
 %% Wave Cases
-% No wave
-waves = waveClass('noWaveCIC');
-waves.T = 5;
+% % No wave
+% waves = waveClass('noWaveCIC');
+% waves.T = 5;
 
-% % Regular Wave
-% waves = waveClass('regular');
-% waves.H = 2.0;
-% waves.T = 5.0;
+% Regular Wave
+waves = waveClass('regular');
+waves.H = 2.0;
+waves.T = 5.0;
 
 % % Irregular Waves
 % waves = waveClass('irregular');               % Initialize Wave Class and Specify Type
@@ -51,7 +51,7 @@ body(1).morisonElement.cd = [1 1 1];
 body(1).morisonElement.ca = [1 1 1];
 body(1).morisonElement.characteristicArea = [10*30 10*30 pi*10^2/4];
 body(1).morisonElement.VME = body(1).dispVol;
-body(1).morisonElement.rgME = [0 0 0]; % ME forces applied at CG
+body(1).morisonElement.rgME = [0 0 10]; % ME forces applied at CG
 % body(1).morisonElement.z = [0 0 1]; % not used for Morison Element xyz method
 
 % Tower
@@ -71,10 +71,10 @@ constraint(1) = constraintClass('monopile-tower');
 constraint(1).loc = [0 0 0];
 
 % Fixed joint at seabed
-% constraint(2) = constraintClass('seabed');
-% constraint(2).loc = [0 0 -30];
+constraint(2) = constraintClass('seabed');
+constraint(2).loc = [0 0 -30];
 
-pto(1) = ptoClass('seabed');
-pto(1).loc = [0 0 -30];
-pto(1).c = 0;
-pto(1).k = 1e9;
+% pto(1) = ptoClass('seabed');
+% pto(1).loc = [0 0 -30];
+% pto(1).c = 0;
+% pto(1).k = 1e9;
