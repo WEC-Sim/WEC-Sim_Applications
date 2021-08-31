@@ -11,7 +11,6 @@ simu.dt = 0.01;                         % Simulation Time-Step [s]
 simu.CITime = 40;                       % Specify CI Time [s]
 simu.yawNonLin=0;
 simu.yawThresh=1;
-simu.nlHydro=0;
 
 %% Wave Information
 % Regular Waves 
