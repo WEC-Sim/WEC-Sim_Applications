@@ -73,8 +73,3 @@ constraint(1).loc = [0 0 0];
 % Fixed joint at seabed
 constraint(2) = constraintClass('seabed');
 constraint(2).loc = [0 0 -30];
-
-% pto(1) = ptoClass('seabed');
-% pto(1).loc = [0 0 -30];
-% pto(1).c = 0;
-% pto(1).k = 1e9;
