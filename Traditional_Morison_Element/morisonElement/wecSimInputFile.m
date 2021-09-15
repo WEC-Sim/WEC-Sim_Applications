@@ -12,7 +12,6 @@ simu.rampTime = 100;                           % Wave Ramp Time [s] 200
 simu.endTime = 400;                            % Simulation End Time [s] 400
 simu.dt = 0.01;
 simu.ssCalc = 1;
-simu.morisonElement = 1;
 
 %% Wave Cases
 % % No wave
@@ -47,6 +46,7 @@ body(1).cb = [0 0 -15];
 body(1).dispVol = pi*10^2*30;
 
 % Morison Element Implementation
+body(1).morisonElement.option = 1;
 body(1).morisonElement.cd = [1 1 1];
 body(1).morisonElement.ca = [1 1 1];
 body(1).morisonElement.characteristicArea = [10*30 10*30 pi*10^2/4];

@@ -12,7 +12,6 @@ simu.rampTime = 100;                           % Wave Ramp Time [s] 200
 simu.endTime = 400;                            % Simulation End Time [s] 400
 simu.dt = 0.01;
 simu.ssCalc = 1;
-simu.morisonElement = 0;
 
 %% Wave Cases
 % % No wave
@@ -47,6 +46,7 @@ body(1).momOfInertia = [1.25 1.25 0.15]*1e9;
 % body(1).dispVol = pi*10^2*30;                 % Hydro body volume defined by h5 file
 
 % Morison Element Implementation not used for comparison with hydro body
+% body(1).morisonElement.option = 0;
 % body(1).morisonElement.cd = [1 1 1];
 % body(1).morisonElement.ca = [1 1 1];
 % body(1).morisonElement.characteristicArea = [10*30 10*30 pi*10^2/4];
