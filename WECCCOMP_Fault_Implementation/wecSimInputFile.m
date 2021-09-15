@@ -50,7 +50,7 @@ body(1) = bodyClass('hydroData/wavestar.h5');       % Initialize bodyClass
     body(1).mass            = 3.075*rhoMult;                % Define mass [kg]   
     body(1).momOfInertia    = [0 0.001450 0]*rhoMult;       % Moment of Inertia [kg*m^2]     
     body(1).geometryFile    = 'geometry/Float.stl'; % Geometry File
-    body(1).linearDamping   = [0 0 0 0 1.8 0];      % Linear Viscous Drag Coefficient Determined From Experimetnal Tests
+    body(1).linearDamping(5,5)  = 1.8;      % Linear Viscous Drag Coefficient Determined From Experimetnal Tests
     
 %% Arm - Rotates
 body(2) = bodyClass('');                            % Initialize bodyClass
