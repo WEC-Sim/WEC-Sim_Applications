@@ -56,6 +56,7 @@ waves.T = 8;                            % Wave Period [s]
 %% Visualization Markers
 
 % 1. A simple example with markers in a diagonal layout
+% visON = 1;
 % X = 2*[1;2;3;4;5];
 % Y = 2*[1;2;3;4;5];
 % waves.markLoc = [X,Y];
@@ -63,6 +64,7 @@ waves.T = 8;                            % Wave Period [s]
 % waves.markSize = 15; % Marker Size in Pixels
 
 % 2. An example with a square mesh of visualization blocks:
+visON = 1;
 mrk = 10;
 dmrk = 5;
 [X,Y] = meshgrid(-mrk:dmrk:mrk,-mrk:dmrk:mrk);
