@@ -43,5 +43,5 @@ function results = wecSimAppTest(testsPath)
     
     % Run the tests
     results = runner.run(suite);
-    
+    results.table
 end
