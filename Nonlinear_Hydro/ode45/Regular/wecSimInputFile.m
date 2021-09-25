@@ -9,7 +9,6 @@ simu.rampTime = 50;
 simu.endTime=150;                       
 simu.dt = 0.05;                         
 simu.rho=1025;                                                                                                           
-simu.nlHydro = 2;                       % Non-linear hydro on/off
 
 %% Wave Information
 % Regular Waves 
@@ -25,6 +24,7 @@ body(1).momOfInertia = ...
 body(1).geometryFile = '../../geometry/elipsoid.stl' ;    
 body(1).viscDrag.cd=[1 0 1 0 1 0];
 body(1).viscDrag.characteristicArea=[25 0 pi*5^2 0 pi*5^5 0];
+body(1).nlHydro = 2;                       % Non-linear hydro on/off
 
 %% PTO and Constraint Parameters
 % Fixed Constraint
