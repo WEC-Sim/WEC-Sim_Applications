@@ -57,11 +57,11 @@ waves.T = 8;                            % Wave Period [s]
 
 % 1. A simple example with markers in a diagonal layout
 
-X = 2*[1;2;3;4;5];
-Y = 2*[1;2;3;4;5];
-waves.markLoc = [X,Y];
-waves.markStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
-waves.markSize = 15; % Marker Size in Pixels
+% X = 2*[1;2;3;4;5];
+% Y = 2*[1;2;3;4;5];
+% waves.markLoc = [X,Y];
+% waves.markStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
+% waves.markSize = 15; % Marker Size in Pixels
 
 % 2. An example with a square mesh of visualization blocks:
 
