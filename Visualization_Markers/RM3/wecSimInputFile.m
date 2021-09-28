@@ -10,18 +10,11 @@ simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & 
 simu.dt = 0.1; 							% Simulation time-step [s]
 
 %% Wave Information 
-% % noWaveCIC, no waves with radiation CIC  
-% waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
 
 % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
 waves.H = 2.5;                          % Wave Height [m]
 waves.T = 8;                            % Wave Period [s]
-
-% % Regular Waves with CIC
-% waves = waveClass('regularCIC');           % Initialize Wave Class and Specify Type                                 
-% waves.H = 2.5;                          % Wave Height [m]
-% waves.T = 8;                            % Wave Period [s]
 
 % % Irregular Waves using PM Spectrum 
 % waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
@@ -29,47 +22,19 @@ waves.T = 8;                            % Wave Period [s]
 % waves.T = 8;                            % Peak Period [s]
 % waves.spectrumType = 'PM';              % Specify Wave Spectrum Type
 
-% % Irregular Waves using JS Spectrum with Equal Energy and Seeded Phase
-% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-% waves.H = 2.5;                          % Significant Wave Height [m]
-% waves.T = 8;                            % Peak Period [s]
-% waves.spectrumType = 'JS';              % Specify Wave Spectrum Type
-% waves.freqDisc = 'EqualEnergy';         % Uses 'EqualEnergy' bins (default) 
-% waves.phaseSeed = 1;                    % Phase is seeded so eta is the same
-
-% % Irregular Waves using PM Spectrum with Traditional and State Space 
-% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-% waves.H = 2.5;                          % Significant Wave Height [m]
-% waves.T = 8;                            % Peak Period [s]
-% waves.spectrumType = 'PM';              % Specify Wave Spectrum Type
-% simu.ssCalc = 1;                        % Turn on State Space
-% waves.freqDisc = 'Traditional';         % Uses 1000 frequnecies
-
 % % Irregular Waves with imported spectrum
 % waves = waveClass('spectrumImport');        % Create the Wave Variable and Specify Type
 % waves.spectrumDataFile = 'spectrumData.mat';  %Name of User-Defined Spectrum File [:,2] = [f, Sf]
 
-% % Waves with imported wave elevation time-history  
-% waves = waveClass('etaImport');         % Create the Wave Variable and Specify Type
-% waves.etaDataFile = 'etaData.mat'; % Name of User-Defined Time-Series File [:,2] = [time, eta]
 
-%% Visualization Markers
+%% Wave Visualization Markers
+% Example with a square mesh of visualization markers
 
-%% 1. A simple example with markers in a diagonal layout
-
-% X = 2*[1;2;3;4;5];
-% Y = 2*[1;2;3;4;5];
-% waves.markLoc = [X,Y];
-% waves.markStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
-% waves.markSize = 15; % Marker Size in Pixels
-
-%% 2. An example with a square mesh of visualization blocks:
-
-mrk = 10;
-dmrk = 10;
-[X,Y] = meshgrid(-mrk:dmrk:mrk,-mrk:dmrk:mrk);
+marker = 20;
+distance = 10;
+[X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
 waves.markLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
-clear('mrk','dmrk','X','Y')
+clear('marker','distance','X','Y')
 waves.markStyle = 1; % 1: Sphere, 2: Cube, 3: Frame.
 waves.markSize = 10; % Marker Size in Pixels
 

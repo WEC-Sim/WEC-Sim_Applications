@@ -11,46 +11,34 @@ simu.dt = 0.1;                          % Simulation Time-Step [s]
 simu.CITime = 30;                       % Specify CI Time [s]
 
 %% Wave Information
-% % noWaveCIC, no waves with radiation CIC  
-% waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
 
-% % Regular Waves 
-% waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-% waves.H = 2.5;                          % Wave Height [m]
-% waves.T = 8;                            % Wave Period [s]
+% Regular Waves 
+waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
+waves.H = 2.5;                          % Wave Height [m]
+waves.T = 8;                            % Wave Period [s]
 
-% Irregular Waves using PM Spectrum with Directionality 
-waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-waves.H = 2.5;                          % Significant Wave Height [m]
-waves.T = 8;                            % Peak Period [s]
-waves.spectrumType = 'PM';              % Specify Spectrum Type
-waves.waveDir = [0,30,90];              % Wave Directionality [deg]
-waves.waveSpread = [0.1,0.2,0.7];       % Wave Directional Spreading [%}
+% % Irregular Waves using PM Spectrum with Directionality 
+% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
+% waves.H = 2.5;                          % Significant Wave Height [m]
+% waves.T = 8;                            % Peak Period [s]
+% waves.spectrumType = 'PM';              % Specify Spectrum Type
+% waves.waveDir = [0,30,90];              % Wave Directionality [deg]
+% waves.waveSpread = [0.1,0.2,0.7];       % Wave Directional Spreading [%}
 
 % % Irregular Waves with imported spectrum
 % waves = waveClass('spectrumImport');        % Create the Wave Variable and Specify Type
 % waves.spectrumDataFile = 'spectrumData.mat';  %Name of User-Defined Spectrum File [:,2] = [f, Sf]
 
-% % Waves with imported wave elevation time-history  
-% waves = waveClass('etaImport');         % Create the Wave Variable and Specify Type
-% waves.etaDataFile = 'etaData.mat'; % Name of User-Defined Time-Series File [:,2] = [time, eta]
 %% Wave Visualization Markers
-% % 1. A simple example with markers in a diagonal layout
-% % X = 2*[1;2;3;4;5];
-% % Y = 2*[1;2;3;4;5];
-% % waves.markLoc = [X,Y];
-% % waves.markStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
-% % waves.markSize = 15; % Marker Size in Pixels
-% 
-% 2. An example with a square mesh of visualization blocks:
-mrk = 10;
-dmrk = 5;
-[X,Y] = meshgrid(-mrk:dmrk:mrk,-mrk:dmrk:mrk);
-waves.markLoc = .1*[reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
-clear('mrk','dmrk','X','Y')
-waves.markStyle = 3; % 1: Sphere, 2: Cube, 3: Frame.
-waves.markSize = 20; % Marker Size in Pixels
+% Example with a square mesh of visualization markers
 
+marker = 20;
+distance = 10;
+[X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
+waves.markLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
+clear('marker','distance','X','Y')
+waves.markStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
+waves.markSize = 10; % Marker Size in Pixels
 
 
 %% Body Data
