@@ -35,8 +35,8 @@ distance = 10;
 [X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
 waves.markLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
 clear('marker','distance','X','Y')
-waves.markStyle = 1; % 1: Sphere, 2: Cube, 3: Frame.
-waves.markSize = 10; % Marker Size in Pixels
+waves.markerStyle = 1; % 1: Sphere, 2: Cube, 3: Frame.
+waves.markerSize = 10; % Marker Size in Pixels
 
 %% Body Data
 % Float
