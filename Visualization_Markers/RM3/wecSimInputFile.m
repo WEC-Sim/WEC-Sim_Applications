@@ -55,7 +55,7 @@ waves.T = 8;                            % Wave Period [s]
 
 %% Visualization Markers
 
-% 1. A simple example with markers in a diagonal layout
+%% 1. A simple example with markers in a diagonal layout
 
 % X = 2*[1;2;3;4;5];
 % Y = 2*[1;2;3;4;5];
@@ -63,15 +63,16 @@ waves.T = 8;                            % Wave Period [s]
 % waves.markStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
 % waves.markSize = 15; % Marker Size in Pixels
 
-% 2. An example with a square mesh of visualization blocks:
+%% 2. An example with a square mesh of visualization blocks:
 
-% mrk = 10;
-% dmrk = 5;
-% [X,Y] = meshgrid(-mrk:dmrk:mrk,-mrk:dmrk:mrk);
-% waves.markLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
-% clear('mrk','dmrk','X','Y')
-% waves.markStyle = 1; % 1: Sphere, 2: Cube, 3: Frame.
-% waves.markSize = 20; % Marker Size in Pixels
+mrk = 5;
+dmrk = 5;
+[X,Y] = meshgrid(-mrk:dmrk:mrk,-mrk:dmrk:mrk);
+waves.markLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
+clear('mrk','dmrk','X','Y')
+waves.markStyle = 1; % 1: Sphere, 2: Cube, 3: Frame.
+waves.markSize = 10; % Marker Size in Pixels
+
 %% Body Data
 % Float
 body(1) = bodyClass('hydroData/rm3.h5');      
