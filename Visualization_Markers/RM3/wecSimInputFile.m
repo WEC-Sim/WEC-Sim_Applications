@@ -65,8 +65,8 @@ waves.T = 8;                            % Wave Period [s]
 
 %% 2. An example with a square mesh of visualization blocks:
 
-mrk = 5;
-dmrk = 5;
+mrk = 10;
+dmrk = 10;
 [X,Y] = meshgrid(-mrk:dmrk:mrk,-mrk:dmrk:mrk);
 waves.markLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
 clear('mrk','dmrk','X','Y')
