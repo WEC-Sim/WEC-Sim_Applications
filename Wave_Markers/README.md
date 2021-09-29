@@ -1,4 +1,4 @@
-# Visualization Markers Example
+# Wave Markers
 
 **Author:**	Sal Husain
 
