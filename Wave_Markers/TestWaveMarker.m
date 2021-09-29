@@ -61,7 +61,7 @@ classdef TestWaveMarker < matlab.unittest.TestCase
     
     methods(Test)
         
-        function testRM3e_Marker(testCase)
+        function testRM3_Marker(testCase)
             cd RM3
             wecSim
         end
