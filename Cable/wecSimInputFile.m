@@ -2,7 +2,7 @@
 simu = simulationClass();               % Initialize Simulation Class
 simu.simMechanicsFile = 'RM3_cable.slx';% Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer = 'off';                  % Turn SimMechanics Explorer (on/off)
+simu.explorer = 'on';                  % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 10;                   	% Wave Ramp Time [s]
 simu.endTime = 100;                     % Simulation End Time [s]
@@ -45,10 +45,10 @@ constraint(3) = constraintClass('Cable_Top');              % Initialize Constrai
 constraint(3).loc = [0 0 -5];                              % Constraint Location [m]
 
 %% 3DOF Tension cable
-cable(1) = cableClass('Cable',constraint(2),constraint(3));
+cable(1) = cableClass('Cable','constraint(2)','constraint(3)');
 cable(1).k = 1000000;
 cable(1).c = 100;
-% cable(1).L0 = 9.9; % Cable equilibrium length [m] 
+cable(1).L0 = 9.9; % Cable equilibrium length [m] 
 % cable(1).preTension = 5100000; % Cable equilibrium pre-tension [N]
-% cable(1).viscDrag.cd = [1.4 1.4 1.4 0 0 0];
-% cable(1).viscDrag.characteristicArea = [10 10 10 0 0 0];
+cable(1).viscDrag.cd = [1.4 1.4 1.4 0 0 0];
+cable(1).viscDrag.characteristicArea = [10 10 10 0 0 0];
