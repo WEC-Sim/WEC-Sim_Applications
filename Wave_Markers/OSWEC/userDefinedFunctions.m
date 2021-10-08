@@ -1,12 +1,14 @@
-%Example of Visualization with an animation in a MATLAB .fig 
+%% Example of Visualization with an animation in a MATLAB .fig 
 
-%Plot waves
+%% Plot waves
+
 waves.plotEta(simu.rampTime);
 try 
     waves.plotSpectrum();
 catch
 end
 
+%% Plot response
 % Plot RY forces for body 1
 output.plotForces(1,5)
 
@@ -16,7 +18,8 @@ output.plotResponse(1,5);
 % Plot x forces for body 2
 output.plotForces(2,1)
 
-% Save waves and response as video
+%% Save waves and response as video
+
 % output.plotWaves(simu,body,waves,...
 %     'timesPerFrame',5,'axisLimits',[-50 50 -50 50 -12 20],...
 %     'startEndTime',[100 125]);
