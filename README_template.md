@@ -8,7 +8,5 @@
 
 **Dependency:**	(optional) additional toolbox dependencies
 
-**Note:**	(optional) note about the application
-
 
 Brief description of the example. 

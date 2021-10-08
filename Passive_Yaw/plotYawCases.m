@@ -4,8 +4,8 @@
 
 % load output files and plot yaw postion and excitation force
 % load outputs
-yawOn=importdata('yawOn.mat');
-yawOff=importdata('yawOff.mat');
+yawOn=importdata(fullfile('.','PassiveYawON','yawOn.mat'));
+yawOff=importdata(fullfile('.','PassiveYawOFF','yawOff.mat'));
 
 % make position plot
 figure; clf;
