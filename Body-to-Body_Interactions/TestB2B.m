@@ -60,10 +60,10 @@ classdef TestB2B < matlab.unittest.TestCase
                                  testCase.OriginalDefault);
         end
         
-        function removeH5(testCase)
-            delete(fullfile(testCase.h5Dir, testCase.h5Name));
-        end
-        
+%         function removeH5(testCase)
+%             delete(fullfile(testCase.h5Dir, testCase.h5Name));
+%         end
+%         
     end
     
     methods(Test)

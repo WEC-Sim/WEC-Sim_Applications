@@ -61,11 +61,11 @@ classdef TestMoorDynViz < matlab.unittest.TestCase
                                  testCase.OriginalDefault);
         end
         
-        function removeH5(testCase)
-            if testCase.hasH5
-                delete(fullfile(testCase.h5Dir, testCase.h5Name));
-            end
-        end
+%         function removeH5(testCase)
+%             if testCase.hasH5
+%                 delete(fullfile(testCase.h5Dir, testCase.h5Name));
+%             end
+%         end
         
         function removeVTK(testCase)
             folderPath = fullfile(testCase.testDir, 'vtk');

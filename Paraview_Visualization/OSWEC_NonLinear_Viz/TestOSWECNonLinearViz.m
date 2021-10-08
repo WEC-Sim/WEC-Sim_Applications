@@ -54,9 +54,9 @@ classdef TestOSWECNonLinearViz < matlab.unittest.TestCase
                                  testCase.OriginalDefault);
         end
         
-        function removeH5(testCase)
-            delete(fullfile(testCase.h5Dir, testCase.h5Name));
-        end
+%         function removeH5(testCase)
+%             delete(fullfile(testCase.h5Dir, testCase.h5Name));
+%         end
         
         function removeVTK(testCase)
             rmdir(fullfile(testCase.testDir, 'vtk'), 's');
