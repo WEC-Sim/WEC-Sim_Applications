@@ -13,8 +13,8 @@ if ~any(ismember(fList(1,:),'yawOff.mat'));
     cd('./PassiveYawOFF')   
     wecSim;
     close all;
-    cd('..')
     save('yawOff','output')
+    cd('..')
     clearvars -except fList
 end
 
@@ -23,8 +23,8 @@ if ~any(ismember(fList(1,:),'yawOn.mat'));
     cd('./PassiveYawON')
     wecSim;
     close all;
-    cd('..')
     save('yawOn','output')
+    cd('..')
     clear;
 end
 
