@@ -16,7 +16,7 @@ simu.dt = 0.1; 							% Simulation time-step [s]
 % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
 waves.H = 2.5;                          % Wave Height [m]
-waves.T = 8;                            % Wave Period [s]
+waves.T = 3;                            % Wave Period [s]
 
 % % Regular Waves with CIC
 % waves = waveClass('regularCIC');           % Initialize Wave Class and Specify Type                                 
@@ -57,21 +57,21 @@ waves.T = 8;                            % Wave Period [s]
 
 % 1. A simple example with markers in a diagonal layout
 
-% X = 2*[1;2;3;4;5];
-% Y = 2*[1;2;3;4;5];
-% waves.markLoc = [X,Y];
-% waves.markStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
-% waves.markSize = 15; % Marker Size in Pixels
+X = 2*[1;2;3;4;5];
+Y = 2*[1;2;3;4;5];
+waves.markerLoc = [X,Y];
+waves.markerStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
+waves.markerSize = 15; % Marker Size in Pixels
 
 % 2. An example with a square mesh of visualization blocks:
 
 % mrk = 10;
 % dmrk = 5;
 % [X,Y] = meshgrid(-mrk:dmrk:mrk,-mrk:dmrk:mrk);
-% waves.markLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
+% waves.markerLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
 % clear('mrk','dmrk','X','Y')
-% waves.markStyle = 1; % 1: Sphere, 2: Cube, 3: Frame.
-% waves.markSize = 20; % Marker Size in Pixels
+% waves.markerStyle = 1; % 1: Sphere, 2: Cube, 3: Frame.
+% waves.markerSize = 20; % Marker Size in Pixels
 %% Body Data
 % Float
 body(1) = bodyClass('hydroData/rm3.h5');      

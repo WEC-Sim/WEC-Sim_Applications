@@ -34,24 +34,25 @@ waves.waveSpread = [0.1,0.2,0.7];       % Wave Directional Spreading [%}
 % % Waves with imported wave elevation time-history  
 % waves = waveClass('etaImport');         % Create the Wave Variable and Specify Type
 % waves.etaDataFile = 'etaData.mat'; % Name of User-Defined Time-Series File [:,2] = [time, eta]
-%% Wave Visualization Markers
-% % 1. A simple example with markers in a diagonal layout
-% % X = 2*[1;2;3;4;5];
-% % Y = 2*[1;2;3;4;5];
-% % waves.markLoc = [X,Y];
-% % waves.markStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
-% % waves.markSize = 15; % Marker Size in Pixels
-% 
+%% Visualization Markers
+
+% 1. A simple example with markers in a diagonal layout
+
+X = 2*[1;2;3;4;5];
+Y = 2*[1;2;3;4;5];
+waves.markerLoc = [X,Y];
+waves.markerStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
+waves.markerSize = 15; % Marker Size in Pixels
+
 % 2. An example with a square mesh of visualization blocks:
-mrk = 10;
-dmrk = 5;
-[X,Y] = meshgrid(-mrk:dmrk:mrk,-mrk:dmrk:mrk);
-waves.markLoc = .1*[reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
-clear('mrk','dmrk','X','Y')
-waves.markStyle = 3; % 1: Sphere, 2: Cube, 3: Frame.
-waves.markSize = 20; % Marker Size in Pixels
 
-
+% mrk = 10;
+% dmrk = 5;
+% [X,Y] = meshgrid(-mrk:dmrk:mrk,-mrk:dmrk:mrk);
+% waves.markerLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
+% clear('mrk','dmrk','X','Y')
+% waves.markerStyle = 1; % 1: Sphere, 2: Cube, 3: Frame.
+% waves.markerSize = 20; % Marker Size in Pixels
 
 %% Body Data
 % Flap
