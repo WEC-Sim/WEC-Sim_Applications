@@ -26,12 +26,16 @@ classdef TestPTOSimRM3 < matlab.unittest.TestCase
         end        
         function runBemio(testCase)            
             cd(testCase.h5Dir);
-            hydro = struct();
-            hydro = Read_WAMIT(hydro,testCase.outName,[]);            
-            hydro = Radiation_IRF(hydro,60,[],[],[],[]);
-            hydro = Radiation_IRF_SS(hydro,[],[]);
-            hydro = Excitation_IRF(hydro,157,[],[],[],[]);            
-            Write_H5(hydro)
+            if isfile(testCase.h5Name)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
+                hydro = struct();
+                hydro = Read_WAMIT(hydro,testCase.outName,[]);            
+                hydro = Radiation_IRF(hydro,60,[],[],[],[]);
+                hydro = Radiation_IRF_SS(hydro,[],[]);
+                hydro = Excitation_IRF(hydro,157,[],[],[],[]);            
+                Write_H5(hydro)
+            end
             cd(testCase.testDir)            
         end        
     end
