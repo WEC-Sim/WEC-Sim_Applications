@@ -29,9 +29,9 @@ waves = waveClass('irregular');                    % Initialize waveClass
     waves.H             = 0.0625;                   % Wave Height [m]
     waves.T             = 1.412;                    % Wave Period [s]
     waves.spectrumType  = 'JS';
-    waves.wavegauge1loc = [-1.70, 0];                      % Wave Gauge 1 x-location
-    waves.wavegauge2loc = [-1.50, 0];                      % Wave Gauge 2 x-location
-    waves.wavegauge3loc = [-1.25, 0];                      % Wave Gauge 3 x-location
+    waves.markerLoc     = [-1.70, 0;
+                           -1.50, 0;
+                           -1.25, 0];
 %% Irregular Waves  
 % waves = waveClass('irregular');                     % Initialize waveClass
 %     waves.H             = 0.0625;                   % Wave Height [m]
