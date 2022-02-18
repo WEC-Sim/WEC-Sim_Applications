@@ -11,7 +11,7 @@ simu.dtCITime = 0.05;
 %% Wave Information
 % User-Defined Time-Series
 waves = waveClass('etaImport');         % Create the Wave Variable and Specify Type
-waves.etaDataFile = 'etaData.mat';      % Name of User-Defined Time-Series File [:,2] = [time, eta]
+waves.waveDataFile = 'etaData.mat';      % Name of User-Defined Time-Series File [:,2] = [time, eta]
 
 %% Body Data
 % Float
