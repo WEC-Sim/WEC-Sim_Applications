@@ -8,12 +8,11 @@ simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 100;                       % Wave Ramp Time Length [s]
 simu.endTime=400;                       % Simulation End Time [s]
 simu.dt = 0.1; 							% Simulation time-step [s]
-simu.mcrCaseFile = 'mcrExample.mat';
+simu.mcrMatFile = 'mcrExample.mat';
 
 %% Wave Information 
 % Regular Waves  
 waves = waveClass('spectrumImport');        % Initialize Wave Class and Specify Type 
-% waves.spectrumDataFile specified in mcrExample.mat
 
 %% Body Data
 % Float
