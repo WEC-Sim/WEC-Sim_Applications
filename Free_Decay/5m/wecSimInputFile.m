@@ -3,7 +3,7 @@ simu = simulationClass();
 simu.simMechanicsFile = 'sphere.slx';                         
 simu.endTime=40;                        
 simu.dt = 0.01;                         
-simu.CITime = 15;
+simu.cicEndTime = 15;
 simu.explorer = 'off';
 simu.adjMassWeightFun = 0.47761120825;
 

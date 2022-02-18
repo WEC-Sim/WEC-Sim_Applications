@@ -8,7 +8,7 @@ simu.endTime=300;
 simu.solver = 'ode4';                       %simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01;                             %Simulation time-step [s] for a convolution function in the radiation force calculation 
 simu.rampTime = 50;
-simu.CITime = 30;
+simu.cicEndTime = 30;
 
 %% Wave Information
 %% Irregular Waves using PM Spectrum with Convolution Integral Calculation

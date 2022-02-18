@@ -8,7 +8,7 @@ simu.rampTime = 100;                    % Wave Ramp Time [s]
 simu.endTime=250;                       % Simulation End Time [s]        
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01;                         % Simulation Time-Step [s]
-simu.CITime = 40;                       % Specify CI Time [s]
+simu.cicEndTime = 40;                       % Specify CI Time [s]
 %simu.dtCITime=0.001;
 simu.yawNonLin=1;
 simu.yawThresh=1;
