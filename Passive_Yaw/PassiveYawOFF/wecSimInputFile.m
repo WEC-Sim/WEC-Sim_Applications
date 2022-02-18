@@ -17,7 +17,7 @@ simu.yawNonLin=0;                       % Turn passive yaw OFF
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
 waves.H = 2.5;                          % Wave Height [m]
 waves.T = 8;                            % Wave Period [s]
-waves.waveDir = [10];                   % Wave Directionality [deg]
+waves.waveDirection = [10];                   % Wave Directionality [deg]
 waves.waveSpread = [1];                 % Wave Directional Spreading [%}
 
 %% Body Data

@@ -22,7 +22,7 @@ waves.T = 8;                            % Wave Period [s]
 % waves.H = 2.5;                          % Significant Wave Height [m]
 % waves.T = 8;                            % Peak Period [s]
 % waves.spectrumType = 'PM';              % Specify Spectrum Type
-% waves.waveDir = [0,30,90];              % Wave Directionality [deg]
+% waves.waveDirection = [0,30,90];              % Wave Directionality [deg]
 % waves.waveSpread = [0.1,0.2,0.7];       % Wave Directional Spreading [%}
 
 % % Irregular Waves with imported spectrum
