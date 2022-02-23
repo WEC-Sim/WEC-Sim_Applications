@@ -27,10 +27,10 @@ classdef TestPassiveYaw < matlab.unittest.TestCase
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             hydro = struct();
-            hydro = Read_WAMIT(hydro,testCase.outName,[]);            
-            hydro = Radiation_IRF(hydro,40,[],[],[],[]);
-            hydro = Excitation_IRF(hydro,40,[],[],[],[]);            
-            Write_H5(hydro)
+            hydro = readWAMIT(hydro,testCase.outName,[]);            
+            hydro = radiationIRF(hydro,40,[],[],[],[]);
+            hydro = excitationIRF(hydro,40,[],[],[],[]);            
+            writeBEMIOH5(hydro)
             cd(testCase.testDir)            
         end        
     end

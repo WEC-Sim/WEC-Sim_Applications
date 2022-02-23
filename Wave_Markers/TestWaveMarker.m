@@ -27,10 +27,10 @@ classdef TestWaveMarker < matlab.unittest.TestCase
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             hydro = struct();
-            hydro = Read_WAMIT(hydro,testCase.outName,[]);                 
-            hydro = Radiation_IRF(hydro,30,[],[],[],[]);
-            hydro = Excitation_IRF(hydro,30,[],[],[],[]);            
-            Write_H5(hydro)
+            hydro = readWAMIT(hydro,testCase.outName,[]);                 
+            hydro = radiationIRF(hydro,30,[],[],[],[]);
+            hydro = excitationIRF(hydro,30,[],[],[],[]);            
+            writeBEMIOH5(hydro)
             cd(testCase.testDir)            
         end        
     end

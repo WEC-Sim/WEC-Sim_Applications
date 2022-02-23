@@ -1,8 +1,8 @@
 clc; clear all; close all;
 hydro = struct();
 
-hydro = Read_WAMIT(hydro,'oswec.out',[]);
-hydro = Radiation_IRF(hydro,30,[],[],[],[]);
-hydro = Excitation_IRF(hydro,30,[],[],[],[]);
-Write_H5(hydro)
+hydro = readWAMIT(hydro,'oswec.out',[]);
+hydro = radiationIRF(hydro,30,[],[],[],[]);
+hydro = excitationIRF(hydro,30,[],[],[],[]);
+writeBEMIOH5(hydro)
 Plot_BEMIO(hydro)

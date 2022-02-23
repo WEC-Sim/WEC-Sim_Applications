@@ -27,11 +27,11 @@ classdef TestWECCOMP < matlab.unittest.TestCase
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             hydro = struct();
-            hydro = Read_WAMIT(hydro,testCase.outName,[]);            
-            hydro = Radiation_IRF(hydro,2,[],[],[],[]);
-            hydro = Radiation_IRF_SS(hydro,[],[]);
-            hydro = Excitation_IRF(hydro,2,[],[],[],[]);            
-            Write_H5(hydro)
+            hydro = readWAMIT(hydro,testCase.outName,[]);            
+            hydro = radiationIRF(hydro,2,[],[],[],[]);
+            hydro = radiationIRFSS(hydro,[],[]);
+            hydro = excitationIRF(hydro,2,[],[],[],[]);            
+            writeBEMIOH5(hydro)
             cd(testCase.testDir)            
         end        
     end
