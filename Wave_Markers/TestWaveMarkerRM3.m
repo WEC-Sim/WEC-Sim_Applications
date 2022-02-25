@@ -1,4 +1,4 @@
-classdef TestWaveMarker < matlab.unittest.TestCase
+classdef TestWaveMarkerRM3 < matlab.unittest.TestCase
     
     properties
         OriginalDefault
@@ -9,7 +9,7 @@ classdef TestWaveMarker < matlab.unittest.TestCase
     end    
     
     methods (Access = 'public')        
-        function obj = TestWaveMarker
+        function obj = TestWaveMarkerRM3
             obj.testDir = fileparts(mfilename('fullpath'));
         end    
     end
@@ -26,11 +26,15 @@ classdef TestWaveMarker < matlab.unittest.TestCase
         end        
         function runBemio(testCase)            
             cd(testCase.h5Dir);
-            hydro = struct();
-            hydro = Read_WAMIT(hydro,testCase.outName,[]);                 
-            hydro = Radiation_IRF(hydro,30,[],[],[],[]);
-            hydro = Excitation_IRF(hydro,30,[],[],[],[]);            
-            Write_H5(hydro)
+            if isfile(testCase.h5Name)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
+                hydro = struct();
+                hydro = Read_WAMIT(hydro,testCase.outName,[]);                 
+                hydro = Radiation_IRF(hydro,30,[],[],[],[]);
+                hydro = Excitation_IRF(hydro,30,[],[],[],[]);            
+                Write_H5(hydro)
+            end
             cd(testCase.testDir)            
         end        
     end
