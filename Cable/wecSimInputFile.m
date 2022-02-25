@@ -4,8 +4,8 @@ simu.simMechanicsFile = 'MBARI_cable.slx';% Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'on';                  % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
-simu.rampTime = 10;                   	% Wave Ramp Time [s]
-simu.endTime = 100;                     % Simulation End Time [s]
+simu.rampTime = 40;                   	% Wave Ramp Time [s]
+simu.endTime = 120;                     % Simulation End Time [s]
 simu.solver = 'ode45';                  % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01;                         % Simulation time-step [s]
 
