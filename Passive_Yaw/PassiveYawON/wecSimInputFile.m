@@ -2,15 +2,15 @@
 simu = simulationClass();               % Initialize Simulation Class
 simu.simMechanicsFile = 'OSWEC.slx';    % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer='off';                     % Turn SimMechanics Explorer (on/off)
+simu.explorer='off';                    % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 100;                    % Wave Ramp Time [s]
 simu.endTime=600;                       % Simulation End Time [s]        
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01;                         % Simulation Time-Step [s]
 simu.CITime = 40;                       % Specify CI Time [s]
-simu.yawNonLin=1;
-simu.yawThresh=0.01;
+simu.yawNonLin=1;                       % Turn passive yaw ON
+simu.yawThresh=0.01;                    % Set passive yaw threshold
 
 %% Wave Information
 % % Regular Waves 
@@ -20,24 +20,15 @@ waves.T = 8;                            % Wave Period [s]
 waves.waveDir = [10];                   % Wave Directionality [deg]
 waves.waveSpread = [1];                 % Wave Directional Spreading [%}
 
-% % Irregular Waves- pierson moskowitz
-% waves = waveClass('irregular');           % Initialize Wave Class and Specify Type                                 
-% waves.H = 2.5;                          % Wave Height [m]
-% waves.T = 8;                            % Wave Period [s]
-% waves.waveDir = [10];                   % Wave Directionality [deg]
-% waves.waveSpread = [1];                 % Wave Directional Spreading [%}
-% waves.spectrumType='PM';
-% waves.phaseSeed= 1;
-
 %% Body Data
-% Flap
+% Flap NOTE: This test uses unique BEM for the OSWEC
 body(1) = bodyClass('../hydroData/oswec.h5');      % Initialize bodyClass for Flap
 body(1).geometryFile = '../geometry/flap.stl';     % Geometry File
 body(1).mass = 12700;                           % User-Defined mass [kg]
 body(1).momOfInertia = [1.85e6 1.85e6 1.85e6];  % Moment of Inertia [kg-m^2]
 %body(1).viscDrag.cd = [3 3 3 3 3 3];
 
-% Base
+% Base NOTE: This test uses unique BEM for the OSWEC
 body(2) = bodyClass('../hydroData/oswec.h5');      % Initialize bodyClass for Base
 body(2).geometryFile = '../geometry/base.stl';     % Geometry File
 body(2).mass = 'fixed';                         % Creates Fixed Body

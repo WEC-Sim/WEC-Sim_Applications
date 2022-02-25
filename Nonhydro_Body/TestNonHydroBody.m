@@ -7,8 +7,7 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
         h5Name = 'oswec.h5'
         outName = 'oswec.out'
     end
-    
-    
+        
     methods (Access = 'public')        
         function obj = TestNonHydroBody
             obj.testDir = fileparts(mfilename('fullpath'));
@@ -21,8 +20,7 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassSetup)
-        
+    methods(TestClassSetup)        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
@@ -39,18 +37,12 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
         
     end
     
-    methods(TestClassTeardown)
-        
+    methods(TestClassTeardown)        
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...
                                  testCase.OriginalDefault);
         end
-        
-        function removeH5(testCase)
-            delete(fullfile(testCase.h5Dir, testCase.h5Name));
-        end
-        
     end
     
     methods(Test)        
