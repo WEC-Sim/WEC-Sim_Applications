@@ -9,12 +9,10 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
     end
     
     
-    methods (Access = 'public')
-        
+    methods (Access = 'public')        
         function obj = TestNonHydroBody
             obj.testDir = fileparts(mfilename('fullpath'));
-        end
-    
+        end    
     end
     
     methods (TestMethodSetup)
@@ -29,18 +27,14 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
         
-        function runBemio(testCase)
-            
+        function runBemio(testCase)            
             cd(testCase.h5Dir);
             hydro = struct();
-            hydro = Read_WAMIT(hydro,testCase.outName,[]);
-            
+            hydro = Read_WAMIT(hydro,testCase.outName,[]);            
             hydro = Radiation_IRF(hydro,30,[],[],[],[]);
-            hydro = Excitation_IRF(hydro,30,[],[],[],[]);
-            
+            hydro = Excitation_IRF(hydro,30,[],[],[],[]);            
             Write_H5(hydro)
-            cd(testCase.testDir)
-            
+            cd(testCase.testDir)            
         end
         
     end
@@ -59,12 +53,10 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
         
     end
     
-    methods(Test)
-        
+    methods(Test)        
         function testNonhydro_Body(testCase)
             wecSim
-        end
-        
+        end        
     end
     
 end

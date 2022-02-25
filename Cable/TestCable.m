@@ -4,17 +4,15 @@ classdef TestCable < matlab.unittest.TestCase
         OriginalDefault
         testDir
         h5Dir = fullfile("hydroData")
-        h5Name = 'rm3.h5'
-        outName = 'rm3.out'
+        h5Name = 'mbari_snl.h5'
+        outName = 'mbari_snl.out'
     end
     
     
-    methods (Access = 'public')
-        
+    methods (Access = 'public')        
         function obj = TestCable
             obj.testDir = fileparts(mfilename('fullpath'));
-        end
-    
+        end    
     end
     
     methods (TestMethodSetup)
@@ -23,34 +21,24 @@ classdef TestCable < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassSetup)
+    methods(TestClassSetup)        
         
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
         
-        function runBemio(testCase)
-            
+        function runBemio(testCase)            
             cd(testCase.h5Dir);
             hydro = struct();
-            hydro = Read_WAMIT(hydro,'rm3.out',[]);
-            
-            hydro = Radiation_IRF(hydro,60,[],[],[],[]);
+            hydro = Read_WAMIT(hydro,testCase.outName,[]);            
+            hydro = Radiation_IRF(hydro,20,[],[],[],[]);
             hydro = Radiation_IRF_SS(hydro,[],[]);
-            hydro = Excitation_IRF(hydro,157,[],[],[],[]);
-            
+            hydro = Excitation_IRF(hydro,30,[],[],[],[]);            
             Write_H5(hydro)
-            cd(testCase.testDir)
-            
+            cd(testCase.testDir)            
         end
         
-    end
-    
-    methods(TestMethodTeardown)
-        function returnHome(testCase)
-            cd(testCase.testDir)
-        end
-    end
+    end    
     
     methods(TestClassTeardown)
         
@@ -66,14 +54,10 @@ classdef TestCable < matlab.unittest.TestCase
         
     end
     
-    methods(Test)
-        
+    methods(Test)        
         function testCable(testCase)
-            cd(testCase.testDir)
             wecSim
-            cd(testCase.testDir)
-        end
-        
+        end        
     end
     
 end
