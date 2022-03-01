@@ -20,18 +20,22 @@ classdef TestPassiveYaw < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassSetup)        
+    methods(TestClassSetup)
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
-        function runBemio(testCase)            
+        end
+        function runBemio(testCase)
             cd(testCase.h5Dir);
+            if isfile(testCase.h5Name)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
             hydro = struct();
             hydro = readWAMIT(hydro,testCase.outName,[]);            
             hydro = radiationIRF(hydro,40,[],[],[],[]);
             hydro = excitationIRF(hydro,40,[],[],[],[]);            
             writeBEMIOH5(hydro)
-            cd(testCase.testDir)            
+            end
+            cd(testCase.testDir)
         end        
     end
     

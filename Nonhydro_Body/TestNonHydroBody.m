@@ -23,16 +23,22 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
     methods(TestClassSetup)        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
+        end
+        
         function runBemio(testCase)            
             cd(testCase.h5Dir);
+            if isfile(testCase.h5Name)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
             hydro = struct();
             hydro = readWAMIT(hydro,testCase.outName,[]);            
             hydro = radiationIRF(hydro,30,[],[],[],[]);
             hydro = excitationIRF(hydro,30,[],[],[],[]);            
             writeBEMIOH5(hydro)
+            end
             cd(testCase.testDir)            
-        end        
+        end
+        
     end
     
     methods(TestClassTeardown)        
@@ -47,5 +53,6 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
         function testNonhydro_Body(testCase)
             wecSim
         end        
-    end    
+    end
+    
 end

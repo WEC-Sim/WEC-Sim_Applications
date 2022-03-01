@@ -26,24 +26,28 @@ classdef TestTraditionalME < matlab.unittest.TestCase
         end        
         function runBemio(testCase)
             cd(testCase.h5Dir);
-            hydro = struct();
-            hydro = readWAMIT(hydro,testCase.outName,[]);
-            hydro.body = {'monopile'};            
-            hydro = radiationIRF(hydro,30,[],[],[],15);
-            hydro = radiationIRFSS(hydro,[],[]);
-            hydro = excitationIRF(hydro,30,[],[],[],15);            
-            writeBEMIOH5(hydro)
+            if isfile(testCase.h5Name)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
+                hydro = struct();
+                hydro = readWAMIT(hydro,testCase.outName,[]);
+                hydro.body = {'monopile'};            
+                hydro = radiationIRF(hydro,30,[],[],[],15);
+                hydro = radiationIRFSS(hydro,[],[]);
+                hydro = excitationIRF(hydro,30,[],[],[],15);            
+                writeBEMIOH5(hydro)
+            end
             cd(testCase.testDir)
-        end        
+        end
     end
     
-    methods(TestMethodTeardown)        
+    methods(TestMethodTeardown)
         function returnHome(testCase)
             cd(testCase.testDir)
         end        
     end
     
-    methods(TestClassTeardown)        
+    methods(TestClassTeardown)
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...

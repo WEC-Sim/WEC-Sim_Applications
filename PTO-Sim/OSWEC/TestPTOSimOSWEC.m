@@ -26,14 +26,18 @@ classdef TestPTOSimOSWEC < matlab.unittest.TestCase
         end        
         function runBemio(testCase)            
             cd(testCase.h5Dir);
-            hydro = struct();
-            hydro = readWAMIT(hydro,testCase.outName,[]);           
-            hydro = radiationIRF(hydro,30,[],[],[],[]);
-            hydro = radiationIRFSS(hydro,[],[]);
-            hydro = excitationIRF(hydro,30,[],[],[],[]);            
-            writeBEMIOH5(hydro)
-            cd(testCase.testDir)            
-        end        
+            if isfile(testCase.h5Name)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
+                hydro = struct();
+                hydro = readWAMIT(hydro,testCase.outName,[]);           
+                hydro = radiationIRF(hydro,30,[],[],[],[]);
+                hydro = radiationIRFSS(hydro,[],[]);
+                hydro = excitationIRF(hydro,30,[],[],[],[]);            
+                writeBEMIOH5(hydro)
+            end
+            cd(testCase.testDir)
+        end
     end
     
     methods(TestMethodTeardown)

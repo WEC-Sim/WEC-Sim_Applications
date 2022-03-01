@@ -9,7 +9,8 @@ hydro = struct();
 
 % Simulation properties
 hydro.file = 'experimental';
-hydro.code = '';
+hydro.code = 'custom';
+hydro.dof = 6*ones(1,nBody);
 hydro.g = 9.81;
 hydro.rho = 1000;
 hydro.body = bodyNames;
@@ -57,6 +58,14 @@ hydro.C(:,:,2) = b2_k;
 % Excitation force
 hydro.ex_re = zeros(6*nBody,nDir,nFreq);
 hydro.ex_im = zeros(6*nBody,nDir,nFreq);
+hydro.sc_re = zeros(6*nBody,nDir,nFreq);
+hydro.sc_im = zeros(6*nBody,nDir,nFreq);
+hydro.sc_ma = zeros(6*nBody,nDir,nFreq);
+hydro.sc_ph = zeros(6*nBody,nDir,nFreq);
+hydro.fk_re = zeros(6*nBody,nDir,nFreq);
+hydro.fk_im = zeros(6*nBody,nDir,nFreq);
+hydro.fk_ma = zeros(6*nBody,nDir,nFreq);
+hydro.fk_ph = zeros(6*nBody,nDir,nFreq);
 hydro.ex_re(1:6,:,:) = b1_reEx;
 hydro.ex_re(7:12,:,:) = b2_reEx;
 hydro.ex_im(1:6,:,:) = b1_imEx;
