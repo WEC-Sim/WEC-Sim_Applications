@@ -23,7 +23,8 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
     methods(TestClassSetup)        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
+        end
+        
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             hydro = struct();
@@ -32,7 +33,8 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
             hydro = Excitation_IRF(hydro,30,[],[],[],[]);            
             Write_H5(hydro)
             cd(testCase.testDir)            
-        end        
+        end
+        
     end
     
     methods(TestClassTeardown)        
@@ -47,5 +49,6 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
         function testNonhydro_Body(testCase)
             wecSim
         end        
-    end    
+    end
+    
 end
