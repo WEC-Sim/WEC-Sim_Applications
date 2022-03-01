@@ -28,13 +28,13 @@ classdef TestGeneralizedBodyModes < matlab.unittest.TestCase
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
                 fprintf('runBemio skipped, *.h5 already exists\n')
-            else            
+            else
                 hydro = struct();
-                hydro = Read_WAMIT(hydro,testCase.outName,[]);            
-                hydro = Radiation_IRF(hydro,100,[],[],[],20);
-                hydro = Radiation_IRF_SS(hydro,[],[]);
-                hydro = Excitation_IRF(hydro,100,[],[],[],30);            
-                Write_H5(hydro)
+                hydro = readWAMIT(hydro,testCase.outName,[]);            
+                hydro = radiationIRF(hydro,100,[],[],[],20);
+                hydro = radiationIRFSS(hydro,[],[]);
+                hydro = excitationIRF(hydro,100,[],[],[],30);            
+                writeBEMIOH5(hydro)
             end
             cd(testCase.testDir)            
         end        

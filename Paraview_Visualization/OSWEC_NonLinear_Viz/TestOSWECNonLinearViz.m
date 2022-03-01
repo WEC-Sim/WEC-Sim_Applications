@@ -11,7 +11,7 @@ classdef TestOSWECNonLinearViz < matlab.unittest.TestCase
     methods (Access = 'public')        
         function obj = TestOSWECNonLinearViz
             obj.testDir = fileparts(mfilename('fullpath'));
-        end    
+        end
     end
     
     methods (TestMethodSetup)
@@ -23,20 +23,20 @@ classdef TestOSWECNonLinearViz < matlab.unittest.TestCase
     methods(TestClassSetup)        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
+        end
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
                 fprintf('runBemio skipped, *.h5 already exists\n')
             else
                 hydro = struct();
-                hydro = Read_WAMIT(hydro,testCase.outName,[]);            
-                hydro = Radiation_IRF(hydro,30,[],[],[],[]);
-                hydro = Radiation_IRF_SS(hydro,[],[]);
-                hydro = Excitation_IRF(hydro,30,[],[],[],[]);            
-                Write_H5(hydro)
+                hydro = readWAMIT(hydro,testCase.outName,[]);            
+                hydro = radiationIRF(hydro,30,[],[],[],[]);
+                hydro = radiationIRFSS(hydro,[],[]);
+                hydro = excitationIRF(hydro,30,[],[],[],[]);            
+                writeBEMIOH5(hydro)
             end
-            cd(testCase.testDir)            
+            cd(testCase.testDir)
         end        
     end
     

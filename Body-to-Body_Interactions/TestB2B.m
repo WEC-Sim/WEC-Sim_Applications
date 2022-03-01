@@ -30,11 +30,11 @@ classdef TestB2B < matlab.unittest.TestCase
                 fprintf('runBemio skipped, *.h5 already exists\n')
             else
                 hydro = struct();
-                hydro = Read_WAMIT(hydro,testCase.outName,[]);            
-                hydro = Radiation_IRF(hydro,60,[],[],[],[]);
-                hydro = Radiation_IRF_SS(hydro,[],[]);
-                hydro = Excitation_IRF(hydro,157,[],[],[],[]);            
-                Write_H5(hydro)
+                hydro = readWAMIT(hydro,testCase.outName,[]);            
+                hydro = radiationIRF(hydro,60,[],[],[],[]);
+                hydro = radiationIRFSS(hydro,[],[]);
+                hydro = excitationIRF(hydro,157,[],[],[],[]);            
+                writeBEMIOH5(hydro)
             end
             cd(testCase.testDir)            
         end        
