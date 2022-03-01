@@ -112,11 +112,11 @@ pto(1) = ptoClass('PTO');                           % Initialize ptoClass
 pto(2) = ptoClass('C');               % Initialize constraintClass
     pto(2).loc = [-0.6214398 0 0.3816858];   % Constraint Location [m]
 
-    %% B - Revolute
+%% B - Revolute
 pto(3) = ptoClass('B');               % Initialize constraintClass
     pto(3).loc = [-0.438 0 0.714];          	% Constraint Location [m]  
     
-    %% A - Revolute
+%% A - Revolute
 pto(4) = ptoClass('A');               % Initialize constraintClass
     pto(4).loc = [-0.438 0 0.302];           % Constraint Location [m]
  
