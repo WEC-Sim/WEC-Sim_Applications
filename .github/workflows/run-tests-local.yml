@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [R2020a, latest]
+        release: [R2020b, latest]
         folder: [Body-to-Body_Interactions,
                  Desalination,
                  End_Stops,
@@ -27,6 +27,8 @@ jobs:
                  Paraview_Visualization,
                  Passive_Yaw,
                  PTO-Sim,
+                 Traditional_Morison_Element,
+                 Wave_Markers,
                  WECCCOMP_Fault_Implementation,
                  write_hdf5]
     name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
