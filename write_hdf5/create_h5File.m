@@ -1,10 +1,10 @@
 
-% create or load data to write to the H5 file
+% create or load hydrodata
 load('rm3_hydroData.mat')
 
 % Assign variables to the hydro structure. See
 % https://wec-sim.github.io/WEC-Sim/master/user/advanced_features.html#bemio-hydro-data-structure
-% for the full layout.
+% for the full description.
 hydro = struct();
 
 % Simulation properties
