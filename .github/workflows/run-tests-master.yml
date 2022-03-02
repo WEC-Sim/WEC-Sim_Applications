@@ -1,13 +1,13 @@
 name: Run MATLAB tests on local changes
 on:
   # Trigger the workflow on push or pull request,
-  # but only for the github_actions branch
+  # but only for the master branch
   push:
     branches:
-      - github_actions
+      - master
   pull_request:
     branches:
-      - github_actions
+      - master
 jobs:
   run_tests:
     runs-on: ubuntu-latest
