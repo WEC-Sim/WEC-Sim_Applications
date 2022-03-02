@@ -38,7 +38,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           lfs: true
-          ref: 'dev'
       - name: Checkout LFS objects
         run: git lfs checkout
       - name: Check out WEC-Sim
