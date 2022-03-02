@@ -1,4 +1,4 @@
-name: Run MATLAB tests on local changes
+name: Run MATLAB tests on master branch
 on:
   # Trigger the workflow on push or pull request,
   # but only for the master branch
