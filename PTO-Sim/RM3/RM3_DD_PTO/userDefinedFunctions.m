@@ -3,8 +3,6 @@ close all
 
 %% Plots
 
-set(0,'DefaultFigureWindowStyle','docked')
-
 figure();
 subplot(211)
 plot(output.ptosim.time,output.ptosim.pmLinearGenerator.Ia)

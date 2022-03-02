@@ -3,7 +3,7 @@ classdef TestWECCOMP < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = fullfile("hydroData")
+        h5Dir = "hydroData"
         h5Name = 'wavestar.h5'
         outName = 'wavestar.out'
     end

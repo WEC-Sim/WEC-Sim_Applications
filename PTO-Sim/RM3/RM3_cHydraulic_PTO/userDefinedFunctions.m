@@ -4,8 +4,6 @@ clear table
 
 %% Plots 
 
-set(0,'DefaultFigureWindowStyle','docked')
-
 figure();
 plot(output.ptosim.time,output.ptosim.accumulator(1).pressure/1e6,output.ptosim.time,output.ptosim.accumulator(2).pressure/1e6)
 set(findall(gcf,'type','axes'),'fontsize',16)

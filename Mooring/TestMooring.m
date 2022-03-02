@@ -3,7 +3,7 @@ classdef TestMooring < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = fullfile("hydroData")
+        h5Dir = 'hydroData'
         h5Name = 'rm3.h5'
         outName = 'rm3.out'
     end    
