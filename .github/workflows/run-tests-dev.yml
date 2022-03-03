@@ -1,0 +1,70 @@
+name: Run MATLAB tests on github_actions_dev branch
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the github_actions_dev branch
+  push:
+    branches:
+      - github_actions_dev
+  pull_request:
+    branches:
+      - github_actions_dev
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        release: [R2020b, latest]
+        folder: [Body-to-Body_Interactions,
+                 Cable,
+                 Desalination,
+                 End_Stops,
+                 Free_Decay,
+                 Generalized_Body_Modes,
+                 Mooring,
+                 Multiple_Condition_Runs,
+                 Nonhydro_Body,
+                 Nonlinear_Hydro,
+                 Paraview_Visualization,
+                 Passive_Yaw,
+                 PTO-Sim,
+                 Traditional_Morison_Element,
+                 Wave_Markers,
+                 WECCCOMP_Fault_Implementation,
+                 write_hdf5]
+    name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+          ref: 'dev'
+      - name: Checkout LFS objects
+        run: git lfs checkout
+      - name: Check out WEC-Sim
+        uses: actions/checkout@v2
+        with:
+          repository: WEC-Sim/WEC-Sim
+          ref: 'dev'
+          path: './WEC-Sim'
+      - name: Check out MoorDyn
+        uses: actions/checkout@v2
+        with:
+          repository: WEC-Sim/MoorDyn
+          path: './MoorDyn'
+      - name: Copy MoorDyn Files
+        run: |
+            cp * ../WEC-Sim/source/functions/moorDyn
+            ls ../WEC-Sim/source/functions/moorDyn
+        shell: bash
+        working-directory: './MoorDyn'
+      - name: Install MATLAB
+        uses: matlab-actions/setup-matlab@v1
+      - name: Install WEC-Sim
+        uses: matlab-actions/run-command@v1
+        with:
+          command: addpath(genpath('WEC-Sim/source'));, savepath pathdef.m;
+      - name: Run tests and generate artifacts
+        uses: matlab-actions/run-command@v1
+        with:
+          command: results = wecSimAppTest("${{ matrix.folder }}"), assertSuccess(results);
