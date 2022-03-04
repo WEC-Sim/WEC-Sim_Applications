@@ -1,5 +1,8 @@
 # WEC-Sim_Applications
 
+[![master build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-master.yml/badge.svg)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-master.yml)
+[![dev build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-dev.yml/badge.svg)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-dev.yml)
+
 This repository contains applications of the WEC-Sim code, including tutorials by the WEC-Sim team as well as user-shared examples. 
 
 To contribute an example follow these guidelines:
