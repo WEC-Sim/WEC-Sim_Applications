@@ -1,14 +1,23 @@
 name: Run MATLAB tests on master branch
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
+  # Trigger the workflow on push or pull requests on the master branch and on 
+  # pushes to WEC-Sim/WEC-Sim master branch
   push:
     branches:
       - master
   pull_request:
     branches:
       - master
+  repository_dispatch:
+    types:
+      - wecsim-master
 jobs:
+  dispatch_event:
+    runs-on: ubuntu-latest
+    name: Identify dispatch event
+    steps:
+      - run: echo "Triggered by WEC-Sim commit ${{ github.event.client_payload.sha }}"
+    if: github.event_name == 'repository_dispatch'
   run_tests:
     runs-on: ubuntu-latest
     strategy:

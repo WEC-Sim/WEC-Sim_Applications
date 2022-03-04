@@ -1,14 +1,23 @@
 name: Run MATLAB tests on dev branch
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the dev branch
+  # Trigger the workflow on push or pull requests on the dev branch and on 
+  # pushes to WEC-Sim/WEC-Sim dev branch
   push:
     branches:
       - dev
   pull_request:
     branches:
       - dev
+  repository_dispatch:
+    types:
+      - wecsim-dev
 jobs:
+  dispatch_event:
+    runs-on: ubuntu-latest
+    name: Identify dispatch event
+    if: github.event_name == 'repository_dispatch'
+    steps:
+        - run: echo "Triggered by WEC-Sim commit ${{ github.event.client_payload.sha }}"
   run_tests:
     runs-on: ubuntu-latest
     strategy:
