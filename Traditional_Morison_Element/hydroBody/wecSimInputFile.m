@@ -11,7 +11,7 @@ simu.CITime = 30;
 simu.rampTime = 100;                           % Wave Ramp Time [s] 200
 simu.endTime = 400;                            % Simulation End Time [s] 400
 simu.dt = 0.01;
-simu.ssCalc = 1;
+simu.stateSpace = 1;
 
 %% Wave Cases
 % % No wave
@@ -38,7 +38,7 @@ waves.T = 5.0;
 body(1) = bodyClass('../hydroData/monopile.h5');
 body(1).geometryFile = '../geometry/monopile.stl';
 % body(1).name = 'monopile';                    % Hydro body name defined by h5 file
-body(1).nhBody = 0;                             % Hydro body
+body(1).nonHydro = 0;                             % Hydro body
 body(1).mass = 'equilibrium'; % 1044536
 body(1).momOfInertia = [1.25 1.25 0.15]*1e9;
 % body(1).cg = [0 0 -15];                       % Hydro body cg defined by h5 file
@@ -58,7 +58,7 @@ body(1).momOfInertia = [1.25 1.25 0.15]*1e9;
 body(2) = bodyClass('');
 body(2).geometryFile = '../geometry/tower.stl';
 body(2).name = 'tower';
-body(2).nhBody = 1;
+body(2).nonHydro = 1;
 body(2).mass = 1031930;
 body(2).momOfInertia = [9.66 9.66 .132]*1e8;
 body(2).cg = [0 0 25];

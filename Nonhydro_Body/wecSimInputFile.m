@@ -24,7 +24,7 @@ body(1).momOfInertia = [1.85e6 1.85e6 1.85e6];
 % Base (Non-hydro Body)
 body(2) = bodyClass('');                % Initialize bodyClass without an *.h5 file
 body(2).geometryFile = 'geometry/base.stl';    % Geometry File
-body(2).nhBody = 1;                     % Turn non-hydro body on
+body(2).nonHydro = 1;                     % Turn non-hydro body on
 body(2).name = 'base';                  % Specify body name
 body(2).mass = 999;                     % Specify Mass  
 body(2).momOfInertia = [1 1 1];         % Specify MOI  

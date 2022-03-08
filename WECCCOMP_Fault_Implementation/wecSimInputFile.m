@@ -6,12 +6,12 @@ simu = simulationClass();                           % Create the Simulation Vari
     simu.dt             = 0.001;                    % Simulation Time-Step [s]
     simu.rampTime       = 5*1.412;                  % Wave Ramp Time Length [s]
     simu.endTime        = 100*1.412;                % Simulation End Time [s]
-    simu.cicEndTime         = 2;                        % Convolution Time [s]
+    simu.cicEndTime     = 2;                        % Convolution Time [s]
     simu.explorer       = 'off';                    % Explorer off
     simu.solver         = 'ode4';                   % Turn on ode45
     simu.domainSize     = 5;
-    simu.ssCalc         = 1;                        % Simulate Impulse Response Function with State Space Approximation
-    simu.mcrCaseFile    = 'WECCCOMP_ss.mat';        % MATLAB File Containing MCR Runs
+    simu.stateSpace     = 1;                        % Simulate Impulse Response Function with State Space Approximation
+    simu.mcrMatFile     = 'WECCCOMP_ss.mat';        % MATLAB File Containing MCR Runs
 
 %% Controller Initialization
     controller_init                                 % Initializes the variables in controller_init.m
@@ -55,7 +55,7 @@ body(1) = bodyClass('hydroData/wavestar.h5');       % Initialize bodyClass
 %% Arm - Rotates
 body(2) = bodyClass('');                            % Initialize bodyClass
     body(2).geometryFile    = 'geometry/Arm.STL';   % Geometry File
-    body(2).nhBody          = 1;                    % Turn non-hydro body on
+    body(2).nonHydro          = 1;                    % Turn non-hydro body on
     body(2).name            = 'Arm';                % Specify body name
     body(2).mass            = 1.157;                % Define mass [kg]   
     body(2).momOfInertia    = [0 0.0606 0];         % Moment of Inertia [kg*m^2]     
@@ -66,7 +66,7 @@ body(2) = bodyClass('');                            % Initialize bodyClass
 %% Frame - FIXED
 body(3) = bodyClass('');                            % Initialize bodyClass
     body(3).geometryFile    = 'geometry/Frame.STL'; % Geometry File
-    body(3).nhBody          = 1;                    % Turn non-hydro body on
+    body(3).nonHydro          = 1;                    % Turn non-hydro body on
     body(3).name            = 'Frame';              % Specify body name
     body(3).mass            = 999;                  % Define mass [kg] - FIXED  
     body(3).momOfInertia    = [999 999 999];        % Moment of Inertia [kg*m^2] - FIXED 
@@ -79,7 +79,7 @@ body(3) = bodyClass('');                            % Initialize bodyClass
 %% BC Rod - TRANSLATE
 body(4) = bodyClass('');                            % Initialize bodyClass
     body(4).geometryFile    = 'geometry/BC.STL';    % Geometry File
-    body(4).nhBody          = 1;                    % Turn non-hydro body on
+    body(4).nonHydro          = 1;                    % Turn non-hydro body on
     body(4).name            = 'BC';                 % Specify body name
     body(4).mass            = 0.0001;               % Define mass [kg]   
     body(4).momOfInertia    = [0.0001 0.0001 0.0001]; % Moment of Inertia [kg*m^2]      
@@ -90,7 +90,7 @@ body(4) = bodyClass('');                            % Initialize bodyClass
 %% Motor - ROTATE
 body(5) = bodyClass('');                            % Initialize bodyClass
     body(5).geometryFile    = 'geometry/Motor.STL'; % Geometry File
-    body(5).nhBody          = 1;                    % Turn non-hydro body on
+    body(5).nonHydro          = 1;                    % Turn non-hydro body on
     body(5).name            = 'Motor';              % Specify body name
     body(5).mass            = 0.0001;               % Define mass [kg]   
     body(5).momOfInertia    = [0.0001 0.0001 0.0001]; % Moment of Inertia [kg*m^2]     

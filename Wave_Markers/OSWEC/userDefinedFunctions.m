@@ -2,7 +2,7 @@
 
 %% Plot waves
 
-waves.plotEta(simu.rampTime);
+waves.plotElevation(simu.rampTime);
 try 
     waves.plotSpectrum();
 catch

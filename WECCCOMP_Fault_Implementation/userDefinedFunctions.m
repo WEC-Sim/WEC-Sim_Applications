@@ -4,7 +4,7 @@ clear power power_eff
 
 
 %% Plot waves
-waves.plotEta(simu.rampTime);
+waves.plotElevation(simu.rampTime);
 hold on
 plot([25 25],[1.5*min(waves.waveAmpTime(:,2)),1.5*max(waves.waveAmpTime(:,2))])
 legend('\eta','rampTime','powerCalcTime')

@@ -7,7 +7,7 @@ mcr.waveT(imcr) = waves.T;
 %Example of user input MATLAB file for post processing
 
 %Plot waves
-waves.plotEta(simu.rampTime);
+waves.plotElevation(simu.rampTime);
 try 
     waves.plotSpectrum();
 catch

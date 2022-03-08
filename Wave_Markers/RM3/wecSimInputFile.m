@@ -24,7 +24,7 @@ waves.T = 8;                            % Wave Period [s]
 
 % % Irregular Waves with imported spectrum
 % waves = waveClass('spectrumImport');        % Create the Wave Variable and Specify Type
-% waves.spectrumDataFile = 'spectrumData.mat';  %Name of User-Defined Spectrum File [:,2] = [f, Sf]
+% waves.spectrumFile = 'spectrumData.mat';    % Name of User-Defined Spectrum File [:,2] = [f, Sf]
 
 
 %% Wave Visualization Markers
