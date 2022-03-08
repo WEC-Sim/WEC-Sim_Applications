@@ -3,7 +3,7 @@ classdef TestPTOSimRM3 < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = fullfile("hydroData")
+        h5Dir = "hydroData"
         h5Name = 'rm3.h5'
         outName = 'rm3.out'
     end    
@@ -26,14 +26,18 @@ classdef TestPTOSimRM3 < matlab.unittest.TestCase
         end        
         function runBemio(testCase)            
             cd(testCase.h5Dir);
-            hydro = struct();
-            hydro = Read_WAMIT(hydro,testCase.outName,[]);            
-            hydro = Radiation_IRF(hydro,60,[],[],[],[]);
-            hydro = Radiation_IRF_SS(hydro,[],[]);
-            hydro = Excitation_IRF(hydro,157,[],[],[],[]);            
-            Write_H5(hydro)
-            cd(testCase.testDir)            
-        end        
+            if isfile(testCase.h5Name)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
+                hydro = struct();
+                hydro = readWAMIT(hydro,testCase.outName,[]);
+                hydro = radiationIRF(hydro,60,[],[],[],[]);
+                hydro = radiationIRFSS(hydro,[],[]);
+                hydro = excitationIRF(hydro,157,[],[],[],[]);
+                writeBEMIOH5(hydro)
+            end
+            cd(testCase.testDir)
+        end
     end
     
     methods(TestMethodTeardown)
@@ -42,7 +46,7 @@ classdef TestPTOSimRM3 < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassTeardown)        
+    methods(TestClassTeardown)
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...

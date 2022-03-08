@@ -1,8 +1,8 @@
 clc; clear all; close all;
 hydro = struct();
 
-hydro = Read_WAMIT(hydro,'ellipsoid.out',[]);
-hydro = Radiation_IRF(hydro,60,[],[],[],[]);
-hydro = Excitation_IRF(hydro,100,[],[],[],[]);
-Write_H5(hydro)
-Plot_BEMIO(hydro)
+hydro = readWAMIT(hydro,'ellipsoid.out',[]);
+hydro = radiationIRF(hydro,60,[],[],[],[]);
+hydro = excitationIRF(hydro,100,[],[],[],[]);
+writeBEMIOH5(hydro)
+plotBEMIO(hydro)
