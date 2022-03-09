@@ -29,12 +29,7 @@ classdef TestNonlinearHydro < matlab.unittest.TestCase
             if isfile(testCase.h5Name)
                 fprintf('runBemio skipped, *.h5 already exists\n')
             else
-                hydro = struct();
-                hydro = readWAMIT(hydro,testCase.outName,[]);            
-                hydro = radiationIRF(hydro,60,[],[],[],[]);
-                hydro = radiationIRFSS(hydro,[],[]);
-                hydro = excitationIRF(hydro,157,[],[],[],[]);            
-                writeBEMIOH5(hydro)
+                bemio
             end
             cd(testCase.testDir)            
         end        

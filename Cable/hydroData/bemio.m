@@ -1,7 +1,12 @@
+% clc; clear all; close all;
+
+%% hydro data
 hydro = struct();
-hydro = Read_WAMIT(hydro,'mbari_snl.out',[]);
-hydro = Radiation_IRF(hydro,20,[],[],[],[]);
-hydro = Radiation_IRF_SS(hydro,[],[]);
-hydro = Excitation_IRF(hydro,30,[],[],[],[]);
-Write_H5(hydro)
-Plot_BEMIO(hydro)
+hydro = readWAMIT(hydro,'mbari_snl.out',[]);
+hydro = radiationIRF(hydro,20,[],[],[],[]);
+hydro = radiationIRFSS(hydro,[],[]);
+hydro = excitationIRF(hydro,30,[],[],[],[]);
+writeBEMIOH5(hydro)
+
+%% Plot hydro data
+%plotBEMIO(hydro)

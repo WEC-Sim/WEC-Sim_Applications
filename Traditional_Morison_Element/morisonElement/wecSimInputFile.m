@@ -30,7 +30,7 @@ waves.T = 5.0;
 % waves.spectrumType = 'PM';                    % Specify Spectrum Type
 % waves.phaseSeed = 5;
 
-waves.freqRange = [0 10]; % Must define wave frequency range without an .h5 / hydro body
+waves.bem.range = [0 10]; % Must define wave frequency range without an .h5 / hydro body
 waves.waterDepth = 30;    % Must define water depth without an .h5 / hydro body
 
 %% Body Data

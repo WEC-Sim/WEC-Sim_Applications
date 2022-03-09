@@ -18,7 +18,7 @@ waves = waveClass('irregular');             % Create the Wave Variable and Speci
 waves.H = 2;                        
 waves.T = 8;                          
 waves.spectrumType = 'JS';
-waves.freqDisc = 'Traditional';
+waves.bem.option = 'Traditional';
 waves.viz.numPointsX = 1000;
 waves.viz.numPointsY = 2;
 

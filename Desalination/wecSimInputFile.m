@@ -16,9 +16,9 @@ waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
 waves.H = 2.64;                         % Significant Wave Height [m]
 waves.T = 9.86;                         % Peak Period [s]
 waves.spectrumType = 'PM';              % Specify Wave Spectrum Type
-waves.freqDisc = 'EqualEnergy';
+waves.bem.option = 'EqualEnergy';
+waves.bem.count = 250;
 waves.phaseSeed = 1;
-waves.numFreq = 250;
 
 %% Body Data
 %% Flap
