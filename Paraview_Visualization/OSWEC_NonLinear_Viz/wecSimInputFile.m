@@ -42,11 +42,11 @@ body(2).dispVol = 0;                        % Specify Displaced Volume
 %% PTO and Constraint Parameters
 % Fixed Constraint
 constraint(1)= constraintClass('Constraint1'); 
-constraint(1).loc = [0 0 -10];
+constraint(1).location = [0 0 -10];
 
 % Rotational PTO
 pto(1) = ptoClass('PTO1');                     
-pto(1).k = 0;                                  
-pto(1).c = 0;                                  
-pto(1).loc = [0 0 -8.9];                       
+pto(1).stiffness = 0;                                  
+pto(1).damping = 0;                                  
+pto(1).location = [0 0 -8.9];                       
 

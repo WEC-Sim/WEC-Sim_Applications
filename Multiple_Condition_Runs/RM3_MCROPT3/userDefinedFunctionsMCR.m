@@ -3,7 +3,7 @@
 filename = sprintf('savedData%03d.mat', imcr);
 
 mcr.Avgpower(imcr) = mean(output.ptos.powerInternalMechanics(2000:end,3));
-mcr.CPTO(imcr)  = pto(1).c;
+mcr.CPTO(imcr)  = pto(1).damping;
 
 save (filename, 'mcr','output','waves');
 

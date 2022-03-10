@@ -68,8 +68,8 @@ body(2).dispVol = 0;
 %% Constraints & PTOs
 % Fixed joint between monopile and tower
 constraint(1) = constraintClass('monopile-tower');
-constraint(1).loc = [0 0 0];
+constraint(1).location = [0 0 0];
 
 % Fixed joint at seabed
 constraint(2) = constraintClass('seabed');
-constraint(2).loc = [0 0 -30];
+constraint(2).location = [0 0 -30];

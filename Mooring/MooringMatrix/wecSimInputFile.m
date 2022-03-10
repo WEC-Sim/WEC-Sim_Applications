@@ -30,19 +30,19 @@ body(2).initDisp.initLinDisp = [0 0 -0.21];         % Initial Displacement
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); 
-constraint(1).loc = [0 0 0];    
+constraint(1).location = [0 0 0];    
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');              	
-pto(1).k = 0;                             	
-pto(1).c = 1200000;                       	
-pto(1).loc = [0 0 0];     
+pto(1).stiffness = 0;                             	
+pto(1).damping = 1200000;                       	
+pto(1).location = [0 0 0];     
 
 %% Mooring
 % Mooring Matrix
 mooring(1) = mooringClass('mooring');               % Initialize mooringClass
-mooring(1).matrix.k = zeros(6,6);
-mooring(1).matrix.k(1,1) = 1e5;
+mooring(1).matrix.stiffness = zeros(6,6);
+mooring(1).matrix.stiffness(1,1) = 1e5;
 mooring(1).matrix.c = zeros(6,6);
 mooring(1).matrix.preTension = zeros(1,6);
 

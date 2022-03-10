@@ -18,31 +18,30 @@ simu = simulationClass();                           % Create the Simulation Vari
 %% Wave Information  
 %% No Wave
 % waves = waveClass('noWave');
-%     waves.T = 0.79;
+% waves.T = 0.79;
+
 %% No Wave CIC
-% waves = waveClass('noWaveCIC');                   % Initialize waveClass
-%     waves.H = 0.0;                                % Wave Height [m]
-%     waves.T = 0.0;                                % Wave Period [s]
+% waves = waveClass('noWaveCIC');                       % Initialize waveClass
+% waves.H = 0.0;                                        % Wave Height [m]
+% waves.T = 0.0;                                        % Wave Period [s]
     
 %% Regular Waves  
-waves = waveClass('irregular');                    % Initialize waveClass
-    waves.H             = 0.0625;                   % Wave Height [m]
-    waves.T             = 1.412;                    % Wave Period [s]
-    waves.spectrumType  = 'JS';
-    waves.wavegauge1loc = [-1.70, 0];                      % Wave Gauge 1 x-location
-    waves.wavegauge2loc = [-1.50, 0];                      % Wave Gauge 2 x-location
-    waves.wavegauge3loc = [-1.25, 0];                      % Wave Gauge 3 x-location
+waves = waveClass('irregular');                         % Initialize waveClass
+waves.H             = 0.0625;                           % Wave Height [m]
+waves.T             = 1.412;                            % Wave Period [s]
+waves.spectrumType  = 'JS';
+waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];  % Wave Gauge locations
+    
 %% Irregular Waves  
 % waves = waveClass('irregular');                     % Initialize waveClass
-%     waves.H             = 0.0625;                   % Wave Height [m]
-%     waves.T             = 1.412;                    % Wave Period [s]
-%     waves.spectrumType  = 'JS';                     % Specify Wave Spectrum Type
-%     waves.bem.option    = 'EqualEnergy';            % Uses 'EqualEnergy' bins (default) 
-%     waves.phaseSeed     = 1;                        % Phase is seeded so eta is the same    
-%     waves.gamma         = 1;
-%     waves.wavegauge1loc = -1.70;                      % Wave Gauge 1 x-location
-%     waves.wavegauge2loc = -1.50;                      % Wave Gauge 2 x-location
-%     waves.wavegauge3loc = -1.25;                      % Wave Gauge 3 x-location
+% waves.H             = 0.0625;                   % Wave Height [m]
+% waves.T             = 1.412;                    % Wave Period [s]
+% waves.spectrumType  = 'JS';                     % Specify Wave Spectrum Type
+% waves.bem.option    = 'EqualEnergy';            % Uses 'EqualEnergy' bins (default) 
+% waves.phaseSeed     = 1;                        % Phase is seeded so eta is the same    
+% waves.gamma         = 1;
+% waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];  % Wave Gauge locations
+
 %% Body Data
 %% Float - 3 DOF
 rhoMult = 1;
@@ -101,26 +100,26 @@ body(5) = bodyClass('');                            % Initialize bodyClass
 %% PTO and Constraint Parameters
 %% Rigid Connnection between Arm and Float
 constraint(1) = constraintClass('Arm-Float');       % Initialize constraintClass
-    constraint(1).loc = [0 0 0.09];                 % Constraint Location [m]
+    constraint(1).location = [0 0 0.09];                 % Constraint Location [m]
     
 %% Linear Motor
 pto(1) = ptoClass('PTO');                           % Initialize ptoClass
-    pto(1).loc = [-0.438 0 0.714];                  % PTO Location [m]
+    pto(1).location = [-0.438 0 0.714];                  % PTO Location [m]
     pto(1).orientation.z = [183.4398/379.5826 0 332.3142/379.5823];  % PTO orientation
-    pto(1).c = 0;                                   % Joint Internal Damping Coefficient
+    pto(1).damping = 0;                                   % Joint Internal Damping Coefficient
 %% C - Revolute
 pto(2) = ptoClass('C');               % Initialize constraintClass
-    pto(2).loc = [-0.6214398 0 0.3816858];   % Constraint Location [m]
+    pto(2).location = [-0.6214398 0 0.3816858];   % Constraint Location [m]
 
 %% B - Revolute
 pto(3) = ptoClass('B');               % Initialize constraintClass
-    pto(3).loc = [-0.438 0 0.714];          	% Constraint Location [m]  
+    pto(3).location = [-0.438 0 0.714];          	% Constraint Location [m]  
     
 %% A - Revolute
 pto(4) = ptoClass('A');               % Initialize constraintClass
-    pto(4).loc = [-0.438 0 0.302];           % Constraint Location [m]
+    pto(4).location = [-0.438 0 0.302];           % Constraint Location [m]
  
 %% Frame - Fixed
 constraint(2) = constraintClass('Fixed');           % Initialize constraintClass
-    constraint(2).loc = [-0.438 0 1.5];             % Constraint Location [m]
+    constraint(2).location = [-0.438 0 1.5];             % Constraint Location [m]
     

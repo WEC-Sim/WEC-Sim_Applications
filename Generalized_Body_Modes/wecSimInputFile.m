@@ -30,4 +30,4 @@ body(1).momOfInertia = [6.667*10^7 2.167*10^9 2.167*10^9];  %Moment of Inertia [
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); % Initialize Constraint Class for Constraint1
-constraint(1).loc = [0 0 0];                    % Constraint Location [m]
+constraint(1).location = [0 0 0];                    % Constraint Location [m]

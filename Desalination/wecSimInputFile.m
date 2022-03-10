@@ -42,19 +42,19 @@ body(2).mass = 'fixed';                        % Creates Fixed Body
 
 %% PTO and Constraint Parameters
 constraint(1)= constraintClass('Constraint1'); % Initialize ConstraintClass 
-constraint(1).loc = [0 0 -10];
+constraint(1).location = [0 0 -10];
 
 constraint(2)= constraintClass('Constraint2'); % Initialize ConstraintClass 
-constraint(2).loc = [0 0 -8.9];
+constraint(2).location = [0 0 -8.9];
 
 constraint(3)= constraintClass('Constraint3'); % Initialize ConstraintClass 
-constraint(3).loc = [4.7021271782+0.9 0 -8.7];
+constraint(3).location = [4.7021271782+0.9 0 -8.7];
 
 constraint(4)= constraintClass('Constraint4'); % Initialize ConstraintClass 
-constraint(4).loc = [0+0.9 0 -7];
+constraint(4).location = [0+0.9 0 -7];
 
 pto(1) = ptoClass('PTO1');                     % Initialize ptoClass for PTO1
-pto(1).k = 0;                                  % PTO Stiffness Coeff [Nm/rad]
-pto(1).c = 0;                                  % PTO Damping Coeff [Nsm/rad]
-pto(1).loc = [2.35106397378+0.9 0 -7.849998936];   % PTO Global Location [m]
+pto(1).stiffness = 0;                                  % PTO Stiffness Coeff [Nm/rad]
+pto(1).damping = 0;                                  % PTO Damping Coeff [Nsm/rad]
+pto(1).location = [2.35106397378+0.9 0 -7.849998936];   % PTO Global Location [m]
 pto(1).orientation.z = [-4.7021271782/5 0 1.7/5];  % PTO orientation

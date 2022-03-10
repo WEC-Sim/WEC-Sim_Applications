@@ -32,10 +32,10 @@ body(2).mass = 'fixed';
 %% PTO and Constraint Parameters
 % Fixed Constraint
 constraint(1)= constraintClass('Constraint1');  
-constraint(1).loc = [0 0 -10];                  
+constraint(1).location = [0 0 -10];                  
 
 % Rotational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize ptoClass for PTO1
-pto(1).k = 0;                                   % PTO Stiffness Coeff [Nm/rad]
-pto(1).c = 0;                                   % PTO Damping Coeff [Nsm/rad]
-pto(1).loc = [0 0 -8.9];                        % PTO Location [m]
+pto(1).stiffness = 0;                                   % PTO Stiffness Coeff [Nm/rad]
+pto(1).damping = 0;                                   % PTO Damping Coeff [Nsm/rad]
+pto(1).location = [0 0 -8.9];                        % PTO Location [m]

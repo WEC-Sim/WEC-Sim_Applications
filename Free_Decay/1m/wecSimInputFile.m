@@ -5,7 +5,7 @@ simu.endTime=40;
 simu.dt = 0.01;                         
 simu.cicEndTime = 15;
 simu.explorer = 'off';
-simu.adjMassWeightFun = 0.47761120825;
+simu.adjMassFactor = 0.47761120825;
 
 %% Wave Information  
 % Regular Waves  
@@ -22,5 +22,5 @@ body(1).initDisp.initLinDisp = [ 0 0 1];    % Initial Displacement [m]
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); 
-constraint(1).loc = [0 0 0];                    
+constraint(1).location = [0 0 0];                    
 
