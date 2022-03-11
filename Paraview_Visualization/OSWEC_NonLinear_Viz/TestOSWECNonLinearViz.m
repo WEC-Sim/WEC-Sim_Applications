@@ -47,7 +47,7 @@ classdef TestOSWECNonLinearViz < matlab.unittest.TestCase
                                  testCase.OriginalDefault);
         end
         function removeVTK(testCase)
-            rmdir(fullfile(testCase.testDir, 'vtk'), 's');
+            try rmdir(fullfile(testCase.testDir, 'vtk'), 's'); end
         end        
     end
     
