@@ -1,4 +1,4 @@
-classdef TestWaveMarker < matlab.unittest.TestCase
+classdef TestWaveMarkerRM3 < matlab.unittest.TestCase
     
     properties
         OriginalDefault
@@ -9,7 +9,7 @@ classdef TestWaveMarker < matlab.unittest.TestCase
     end    
     
     methods (Access = 'public')        
-        function obj = TestWaveMarker
+        function obj = TestWaveMarkerRM3
             obj.testDir = fileparts(mfilename('fullpath'));
         end    
     end
@@ -23,19 +23,23 @@ classdef TestWaveMarker < matlab.unittest.TestCase
     methods(TestClassSetup)        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
-        function runBemio(testCase)            
+        end
+        function runBemio(testCase)
             cd(testCase.h5Dir);
-            hydro = struct();
-            hydro = Read_WAMIT(hydro,testCase.outName,[]);                 
-            hydro = Radiation_IRF(hydro,30,[],[],[],[]);
-            hydro = Excitation_IRF(hydro,30,[],[],[],[]);            
-            Write_H5(hydro)
-            cd(testCase.testDir)            
-        end        
+            if isfile(testCase.h5Name)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
+                hydro = struct();
+                hydro = readWAMIT(hydro,testCase.outName,[]);                 
+                hydro = radiationIRF(hydro,30,[],[],[],[]);
+                hydro = excitationIRF(hydro,30,[],[],[],[]);            
+                writeBEMIOH5(hydro)
+            end
+            cd(testCase.testDir)
+        end
     end
     
-    methods(TestClassTeardown)        
+    methods(TestClassTeardown)
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...

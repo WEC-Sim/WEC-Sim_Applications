@@ -3,7 +3,7 @@ classdef TestDesalination < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = fullfile("hydroData")
+        h5Dir = "hydroData"
         h5Name = 'oswec.h5'
         outName = 'oswec.out'
         hasH5 = false
@@ -31,11 +31,15 @@ classdef TestDesalination < matlab.unittest.TestCase
                         license('test', 'SimHydraulics'), 1,    ...
                         "Simscape Fluids is not available");            
             cd(testCase.h5Dir);
-            hydro = struct();
-            hydro = Read_WAMIT(hydro,testCase.outName,[]);            
-            hydro = Radiation_IRF(hydro,30,[],[],[],[]);
-            hydro = Excitation_IRF(hydro,30,[],[],[],[]);            
-            Write_H5(hydro)
+            if isfile(testCase.h5Name)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
+                hydro = struct();
+                hydro = readWAMIT(hydro,testCase.outName,[]);            
+                hydro = radiationIRF(hydro,30,[],[],[],[]);
+                hydro = excitationIRF(hydro,30,[],[],[],[]);            
+                writeBEMIOH5(hydro)
+            end
             cd(testCase.testDir)            
             testCase.hasH5 = true;            
         end        

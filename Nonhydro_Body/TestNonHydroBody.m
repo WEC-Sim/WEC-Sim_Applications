@@ -3,7 +3,7 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = fullfile("hydroData")
+        h5Dir = "hydroData"
         h5Name = 'oswec.h5'
         outName = 'oswec.out'
     end
@@ -27,11 +27,15 @@ classdef TestNonHydroBody < matlab.unittest.TestCase
         
         function runBemio(testCase)            
             cd(testCase.h5Dir);
+            if isfile(testCase.h5Name)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
             hydro = struct();
-            hydro = Read_WAMIT(hydro,testCase.outName,[]);            
-            hydro = Radiation_IRF(hydro,30,[],[],[],[]);
-            hydro = Excitation_IRF(hydro,30,[],[],[],[]);            
-            Write_H5(hydro)
+            hydro = readWAMIT(hydro,testCase.outName,[]);            
+            hydro = radiationIRF(hydro,30,[],[],[],[]);
+            hydro = excitationIRF(hydro,30,[],[],[],[]);            
+            writeBEMIOH5(hydro)
+            end
             cd(testCase.testDir)            
         end
         

@@ -3,7 +3,7 @@ classdef TestWECCOMP < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = fullfile("hydroData")
+        h5Dir = "hydroData"
         h5Name = 'wavestar.h5'
         outName = 'wavestar.out'
     end
@@ -40,7 +40,7 @@ classdef TestWECCOMP < matlab.unittest.TestCase
         end      
     end
     
-    methods(TestClassTeardown)        
+    methods(TestClassTeardown)
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...
@@ -48,9 +48,10 @@ classdef TestWECCOMP < matlab.unittest.TestCase
         end                
     end
     
-    methods(Test)        
+    methods(Test)
         function testWECCCOMP_Fault_Implementation(testCase)
+            assumeFail(testCase, "Not compatible with latest WEC-Sim")
             wecSim
-        end        
-    end    
+        end
+    end
 end
