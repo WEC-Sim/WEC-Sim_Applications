@@ -9,7 +9,7 @@ simu.dt = 0.01;
 simu.dtOut = 0.1;                           % Specifies output time-step  
 simu.cicDt = 0.05;           
 simu.solver = 'ode45';                      % Runs WEC-Sim with variable time-step
-simu.paraview = 1;                          % Saves data to *.vtp for Paraview
+simu.paraview.option = 1;                   % Saves data to *.vtp for Paraview
 simu.domainSize = 300;                      % Changes default domain size
 
 %% Wave Information
