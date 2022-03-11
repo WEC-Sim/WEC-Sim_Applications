@@ -1,6 +1,6 @@
 
 % create or load hydrodata
-load('rm3_hydroData.mat')
+load('RM3expData.mat')
 
 % Assign variables to the hydro structure. See
 % https://wec-sim.github.io/WEC-Sim/master/user/advanced_features.html#bemio-hydro-data-structure
@@ -8,8 +8,8 @@ load('rm3_hydroData.mat')
 hydro = struct();
 
 % Simulation properties
-hydro.file = 'experimental';
-hydro.code = 'custom';
+hydro.file = 'RM3experimental';
+hydro.code = 'experimental';
 hydro.dof = 6*ones(1,nBody);
 hydro.g = 9.81;
 hydro.rho = 1000;
@@ -20,7 +20,7 @@ hydro.Nf = nFreq;
 hydro.Nh = nDir;
 hydro.T = T;
 hydro.w = w;
-hydro.beta = wave_dir;
+hydro.theta = wave_dir;
 
 % Body Properties
 hydro.cg = zeros(3,nBody);
@@ -51,9 +51,9 @@ hydro = radiationIRF(hydro,[],[],[],[],[]);
 hydro = radiationIRFSS(hydro,[],[]);
 
 % Stiffness
-hydro.C = zeros(6,6,nBody);
-hydro.C(:,:,1) = b1_k;
-hydro.C(:,:,2) = b2_k;
+hydro.Khs = zeros(6,6,nBody);
+hydro.Khs(:,:,1) = b1_k;
+hydro.Khs(:,:,2) = b2_k;
 
 % Excitation force
 hydro.ex_re = zeros(6*nBody,nDir,nFreq);
