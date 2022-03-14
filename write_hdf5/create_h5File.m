@@ -20,7 +20,7 @@ hydro.Nf = nFreq;
 hydro.Nh = nDir;
 hydro.T = T;
 hydro.w = w;
-hydro.beta = wave_dir;
+hydro.theta = wave_dir;
 
 % Body Properties
 hydro.cg = zeros(3,nBody);

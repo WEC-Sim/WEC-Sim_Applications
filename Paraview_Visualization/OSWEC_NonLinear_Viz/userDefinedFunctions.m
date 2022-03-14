@@ -23,8 +23,8 @@ figure;
 MAXHSP=max(HSmax)
 
 %define vertices faces and col data
-v = body(1).bodyGeometry.vertex;
-f = body(1).bodyGeometry.face;
+v = body(1).body.geometry.vertex;
+f = body(1).body.geometry.face;
 col = HSmax';
 
 patch('Faces',f,'Vertices',v,'FaceVertexCData',col,'FaceColor','flat');
@@ -67,8 +67,8 @@ view([-37.5 30])
 figure;
 [Lmax,~]=max(output.bodies(1).cellPressures_waveLinear);
 MAXLP=max(Lmax)
-v = body(1).bodyGeometry.vertex;
-f = body(1).bodyGeometry.face;
+v = body(1).body.geometry.vertex;
+f = body(1).body.geometry.face;
 col = Lmax';
 patch('Faces',f,'Vertices',v,'FaceVertexCData',col,'FaceColor','flat');
 
@@ -111,8 +111,8 @@ figure;
 [NLmax,~]=max(output.bodies(1).cellPressures_waveNonLinear);
 MAXNLP=max(NLmax)
 
-v = body(1).bodyGeometry.vertex;
-f = body(1).bodyGeometry.face;
+v = body(1).body.geometry.vertex;
+f = body(1).body.geometry.face;
 col = NLmax';
 patch('Faces',f,'Vertices',v,'FaceVertexCData',col,'FaceColor','flat');
 
@@ -156,8 +156,8 @@ TotalPressL=(output.bodies(1).cellPressures_hydrostatic)+(output.bodies(1).cellP
 [TPmaxL,~]=max(TotalPressL);
 MAXTPL=max(TPmaxL)
 
-v = body(1).bodyGeometry.vertex;
-f = body(1).bodyGeometry.face;
+v = body(1).body.geometry.vertex;
+f = body(1).body.geometry.face;
 col = TPmaxL';
 patch('Faces',f,'Vertices',v,'FaceVertexCData',col,'FaceColor','flat');
 
@@ -201,8 +201,8 @@ TotalPressNL=(output.bodies(1).cellPressures_hydrostatic)+(output.bodies(1).cell
 [TPmaxNL,~]=max(TotalPressNL);
 MAXTPNL=max(TPmaxNL)
 
-v = body(1).bodyGeometry.vertex;
-f = body(1).bodyGeometry.face;
+v = body(1).body.geometry.vertex;
+f = body(1).body.geometry.face;
 col = TPmaxNL';
 patch('Faces',f,'Vertices',v,'FaceVertexCData',col,'FaceColor','flat');
 
