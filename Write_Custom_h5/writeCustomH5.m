@@ -2,9 +2,8 @@
 % create or load hydrodata
 load('RM3expData.mat')
 
-% Assign variables to the hydro structure. See
-% https://wec-sim.github.io/WEC-Sim/master/user/advanced_features.html#bemio-hydro-data-structure
-% for the full description.
+% Assign variables to the hydro structure. 
+% Refer to BEMIO documenation for the full description.
 hydro = struct();
 
 % Simulation properties
