@@ -27,7 +27,7 @@ body(1).mass =1080;%'equilibrium'; % RM3 is based on 725834
 %Weight.
 body(1).momOfInertia = [541.2, 541.3, 1058];  %Moment of Inertia [kg*m^2] (from meshmagick)
 body(1).quadDrag.cd = [1.15 1.15 1 0.5 0.5 0]; % the directional heave plate will have differences made up by pto
-body(1).quadDrag.characteristicArea = [2.9568 2.9568 5.4739 5.4739 5.4739 0]; %
+body(1).quadDrag.area = [2.9568 2.9568 5.4739 5.4739 5.4739 0]; %
 
 % % Spar/Plate
 body(2) = bodyClass('hydroData/mbari_snl.h5');
@@ -37,7 +37,7 @@ r=1.4; h=0.1; m=815;
 body(2).momOfInertia = [(1/12)*m*(3*r^2 + h^2), (1/12)*m*(3*r^2 + h^2),(1/2)*m*(r^2)]; % approx as circle of radius 1.4 m, thickness 0.1
 body(2).initDisp.initLinDisp=[0 0 0]; % starts at 30 m of depth relative to SWL on buoy
 body(2).quadDrag.cd = [0.8 0.8 0 1 1 0]; % the directional heave plate will have differences made up by pto
-body(2).quadDrag.characteristicArea = [1.12 1.12 6.56 6.56 6.56 0]; %
+body(2).quadDrag.area = [1.12 1.12 6.56 6.56 6.56 0]; %
 
 % PTO, modeled as a cylinder of radius 0.085 m, length 8.8 m
 body(3) = bodyClass('');
@@ -48,7 +48,7 @@ body(3).momOfInertia =[3898.4 3898.4 2.1675];
 body(3).cg = [0 0 -4.8];
 body(3).cb = [0 0 -4.8];
 body(3).quadDrag.cd = [1.15 1.15 0 1.15 1.15 0]; % the directional heave plate will have differences made up by pto
-body(3).quadDrag.characteristicArea = [1.4960 1.4960 0 1.4960 1.4960 0]; %
+body(3).quadDrag.area = [1.4960 1.4960 0 1.4960 1.4960 0]; %
 %body(3).initDisp.initLinDisp = [ 0 0 -4.8];
 body(3).dispVol =0.200;
 
@@ -78,4 +78,4 @@ cable(1).damping = 100;
 cable(1).L0 = 17.8; % Cable equilibrium length [m] 
 % cable(1).preTension = 5100000; % Cable equilibrium pre-tension [N]
 cable(1).quadDrag.cd = [1.4 1.4 1.4 0 0 0];
-cable(1).quadDrag.characteristicArea = [10 10 10 0 0 0];
+cable(1).quadDrag.area = [10 10 10 0 0 0];

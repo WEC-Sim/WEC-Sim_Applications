@@ -23,7 +23,7 @@ body(1).initDisp.initLinDisp    = [ 0 0 1];    % Initial Displacement [m]
 body(1).morisonElement.option = 1;                 % Turn Morison Element on with option 1
 body(1).morisonElement.cd                 = [1 0 0];
 body(1).morisonElement.ca                 = [1 0 0];
-body(1).morisonElement.characteristicArea = [1 0 0];
+body(1).morisonElement.area = [1 0 0];
 body(1).morisonElement.VME                = [0.01];
 body(1).morisonElement.rgME               = [0 0 -2];
 body(1).morisonElement.z                  = [0 1 0];
@@ -32,7 +32,7 @@ body(1).morisonElement.z                  = [0 1 0];
 % body(1).morisonElement.option = 2;                 % Turn Morison Element on with option 2 
 % body(1).morisonElement.cd                 = [0 0 1];
 % body(1).morisonElement.ca                 = [0 0 1];
-% body(1).morisonElement.characteristicArea = [0 0 1];
+% body(1).morisonElement.area = [0 0 1];
 % body(1).morisonElement.VME                = [0.01];
 % body(1).morisonElement.rgME               = [0 0 -2];
 

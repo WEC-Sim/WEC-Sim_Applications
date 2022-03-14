@@ -29,9 +29,9 @@ body(1).geometryFile = './geometry/flap.stl';  % Geometry File
 body(1).morisonElement.option = 1;
 body(1).morisonElement.cd = ones (5,3);
 body(1).morisonElement.ca = zeros(5,3);
-body(1).morisonElement.characteristicArea = zeros(5,3);
-body(1).morisonElement.characteristicArea(:,1) = 18*1.8;
-body(1).morisonElement.characteristicArea(:,3) = 18*1.8;
+body(1).morisonElement.area = zeros(5,3);
+body(1).morisonElement.area(:,1) = 18*1.8;
+body(1).morisonElement.area(:,3) = 18*1.8;
 body(1).morisonElement.VME  = zeros(5,1);
 body(1).morisonElement.rgME = [0 0 -3; 0 0 -1.2; 0 0 0.6; 0 0 2.4; 0 0 4.2];
 
