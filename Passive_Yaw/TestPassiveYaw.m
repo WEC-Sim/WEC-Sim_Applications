@@ -29,11 +29,6 @@ classdef TestPassiveYaw < matlab.unittest.TestCase
             if isfile(testCase.h5Name)
                 fprintf('runBemio skipped, *.h5 already exists\n')
             else
-    %             hydro = struct();
-    %             hydro = readWAMIT(hydro,testCase.outName,[]);            
-    %             hydro = radiationIRF(hydro,40,[],[],[],[]);
-    %             hydro = excitationIRF(hydro,40,[],[],[],[]);            
-    %             writeBEMIOH5(hydro)
                 bemio
             end
             cd(testCase.testDir)
