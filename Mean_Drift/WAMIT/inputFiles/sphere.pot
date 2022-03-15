@@ -1,0 +1,11 @@
+sphere.POT  Cylinder, R=T=1, ILOWHI=0, ISOR=1
+  -1.0       			HBOT
+  1   1                         IRAD,IDIFF
+  -201                          NPER
+  0.00 0.05                    	PER 
+  1
+  0.0
+  1                          	NBODY
+  sphere.gdf
+  0.0  0.0  0.0 0.0
+   1  1  1  1  1  1

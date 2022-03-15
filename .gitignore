@@ -72,7 +72,6 @@ yaw*.mat
 WECCCOMP_Fault_Implementation/SS*.mat
 WECCCOMP_Fault_Implementation/SS*.fig
 
-
 # BEM
 *.1
 *.3
@@ -84,7 +83,8 @@ WECCCOMP_Fault_Implementation/SS*.fig
 *.p2f
 *.pot
 !/Generalized_Body_Modes/hydroData/WAMIT/*
-
+!/Mean_Drift/WAMIT/inputFiles/*
+!/Mean_Drift/WAMIT/outputFiles/*
 
 # Other
 .DS_Store
