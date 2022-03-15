@@ -58,7 +58,7 @@ body(2).nonHydro          = 1;                      % Turn non-hydro body on
 body(2).name            = 'Arm';                    % Specify body name
 body(2).mass            = 1.157;                    % Define mass [kg]   
 body(2).momOfInertia    = [0 0.0606 0];             % Moment of Inertia [kg*m^2]     
-body(2).dispVol         = 0;                        % Specify Displaced Volume  
+body(2).volume         = 0;                        % Specify Displaced Volume  
 body(2).cg              = [-0.3301 0 0.2551];       % Specify Cg
 body(2).cb              = [-0.3301 0 0.2551];       % Specify Cb
 
@@ -69,7 +69,7 @@ body(3).nonHydro          = 1;                      % Turn non-hydro body on
 body(3).name            = 'Frame';                  % Specify body name
 body(3).mass            = 999;                      % Define mass [kg] - FIXED  
 body(3).momOfInertia    = [999 999 999];            % Moment of Inertia [kg*m^2] - FIXED 
-body(3).dispVol         = 0;                        % Specify Displaced Volume  
+body(3).volume         = 0;                        % Specify Displaced Volume  
 body(3).viz.color       = [0 0 0];
 body(3).viz.opacity     = 0.5;
 body(3).cg              = [0 0 0];                  % Specify Cg
@@ -82,7 +82,7 @@ body(4).nonHydro          = 1;                      % Turn non-hydro body on
 body(4).name            = 'BC';                     % Specify body name
 body(4).mass            = 0.0001;                   % Define mass [kg]   
 body(4).momOfInertia    = [0.0001 0.0001 0.0001];   % Moment of Inertia [kg*m^2]      
-body(4).dispVol         = 0;                        % Specify Displaced Volume  
+body(4).volume         = 0;                        % Specify Displaced Volume  
 body(4).cg              = [0 0 0];                  % Specify Cg
 body(4).cb              = [0 0 0];                  % Specify Cb 
 
@@ -93,7 +93,7 @@ body(5).nonHydro          = 1;                      % Turn non-hydro body on
 body(5).name            = 'Motor';                  % Specify body name
 body(5).mass            = 0.0001;                   % Define mass [kg]   
 body(5).momOfInertia    = [0.0001 0.0001 0.0001];   % Moment of Inertia [kg*m^2]     
-body(5).dispVol         = 0;                        % Specify Displaced Volume  
+body(5).volume         = 0;                        % Specify Displaced Volume  
 body(5).cg              = [0 0 0];                  % Specify Cg
 body(5).cb              = [0 0 0];                  % Specify Cb
 

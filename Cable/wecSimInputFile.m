@@ -50,7 +50,7 @@ body(3).cb = [0 0 -4.8];
 body(3).quadDrag.cd = [1.15 1.15 0 1.15 1.15 0]; % the directional heave plate will have differences made up by pto
 body(3).quadDrag.area = [1.4960 1.4960 0 1.4960 1.4960 0]; %
 %body(3).initDisp.initLinDisp = [ 0 0 -4.8];
-body(3).dispVol =0.200;
+body(3).volume =0.200;
 
 
 %% PTO and Constraint Parameters

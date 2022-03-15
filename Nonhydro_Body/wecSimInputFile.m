@@ -30,7 +30,7 @@ body(2).mass = 999;                     % Specify Mass
 body(2).momOfInertia = [1 1 1];         % Specify MOI  
 body(2).cg = [0 0 -10.9];               % Specify Cg  
 body(2).cb = [0 0 0];                   % Specify Cb
-body(2).dispVol = 0;                    % Specify Displaced Volume  
+body(2).volume = 0;                    % Specify Displaced Volume  
 
 %% PTO and Constraint Parameters
 % Fixed Constraint

@@ -43,14 +43,14 @@ body(1).mass = 'equilibrium'; % 1044536
 body(1).momOfInertia = [1.25 1.25 0.15]*1e9;
 % body(1).cg = [0 0 -15];                       % Hydro body cg defined by h5 file
 % body(1).cb = [0 0 -15];                       % Hydro body cb defined by h5 file
-% body(1).dispVol = pi*10^2*30;                 % Hydro body volume defined by h5 file
+% body(1).volume = pi*10^2*30;                 % Hydro body volume defined by h5 file
 
 % Morison Element Implementation not used for comparison with hydro body
 % body(1).morisonElement.option = 0;
 % body(1).morisonElement.cd = [1 1 1];
 % body(1).morisonElement.ca = [1 1 1];
 % body(1).morisonElement.area = [10*30 10*30 pi*10^2/4];
-% body(1).morisonElement.VME = body(1).dispVol;
+% body(1).morisonElement.VME = body(1).volume;
 % body(1).morisonElement.rgME = [0 0 10]; % ME forces applied at CG
 % body(1).morisonElement.z = [0 0 1]; % not used for Morison Element xyz method
 
@@ -63,7 +63,7 @@ body(2).mass = 1031930;
 body(2).momOfInertia = [9.66 9.66 .132]*1e8;
 body(2).cg = [0 0 25];
 body(2).cb = [0 0 25];
-body(2).dispVol = 0;
+body(2).volume = 0;
 
 %% Constraints & PTOs
 % Fixed joint between monopile and tower
