@@ -1,7 +1,7 @@
 %% Example of Visualization with an animation in a MATLAB .fig 
 
 %% Plot waves
-waves.plotEta(simu.rampTime);
+waves.plotElevation(simu.rampTime);
 try 
     waves.plotSpectrum();
 catch

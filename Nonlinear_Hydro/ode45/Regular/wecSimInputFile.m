@@ -22,17 +22,17 @@ body(1).mass = 'equilibrium';
 body(1).momOfInertia = ...              
     [1.375264e6 1.375264e6 1.341721e6];      
 body(1).geometryFile = '../../geometry/elipsoid.stl' ;    
-body(1).viscDrag.cd=[1 0 1 0 1 0];
-body(1).viscDrag.characteristicArea=[25 0 pi*5^2 0 pi*5^5 0];
-body(1).nlHydro = 2;                       % Non-linear hydro on/off
+body(1).quadDrag.cd=[1 0 1 0 1 0];
+body(1).quadDrag.area=[25 0 pi*5^2 0 pi*5^5 0];
+body(1).nonlinearHydro = 2;                       % Non-linear hydro on/off
 
 %% PTO and Constraint Parameters
 % Fixed Constraint
 constraint(1) = constraintClass('Constraint1'); 
-constraint(1).loc = [0 0 -12.5];        
+constraint(1).location = [0 0 -12.5];        
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');              
-pto(1).k=0;                             
-pto(1).c=1200000;                      
-pto(1).loc = [0 0 -12.5];
+pto(1).stiffness=0;                             
+pto(1).damping=1200000;                      
+pto(1).location = [0 0 -12.5];

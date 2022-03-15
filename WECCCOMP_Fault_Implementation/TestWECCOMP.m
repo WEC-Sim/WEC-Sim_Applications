@@ -37,7 +37,7 @@ classdef TestWECCOMP < matlab.unittest.TestCase
                 writeBEMIOH5(hydro)
             end
             cd(testCase.testDir)
-        end
+        end      
     end
     
     methods(TestClassTeardown)

@@ -9,7 +9,7 @@ simu.rampTime = 100;
 simu.endTime=400;                       
 simu.dt = 0.1; 							
 simu.b2b = 0;                       % Turn B2B interactions 'off'   
-simu.ssCalc = 1;
+simu.stateSpace = 1;
 
 %% Wave Information 
 % Regular Waves  
@@ -33,10 +33,10 @@ body(2).geometryFile = '../geometry/plate.stl';
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); 
-constraint(1).loc = [0 0 0];                
+constraint(1).location = [0 0 0];                
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');              	
-pto(1).k=0;                             	
-pto(1).c=1200000;                       	
-pto(1).loc = [0 0 0];  
+pto(1).stiffness=0;                             	
+pto(1).damping=1200000;                       	
+pto(1).location = [0 0 0];  

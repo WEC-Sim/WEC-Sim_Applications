@@ -3,5 +3,5 @@ function tests = testWriteHDF5
 end
 
 function testcreate_hdfile(testCase)
-    run('create_h5File.m')
+    run('writeCustomH5.m')
 end

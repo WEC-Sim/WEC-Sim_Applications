@@ -1,7 +1,7 @@
 %Example of user input MATLAB file for post processing
 
 %Plot wave surface elevation
-waves.plotEta();
+waves.plotElevation();
 
 %Plot heave response for body 1
 output.plotResponse(1,3);

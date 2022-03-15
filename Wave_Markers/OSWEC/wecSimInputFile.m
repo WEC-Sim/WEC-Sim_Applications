@@ -8,7 +8,7 @@ simu.rampTime = 100;                    % Wave Ramp Time [s]
 simu.endTime=400;                       % Simulation End Time [s]        
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.1;                          % Simulation Time-Step [s]
-simu.CITime = 30;                       % Specify CI Time [s]
+simu.cicEndTime = 30;                       % Specify CI Time [s]
 
 %% Wave Information
 
@@ -18,16 +18,16 @@ waves.H = 2.5;                          % Wave Height [m]
 waves.T = 8;                            % Wave Period [s]
 
 % % Irregular Waves using PM Spectrum with Directionality 
-% waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-% waves.H = 2.5;                          % Significant Wave Height [m]
-% waves.T = 8;                            % Peak Period [s]
-% waves.spectrumType = 'PM';              % Specify Spectrum Type
-% waves.waveDir = [0,30,90];              % Wave Directionality [deg]
-% waves.waveSpread = [0.1,0.2,0.7];       % Wave Directional Spreading [%}
+% waves = waveClass('irregular');       % Initialize Wave Class and Specify Type
+% waves.H = 2.5;                        % Significant Wave Height [m]
+% waves.T = 8;                          % Peak Period [s]
+% waves.spectrumType = 'PM';            % Specify Spectrum Type
+% waves.direction = [0,30,90];          % Wave Directionality [deg]
+% waves.spread = [0.1,0.2,0.7];         % Wave Directional Spreading [%}
 
 % % Irregular Waves with imported spectrum
 % waves = waveClass('spectrumImport');        % Create the Wave Variable and Specify Type
-% waves.spectrumDataFile = 'spectrumData.mat';  %Name of User-Defined Spectrum File [:,2] = [f, Sf]
+% waves.waveSpectrumFile = 'spectrumData.mat';  %Name of User-Defined Spectrum File [:,2] = [f, Sf]
 
 %% Wave Visualization Markers
 % Example with a square mesh of visualization markers
@@ -35,10 +35,10 @@ waves.T = 8;                            % Wave Period [s]
 marker = 20;
 distance = 10;
 [X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
-waves.markerLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
+waves.marker.location = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
 clear('marker','distance','X','Y')
-waves.markerStyle = 2; % 1: Sphere, 2: Cube, 3: Frame.
-waves.markerSize = 10; % Marker Size in Pixels
+waves.marker.style = 2; % 1: Sphere, 2: Cube, 3: Frame.
+waves.marker.size = 10; % Marker Size in Pixels
 
 
 %% Body Data
@@ -56,10 +56,10 @@ body(2).mass = 'fixed';                         % Creates Fixed Body
 %% PTO and Constraint Parameters
 % Fixed
 constraint(1)= constraintClass('Constraint1');  % Initialize ConstraintClass for Constraint1
-constraint(1).loc = [0 0 -10];                  % Constraint Location [m]
+constraint(1).location = [0 0 -10];                  % Constraint Location [m]
 
 % Rotational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize ptoClass for PTO1
-pto(1).k = 0;                                   % PTO Stiffness Coeff [Nm/rad]
-pto(1).c = 12000;                               % PTO Damping Coeff [Nsm/rad]
-pto(1).loc = [0 0 -8.9];                        % PTO Location [m]
+pto(1).stiffness = 0;                                   % PTO Stiffness Coeff [Nm/rad]
+pto(1).damping = 12000;                               % PTO Damping Coeff [Nsm/rad]
+pto(1).location = [0 0 -8.9];                        % PTO Location [m]

@@ -7,9 +7,9 @@ simu.rampTime = 0;
 simu.endTime=80;                      
 simu.dt = 0.01;                          
 simu.dtOut = 0.1;                           % Specifies output time-step  
-simu.dtCITime = 0.05;           
+simu.cicDt = 0.05;           
 simu.solver = 'ode45';                      % Runs WEC-Sim with variable time-step
-simu.paraview = 1;                          % Saves data to *.vtp for Paraview
+simu.paraview.option = 1;                   % Saves data to *.vtp for Paraview
 simu.domainSize = 300;                      % Changes default domain size
 
 %% Wave Information
@@ -18,7 +18,7 @@ waves = waveClass('irregular');             % Create the Wave Variable and Speci
 waves.H = 2;                        
 waves.T = 8;                          
 waves.spectrumType = 'JS';
-waves.freqDisc = 'Traditional';
+waves.bem.option = 'Traditional';
 waves.viz.numPointsX = 1000;
 waves.viz.numPointsY = 2;
 
@@ -39,13 +39,13 @@ body(2).initDisp.initLinDisp = [0 0 -0.21];  	% Initial Displacement
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); 
-constraint(1).loc = [0 0 0];                   
+constraint(1).location = [0 0 0];                   
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');                      
-pto(1).k=0;                                     
-pto(1).c=1200000;                               
-pto(1).loc = [0 0 0];                           
+pto(1).stiffness=0;                                     
+pto(1).damping=1200000;                               
+pto(1).location = [0 0 0];                           
 
 %% Mooring
 % Moordyn

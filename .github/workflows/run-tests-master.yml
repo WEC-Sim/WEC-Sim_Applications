@@ -40,7 +40,7 @@ jobs:
                  Traditional_Morison_Element,
                  Wave_Markers,
                  WECCCOMP_Fault_Implementation,
-                 write_hdf5]
+                 Write_Custom_h5]
     name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
     steps:
       - name: Check out repository

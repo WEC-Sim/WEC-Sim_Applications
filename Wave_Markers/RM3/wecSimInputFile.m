@@ -24,7 +24,7 @@ waves.T = 8;                            % Wave Period [s]
 
 % % Irregular Waves with imported spectrum
 % waves = waveClass('spectrumImport');        % Create the Wave Variable and Specify Type
-% waves.spectrumDataFile = 'spectrumData.mat';  %Name of User-Defined Spectrum File [:,2] = [f, Sf]
+% waves.spectrumFile = 'spectrumData.mat';    % Name of User-Defined Spectrum File [:,2] = [f, Sf]
 
 
 %% Wave Visualization Markers
@@ -33,10 +33,10 @@ waves.T = 8;                            % Wave Period [s]
 marker = 20;
 distance = 10;
 [X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
-waves.markerLoc = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
+waves.marker.location = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
 clear('marker','distance','X','Y')
-waves.markerStyle = 1; % 1: Sphere, 2: Cube, 3: Frame.
-waves.markerSize = 10; % Marker Size in Pixels
+waves.marker.style = 1; % 1: Sphere, 2: Cube, 3: Frame.
+waves.marker.size = 10; % Marker Size in Pixels
 
 %% Body Data
 % Float
@@ -58,10 +58,10 @@ body(2).momOfInertia = [94419614.57 94407091.24 28542224.82];
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); % Initialize Constraint Class for Constraint1
-constraint(1).loc = [0 0 0];                    % Constraint Location [m]
+constraint(1).location = [0 0 0];                    % Constraint Location [m]
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize PTO Class for PTO1
-pto(1).k = 0;                                   % PTO Stiffness [N/m]
-pto(1).c = 1200000;                             % PTO Damping [N/(m/s)]
-pto(1).loc = [0 0 0];                           % PTO Location [m]
+pto(1).stiffness = 0;                                   % PTO Stiffness [N/m]
+pto(1).damping = 1200000;                             % PTO Damping [N/(m/s)]
+pto(1).location = [0 0 0];                           % PTO Location [m]

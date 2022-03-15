@@ -8,7 +8,7 @@ simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 100;                       % Wave Ramp Time Length [s]
 simu.endTime=400;                       % Simulation End Time [s]
 simu.dt = 0.1; 							% Simulation time-step [s]
-simu.mcrCaseFile = 'mcrExample.mat';
+simu.mcrMatFile = 'mcrExample.mat';
 
 %% Wave Information 
 % Regular Waves  
@@ -32,10 +32,10 @@ body(2).momOfInertia = [94419614.57 94407091.24 28542224.82];
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); %Create Constraint Variable and Set Constraint Name
-constraint(1).loc = [0 0 0];            % Constraint Location [m]
+constraint(1).location = [0 0 0];            % Constraint Location [m]
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');           	% Initialize PTO Class for PTO1
-pto(1).k = 0;                           % PTO Stiffness [N/m]
-pto(1).c=1200000;                       % PTO Damping [N/(m/s)]
-pto(1).loc = [0 0 0];                  	% PTO Location [m]
+pto(1).stiffness = 0;                           % PTO Stiffness [N/m]
+pto(1).damping=1200000;                       % PTO Damping [N/(m/s)]
+pto(1).location = [0 0 0];                  	% PTO Location [m]

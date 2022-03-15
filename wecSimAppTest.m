@@ -1,15 +1,4 @@
-function results = wecSimAppTest(testsPath)
-    % wecSimAppTest runs the WEC-Sim Applications continuous integration 
-    %               testing suite.
-    %
-    %   results = wecSimAppTest
-    %        returns a matlab.unittest.TestResult object for all tests
-    %        in this repository
-    %
-    %   results = wecSimAppTest(testsPath)
-    %        returns a matlab.unittest.TestResult object for the tests 
-    %        located under the given path
-    
+function results = wecSimAppTest(testsPath)   
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Copyright 2014 National Renewable Energy Laboratory and National 
     % Technology & Engineering Solutions of Sandia, LLC (NTESS). 
@@ -28,22 +17,30 @@ function results = wecSimAppTest(testsPath)
     % See the License for the specific language governing permissions and
     % limitations under the License.
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
+    % wecSimAppTest runs the WEC-Sim Applications continuous integration 
+    %               testing suite.
+    %
+    %   results = wecSimAppTest
+    %        returns a matlab.unittest.TestResult object for all tests
+    %        in this repository
+    %
+    %   results = wecSimAppTest(testsPath)
+    %        returns a matlab.unittest.TestResult object for the tests 
+    %        located under the given path    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     arguments
         testsPath string = "."
     end
-    
+    % Import MATLAB unitttest
     import matlab.unittest.TestSuite;
     import matlab.unittest.TestRunner;
     import matlab.unittest.plugins.DiagnosticsRecordingPlugin
-    
+    % Define the test suite
     suite = TestSuite.fromFolder(testsPath, ...
-                                 'IncludingSubfolders', true);
-    
+                                 'IncludingSubfolders', true);    
     % Build the runner
     runner = TestRunner.withTextOutput;
-    runner.addPlugin(DiagnosticsRecordingPlugin);
-    
+    runner.addPlugin(DiagnosticsRecordingPlugin);    
     % Run the tests
     results = runner.run(suite);
     results.table
