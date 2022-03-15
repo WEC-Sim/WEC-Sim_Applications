@@ -1,11 +1,14 @@
-clc; clear all; close all;
-hydro = struct();
+% clc; clear all; close all;
 
+%% hydro data
+hydro = struct();
 hydro = readWAMIT(hydro,'sphere.out',[]);
 hydro = radiationIRF(hydro,10,[],[],[],[]);
 hydro = radiationIRFSS(hydro,[],[]);
 hydro = excitationIRF(hydro,10,[],[],[],[]);
 writeBEMIOH5(hydro)
+
+%% Plot hydro data
 plotBEMIO(hydro)
 
 %% Plot the mean drift coefficients

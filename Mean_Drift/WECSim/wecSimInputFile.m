@@ -4,7 +4,7 @@ simu.simMechanicsFile   = 'sphere.slx';
 simu.rampTime           = 20;
 simu.endTime            = 100;                        
 simu.dt                 = 0.01;                         
-simu.CITime             = 10;
+simu.cicEndTime         = 10;
 simu.explorer           = 'on';
 simu.domainSize         = 25;
 
@@ -30,9 +30,9 @@ body(1).momOfInertia = [Ixx Iyy Izz];
 %      0 (no), 
 %      1 (from control surface) 
 %      2 (from momentum conservation)
-body(1).meanDriftForce    = 1;                                
+body(1).meanDrift = 1;                                
 
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); 
-constraint(1).loc = [0 0 0];                   
+constraint(1).location = [0 0 0];                   
