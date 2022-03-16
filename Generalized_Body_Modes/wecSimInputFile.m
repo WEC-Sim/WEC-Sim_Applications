@@ -14,7 +14,7 @@ simu.dt = 0.05; 						% Simulation time-step [s]
 % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
 waves.height = 2;                            % Wave Height [m]
-waves.T = 8;                            % Wave Period [s]
+waves.period = 8;                            % Wave Period [s]
 
 %% Body Data
 % Float

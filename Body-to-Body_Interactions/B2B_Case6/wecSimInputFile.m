@@ -14,7 +14,7 @@ simu.stateSpace = 1;
 % Regular Waves  
 waves = waveClass('regularCIC');    % Regular CIC           
 waves.height = 2.5;                          
-waves.T = 8;                            
+waves.period = 8;                            
 
 %% Body Data
 % Float

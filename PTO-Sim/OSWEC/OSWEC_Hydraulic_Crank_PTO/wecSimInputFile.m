@@ -12,7 +12,7 @@ simu.explorer = 'off';                     % Turn SimMechanics Explorer (on/off)
 %Irregular Waves using PM Spectrum
 waves = waveClass('irregular');
 waves.height = 2.5;
-waves.T = 8;
+waves.period = 8;
 waves.spectrumType = 'PM';
 waves.phaseSeed=1;
 

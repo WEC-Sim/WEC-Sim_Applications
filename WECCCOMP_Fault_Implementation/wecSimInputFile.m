@@ -18,24 +18,24 @@ controller_init                                     % Initializes the variables 
 %% Wave Information  
 %% No Wave
 % waves = waveClass('noWave');
-% waves.T = 0.79;
+% waves.period = 0.79;
 
 %% No Wave CIC
 % waves = waveClass('noWaveCIC');                   % Initialize waveClass
 % waves.height = 0.0;                                    % Wave Height [m]
-% waves.T = 0.0;                                    % Wave Period [s]
+% waves.period = 0.0;                                    % Wave Period [s]
 
 %% Regular Waves  
 waves = waveClass('irregular');                     % Initialize waveClass
 waves.height             = 0.0625;                       % Wave Height [m]
-waves.T             = 1.412;                        % Wave Period [s]
+waves.period             = 1.412;                        % Wave Period [s]
 waves.spectrumType  = 'JS';
 waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];  % Wave Gauge locations
 
 %% Irregular Waves  
 % waves = waveClass('irregular');                   % Initialize waveClass
 % waves.height             = 0.0625;                     % Wave Height [m]
-% waves.T             = 1.412;                      % Wave Period [s]
+% waves.period             = 1.412;                      % Wave Period [s]
 % waves.spectrumType  = 'JS';                       % Specify Wave Spectrum Type
 % waves.bem.option    = 'EqualEnergy';              % Uses 'EqualEnergy' bins (default) 
 % waves.phaseSeed     = 1;                          % Phase is seeded so eta is the same    
@@ -59,7 +59,7 @@ body(2).name            = 'Arm';                    % Specify body name
 body(2).mass            = 1.157;                    % Define mass [kg]   
 body(2).momOfInertia    = [0 0.0606 0];             % Moment of Inertia [kg*m^2]     
 body(2).volume         = 0;                         % Specify Displaced Volume  
-body(2).cg              = [-0.3301 0 0.2551];       % Specify Cg
+body(2).centerGravity              = [-0.3301 0 0.2551];       % Specify Cg
 body(2).cb              = [-0.3301 0 0.2551];       % Specify Cb
 
 %% Frame - FIXED
@@ -72,7 +72,7 @@ body(3).momOfInertia    = [999 999 999];            % Moment of Inertia [kg*m^2]
 body(3).volume         = 0;                         % Specify Displaced Volume  
 body(3).viz.color       = [0 0 0];
 body(3).viz.opacity     = 0.5;
-body(3).cg              = [0 0 0];                  % Specify Cg
+body(3).centerGravity              = [0 0 0];                  % Specify Cg
 body(3).cb              = [0 0 0];                  % Specify Cb
 
 %% BC Rod - TRANSLATE
@@ -83,7 +83,7 @@ body(4).name            = 'BC';                     % Specify body name
 body(4).mass            = 0.0001;                   % Define mass [kg]   
 body(4).momOfInertia    = [0.0001 0.0001 0.0001];   % Moment of Inertia [kg*m^2]      
 body(4).volume         = 0;                         % Specify Displaced Volume  
-body(4).cg              = [0 0 0];                  % Specify Cg
+body(4).centerGravity              = [0 0 0];                  % Specify Cg
 body(4).cb              = [0 0 0];                  % Specify Cb 
 
 %% Motor - ROTATE
@@ -94,7 +94,7 @@ body(5).name            = 'Motor';                  % Specify body name
 body(5).mass            = 0.0001;                   % Define mass [kg]   
 body(5).momOfInertia    = [0.0001 0.0001 0.0001];   % Moment of Inertia [kg*m^2]     
 body(5).volume         = 0;                         % Specify Displaced Volume  
-body(5).cg              = [0 0 0];                  % Specify Cg
+body(5).centerGravity              = [0 0 0];                  % Specify Cg
 body(5).cb              = [0 0 0];                  % Specify Cb
 
 %% PTO and Constraint Parameters

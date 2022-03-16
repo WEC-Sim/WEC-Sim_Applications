@@ -16,7 +16,7 @@ simu.dt = 0.01;                         % Simulation time-step [s]
 % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
 waves.height = 1;                            % Wave Height [m]
-waves.T = 8;                            % Wave Period [s]
+waves.period = 8;                            % Wave Period [s]
 
 %% Body Data
 % Float
@@ -45,7 +45,7 @@ body(3).geometryFile = 'geometry/cylinder_out.stl';
 body(3).nonHydro = 1;
 body(3).mass =600;
 body(3).momOfInertia =[3898.4 3898.4 2.1675];
-body(3).cg = [0 0 -4.8];
+body(3).centerGravity = [0 0 -4.8];
 body(3).cb = [0 0 -4.8];
 body(3).quadDrag.cd = [1.15 1.15 0 1.15 1.15 0]; % the directional heave plate will have differences made up by pto
 body(3).quadDrag.area = [1.4960 1.4960 0 1.4960 1.4960 0]; %

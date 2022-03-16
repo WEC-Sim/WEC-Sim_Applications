@@ -10,7 +10,7 @@ simu.endTime = 400;
 %% Wave Class
 waves = waveClass('regular'); 
 waves.height = 2.5; 
-waves.T = 8; 
+waves.period = 8; 
 
 %% Body Class
 body(1) = bodyClass('hydroData/*.h5'); 

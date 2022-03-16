@@ -11,7 +11,7 @@ simu.domainSize         = 25;
 %% Wave Information  
 % Regular Waves  
 waves = waveClass('regularCIC');
-waves.T = 2;
+waves.period = 2;
 waves.height = 0.1;
 
 %% Body Data

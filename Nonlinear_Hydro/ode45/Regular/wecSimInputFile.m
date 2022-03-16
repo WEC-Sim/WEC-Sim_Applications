@@ -14,7 +14,7 @@ simu.rho=1025;
 % Regular Waves 
 waves = waveClass('regular');                 
 waves.height = 4;                            
-waves.T = 6;             
+waves.period = 6;             
 
 %% Body Data
 body(1) = bodyClass('../../hydroData/ellipsoid.h5');
