@@ -27,7 +27,7 @@ output.plotForces(2,3);
 % Plot Cable Displacement
 figure()
 subplot(2,1,1)
-initialLength = norm(cable(1).rotloc1 - cable(1).rotloc2);
+initialLength = norm(cable(1).baseLocation - cable(1).followerLocation);
 plot([0 output.cables(1).time(end)], [cable(1).L0 cable(1).L0],'k--',...
     output.cables(1).time, output.cables(1).position(:,3) + initialLength) 
 ylabel('Displacement [m]');
