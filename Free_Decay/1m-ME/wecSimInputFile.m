@@ -17,7 +17,7 @@ body(1)                         = bodyClass('../hydroData/sphere.h5');
 body(1).geometryFile            = '../geometry/sphere.stl';    
 body(1).mass                    = 'equilibrium';                  
 body(1).momOfInertia            = [20907301 21306090.66 37085481.11];     
-body(1).initial.initLinDisp    = [ 0 0 1];    % Initial Displacement [m]
+body(1).initial.displacement    = [ 0 0 1];    % Initial Displacement [m]
 
 % % Morison Element Option 1 Implementation
 body(1).morisonElement.option = 1;                 % Turn Morison Element on with option 1

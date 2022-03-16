@@ -34,7 +34,7 @@ body(2) = bodyClass('hydroData/rm3.h5');
 body(2).geometryFile = 'geometry/plate.stl';
 body(2).mass = 'equilibrium';                   
 body(2).momOfInertia = [94419614.57 94407091.24 28542224.82];
-body(2).initial.initLinDisp = [0 0 -0.21];  	% Initial Displacement
+body(2).initial.displacement = [0 0 -0.21];  	% Initial Displacement
 
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint

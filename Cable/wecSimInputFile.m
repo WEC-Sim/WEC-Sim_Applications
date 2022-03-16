@@ -35,7 +35,7 @@ body(2).geometryFile = 'geometry/Heave_Cone_rot_trans_scale.stl';
 body(2).mass = 815;
 r=1.4; h=0.1; m=815;
 body(2).momOfInertia = [(1/12)*m*(3*r^2 + h^2), (1/12)*m*(3*r^2 + h^2),(1/2)*m*(r^2)]; % approx as circle of radius 1.4 m, thickness 0.1
-body(2).initial.initLinDisp=[0 0 0]; % starts at 30 m of depth relative to SWL on buoy
+body(2).initial.displacement=[0 0 0]; % starts at 30 m of depth relative to SWL on buoy
 body(2).quadDrag.cd = [0.8 0.8 0 1 1 0]; % the directional heave plate will have differences made up by pto
 body(2).quadDrag.area = [1.12 1.12 6.56 6.56 6.56 0]; %
 
@@ -49,7 +49,7 @@ body(3).cg = [0 0 -4.8];
 body(3).cb = [0 0 -4.8];
 body(3).quadDrag.cd = [1.15 1.15 0 1.15 1.15 0]; % the directional heave plate will have differences made up by pto
 body(3).quadDrag.area = [1.4960 1.4960 0 1.4960 1.4960 0]; %
-%body(3).initial.initLinDisp = [ 0 0 -4.8];
+%body(3).initial.displacement = [ 0 0 -4.8];
 body(3).volume =0.200;
 
 
