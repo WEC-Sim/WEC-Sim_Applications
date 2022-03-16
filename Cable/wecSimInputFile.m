@@ -2,7 +2,7 @@
 simu = simulationClass();               % Initialize Simulation Class
 simu.simMechanicsFile = 'MBARI_cable.slx';% Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer = 'on';                  % Turn SimMechanics Explorer (on/off)
+simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 40;                   	% Wave Ramp Time [s]
 simu.endTime = 120;                     % Simulation End Time [s]
@@ -75,7 +75,7 @@ constraint(4).location = [0 0 -0.59];                             % Constraint L
 cable(1) = cableClass('Cable','constraint(2)','constraint(3)');
 cable(1).stiffness = 1000000;
 cable(1).damping = 100;
-cable(1).L0 = 17.8; % Cable equilibrium length [m] 
+cable(1).length = 17.8; % Cable equilibrium length [m] 
 % cable(1).preTension = 5100000; % Cable equilibrium pre-tension [N]
 cable(1).quadDrag.cd = [1.4 1.4 1.4 0 0 0];
 cable(1).quadDrag.area = [10 10 10 0 0 0];
