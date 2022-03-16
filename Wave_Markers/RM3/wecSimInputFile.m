@@ -13,13 +13,13 @@ simu.dt = 0.1; 							% Simulation time-step [s]
 
 % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.H = 2.5;                          % Wave Height [m]
-waves.T = 8;                            % Wave Period [s]
+waves.height = 2.5;                          % Wave Height [m]
+waves.period = 8;                            % Wave Period [s]
 
 % % Irregular Waves using PM Spectrum 
 % waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-% waves.H = 2.5;                          % Significant Wave Height [m]
-% waves.T = 8;                            % Peak Period [s]
+% waves.height = 2.5;                          % Significant Wave Height [m]
+% waves.period = 8;                            % Peak Period [s]
 % waves.spectrumType = 'PM';              % Specify Wave Spectrum Type
 
 % % Irregular Waves with imported spectrum
@@ -47,13 +47,13 @@ body(1).geometryFile = 'geometry/float.stl';    % Location of Geomtry File
 body(1).mass = 'equilibrium';                   
     %Body Mass. The 'equilibrium' Option Sets it to the Displaced Water 
     %Weight.
-body(1).momOfInertia = [20907301 21306090.66 37085481.11];  %Moment of Inertia [kg*m^2]     
+body(1).inertia = [20907301 21306090.66 37085481.11];  %Moment of Inertia [kg*m^2]     
 
 % Spar/Plate
 body(2) = bodyClass('hydroData/rm3.h5'); 
 body(2).geometryFile = 'geometry/plate.stl'; 
 body(2).mass = 'equilibrium';                   
-body(2).momOfInertia = [94419614.57 94407091.24 28542224.82];
+body(2).inertia = [94419614.57 94407091.24 28542224.82];
 
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint

@@ -12,13 +12,13 @@ simu.rho=1025;
 %% Wave Information
 % Regular Waves 
 waves = waveClass('regular');                 
-waves.H = 4;                            
-waves.T = 6;   
+waves.height = 4;                            
+waves.period = 6;   
 
 %% Body Data
 body(1) = bodyClass('../../hydroData/ellipsoid.h5');
 body(1).mass = 'equilibrium';           
-body(1).momOfInertia = ...              
+body(1).inertia = ...              
     [1.375264e6 1.375264e6 1.341721e6];      
 body(1).geometryFile = '../../geometry/elipsoid.stl' ;    
 body(1).quadDrag.cd=[1 0 1 0 1 0];

@@ -16,8 +16,8 @@ waves = waveClass('noWaveCIC');
 body(1) = bodyClass('../hydroData/sphere.h5');    	
 body(1).geometryFile = '../geometry/sphere.stl';      
 body(1).mass = 'equilibrium';                  
-body(1).momOfInertia = [20907301 21306090.66 37085481.11];    
-body(1).initDisp.initLinDisp = [ 0 0 0];    % Initial Displacement [m]
+body(1).inertia = [20907301 21306090.66 37085481.11];    
+body(1).initial.displacement = [ 0 0 0];    % Initial Displacement [m]
 
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint

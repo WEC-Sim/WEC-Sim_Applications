@@ -9,20 +9,20 @@ simu.endTime = 400;
 
 %% Wave Class
 waves = waveClass('regular'); 
-waves.H = 2.5; 
-waves.T = 8; 
+waves.height = 2.5; 
+waves.period = 8; 
 
 %% Body Class
 body(1) = bodyClass('hydroData/*.h5'); 
 body(1).geometryFile = 'geometry/*.stl'; 
 body(1).mass = 0; 
-body(1).momOfInertia = [0 0 0]; 
+body(1).inertia = [0 0 0]; 
 
 %% Body Class
 body(2) = bodyClass('hydroData/*.h5'); 
 body(2).geometryFile = 'geometry/*.stl'; 
 body(2).mass = 0; 
-body(2).momOfInertia = [0 0 0]; 
+body(2).inertia = [0 0 0]; 
 
 %% Constraint Class
 constraint(1) = constraintClass('constraint1'); 

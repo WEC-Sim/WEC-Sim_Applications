@@ -15,8 +15,8 @@ simu.domainSize = 300;                      % Changes default domain size
 %% Wave Information
 % Irregular Waves using PM Spectrum with Convolution Integral Calculation
 waves = waveClass('irregular');             % Create the Wave Variable and Specify Type
-waves.H = 2;                        
-waves.T = 8;                          
+waves.height = 2;                        
+waves.period = 8;                          
 waves.spectrumType = 'JS';
 waves.bem.option = 'Traditional';
 waves.viz.numPointsX = 1000;
@@ -27,14 +27,14 @@ waves.viz.numPointsY = 2;
 body(1) = bodyClass('hydroData/rm3.h5');           
 body(1).geometryFile = 'geometry/float.stl';    
 body(1).mass = 'equilibrium';                   
-body(1).momOfInertia = [20907301 21306090.66 37085481.11]; 
+body(1).inertia = [20907301 21306090.66 37085481.11]; 
 
 % Spar/Plate
 body(2) = bodyClass('hydroData/rm3.h5');     
 body(2).geometryFile = 'geometry/plate.stl';
 body(2).mass = 'equilibrium';                   
-body(2).momOfInertia = [94419614.57 94407091.24 28542224.82];
-body(2).initDisp.initLinDisp = [0 0 -0.21];  	% Initial Displacement
+body(2).inertia = [94419614.57 94407091.24 28542224.82];
+body(2).initial.displacement = [0 0 -0.21];  	% Initial Displacement
 
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint

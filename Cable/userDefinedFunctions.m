@@ -27,12 +27,12 @@ output.plotForces(2,3);
 % Plot Cable Displacement
 figure()
 subplot(2,1,1)
-initialLength = norm(cable(1).rotloc1 - cable(1).rotloc2);
-plot([0 output.cables(1).time(end)], [cable(1).L0 cable(1).L0],'k--',...
+initialLength = norm(cable(1).base.location  - cable(1).follower.location );
+plot([0 output.cables(1).time(end)], [cable(1).length cable(1).length],'k--',...
     output.cables(1).time, output.cables(1).position(:,3) + initialLength) 
 ylabel('Displacement [m]');
 title('Cable Displacement');
-legend('L0','Displacement','Location','SouthEast');
+legend('length','Displacement','Location','SouthEast');
 % Plot Cable Actuation Force 
 subplot(2,1,2)
 plot( output.cables(1).time, output.cables(1).forceActuation(:,3)) %*scale)

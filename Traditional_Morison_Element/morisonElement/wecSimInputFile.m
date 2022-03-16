@@ -16,17 +16,17 @@ simu.stateSpace = 1;
 %% Wave Cases
 % % No wave
 % waves = waveClass('noWaveCIC');
-% waves.T = 5;
+% waves.period = 5;
 
 % Regular Wave
 waves = waveClass('regular');
-waves.H = 2.0;
-waves.T = 5.0;
+waves.height = 2.0;
+waves.period = 5.0;
 
 % % Irregular Waves
 % waves = waveClass('irregular');               % Initialize Wave Class and Specify Type
-% waves.H = 2.0;                               % Significant Wave Height [m]
-% waves.T = 5.0;                                % Peak Period [s]
+% waves.height = 2.0;                               % Significant Wave Height [m]
+% waves.period = 5.0;                                % Peak Period [s]
 % waves.spectrumType = 'PM';                    % Specify Spectrum Type
 % waves.phaseSeed = 5;
 
@@ -40,17 +40,17 @@ body(1).geometryFile = '../geometry/monopile.stl';
 body(1).name = 'monopile';
 body(1).nonHydro = 2;                             % Drag body
 body(1).mass = 'equilibrium'; % 1044536
-body(1).momOfInertia = [1.25 1.25 0.15]*1e9;
-body(1).cg = [0 0 -15];
-body(1).cb = [0 0 -15];
-body(1).dispVol = pi*10^2*30;
+body(1).inertia = [1.25 1.25 0.15]*1e9;
+body(1).centerGravity = [0 0 -15];
+body(1).centerBuoyancy = [0 0 -15];
+body(1).volume = pi*10^2*30;
 
 % Morison Element Implementation
 body(1).morisonElement.option = 1;
 body(1).morisonElement.cd = [1 1 1];
 body(1).morisonElement.ca = [1 1 1];
 body(1).morisonElement.area = [10*30 10*30 pi*10^2/4];
-body(1).morisonElement.VME = body(1).dispVol;
+body(1).morisonElement.VME = body(1).volume;
 body(1).morisonElement.rgME = [0 0 10]; % ME forces applied at CG
 % body(1).morisonElement.z = [0 0 1]; % not used for Morison Element xyz method
 
@@ -60,10 +60,10 @@ body(2).geometryFile = '../geometry/tower.stl';
 body(2).name = 'tower';
 body(2).nonHydro = 1;
 body(2).mass = 1031930;
-body(2).momOfInertia = [9.66 9.66 .132]*1e8;
-body(2).cg = [0 0 25];
-body(2).cb = [0 0 25];
-body(2).dispVol = 0;
+body(2).inertia = [9.66 9.66 .132]*1e8;
+body(2).centerGravity = [0 0 25];
+body(2).centerBuoyancy = [0 0 25];
+body(2).volume = 0;
 
 %% Constraints & PTOs
 % Fixed joint between monopile and tower

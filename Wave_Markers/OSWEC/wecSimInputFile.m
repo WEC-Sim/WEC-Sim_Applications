@@ -14,13 +14,13 @@ simu.cicEndTime = 30;                       % Specify CI Time [s]
 
 % Regular Waves 
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.H = 2.5;                          % Wave Height [m]
-waves.T = 8;                            % Wave Period [s]
+waves.height = 2.5;                          % Wave Height [m]
+waves.period = 8;                            % Wave Period [s]
 
 % % Irregular Waves using PM Spectrum with Directionality 
 % waves = waveClass('irregular');       % Initialize Wave Class and Specify Type
-% waves.H = 2.5;                        % Significant Wave Height [m]
-% waves.T = 8;                          % Peak Period [s]
+% waves.height = 2.5;                        % Significant Wave Height [m]
+% waves.period = 8;                          % Peak Period [s]
 % waves.spectrumType = 'PM';            % Specify Spectrum Type
 % waves.direction = [0,30,90];          % Wave Directionality [deg]
 % waves.spread = [0.1,0.2,0.7];         % Wave Directional Spreading [%}
@@ -46,7 +46,7 @@ waves.marker.size = 10; % Marker Size in Pixels
 body(1) = bodyClass('hydroData/oswec.h5');      % Initialize bodyClass for Flap
 body(1).geometryFile = 'geometry/flap.stl';     % Geometry File
 body(1).mass = 127000;                          % User-Defined mass [kg]
-body(1).momOfInertia = [1.85e6 1.85e6 1.85e6];  % Moment of Inertia [kg-m^2]
+body(1).inertia = [1.85e6 1.85e6 1.85e6];  % Moment of Inertia [kg-m^2]
 
 % Base
 body(2) = bodyClass('hydroData/oswec.h5');      % Initialize bodyClass for Base

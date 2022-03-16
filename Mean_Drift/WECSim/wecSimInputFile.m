@@ -11,8 +11,8 @@ simu.domainSize         = 25;
 %% Wave Information  
 % Regular Waves  
 waves = waveClass('regularCIC');
-waves.T = 2;
-waves.H = 0.1;
+waves.period = 2;
+waves.height = 0.1;
 
 %% Body Data
 % Float
@@ -23,7 +23,7 @@ sphereRadius    = 1;
 sphereVol       = 4/3*pi*sphereRadius^3;
 sphereMass      = (1/2)*simu.rho*sphereVol;
 Ixx             = (2/5)*sphereMass*sphereRadius^(2); Iyy = Ixx; Izz = Iyy;
-body(1).momOfInertia = [Ixx Iyy Izz];
+body(1).inertia = [Ixx Iyy Izz];
 
 %% Mean Drift Option
 % (`integer`) Flag for mean drift force with three options:  

@@ -13,8 +13,8 @@ simu.cicEndTime = 40;                   % Specify CI Time [s]
 %% Wave Information
 % % Regular Waves 
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.H = 2.5;                          % Wave Height [m]
-waves.T = 8;                            % Wave Period [s]
+waves.height = 2.5;                          % Wave Height [m]
+waves.period = 8;                            % Wave Period [s]
 waves.direction = 10;                   % Wave Directionality [deg]
 waves.spread = 1;                       % Wave Directional Spreading [%}
 
@@ -23,7 +23,7 @@ waves.spread = 1;                       % Wave Directional Spreading [%}
 body(1) = bodyClass('../hydroData/oswec.h5');   % Initialize bodyClass for Flap
 body(1).geometryFile = '../geometry/flap.stl';  % Geometry File
 body(1).mass = 12700;                           % User-Defined mass [kg]
-body(1).momOfInertia = [1.85e6 1.85e6 1.85e6];  % Moment of Inertia [kg-m^2]
+body(1).inertia = [1.85e6 1.85e6 1.85e6];  % Moment of Inertia [kg-m^2]
 body(1).yaw.option=1;                           % Turn passive yaw ON
 body(1).yaw.threshold=0.01;                     % Set passive yaw threshold
 

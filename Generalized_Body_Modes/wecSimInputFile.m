@@ -13,8 +13,8 @@ simu.dt = 0.05; 						% Simulation time-step [s]
 
 % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.H = 2;                            % Wave Height [m]
-waves.T = 8;                            % Wave Period [s]
+waves.height = 2;                            % Wave Height [m]
+waves.period = 8;                            % Wave Period [s]
 
 %% Body Data
 % Float
@@ -25,7 +25,7 @@ body(1).geometryFile = 'geometry/barge.stl';    % Location of Geomtry File
 body(1).mass = 'equilibrium';                   
     %Body Mass. The 'equilibrium' Option Sets it to the Displaced Water 
     %Weight.
-body(1).momOfInertia = [6.667*10^7 2.167*10^9 2.167*10^9];  %Moment of Inertia [kg*m^2]     
+body(1).inertia = [6.667*10^7 2.167*10^9 2.167*10^9];  %Moment of Inertia [kg*m^2]     
 
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
