@@ -10,7 +10,7 @@ simu.explorer = 'off';                     % Turn SimMechanics Explorer (on/off)
 %% Wave Information
 % Regular Waves  
 waves = waveClass('regular');            
-waves.H = 2.5;                          
+waves.height = 2.5;                          
 waves.T = 8;                            
 
 %% Body Data

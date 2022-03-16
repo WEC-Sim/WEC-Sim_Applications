@@ -12,7 +12,7 @@ simu.b2b = 1;                       % Turn B2B interactions 'on'
 %% Wave Information 
 % Regular Waves  
 waves = waveClass('regularCIC');    % Regular CIC           
-waves.H = 2.5;                          
+waves.height = 2.5;                          
 waves.T = 8;                            
 
 %% Body Data

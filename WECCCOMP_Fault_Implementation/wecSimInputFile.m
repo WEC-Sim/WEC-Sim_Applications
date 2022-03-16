@@ -22,19 +22,19 @@ controller_init                                     % Initializes the variables 
 
 %% No Wave CIC
 % waves = waveClass('noWaveCIC');                   % Initialize waveClass
-% waves.H = 0.0;                                    % Wave Height [m]
+% waves.height = 0.0;                                    % Wave Height [m]
 % waves.T = 0.0;                                    % Wave Period [s]
 
 %% Regular Waves  
 waves = waveClass('irregular');                     % Initialize waveClass
-waves.H             = 0.0625;                       % Wave Height [m]
+waves.height             = 0.0625;                       % Wave Height [m]
 waves.T             = 1.412;                        % Wave Period [s]
 waves.spectrumType  = 'JS';
 waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];  % Wave Gauge locations
 
 %% Irregular Waves  
 % waves = waveClass('irregular');                   % Initialize waveClass
-% waves.H             = 0.0625;                     % Wave Height [m]
+% waves.height             = 0.0625;                     % Wave Height [m]
 % waves.T             = 1.412;                      % Wave Period [s]
 % waves.spectrumType  = 'JS';                       % Specify Wave Spectrum Type
 % waves.bem.option    = 'EqualEnergy';              % Uses 'EqualEnergy' bins (default) 

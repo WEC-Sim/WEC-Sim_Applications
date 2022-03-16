@@ -13,7 +13,7 @@ simu.cicEndTime = 40;                   % Specify CI Time [s]
 %% Wave Information
 % Regular Waves 
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.H = 2.5;                          % Wave Height [m]
+waves.height = 2.5;                          % Wave Height [m]
 waves.T = 8;                            % Wave Period [s]
 waves.direction = [10];                 % Wave Directionality [deg]
 waves.spread = [1];                     % Wave Directional Spreading [%}

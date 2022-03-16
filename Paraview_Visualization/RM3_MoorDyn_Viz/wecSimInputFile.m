@@ -15,7 +15,7 @@ simu.domainSize = 300;                      % Changes default domain size
 %% Wave Information
 % Irregular Waves using PM Spectrum with Convolution Integral Calculation
 waves = waveClass('irregular');             % Create the Wave Variable and Specify Type
-waves.H = 2;                        
+waves.height = 2;                        
 waves.T = 8;                          
 waves.spectrumType = 'JS';
 waves.bem.option = 'Traditional';

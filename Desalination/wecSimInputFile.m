@@ -13,7 +13,7 @@ simu.cicEndTime = 30;
 %% Wave Information
 %% Irregular Waves using PM Spectrum with Convolution Integral Calculation
 waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-waves.H = 2.64;                         % Significant Wave Height [m]
+waves.height = 2.64;                         % Significant Wave Height [m]
 waves.T = 9.86;                         % Peak Period [s]
 waves.spectrumType = 'PM';              % Specify Wave Spectrum Type
 waves.bem.option = 'EqualEnergy';

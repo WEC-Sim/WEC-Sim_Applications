@@ -20,12 +20,12 @@ simu.stateSpace = 1;
 
 % Regular Wave
 waves = waveClass('regular');
-waves.H = 2.0;
+waves.height = 2.0;
 waves.T = 5.0;
 
 % % Irregular Waves
 % waves = waveClass('irregular');               % Initialize Wave Class and Specify Type
-% waves.H = 2.0;                               % Significant Wave Height [m]
+% waves.height = 2.0;                               % Significant Wave Height [m]
 % waves.T = 5.0;                                % Peak Period [s]
 % waves.spectrumType = 'PM';                    % Specify Spectrum Type
 % waves.phaseSeed = 5;

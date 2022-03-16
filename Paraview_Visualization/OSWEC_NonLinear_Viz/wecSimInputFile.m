@@ -13,7 +13,7 @@ simu.paraview.option = 1;                   % Saves data to *.vtp for Paraview
 %% Wave Information
 % Regular Waves 
 waves = waveClass('regular');
-waves.H = 2.5;
+waves.height = 2.5;
 waves.T = 8;
 %waves.viz.numPointsX = 1000;               % wave plane discretization: # X points [default 50]
 %waves.viz.numPointsY = 100;                % wave plane discretization: # Y points [default 50]

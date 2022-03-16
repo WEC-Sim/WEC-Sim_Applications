@@ -13,7 +13,7 @@ simu.mcrMatFile = 'mcrExample.mat';
 %% Wave Information 
 % Regular Waves  
 waves = waveClass('regularCIC');        % Initialize Wave Class and Specify Type 
-waves.H = 1.5;                          % Wave Height [m]
+waves.height = 1.5;                          % Wave Height [m]
 waves.T = 8;                            % Wave Period [s]
 
 %% Body Data

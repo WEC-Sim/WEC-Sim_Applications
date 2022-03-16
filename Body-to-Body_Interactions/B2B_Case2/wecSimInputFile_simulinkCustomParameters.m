@@ -9,7 +9,7 @@ simu.endTime = 400;
 
 %% Wave Class
 waves = waveClass('regular'); 
-waves.H = 2.5; 
+waves.height = 2.5; 
 waves.T = 8; 
 
 %% Body Class

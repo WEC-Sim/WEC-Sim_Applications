@@ -14,12 +14,12 @@ simu.cicEndTime = 30;                       % Specify CI Time [s]
 
 % Regular Waves 
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.H = 2.5;                          % Wave Height [m]
+waves.height = 2.5;                          % Wave Height [m]
 waves.T = 8;                            % Wave Period [s]
 
 % % Irregular Waves using PM Spectrum with Directionality 
 % waves = waveClass('irregular');       % Initialize Wave Class and Specify Type
-% waves.H = 2.5;                        % Significant Wave Height [m]
+% waves.height = 2.5;                        % Significant Wave Height [m]
 % waves.T = 8;                          % Peak Period [s]
 % waves.spectrumType = 'PM';            % Specify Spectrum Type
 % waves.direction = [0,30,90];          % Wave Directionality [deg]

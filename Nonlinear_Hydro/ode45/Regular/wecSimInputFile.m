@@ -13,7 +13,7 @@ simu.rho=1025;
 %% Wave Information
 % Regular Waves 
 waves = waveClass('regular');                 
-waves.H = 4;                            
+waves.height = 4;                            
 waves.T = 6;             
 
 %% Body Data
