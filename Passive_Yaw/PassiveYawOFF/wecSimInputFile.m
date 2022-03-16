@@ -23,7 +23,7 @@ waves.spread = [1];                     % Wave Directional Spreading [%}
 body(1) = bodyClass('../hydroData/oswec.h5');   % Initialize bodyClass for Flap
 body(1).geometryFile = '../geometry/flap.stl';  % Geometry File
 body(1).mass = 12700;                           % User-Defined mass [kg]
-body(1).momOfInertia = [1.85e6 1.85e6 1.85e6];  % Moment of Inertia [kg-m^2]
+body(1).inertia = [1.85e6 1.85e6 1.85e6];  % Moment of Inertia [kg-m^2]
 body(1).yaw.option=0;                           % Turn passive yaw OFF
 
 % Base NOTE: This test uses unique BEM for the OSWEC

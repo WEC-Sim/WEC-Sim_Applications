@@ -16,13 +16,13 @@ waves.period = 8;
 body(1) = bodyClass('hydroData/*.h5'); 
 body(1).geometryFile = 'geometry/*.stl'; 
 body(1).mass = 0; 
-body(1).momOfInertia = [0 0 0]; 
+body(1).inertia = [0 0 0]; 
 
 %% Body Class
 body(2) = bodyClass('hydroData/*.h5'); 
 body(2).geometryFile = 'geometry/*.stl'; 
 body(2).mass = 0; 
-body(2).momOfInertia = [0 0 0]; 
+body(2).inertia = [0 0 0]; 
 
 %% Constraint Class
 constraint(1) = constraintClass('constraint1'); 

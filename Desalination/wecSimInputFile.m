@@ -24,7 +24,7 @@ waves.phaseSeed = 1;
 %% Flap
 body(1) = bodyClass('./hydroData/oswec.h5');   % Initialize bodyClass for Flap
 body(1).mass = 127000;                         % User-Defined mass [kg]
-body(1).momOfInertia = [1.85e6 1.85e6 1.85e6]; % Moment of Inertia [kg-m^2]
+body(1).inertia = [1.85e6 1.85e6 1.85e6]; % Moment of Inertia [kg-m^2]
 body(1).geometryFile = './geometry/flap.stl';  % Geometry File
 body(1).morisonElement.option = 1;
 body(1).morisonElement.cd = ones (5,3);

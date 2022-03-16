@@ -21,7 +21,7 @@ waves.phaseSeed=1;
 body(1) = bodyClass('../hydroData/oswec.h5');   
 body(1).geometryFile = '../geometry/flap.stl';    
 body(1).mass = 127000;                         
-body(1).momOfInertia = [1.85e6 1.85e6 1.85e6]; 
+body(1).inertia = [1.85e6 1.85e6 1.85e6]; 
 body(1).linearDamping(5,5) = 1*10^7;    % Specify damping on body 1 in pich
 
 % Base

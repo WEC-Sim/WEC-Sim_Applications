@@ -23,7 +23,7 @@ sphereRadius    = 1;
 sphereVol       = 4/3*pi*sphereRadius^3;
 sphereMass      = (1/2)*simu.rho*sphereVol;
 Ixx             = (2/5)*sphereMass*sphereRadius^(2); Iyy = Ixx; Izz = Iyy;
-body(1).momOfInertia = [Ixx Iyy Izz];
+body(1).inertia = [Ixx Iyy Izz];
 
 %% Mean Drift Option
 % (`integer`) Flag for mean drift force with three options:  
