@@ -1,8 +1,8 @@
 # PTO-Sim Hydraulic Crank PTO
 
-**Author:**  	Ratanak So
+**Author:**  	Ratanak So and Jorge Leon
 
-**Version:** 	WEC-Sim v2.0
+**Version:** 	WEC-Sim v5.0
 
 **Geometry:**	OSWEC
 
