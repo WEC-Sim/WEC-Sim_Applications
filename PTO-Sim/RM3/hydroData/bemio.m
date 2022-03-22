@@ -1,4 +1,3 @@
-clc; clear all; close all;
 hydro = struct();
 
 hydro = readWAMIT(hydro,'rm3.out',[]);

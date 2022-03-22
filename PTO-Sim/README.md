@@ -1,6 +1,6 @@
 # PTO-Sim
 
-**Author:**  	Ratanak So
+**Author:**  	Ratanak So and Jorge Leon
 
 **Version:** 	WEC-Sim v2.0
 

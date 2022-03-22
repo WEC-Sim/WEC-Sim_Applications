@@ -37,7 +37,7 @@ classdef TestPTOSimRM3 < matlab.unittest.TestCase
                 writeBEMIOH5(hydro)
             end
             cd(testCase.testDir)
-        end
+        end     
     end
     
     methods(TestMethodTeardown)
@@ -46,7 +46,7 @@ classdef TestPTOSimRM3 < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassTeardown)
+    methods(TestClassTeardown)        
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...
@@ -62,10 +62,6 @@ classdef TestPTOSimRM3 < matlab.unittest.TestCase
         function testRM3_DD_PTO(testCase)
             cd('RM3_DD_PTO')
             wecSim
-        end        
-        function testRM3_Hydraulic_PTO(testCase)
-            cd('RM3_Hydraulic_PTO')
-            wecSim
-        end        
+        end               
     end    
 end

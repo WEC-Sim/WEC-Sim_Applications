@@ -4,15 +4,15 @@ close all
 %% Plots
 
 figure();
-subplot(211)
-plot(output.ptosim.time,output.ptosim.pmLinearGenerator.Ia)
+subplot(2,1,1)
+plot(output.ptosim(1).time,output.ptosim(1).Ia)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
 ylabel('Current (A)')
 title('Phase A Current')
 grid on
-subplot(212)
-plot(output.ptosim.time,output.ptosim.pmLinearGenerator.Ia,output.ptosim.time,output.ptosim.pmLinearGenerator.Ib,output.ptosim.time,output.ptosim.pmLinearGenerator.Ic)
+subplot(2,1,2)
+plot(output.ptosim(1).time,output.ptosim(1).Ia,output.ptosim(1).time,output.ptosim(1).Ib,output.ptosim(1).time,output.ptosim(1).Ic)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
 ylabel('Current (A)')
@@ -21,15 +21,15 @@ legend('Ia','Ib','Ic')
 grid on
 
 figure();
-subplot(211)
-plot(output.ptosim.time,output.ptosim.pmLinearGenerator.Va)
+subplot(2,1,1)
+plot(output.ptosim(1).time,output.ptosim(1).Va)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
 ylabel('Voltage (V)')
 title('Phase A Voltage')
 grid on
 subplot(212)
-plot(output.ptosim.time,output.ptosim.pmLinearGenerator.Va,output.ptosim.time,output.ptosim.pmLinearGenerator.Vb,output.ptosim.time,output.ptosim.pmLinearGenerator.Vc)
+plot(output.ptosim(1).time,output.ptosim(1).Va,output.ptosim(1).time,output.ptosim(1).Vb,output.ptosim(1).time,output.ptosim(1).Vc)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
 ylabel('Voltage (V)')
@@ -38,19 +38,9 @@ legend('Va','Vb','Vc')
 grid on
 
 figure();
-plot(output.ptosim.time,output.ptosim.pmLinearGenerator.fricForce,output.ptosim.time,output.ptosim.pmLinearGenerator.force)
+plot(output.ptosim(1).time,output.ptosim(1).elecPower)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
-ylabel('Force (N)')
-title('Friction Force and PTO Force')
-legend('fricForce','ptoForce')
-grid on
-
-figure();
-plot(output.ptosim.time,output.ptosim.pmLinearGenerator.absPower/1e3,output.ptosim.time,output.ptosim.pmLinearGenerator.elecPower/1e3)
-set(findall(gcf,'type','axes'),'fontsize',16)
-xlabel('Time (s)')
-ylabel('Power (kW)') 
-title('Absorbed Power and Electrical Power')
-legend('absPower','elecPower')
+ylabel('Power (W)')
+title('Electric Power')
 grid on
