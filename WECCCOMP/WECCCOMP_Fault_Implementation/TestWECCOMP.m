@@ -50,7 +50,6 @@ classdef TestWECCOMP < matlab.unittest.TestCase
     
     methods(Test)
         function testWECCCOMP_Fault_Implementation(testCase)
-            assumeFail(testCase, "Not compatible with latest WEC-Sim")
             wecSim
         end
     end

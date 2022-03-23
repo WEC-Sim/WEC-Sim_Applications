@@ -68,9 +68,11 @@ $ cat .gitignore
 !**/mooring/lines.txt
 **/vtk/*
 savedData*.mat
-yaw*.mat
 WECCCOMP/**/SS*.mat
 WECCCOMP/**/SS*.fig
+Passive_Yaw/**/IrrYaw.mat
+Passive_Yaw/**/figYawIrr.fig
+yaw*.mat
 
 # BEM
 *.1
