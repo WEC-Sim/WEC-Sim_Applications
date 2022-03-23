@@ -69,8 +69,8 @@ $ cat .gitignore
 **/vtk/*
 savedData*.mat
 yaw*.mat
-WECCCOMP_Fault_Implementation/SS*.mat
-WECCCOMP_Fault_Implementation/SS*.fig
+WECCCOMP/**/SS*.mat
+WECCCOMP/**/SS*.fig
 
 # BEM
 *.1
