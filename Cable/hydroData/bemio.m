@@ -2,7 +2,7 @@
 
 %% hydro data
 hydro = struct();
-hydro = readWAMIT(hydro,'mbari_snl.out',[]);
+hydro = readWAMIT(hydro,'mbari.out',[]);
 hydro = radiationIRF(hydro,20,[],[],[],[]);
 hydro = radiationIRFSS(hydro,[],[]);
 hydro = excitationIRF(hydro,30,[],[],[],[]);

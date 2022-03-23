@@ -20,8 +20,8 @@ waves.period = 8;                            % Wave Period [s]
 
 %% Body Data
 % Float
-body(1) = bodyClass('hydroData/mbari_snl.h5');
-body(1).geometryFile = 'geometry/Buoy_2020_rotated_translated_scale.stl';    % Location of Geomtry File
+body(1) = bodyClass('hydroData/mbari.h5');
+body(1).geometryFile = 'geometry/Buoy.stl';    % Location of Geomtry File
 body(1).mass =1080;%'equilibrium'; % RM3 is based on 725834
 %Body Mass. The 'equilibrium' Option Sets it to the Displaced Water
 %Weight.
@@ -30,8 +30,8 @@ body(1).quadDrag.cd = [1.15 1.15 1 0.5 0.5 0]; % the directional heave plate wil
 body(1).quadDrag.area = [2.9568 2.9568 5.4739 5.4739 5.4739 0]; %
 
 % % Spar/Plate
-body(2) = bodyClass('hydroData/mbari_snl.h5');
-body(2).geometryFile = 'geometry/Heave_Cone_rot_trans_scale.stl';
+body(2) = bodyClass('hydroData/mbari.h5');
+body(2).geometryFile = 'geometry/HeaveCone.stl';
 body(2).mass = 815;
 r=1.4; h=0.1; m=815;
 body(2).inertia = [(1/12)*m*(3*r^2 + h^2), (1/12)*m*(3*r^2 + h^2),(1/2)*m*(r^2)]; % approx as circle of radius 1.4 m, thickness 0.1
@@ -41,7 +41,7 @@ body(2).quadDrag.area = [1.12 1.12 6.56 6.56 6.56 0]; %
 
 % PTO, modeled as a cylinder of radius 0.085 m, length 8.8 m
 body(3) = bodyClass('');
-body(3).geometryFile = 'geometry/cylinder_out.stl';
+body(3).geometryFile = 'geometry/Cylinder.stl';
 body(3).nonHydro = 1;
 body(3).mass =600;
 body(3).inertia =[3898.4 3898.4 2.1675];

@@ -4,8 +4,8 @@ classdef TestCable < matlab.unittest.TestCase
         OriginalDefault
         testDir
         h5Dir = fullfile("hydroData")
-        h5Name = 'mbari_snl.h5'
-        outName = 'mbari_snl.out'
+        h5Name = 'mbari.h5'
+        outName = 'mbari.out'
     end
     
     
@@ -45,11 +45,7 @@ classdef TestCable < matlab.unittest.TestCase
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...
                                  testCase.OriginalDefault);
-        end
-        
-        function removeH5(testCase)
-            delete(fullfile(testCase.h5Dir, testCase.h5Name));
-        end
+        end       
         
     end
     
