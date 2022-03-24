@@ -12,9 +12,13 @@ Nathan Michael Tom
 John Anthony Rossiter
 ( Department of Automatic Control and Systems Engineering, University of Sheffield, UK)
 
-_**Version:**_  WEC-Sim v4.4
+_**Version:**_  
 
-_**Geometry:**_ Scaled Wavestar prototype used in WECCCOMP
+WEC-Sim v4.4
+
+_**Geometry:**_ 
+
+Scaled Wavestar prototype used in WECCCOMP
 
 _**Dependencies:**_
 
@@ -27,14 +31,21 @@ _**Dependencies:**_
    Control System Toolbox		-->	for ss command
 
 _**Description:**_
+
 This repository offers a solution for the WECCCOMP based on Nonlinear Model Predictive Control strategy 
 presented in a Paper submitted and accepted to be presented in the **ASME 41st International Conference on Ocean, Offshore & Arctic Engineering (OMAE2022)**
 
-_**Paper Title:**_ Nonlinear Model Predictive Control Using Real-Time Iteration Scheme for Wave Energy Converters Using Wecsim Platform
+_**Paper Title:**_ 
 
-_**Paper Number:**_ OMAE2022-80972
+Nonlinear Model Predictive Control Using Real-Time Iteration Scheme for Wave Energy Converters Using Wecsim Platform
 
-_**Abstract:**_ One of several challenges that wave energy technologies face is their inability to generate electricity cost-competitively 
+_**Paper Number:**_ 
+
+OMAE2022-80972
+
+_**Abstract:**_ 
+
+One of several challenges that wave energy technologies face is their inability to generate electricity cost-competitively 
 with other grid-scale energy generation sources. Several studies have identified two approaches to lower the levelised cost of electricity: 
 reduce the cost over the device's lifetime or increase its overall electrical energy production. Several advanced control strategies have been 
 developed to address the latter. However, only a few take into account the overall efficiency of the power take-off (PTO) system, and none of
