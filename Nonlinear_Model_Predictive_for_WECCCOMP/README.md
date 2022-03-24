@@ -16,10 +16,11 @@ John Anthony Rossiter
 
 **Geometry:** Scaled Wavestar prototype used in WECCCOMP
 
-**Dependency:**	Optimization Toolbox 		-->	for quadprog command
-                System Identification Toolbox	-->	for ar, forecast and c2d commands
-		Statistics Toolbox		-->	for prctile command
-                Control System Toolbox		-->	for ss command
+**Dependencies:**
+Optimization Toolbox 		-->	for quadprog command
+System Identification Toolbox	-->	for ar, forecast and c2d commands
+Statistics Toolbox		-->	for prctile command
+Control System Toolbox		-->	for ss command
 
 
 This repository offers a solution for the WECCCOMP based on Nonlinear Model Predictive Control strategy 
