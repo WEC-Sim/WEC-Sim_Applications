@@ -17,9 +17,13 @@ John Anthony Rossiter
 **Geometry:** Scaled Wavestar prototype used in WECCCOMP
 
 **Dependencies:**
+
 Optimization Toolbox 		-->	for quadprog command
+
 System Identification Toolbox	-->	for ar, forecast and c2d commands
+
 Statistics Toolbox		-->	for prctile command
+
 Control System Toolbox		-->	for ss command
 
 
