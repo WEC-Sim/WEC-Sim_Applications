@@ -18,13 +18,13 @@ John Anthony Rossiter
 
 **Dependencies:**
 
-Optimization Toolbox 		-->	for quadprog command
+   Optimization Toolbox 		-->	for quadprog command
 
-System Identification Toolbox	-->	for ar, forecast and c2d commands
+   System Identification Toolbox	-->	for ar, forecast and c2d commands
 
-Statistics Toolbox		-->	for prctile command
+   Statistics Toolbox		-->	for prctile command
 
-Control System Toolbox		-->	for ss command
+   Control System Toolbox		-->	for ss command
 
 
 This repository offers a solution for the WECCCOMP based on Nonlinear Model Predictive Control strategy 
