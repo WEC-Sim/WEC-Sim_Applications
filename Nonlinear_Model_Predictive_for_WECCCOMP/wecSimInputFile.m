@@ -13,7 +13,7 @@ end
 
 %% Simulation Class
 simu = simulationClass();                           % Create the Simulation Variable
-    simu.simMechanicsFile = 'WaveStar.slx';         % Specify Simulink Model File       
+    simu.simMechanicsFile = 'WaveStar2020b.slx';         % Specify Simulink Model File       
     simu.dt             = 50/1000;                  % Simulation Time-Step [s]
     simu.rampTime       = 25;                       % Wave Ramp Time Length [s]
     switch(SeaState)
