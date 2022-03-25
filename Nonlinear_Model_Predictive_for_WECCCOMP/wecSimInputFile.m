@@ -13,7 +13,7 @@ end
 
 %% Simulation Class
 simu = simulationClass();                           % Create the Simulation Variable
-    simu.simMechanicsFile = 'WaveStar2020b.slx';         % Specify Simulink Model File       
+    simu.simMechanicsFile = 'WaveStar.slx';         % Specify Simulink Model File       
     simu.dt             = 50/1000;                  % Simulation Time-Step [s]
     simu.rampTime       = 25;                       % Wave Ramp Time Length [s]
     switch(SeaState)
@@ -21,8 +21,8 @@ simu = simulationClass();                           % Create the Simulation Vari
         case { 2, 5 };        simu.endTime        = 150 + simu.rampTime;
         case { 3, 6 };        simu.endTime        = 200 + simu.rampTime;
     end
-    simu.CITime         = [];                        % Convolution Time [s]
-    simu.explorer       = 'off';                     % Explorer on
+    simu.CITime         = [];                       % Convolution Time [s]
+    simu.explorer       = 'off';                    % Explorer on
     simu.solver         = 'ode8';                   % Turn on ode45
     simu.domainSize     = 5;
     simu.ssCalc         = 1;                        % Simulate Impulse Response Function with State Space Approximation

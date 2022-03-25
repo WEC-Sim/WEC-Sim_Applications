@@ -1,4 +1,4 @@
-function y = NMPC(xk0, excM_pred, A, Bu, Bw, R, Np,offset_eff, scaler_eff, alpha_efft, qnl, Umax, Umin)
+function y = NMPC(xk0, excM_pred, A, Bu, Bw, R, Np,alpha_eff, beta_eff, phi_eff, qnl, Umax, Umin)
 
 %Sizes
 nx = size( A, 1 );
@@ -25,7 +25,7 @@ Dy = zeros(Np*ny,1);
 %%%%    Shifting Xbar, Ubar and optionally lambdas    %%%%
 Xbar( 1 : Np*nx, 1 ) = Xbar( nx + 1 : ( Np + 1 )*nx, 1 ) ;
 Ubar( 1 : ( Np - 1 )*nu, 1 ) = Ubar( nu + 1 : Np*nu, 1 );
-[ Xbar( Np*nx + 1 : end, 1 ), ~, ~, ~ ] = simulate_and_linearise( Xbar( ( Np - 1 )*nx + 1 : Np*nx , 1 ), Ubar(Np*nu-nu+1:Np*nu), excM_pred( Np, 1 ), A, Bu, Bw, offset_eff, scaler_eff, alpha_efft);
+[ Xbar( Np*nx + 1 : end, 1 ), ~, ~, ~ ] = simulate_and_linearise( Xbar( ( Np - 1 )*nx + 1 : Np*nx , 1 ), Ubar(Np*nu-nu+1:Np*nu), excM_pred( Np, 1 ), A, Bu, Bw, alpha_eff, beta_eff, phi_eff);
 Xbar( 1 : nx, 1 ) = xk0;
 d0 = xk0 - Xbar( 1 : nx, 1 );
 
@@ -40,7 +40,7 @@ d0 = xk0 - Xbar( 1 : nx, 1 );
         uk = Ubar( range_uk, 1);
         wk = excM_pred( range_uk, 1 );
         %   Simulate one step to compute x_k+1 and the linearisation matrices  Ak and Bk
-        [ Xk1, Yk1, Ck, Sk1 ] = simulate_and_linearise( xk, uk, wk, A, Bu, Bw, offset_eff, scaler_eff, alpha_efft);
+        [ Xk1, Yk1, Ck, Sk1 ] = simulate_and_linearise( xk, uk, wk, A, Bu, Bw, alpha_eff, beta_eff, phi_eff);
         %   Accomulate the matrices A and B in a vertical vector
         Atotal( range_xk, : ) = A;
         Butotal( range_xk, : ) = Bu;

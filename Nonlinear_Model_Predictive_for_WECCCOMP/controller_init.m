@@ -14,13 +14,12 @@ Jinf            = 0.4805;                 % Added inertia [kg m^2]
 Jt              = J + Jinf;               % Total inertia [kg m^2]
 Khs             = 92.33;                  % Hydrostatic stiffness coefficient [Nm rad^-1]
 bv              = 1.8;                    % Linear damping coefficient [N m (rad/s)^-1]
-if ~exist("dt","var")
-    dt    = simu.dt;                      % Sampling time [s]
-end
+dt              = simu.dt;                % Sampling time [s]
 
 %% %%%%%% State Space Matrices for the Linear system %%%%%%%%%%%%%%%%%%%%%%%
 load('./waveData/radM_matrices.mat')      % Load state-space model matrices for the radiation moment around point A.
 nx_radM = size(Ar,2);
+% Build the continuous-time state space matrices Ac, Bc, Cc and Dc
 Ac      = [0,                1,             zeros(1,nx_radM);
            -Khs./Jt,          -(Dr+bv)./Jt,  -Cr./Jt;
            zeros(nx_radM,1),  Br,            Ar];      
@@ -39,7 +38,6 @@ Dd      = sysD.D;                         % Discreete Input To Output Matrix
 nx      = size(Ad,1);                     % Number of States  
 nu      = size(Bd,2);                     % Number of Inputs  
 ny      = size(Cd,1);                     % Number of Outputs
-
 r_Acc   = 0.464;                          % "Moment arm" for accelerometer
 Theta0  = deg2rad(26.9527);               % Inclination of accelerometer at neutral [rad], 23.4881deg used in WECCCOMP
 grav    = 9.80665;                        % Standard acceleration due to gravity [m s^-2]
@@ -52,56 +50,48 @@ LPfreq.vel = fix;                         % Low Pass cut off freq in velocity fi
 HPfreq.vel = fix;                         % High pass cut off freq in velocity filter [Hz]
 
 %% %%%%%%%%% Controller information    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Select the controller 
-if ~exist("controllerType","var")
-    controllerType  = 2;                  % 1 for Resistive controller ===> Proportional to the arm angular velocity.
-end                                       % 2 for NMPC Controller      ===> Non-linear predictive control
+% Select the controller to be used in the simulation:
+controllerType  = 2;                  % 1 for Resistive controller ---> Proportional to the arm angular velocity.
+                                      % 2 for NMPC Controller      ---> Non-linear predictive control
+% Time after which the controller strategy starts to work, [seconds]
+startController = 15;                     
 
-startController = 15;                     % Time after which the controller strategy starts to work, [seconds]
+% Define the algorithm to use for the excM prediction
+predictionType  = 2;                  % 1 to use the precalculated excM obtained from wecSim.
+                                      % 2 to use the excM prediction from the AR algorithm. (Used in the Paper)
+% Time after which the controller strategy starts to work, [seconds]
+startPredictor  = 10;                
 
+% Define the prediction horizon Np [steps ahead], and proportional gain
+% depending on the sea state selected for simulation
 switch(SeaState)
     case 1         
-        Np = 20;                            % Prediction horizon, [steps ahead]
-        prop_gain = 6.20;                   % Proportial gain for sea state 4; Energy extracted: 2.121 J
-        load('waveData/SS1_excM_stored.mat'); 
+        Np = 20;    prop_gain = 6.20;   load('waveData/SS1_excM_stored.mat'); 
     case 2         
-        Np = 30;                            % Prediction horizon, [steps ahead]
-        prop_gain = 12.50;                  % Proportial gain for sea state 5; Energy extracted: 23.0551 J
-        load('waveData/SS2_excM_stored.mat'); 
+        Np = 30;    prop_gain = 12.50;  load('waveData/SS2_excM_stored.mat'); 
     case 3         
-        Np = 40;                            % Prediction horizon, [steps ahead]    
-        prop_gain = 19.40;                  % Proportial gain for sea state 6; Energy extracted: 73.0923 J
-        load('waveData/SS3_excM_stored.mat'); 
+        Np = 40;    prop_gain = 19.40;  load('waveData/SS3_excM_stored.mat'); 
     case 4         
-        Np = 20;                            % Prediction horizon, [steps ahead]
-        prop_gain = 6.20;                   % Proportial gain for sea state 4; Energy extracted: 2.121 J
-        load('waveData/SS4_excM_stored.mat'); 
+        Np = 20;    prop_gain = 6.20;   load('waveData/SS4_excM_stored.mat'); 
     case 5         
-        Np = 30;                            % Prediction horizon, [steps ahead]
-        prop_gain = 12.50;                  % Proportial gain for sea state 5; Energy extracted: 23.0551 J
-        load('waveData/SS5_excM_stored.mat'); 
+        Np = 30;    prop_gain = 12.50;  load('waveData/SS5_excM_stored.mat'); 
     case 6         
-        Np = 40;                            % Prediction horizon, [steps ahead]    
-        prop_gain = 19.40;                  % Proportial gain for sea state 6; Energy extracted: 73.0923 J
-        load('waveData/SS6_excM_stored.mat'); 
+        Np = 40;    prop_gain = 19.40;  load('waveData/SS6_excM_stored.mat'); 
 end 
 
-excM_precalculated  = excM_stored;
-
-qnl     = [ 0, 1; 1, 0 ];
-r_ctrl  = 0.90;                            % input penalisation
-R_ctrl  = r_ctrl*eye( Np*nu );
+excM_precalculated  = excM_stored;         % Precalculated excitation moment. Used for prediction type 1
+qnl                 = [ 0, 1; 1, 0 ];      % Matrix used to compute the product \dtheta x control_input ( Eq.(19) from Paper)
+R_ctrl              = 0.90*eye( Np*nu );   % Input rate penalisation ( R in Eq.(18) from Paper)
 
 % Constraints
-Umax    =  McSat;                         % Input Constraints
+Umax    =  McSat;                          % Input Constraints
 Umin    = -McSat;
-% Efficiency Parameters, approximation using tanh:
-% St = offset_eff + scaler_eff*tanh( alpha_eff*u.*v );
-eta_generator   = 0.7;
-eta_motoring    = 1 / 0.7;
-scaler_eff      = 1*( eta_motoring - eta_generator ) / 2;   
-offset_eff      = ( eta_motoring + eta_generator ) / 2;
-alpha_efft      = 1000;
+% Efficiency Parameters, approximation using tanh ( Eq.(10) from Paper):
+eta_generator   = 0.7;                                      % Efficiency of the actuator when it works as generator
+eta_motoring    = 1 / 0.7;                                  % Efficiency of the actuator when it works as a motor            
+beta_eff        = ( eta_motoring - eta_generator ) / 2;     % Scaling factor
+alpha_eff       = ( eta_motoring + eta_generator ) / 2;     % Offset
+phi_eff         = 1000;                                     % "Smoothness" factor. determines the accuracy of the approximation
 
 %% %%%%%%%% Estimator ( Kalman filter ) information    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % covariance of process Q
@@ -117,16 +107,9 @@ Rv      = 6e-6;
 Rkf     = blkdiag( Rp, Rv );
 r       = chol( Rkf, 'lower' );
 
-%% Information for the predictor (Autoregressive model)
-% Define the algorithm to use for the excM prediction
-if ~exist("predictionType","var")
-    predictionType  = 2;                  % 1 to use the precalculated excM obtained from wecSim.
-                                          % 2 to use the excM prediction from the AR algorithm. (Used in the Paper)
-end                                       
-
+%% Information for the predictor (Autoregressive model)                                   
 ARorder         = 18;                     % Number of lag terms
 ARtrainingSet   = 10;                     % Number of past values to compute the AR coefficients
-startPredictor  = 10;                     % Time after which the controller strategy starts to work, [seconds]
 
 %%%%%%%%%%%  Clear Variables %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear Ac Bc Cc Dc sysC sysD Qp Qv QradM QexcM Rp Rv
