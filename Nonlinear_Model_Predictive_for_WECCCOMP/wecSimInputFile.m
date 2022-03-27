@@ -77,7 +77,6 @@ body(1) = bodyClass('hydroData/wavestar.h5');       % Initialize bodyClass
     body(1).geometryFile        = 'geometry/Float.stl'; % Geometry File
     body(1).linearDamping       = zeros(6);         % Linear Viscous Drag Coefficient
     body(1).linearDamping(5,5)  = 1.8;              % Linear Viscous Drag Coefficient, determined From Experimetnal Tests
-%     body(1).nlHydro             = 1;                % This option integrates the pressure due to the instantaneous wave elevation and the instantaneous body position.
 %%%%%%%%%%%%%%%%%%% Arm - Rotates   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 body(2) = bodyClass('');                            % Initialize bodyClass
     body(2).geometryFile    = 'geometry/Arm.stl';   % Geometry File
