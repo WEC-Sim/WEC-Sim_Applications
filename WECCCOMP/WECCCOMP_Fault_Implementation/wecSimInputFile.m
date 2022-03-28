@@ -45,15 +45,15 @@ waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];  % Wave Gauge locations
 %% Body Data
 %% Float - 3 DOF
 rhoMult = 1;
-body(1) = bodyClass('hydroData/wavestar.h5');       % Initialize bodyClass
+body(1) = bodyClass('../hydroData/wavestar.h5');       % Initialize bodyClass
 body(1).mass            = 3.075*rhoMult;            % Define mass [kg]   
 body(1).inertia    = [0 0.001450 0]*rhoMult;   % Moment of Inertia [kg*m^2]     
-body(1).geometryFile    = 'geometry/Float.STL';     % Geometry File
+body(1).geometryFile    = '../geometry/Float.STL';     % ../geometry File
 body(1).linearDamping(5,5)  = 1.8;                  % Linear Viscous Drag Coefficient Determined From Experimetnal Tests
 
 %% Arm - Rotates
 body(2) = bodyClass('');                            % Initialize bodyClass
-body(2).geometryFile    = 'geometry/Arm.STL';       % Geometry File
+body(2).geometryFile    = '../geometry/Arm.STL';       % ../geometry File
 body(2).nonHydro          = 1;                      % Turn non-hydro body on
 body(2).name            = 'Arm';                    % Specify body name
 body(2).mass            = 1.157;                    % Define mass [kg]   
@@ -64,7 +64,7 @@ body(2).centerBuoyancy              = [-0.3301 0 0.2551];       % Specify Cb
 
 %% Frame - FIXED
 body(3) = bodyClass('');                            % Initialize bodyClass
-body(3).geometryFile    = 'geometry/Frame.STL';     % Geometry File
+body(3).geometryFile    = '../geometry/Frame.STL';     % ../geometry File
 body(3).nonHydro          = 1;                      % Turn non-hydro body on
 body(3).name            = 'Frame';                  % Specify body name
 body(3).mass            = 999;                      % Define mass [kg] - FIXED  
@@ -77,7 +77,7 @@ body(3).centerBuoyancy              = [0 0 0];                  % Specify Cb
 
 %% BC Rod - TRANSLATE
 body(4) = bodyClass('');                            % Initialize bodyClass
-body(4).geometryFile    = 'geometry/BC.STL';        % Geometry File
+body(4).geometryFile    = '../geometry/BC.STL';        % ../geometry File
 body(4).nonHydro          = 1;                      % Turn non-hydro body on
 body(4).name            = 'BC';                     % Specify body name
 body(4).mass            = 0.0001;                   % Define mass [kg]   
@@ -88,7 +88,7 @@ body(4).centerBuoyancy              = [0 0 0];                  % Specify Cb
 
 %% Motor - ROTATE
 body(5) = bodyClass('');                            % Initialize bodyClass
-body(5).geometryFile    = 'geometry/Motor.STL';     % Geometry File
+body(5).geometryFile    = '../geometry/Motor.STL';     % ../geometry File
 body(5).nonHydro          = 1;                      % Turn non-hydro body on
 body(5).name            = 'Motor';                  % Specify body name
 body(5).mass            = 0.0001;                   % Define mass [kg]   
