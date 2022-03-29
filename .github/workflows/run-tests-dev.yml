@@ -34,6 +34,7 @@ jobs:
                  Multiple_Condition_Runs,
                  Nonhydro_Body,
                  Nonlinear_Hydro,
+                 Nonlinear_Model_Predictive_for_WECCCOMP,
                  Paraview_Visualization,
                  Passive_Yaw,
                  PTO-Sim,
