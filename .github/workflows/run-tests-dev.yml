@@ -44,11 +44,17 @@ jobs:
                  Write_Custom_h5]
     name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
     steps:
-      - name: Check out repository
+      - name: Check out repository (repository dispatch)
         uses: actions/checkout@v2
         with:
           lfs: true
           ref: 'dev'
+        if: github.event_name == 'repository_dispatch'
+      - name: Check out repository (push or pull request)
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+        if: github.event_name != 'repository_dispatch'
       - name: Checkout LFS objects
         run: git lfs checkout
       - name: Check out WEC-Sim
