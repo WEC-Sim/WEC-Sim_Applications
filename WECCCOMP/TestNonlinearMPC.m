@@ -52,6 +52,7 @@ classdef TestNonlinearMPC < matlab.unittest.TestCase
 
     methods(Test)        
         function testNonlinear_MPC(testCase)
+            cd('WECCCOMP_Nonlinear_Model_Predictive')
             wecSim
         end        
     end
