@@ -70,6 +70,7 @@ $ cat .gitignore
 savedData*.mat
 WECCCOMP/**/SS*.mat
 WECCCOMP/**/SS*.fig
+!WECCCOMP/WECCCOMP_Nonlinear_Model_Predictive/waveData/*.mat
 Passive_Yaw/**/IrrYaw.mat
 Passive_Yaw/**/figYawIrr.fig
 yaw*.mat

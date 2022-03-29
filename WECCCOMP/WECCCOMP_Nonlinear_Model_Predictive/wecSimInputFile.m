@@ -47,9 +47,7 @@ simu = simulationClass();                           % Create the Simulation Vari
 % waves = waveClass('regularCIC');                      % Initialize waveClass
 %     waves.height        = Hm0;                        % Wave Height [m]
 %     waves.period        = Tp;                         % Wave Period [s]
-%     waves.wavegauge1loc = [-1.70, 0];                   % Wave Gauge 1 x-location
-%     waves.wavegauge2loc = [-1.50, 0];                   % Wave Gauge 2 x-location
-%     waves.wavegauge3loc = [-1.25, 0];                   % Wave Gauge 3 x-location
+%     waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];   % Wave Gauge locations
 
 %%%%%%%%%%%%%%%%%%%% Irregular Waves  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     waves = waveClass('irregular');                     % Initialize waveClass
