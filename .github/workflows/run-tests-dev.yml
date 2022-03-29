@@ -39,7 +39,7 @@ jobs:
                  PTO-Sim,
                  Traditional_Morison_Element,
                  Wave_Markers,
-                 WECCCOMP_Fault_Implementation,
+                 WECCCOMP,
                  Write_Custom_h5]
     name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
     steps:

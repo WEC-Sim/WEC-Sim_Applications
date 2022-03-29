@@ -50,6 +50,7 @@ classdef TestWECCOMP < matlab.unittest.TestCase
     
     methods(Test)
         function testWECCCOMP_Fault_Implementation(testCase)
+            cd('WECCCOMP_Fault_Implementation')
             wecSim
         end
     end
