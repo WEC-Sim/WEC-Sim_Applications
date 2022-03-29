@@ -71,30 +71,30 @@ simu = simulationClass();                           % Create the Simulation Vari
 
 %% Body Class
 %%%%%%%%%%%%%%%%%%% Float - 3 DOF   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-body(1) = bodyClass('hydroData/wavestar.h5');       % Initialize bodyClass
+body(1) = bodyClass('../hydroData/wavestar.h5');       % Initialize bodyClass
     body(1).mass                = 3.075;            % Define mass [kg]   
-    body(1).intertia            = [0 0.001450 0];   % Moment of Inertia [kg*m^2]     
-    body(1).geometryFile        = 'geometry/Float.stl'; % Geometry File
+    body(1).inertia             = [0 0.001450 0];   % Moment of Inertia [kg*m^2]     
+    body(1).geometryFile        = '../geometry/Float.stl'; % Geometry File
     body(1).linearDamping       = zeros(6);         % Linear Viscous Drag Coefficient
     body(1).linearDamping(5,5)  = 1.8;              % Linear Viscous Drag Coefficient, determined From Experimetnal Tests
 %%%%%%%%%%%%%%%%%%% Arm - Rotates   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 body(2) = bodyClass('');                            % Initialize bodyClass
-    body(2).geometryFile    = 'geometry/Arm.stl';   % Geometry File
+    body(2).geometryFile    = '../geometry/Arm.stl';   % Geometry File
     body(2).nonHydro        = 1;                    % Turn non-hydro body on
     body(2).name            = 'Arm';                % Specify body name
     body(2).mass            = 1.157;                % Define mass [kg]   
-    body(2).intertia        = [0 0.0606 0];         % Moment of Inertia [kg*m^2]     
-    body(2).volume         = 0;                    % Specify Displaced Volume  
-    body(2).centerGravity              = [-0.3301 0 0.2551];   % Specify Cg
-    body(2).centerBuoyancy              = [-0.3301 0 0.2551];   % Specify Cb
+    body(2).inertia         = [0 0.0606 0];         % Moment of Inertia [kg*m^2]     
+    body(2).volume          = 0;                    % Specify Displaced Volume  
+    body(2).centerGravity   = [-0.3301 0 0.2551];   % Specify Cg
+    body(2).centerBuoyancy  = [-0.3301 0 0.2551];   % Specify Cb
     
 %%%%%%%%%%%%%%%%%%% Frame - FIXED   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 body(3) = bodyClass('');                            % Initialize bodyClass
-    body(3).geometryFile    = 'geometry/Frame.stl'; % Geometry File
+    body(3).geometryFile    = '../geometry/Frame.stl'; % Geometry File
     body(3).nonHydro        = 1;                    % Turn non-hydro body on
     body(3).name            = 'Frame';              % Specify body name
     body(3).mass            = 999;                  % Define mass [kg] - FIXED  
-    body(3).intertia        = [999 999 999];        % Moment of Inertia [kg*m^2] - FIXED 
+    body(3).inertia         = [999 999 999];        % Moment of Inertia [kg*m^2] - FIXED 
     body(3).volume          = 0;                    % Specify Displaced Volume  
     body(3).viz.color       = [0 0 0];
     body(3).viz.opacity     = 0.5;
@@ -103,22 +103,22 @@ body(3) = bodyClass('');                            % Initialize bodyClass
 
 %%%%%%%%%%%%%%%%%%% BC Rod - TRANSLATE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 body(4) = bodyClass('');                            % Initialize bodyClass
-    body(4).geometryFile    = 'geometry/BC.stl';    % Geometry File
+    body(4).geometryFile    = '../geometry/BC.stl';    % Geometry File
     body(4).nonHydro        = 1;                    % Turn non-hydro body on
     body(4).name            = 'BC';                 % Specify body name
     body(4).mass            = 0.0001;               % Define mass [kg]   
-    body(4).intertia        = [0.0001 0.0001 0.0001]; % Moment of Inertia [kg*m^2]      
+    body(4).inertia         = [0.0001 0.0001 0.0001]; % Moment of Inertia [kg*m^2]      
     body(4).volume          = 0;                    % Specify Displaced Volume  
     body(4).centerGravity   = [0 0 0];              % Specify Cg
     body(4).centerBuoyancy  = [0 0 0];              % Specify Cb
     
 %%%%%%%%%%%%%%%%%%% Motor - ROTATE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 body(5) = bodyClass('');                            % Initialize bodyClass
-    body(5).geometryFile    = 'geometry/Motor.stl'; % Geometry File
+    body(5).geometryFile    = '../geometry/Motor.stl'; % Geometry File
     body(5).nonHydro        = 1;                    % Turn non-hydro body on
     body(5).name            = 'Motor';              % Specify body name
     body(5).mass            = 0.0001;               % Define mass [kg]   
-    body(5).intertia        = [0.0001 0.0001 0.0001]; % Moment of Inertia [kg*m^2]     
+    body(5).inertia         = [0.0001 0.0001 0.0001]; % Moment of Inertia [kg*m^2]     
     body(5).volume          = 0;                    % Specify Displaced Volume  
     body(5).centerGravity   = [0 0 0];              % Specify Cg
     body(5).centerBuoyancy  = [0 0 0];              % Specify Cb
@@ -144,7 +144,7 @@ constraint(4) = constraintClass('C');               % Initialize constraintClass
 pto(1) = ptoClass('PTO');                           % Initialize ptoClass
     pto(1).location = [-0.438 0 0.714];             % PTO Location [m]
     pto(1).orientation.z = [183.4398/379.5826 0 332.3142/379.5823];  % PTO orientation
-    pto(1).c = 0;                                   % Joint Internal Damping Coefficient
+    pto(1).damping = 0;                             % Joint Internal Damping Coefficient
 
 %%%%%%%%%%%%%%%%%%% Frame - Fixed    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 constraint(5) = constraintClass('Fixed');           % Initialize constraintClass

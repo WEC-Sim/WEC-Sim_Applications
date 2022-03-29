@@ -14,7 +14,7 @@ John Anthony Rossiter
 
 _**Version:**_  
 
-WEC-Sim v4.4
+WEC-Sim v5.0
 
 _**Geometry:**_ 
 
@@ -26,7 +26,7 @@ _**Dependencies:**_
 
    System Identification Toolbox	-->	for ar, forecast and c2d commands
 
-   Statistics Toolbox		-->	for prctile command
+   Statistics and Machine Learning Toolbox -->	for prctile command
 
    Control System Toolbox		-->	for ss command
 
