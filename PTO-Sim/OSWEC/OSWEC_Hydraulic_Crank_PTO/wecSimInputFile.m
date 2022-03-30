@@ -25,9 +25,10 @@ body(1).inertia = [1.85e6 1.85e6 1.85e6];
 body(1).linearDamping(5,5) = 1*10^7;    % Specify damping on body 1 in pich
 
 % Base
-body(2) = bodyClass('../hydroData/oswec.h5');   
-body(2).geometryFile = '../geometry/base.stl';    
-body(2).mass = 'fixed';                        
+body(2) = bodyClass('../hydroData/oswec.h5');
+body(2).geometryFile = '../geometry/base.stl';
+body(2).mass = 999;                             % Placeholder mass for fixed body
+body(2).inertia = [999 999 999];                % Placeholder inertia for fixed body
 
 %% PTO and Constraint Parameters
 % Fixed Constraint
