@@ -38,7 +38,8 @@ body(1).morisonElement.rgME = [0 0 -3; 0 0 -1.2; 0 0 0.6; 0 0 2.4; 0 0 4.2];
 %% Base
 body(2) = bodyClass('./hydroData/oswec.h5');   % Initialize bodyClass for Base
 body(2).geometryFile = './geometry/base.stl';  % Geometry File
-body(2).mass = 'fixed';                        % Creates Fixed Body
+body(2).mass = 999;                            % Placeholder mass for fixed body
+body(2).inertia = [999 999 999];               % Placeholder inertia for fixed body
 
 %% PTO and Constraint Parameters
 constraint(1)= constraintClass('Constraint1'); % Initialize ConstraintClass 
