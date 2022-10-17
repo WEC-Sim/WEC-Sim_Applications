@@ -62,7 +62,7 @@ xline(1/T,'--')
 legend('','Natural Frequency','Wave Frequency','Location','northwest')
 
 % Calculate the maximum potential power
-P_ub = -sum(abs(Fexc).^2./(8*real(Zi)))
+P_max = -sum(abs(Fexc).^2./(8*real(Zi)))
 
 % Calculate optimal Kp and Ki gains for reactive control
 KpOpt = radiationDamping(closestIndOmega)

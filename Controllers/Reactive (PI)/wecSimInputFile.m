@@ -1,8 +1,8 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'RM3.slx';      % Specify Simulink Model File
+simu.simMechanicsFile = 'reactive.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
+simu.explorer = 'off';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 50;                    % Wave Ramp Time [s]
 simu.endTime = 200;                     % Simulation End Time [s]
@@ -84,5 +84,5 @@ pto(1).damping = 0;                       % PTO Damping [N/(m/s)]
 pto(1).location = [0 0 0];                      % PTO Location [m]
 
 controller(1) = controllerClass('PI');
-controller(1).proportionalIntegral.Kp = 2.7276e+06;
-controller(1).proportionalIntegral.Ki = 0;
+controller(1).proportionalIntegral.Kp = 4.9341e+05;
+controller(1).proportionalIntegral.Ki = -1.7705e+06;

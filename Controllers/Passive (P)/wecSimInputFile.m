@@ -4,8 +4,8 @@ simu.simMechanicsFile = 'passive.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
-simu.rampTime = 50;                    % Wave Ramp Time [s]
-simu.endTime = 200;                     % Simulation End Time [s]
+simu.rampTime = 10;                    % Wave Ramp Time [s]
+simu.endTime = 400;                     % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.02; 							% Simulation time-step [s]
 simu.mcrMatFile = 'mcrCases.mat';
@@ -84,8 +84,4 @@ pto(1).damping = 0;                       % PTO Damping [N/(m/s)]
 pto(1).location = [0 0 0];                      % PTO Location [m]
 
 controller(1) = controllerClass('PI');
-controller(1).proportionalIntegral.Kp = 2.7276e+06;
-controller(1).proportionalIntegral.Ki = 0;
-
-% Replace gains with optimal ones for regular waves
-gainCalc
+controller(1).proportional.Kp = 2.7276e+06;

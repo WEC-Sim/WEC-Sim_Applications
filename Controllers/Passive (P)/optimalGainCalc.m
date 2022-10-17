@@ -2,6 +2,8 @@
 % conditions and determines the optimal proportional gain value for a 
 % passive controller (for regular waves)
 
+close all; clear all; clc;
+
 % Inputs (from wecSimInputFile)
 simu = simulationClass();
 body(1) = bodyClass('hydroData/rm3.h5');
@@ -62,7 +64,7 @@ xline(1/T,'--')
 legend('','Natural Frequency','Wave Frequency','Location','northwest')
 
 % Calculate the maximum potential power
-P_ub = -sum(abs(Fexc).^2./(8*real(Zi)))
+P_max = -sum(abs(Fexc).^2./(8*real(Zi)))
 
 % Optimal proportional gain for passive control:
 KpOpt = sqrt(radiationDamping(closestIndOmega)^2 + ((hydrostaticStiffness/omega) - omega*(mass + addedMass(closestIndOmega)))^2)
