@@ -41,7 +41,7 @@ Phase = (angle(Zi))*(180/pi);
 % Determine natural frequency based on the phase of the impedance
 [~,closestIndNat] = min(abs(imag(Zi)));
 natFreq = floatHydro.simulation_parameters.w(closestIndNat);
-T0 = (2*pi)/natFreq;
+natT = (2*pi)/natFreq;
 
 % Create bode plot for impedance
 figure()
@@ -63,13 +63,12 @@ xline(natFreq/(2*pi))
 xline(1/T,'--')
 legend('','Natural Frequency','Wave Frequency','Location','northwest')
 
+% Determine optimal latching time
+optLatchTime = 0.5*(T - natT)
+KpOpt = radiationDamping(closestIndOmega)
+force = 80*(mass+addedMass(closestIndOmega))
+
 % Calculate the maximum potential power
 P_max = -sum(abs(Fexc).^2./(8*real(Zi)))
 
-% Optimal proportional gain for passive control:
-KpOpt = sqrt(radiationDamping(closestIndOmega)^2 + ((hydrostaticStiffness/omega) - omega*(mass + addedMass(closestIndOmega)))^2)
-Ki = 0;
 
-% Calculate expected power with optimal passive control
-Zpto = KpOpt + Ki/(1j*omega);
-P = -sum(0.5*real(Zpto).*((abs(Fexc)).^2./(abs(Zpto+Zi)).^2))

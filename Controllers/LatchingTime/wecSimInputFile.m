@@ -1,13 +1,13 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'passive.slx';      % Specify Simulink Model File
+simu.simMechanicsFile = 'latchTime.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
-simu.rampTime = 10;                    % Wave Ramp Time [s]
+simu.rampTime = 100;                    % Wave Ramp Time [s]
 simu.endTime = 400;                     % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-simu.dt = 0.02; 							% Simulation time-step [s]
+simu.dt = 0.01; 							% Simulation time-step [s]
 simu.mcrMatFile = 'mcrCases.mat';
 
 %% Wave Information 
@@ -17,7 +17,7 @@ simu.mcrMatFile = 'mcrCases.mat';
 % % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
 waves.height = 2.5;                     % Wave Height [m]
-waves.period = 9.52;                       % Wave Period [s] - this wave period was chosen to match up with one of the BEM wave periods
+waves.period = 9.52;                       % Wave Period [s]
 
 % % Regular Waves with CIC
 % waves = waveClass('regularCIC');          % Initialize Wave Class and Specify Type                                 
@@ -83,5 +83,6 @@ pto(1).stiffness = 0;                           % PTO Stiffness [N/m]
 pto(1).damping = 0;                       % PTO Damping [N/(m/s)]
 pto(1).location = [0 0 0];                      % PTO Location [m]
 
-controller(1) = controllerClass('PI');
-controller(1).proportional.Kp = 2.7276e+06;
+controller(1) = controllerClass('Latching');
+controller(1).latching.latchTime = 2.2667;
+controller(1).latching.Kp = 4.9341e+05;

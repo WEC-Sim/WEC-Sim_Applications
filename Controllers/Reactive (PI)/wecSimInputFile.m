@@ -57,10 +57,10 @@ waves.period = 9.52;                       % Wave Period [s]
 
 %% Body Data
 % Float
-body(1) = bodyClass('hydroData/rm3.h5');      
+body(1) = bodyClass('../hydroData/rm3.h5');      
     % Create the body(1) Variable, Set Location of Hydrodynamic Data File 
     % and Body Number Within this File.   
-body(1).geometryFile = 'geometry/float.stl';    % Location of Geomtry File
+body(1).geometryFile = '../geometry/float.stl';    % Location of Geomtry File
 body(1).mass = 'equilibrium';                   
     % Body Mass. The 'equilibrium' Option Sets it to the Displaced Water 
     % Weight.
