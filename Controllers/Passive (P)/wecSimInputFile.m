@@ -83,5 +83,5 @@ pto(1).stiffness = 0;                           % PTO Stiffness [N/m]
 pto(1).damping = 0;                       % PTO Damping [N/(m/s)]
 pto(1).location = [0 0 0];                      % PTO Location [m]
 
-controller(1) = controllerClass('PI');
+controller(1) = controllerClass('P');
 controller(1).proportional.Kp = 2.7276e+06;

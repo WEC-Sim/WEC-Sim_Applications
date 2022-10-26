@@ -1,5 +1,5 @@
 %Example of user input MATLAB file for post processing
-close all;
+close all
 
 %Plot waves
 waves.plotElevation(simu.rampTime);
@@ -37,3 +37,15 @@ startTime = output.controllers.time(end) - 10*waves.period; % select last 10 per
 [~,startInd] = min(abs(output.controllers.time - startTime));
 disp('Controller Power:')
 mean( mean(output.controllers.power(startInd:endInd,3)))
+
+figure()
+yyaxis left
+plot(output.bodies.time,output.bodies.velocity(:,3))
+xlabel('Time (s)')
+xlim([200 220])
+ylabel('Velocity (m/s)')
+ylim([-4 4])
+hold on
+yyaxis right
+plot(output.bodies.time,output.bodies.forceExcitation(:,3)/1000)
+ylabel('Excitation Force (kN)')

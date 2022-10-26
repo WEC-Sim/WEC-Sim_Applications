@@ -1,6 +1,6 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'RM3Declutch.slx';      % Specify Simulink Model File
+simu.simMechanicsFile = 'declutch.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
@@ -8,6 +8,7 @@ simu.rampTime = 100;                    % Wave Ramp Time [s]
 simu.endTime = 400;                     % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01; 							% Simulation time-step [s]
+simu.mcrMatFile = 'mcrCases.mat';
 
 %% Wave Information 
 % % noWaveCIC, no waves with radiation CIC  
@@ -15,8 +16,8 @@ simu.dt = 0.01; 							% Simulation time-step [s]
 
 % % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.height = 2;                     % Wave Height [m]
-waves.period = 6;                       % Wave Period [s]
+waves.height = 1;                     % Wave Height [m]
+waves.period = 4;                       % Wave Period [s]
 
 % % Regular Waves with CIC
 % waves = waveClass('regularCIC');          % Initialize Wave Class and Specify Type                                 
@@ -56,10 +57,10 @@ waves.period = 6;                       % Wave Period [s]
 
 %% Body Data
 % Float
-body(1) = bodyClass('hydroData/rm3.h5');      
+body(1) = bodyClass('../hydroData/rm3.h5');      
     % Create the body(1) Variable, Set Location of Hydrodynamic Data File 
     % and Body Number Within this File.   
-body(1).geometryFile = 'geometry/float.stl';    % Location of Geomtry File
+body(1).geometryFile = '../geometry/float.stl';    % Location of Geomtry File
 body(1).mass = 'equilibrium';                   
     % Body Mass. The 'equilibrium' Option Sets it to the Displaced Water 
     % Weight.
@@ -83,6 +84,5 @@ pto(1).damping = 0;                       % PTO Damping [N/(m/s)]
 pto(1).location = [0 0 0];                      % PTO Location [m]
 
 controller(1) = controllerClass('Declutching');
-controller(1).declutching.declutchTime = 0;
-controller(1).declutching.Kp = 1e6;
-controller(1).declutching.Ki = 1e6;
+controller(1).declutching.declutchTime = .85;
+controller(1).declutching.Kp =  9.9347e+05;

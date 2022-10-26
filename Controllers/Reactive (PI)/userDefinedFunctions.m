@@ -1,6 +1,5 @@
 %Example of user input MATLAB file for post processing
-
-close all;
+close all
 
 %Plot waves
 waves.plotElevation(simu.rampTime);

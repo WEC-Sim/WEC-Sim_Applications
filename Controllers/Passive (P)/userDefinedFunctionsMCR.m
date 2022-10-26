@@ -15,7 +15,7 @@ if imcr == 9
     title('Mean Power vs. Proportional Gain')
     xlabel('Proportional Gain/Damping (Ns/m)')
     ylabel('Mean Power (W)')
-    xline(2.7276e6, '--')
-    yline(-3.9286e5, '--')
+    xline(9.9347e+05, '--')
+    %yline(-3.9286e+05, '--')
     legend('','Theoretical Optimal')
 end
