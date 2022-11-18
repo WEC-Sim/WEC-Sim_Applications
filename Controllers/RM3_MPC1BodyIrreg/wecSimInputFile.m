@@ -1,6 +1,6 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = ['floatMPC.slx'];      % Specify Simulink Model File
+simu.simMechanicsFile = ['floatMPCIrreg.slx'];      % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
@@ -31,12 +31,12 @@ waves.period = 9.52;                       % Wave Period [s]
 %  waves.direction=[0];
 
 % % Irregular Waves using JS Spectrum with Equal Energy and Seeded Phase
-% waves = waveClass('irregular');           % Initialize Wave Class and Specify Type
-% waves.height = 2.5;                       % Significant Wave Height [m]
-% waves.period = 8;                         % Peak Period [s]
-% waves.spectrumType = 'JS';                % Specify Wave Spectrum Type
-% waves.bem.option = 'EqualEnergy';         % Uses 'EqualEnergy' bins (default) 
-% waves.phaseSeed = 1;                      % Phase is seeded so eta is the same
+waves = waveClass('irregular');           % Initialize Wave Class and Specify Type
+waves.height = 2.5;                       % Significant Wave Height [m]
+waves.period = 8;                         % Peak Period [s]
+waves.spectrumType = 'JS';                % Specify Wave Spectrum Type
+waves.bem.option = 'EqualEnergy';         % Uses 'EqualEnergy' bins (default) 
+waves.phaseSeed = 1;                      % Phase is seeded so eta is the same
 
 % % Irregular Waves using PM Spectrum with Traditional and State Space 
 % waves = waveClass('irregular');           % Initialize Wave Class and Specify Type

@@ -83,4 +83,4 @@ grid on
 hold on
 fplot(180/pi*angle(cInfw), [min(omegas) max(omegas)],'-o')
 
-save('coeff2.mat','coeff')
+save('coeff.mat','coeff')
