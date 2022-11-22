@@ -2,7 +2,7 @@ close all; clear all; clc;
 
 % Inputs (from wecSimInputFile)
 simu = simulationClass();
-body(1) = bodyClass('hydroData/rm3.h5');
+body(1) = bodyClass('../hydroData/rm3.h5');
 waves.height = 2.5;
 waves.period = 9.52;
 
@@ -83,4 +83,4 @@ grid on
 hold on
 fplot(180/pi*angle(cInfw), [min(omegas) max(omegas)],'-o')
 
-save('coeff2.mat','coeff')
+save('coeff.mat','coeff')
