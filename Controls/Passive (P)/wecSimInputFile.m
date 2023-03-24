@@ -11,65 +11,20 @@ simu.dt = 0.02; 							% Simulation time-step [s]
 simu.mcrMatFile = 'mcrCases.mat';
 
 %% Wave Information 
-% % noWaveCIC, no waves with radiation CIC  
-% waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
 
-% % Regular Waves  
+% Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
 waves.height = 2.5;                     % Wave Height [m]
 waves.period = 9.6664;                       % Wave Period [s] - this wave period was chosen to match up with one of the BEM wave periods
 
-% % Regular Waves with CIC
-% waves = waveClass('regularCIC');          % Initialize Wave Class and Specify Type                                 
-% waves.height = 2.5;                       % Wave Height [m]
-% waves.period = 8;                         % Wave Period [s]
-
-% % Irregular Waves using PM Spectrum 
-%  waves = waveClass('irregular');           % Initialize Wave Class and Specify Type
-%  waves.height = 2.5;                       % Significant Wave Height [m]
-%  waves.period = 8;                         % Peak Period [s]
-%  waves.spectrumType = 'PM';                % Specify Wave Spectrum Type
-%  waves.direction=[0];
-
-% % Irregular Waves using JS Spectrum with Equal Energy and Seeded Phase
-% waves = waveClass('irregular');           % Initialize Wave Class and Specify Type
-% waves.height = 2.5;                       % Significant Wave Height [m]
-% waves.period = 8;                         % Peak Period [s]
-% waves.spectrumType = 'JS';                % Specify Wave Spectrum Type
-% waves.bem.option = 'EqualEnergy';         % Uses 'EqualEnergy' bins (default) 
-% waves.phaseSeed = 1;                      % Phase is seeded so eta is the same
-
-% % Irregular Waves using PM Spectrum with Traditional and State Space 
-% waves = waveClass('irregular');           % Initialize Wave Class and Specify Type
-% waves.height = 2.5;                       % Significant Wave Height [m]
-% waves.period = 8;                         % Peak Period [s]
-% waves.spectrumType = 'PM';                % Specify Wave Spectrum Type
-% simu.stateSpace = 1;                      % Turn on State Space
-% waves.bem.option = 'Traditional';         % Uses 1000 frequnecies
-
-% % Irregular Waves with imported spectrum
-% waves = waveClass('spectrumImport');      % Create the Wave Variable and Specify Type
-% waves.spectrumFile = 'spectrumData.mat';  % Name of User-Defined Spectrum File [:,2] = [f, Sf]
-
-% % Waves with imported wave elevation time-history  
-% waves = waveClass('elevationImport');          % Create the Wave Variable and Specify Type
-% waves.elevationFile = 'elevationData.mat';     % Name of User-Defined Time-Series File [:,2] = [time, eta]
-
 %% Body Data
-% Float
-body(1) = bodyClass('../hydroData/sphere.h5');      
-    % Create the body(1) Variable, Set Location of Hydrodynamic Data File 
-    % and Body Number Within this File.   
-body(1).geometryFile = '../geometry/sphere.stl';    % Location of Geomtry File
-body(1).mass = 'equilibrium';                   
-    % Body Mass. The 'equilibrium' Option Sets it to the Displaced Water 
-    % Weight.
-body(1).inertia = [20907301 21306090.66 37085481.11];  % Moment of Inertia [kg*m^2]     
+% Sphere
+body(1) = bodyClass('../hydroData/sphere.h5');          % Create the body(1) Variable
+body(1).geometryFile = '../geometry/sphere.stl';        % Location of Geomtry File
+body(1).mass = 'equilibrium';                           % Body Mass
+body(1).inertia = [20907301 21306090.66 37085481.11];   % Moment of Inertia [kg*m^2]     
 
 %% PTO and Constraint Parameters
-% Floating (3DOF) Joint
-% constraint(1) = constraintClass('Constraint1'); % Initialize Constraint Class for Constraint1
-% constraint(1).location = [0 0 0];               % Constraint Location [m]
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize PTO Class for PTO1
@@ -77,5 +32,5 @@ pto(1).stiffness = 0;                           % PTO Stiffness [N/m]
 pto(1).damping = 0;                       % PTO Damping [N/(m/s)]
 pto(1).location = [0 0 0];                      % PTO Location [m]
 
-%controller(1) = controllerClass('P');
+% P Controller
 controller(1).proportional.Kp = 8.6087e+05;

@@ -11,25 +11,8 @@ end
 %Plot heave response for body 1
 output.plotResponse(1,3);
 
-%Plot heave response for body 2
-%output.plotResponse(2,3);
-
 %Plot heave forces for body 1
 output.plotForces(1,3);
-
-%Plot heave forces for body 2
-%output.plotForces(2,3);
-
-%Save waves and response as video
-% output.saveViz(simu,body,waves,...
-%     'timesPerFrame',5,'axisLimits',[-150 150 -150 150 -50 20],...
-%     'startEndTime',[100 125]);
-
-figure()
-plot(output.ptos.time,output.ptos.powerInternalMechanics(:,3))
-title('PTO Power')
-disp('PTO Power:')
-mean(output.ptos.powerInternalMechanics(:,3))
 
 controllersOutput = controller1_out;
 signals = {'force','power'};
@@ -39,58 +22,66 @@ for ii = 1:length(controllersOutput)
     end
 end
 
+% Plot Controller Power
 figure()
-plot(controllersOutput.time,controllersOutput.power(:,3))
+plot(controllersOutput.time,controllersOutput.power(:,3)/1000)
 title('Controller Power')
-ylabel('Power (W)')
+ylabel('Power (kW)')
 xlabel('Time (s)')
 
-%last 10 periods
+% Calculate average controller power over last 10 wave periods
 endInd = length(controllersOutput.power(:,3));
-startTime = 300; % select last 10 periods
+startTime = controllersOutput.time(end) - 10*waves.period; % select last 10 periods
 [~,startInd] = min(abs(controllersOutput.time(:) - startTime));
-disp('Controller Power:')
-mean( mean(controllersOutput.power(startInd:endInd,3)))
+disp('Controller Power (kW):')
+disp(mean(controllersOutput.power(startInd:endInd,3))/1000)
+disp("Peak Controller Power (kW):")
+disp(max(abs(controllersOutput.power(startInd:endInd,3)))/1000)
 
+% Plot heave position
 figure()
 plot(output.bodies.time,output.bodies.position(:,3)-body.centerGravity(3))
-title('position')
-yline(controller.modelPredictiveControl.maxPos)
-yline(-controller.modelPredictiveControl.maxPos)
+title('Heave Position')
+yline(controller.modelPredictiveControl.maxPos, '--')
+yline(-controller.modelPredictiveControl.maxPos, '--')
+ylabel('Position (m)')
+xlabel('Time (s)')
+ylim([-(controller.modelPredictiveControl.maxPos + .25), controller.modelPredictiveControl.maxPos + .25])
+disp("Max Heave Position (m):")
+disp(max(abs(output.bodies.position(:,3)-body.centerGravity(3))))
 
+% Plot heave velocity
 figure()
 plot(output.bodies.time,output.bodies.velocity(:,3))
-title('velocity')
-yline(controller.modelPredictiveControl.maxVel)
-yline(-controller.modelPredictiveControl.maxVel)
+title('Heave Velocity')
+yline(controller.modelPredictiveControl.maxVel, '--')
+yline(-controller.modelPredictiveControl.maxVel, '--')
+ylabel('Velocity (m/s)')
+xlabel('Time (s)')
+ylim([-(controller.modelPredictiveControl.maxVel + .25), controller.modelPredictiveControl.maxVel + .25])
+disp("Max Heave Velocity (m/s):")
+disp(max(abs(output.bodies.velocity(:,3))))
 
+% Plot PTO Force
 figure()
-plot(controllersOutput.time,controllersOutput.force(:,3))
-title('force')
-yline(controller.modelPredictiveControl.maxPTOForce)
-yline(-controller.modelPredictiveControl.maxPTOForce)
+plot(controllersOutput.time,controllersOutput.force(:,3)/1000)
+title('PTO Force')
+yline(controller.modelPredictiveControl.maxPTOForce/1000, '--')
+yline(-controller.modelPredictiveControl.maxPTOForce/1000, '--')
+ylabel('Force (kN)')
+xlabel('Time (s)')
+ylim([-(controller.modelPredictiveControl.maxPTOForce/1000 + 250), controller.modelPredictiveControl.maxPTOForce/1000 + 250])
+disp("Max PTO Force (kN):")
+disp(max(abs(controllersOutput.force(:,3)))/1000)
 
-
+% Plot change in PTO Force
 figure()
-plot(dfPTO)
-title('force change')
-yline(controller.modelPredictiveControl.maxPTOForceChange)
-yline(-controller.modelPredictiveControl.maxPTOForceChange)
-
-% figure()
-% plot(controlPower)
-% disp('Controller Power:')
-% mean(controlPower)
-
-outPos = plantOutput.Data(:,2);
-outVel = plantOutput.Data(:,1);
-
-figure()
-plot(plantOutput.Time, outPos)
-hold on
-plot(output.bodies.time,output.bodies.position(:,3)-body.centerGravity(3))
-
-figure()
-plot(plantOutput.Time,outVel)
-hold on
-plot(output.bodies.time, output.bodies.velocity(:,3))
+plot(controllersOutput.time,gradient(controllersOutput.force(:,3))*(1/simu.dt)/1000)
+title('PTO Force Change')
+yline(controller.modelPredictiveControl.maxPTOForceChange/1000, '--')
+yline(-controller.modelPredictiveControl.maxPTOForceChange/1000, '--')
+ylabel('Force Change (kN/s)')
+xlabel('Time (s)')
+ylim([-(controller.modelPredictiveControl.maxPTOForceChange/1000 + 250), controller.modelPredictiveControl.maxPTOForceChange/1000 + 250])
+disp("Max PTO Force Change (kN/s):")
+disp(max(abs(gradient(controllersOutput.force(:,3))*(1/simu.dt)))/1000)

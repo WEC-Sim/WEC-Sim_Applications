@@ -4,6 +4,8 @@
 hydro = readBEMIOH5(body.h5File, 1, body.meanDrift);
 
 disp('setting up MPC')
+
+% Import necessary BEM Data and set other variables based on inputs
 controller(1).bemData.a = squeeze(hydro.hydro_coeffs.added_mass.all(3,3,:)).*simu.rho;
 controller(1).bemData.aInf = hydro.hydro_coeffs.added_mass.inf_freq(3,3)*simu.rho;
 controller(1).bemData.m = hydro.properties.volume*1000;
@@ -14,13 +16,10 @@ controller(1).MPCSetup.qScale = 0.5*controller(1).modelPredictiveControl.dt;
 controller(1).MPCSetup.currentIteration = 0;
 controller(1).MPCSetup.infeasibleCount = 0;
 
-% Tracks # of occurances of non-convergence      
-controller(1).MPCSetup.numSamplesInEntireRun = simu.endTime/simu.dt;  % Total number of SIM iterations (not neccesarily MPC iterations)
-controller(1).MPCSetup.timeSamplesPerIteration = controller(1).modelPredictiveControl.dt/simu.dt;
-
 % Prediction Start
 controller(1).MPCSetup.SimTimeToFullBuffer = (controller(1).modelPredictiveControl.order+controller(1).modelPredictiveControl.Ho)*controller(1).modelPredictiveControl.dt/simu.dt;  % 0.1 is the simulation time step
 
+% Load coefficients
 load(controller(1).modelPredictiveControl.coeffFile);
 
 % Make Plant Model    
@@ -39,4 +38,5 @@ end
 % Set output size
 controller(1).MPCSetup.outputSize = (controller(1).MPCSetup.HpInk+1)*1;
 
+% Set variable for simulink input/output sizes
 HpInk = controller(1).MPCSetup.HpInk;

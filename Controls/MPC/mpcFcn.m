@@ -1,4 +1,4 @@
-function y = mpcFcn(x_k, v_arrow_k, Sx, Su, Sv, Q, HpInk, H, yLen, maxVel, maxPos, maxPTOForce, maxPTOForceChange, currentIteration, Ho, order, outputSize, timeSamplesPerIteration, infeasibleCount)
+function [y, currentIteration, infeasibleCount] = mpcFcn(x_k, v_arrow_k, Sx, Su, Sv, Q, HpInk, H, yLen, maxVel, maxPos, maxPTOForce, maxPTOForceChange, Ho, order, outputSize, currentIteration, time, infeasibleCount)
 %% Run 2nd formulation of mpcStruct to find Fpto which maximizes Force*Velocity                    
 
 %% Create cost matrices for mpcStructStruct objective function
@@ -56,7 +56,6 @@ if x_k(1) >= 0
 else 
     signOfReactivePowerLimit = 1;
 end
-%mpcStruct.y_arrow_upperbound = y_arrow_upperbound;
 
 A = [...
     I; ...
@@ -73,7 +72,7 @@ B = [...
 
 
 %% Run quadprog
-if currentIteration > (Ho + order)*.5 % Only run mpcStruct after buffer is full, otherwise Fe predictions are not accurate
+if currentIteration > (Ho + order) % Only run mpcStruct after buffer is full, otherwise Fe predictions are not accurate
     options = optimoptions('quadprog','Algorithm','interior-point-convex','Display','off', 'MaxIter', 600); % Can't set x0 w/ interior-point-convex 
     [dFpto_cmd,FVAL,EXITFLAG, OUTPUT] = quadprog(H,f,A,B,[],[],[],[],[],options);
     if all(eig(H) >= 0) == 0
@@ -83,14 +82,16 @@ if currentIteration > (Ho + order)*.5 % Only run mpcStruct after buffer is full,
     end
     if (EXITFLAG ~= 1) && (EXITFLAG ~= 2)
         display('!!!!!!!!!!!!!!!! START ERROR - Infeasible !!!!!!!!!!!!')
-        EXITFLAG    % Display exit flag
-        OUTPUT      % Display output - detailed info from this solution attempt
-        OUTPUT.message
+        %EXITFLAG    % Display exit flag
+        %OUTPUT      % Display output - detailed info from this solution attempt
+        %OUTPUT.message
+        %TimeOfError = currentIteration % Show the time at which this happened
+        %infeasibleCount = infeasibleCount+1 % Keep track of how many times we couldn't get a solution
+        %totalRuns = currentIteration/(0.5) % Show how many iterations have run (to compare with the # of errors, above)
         dFpto_cmd = zeros(outputSize,1);
-        TimeOfError = currentIteration % Show the time at which this happened
-        infeasibleCount = infeasibleCount+1 % Keep track of how many times we couldn't get a solution
-        totalRuns = currentIteration/(0.5) % Show how many iterations have run (to compare with the # of errors, above)
+        infeasibilityMessage = sprintf('Output: %s \n Time: %.2f, Infeasible Count: %d, Total Runs: %d',OUTPUT.message,time,infeasibleCount,currentIteration)
         display('-------------------END ERROR -  Infeasible -------------------')
+        infeasibleCount = infeasibleCount + 1;
     end
 
 else
@@ -98,8 +99,5 @@ else
 end
 
 y = dFpto_cmd(1);
-%display('end of iter');
+currentIteration = currentIteration + 1;
 %endfunction
-
-
-

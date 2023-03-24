@@ -20,7 +20,6 @@ omegas = hydro.simulation_parameters.w;
 
 % Construct C - frequency dependent component
 C = radiationDamping + 1j*omegas'.*(addedMass - aInf);
-%C = C(1:end-1);
 
 % Calculate magnitude and phase for bode plot
 Mag = 20*log10(abs(C));
@@ -34,7 +33,6 @@ xlabel('freq (rad/s)')
 ylabel('mag (dB)')
 grid on
 hold on
-
 subplot(2,1,2)
 semilogx((hydro.simulation_parameters.w),Phase)
 xlabel('freq (rad/s)')
@@ -74,7 +72,6 @@ ylabel('mag (dB)')
 grid on
 hold on
 fplot(20*log10(abs(cInfw)), [min(omegas) max(omegas)],'-o')
-
 subplot(2,1,2)
 semilogx((hydro.simulation_parameters.w),Phase)
 xlabel('freq (rad/s)')

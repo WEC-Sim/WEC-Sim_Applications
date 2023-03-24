@@ -11,19 +11,8 @@ end
 %Plot heave response for body 1
 output.plotResponse(1,3);
 
-%Plot heave response for body 2
-%output.plotResponse(2,3);
-
 %Plot heave forces for body 1
 output.plotForces(1,3);
-
-%Plot heave forces for body 2
-%output.plotForces(2,3);
-
-%Save waves and response as video
-% output.saveViz(simu,body,waves,...
-%     'timesPerFrame',5,'axisLimits',[-150 150 -150 150 -50 20],...
-%     'startEndTime',[100 125]);
 
 controllersOutput = controller1_out;
 signals = {'force','power'};
@@ -33,19 +22,21 @@ for ii = 1:length(controllersOutput)
     end
 end
 
+% Plot controller power
 figure()
 plot(controllersOutput.time,controllersOutput.power(:,3))
 title('Controller Power')
 ylabel('Power (W)')
 xlabel('Time (s)')
 
-%last 10 periods
+% Calculate average power for last 10 wave periods
 endInd = length(controllersOutput.time);
 startTime = controllersOutput.time(end) - 10*waves.period; % select last 10 periods
 [~,startInd] = min(abs(controllersOutput.time - startTime));
 disp('Controller Power:')
 mean(controllersOutput.power(startInd:endInd,3))
 
+% Plot declutching
 figure()
 yyaxis left
 plot(output.bodies.time,output.bodies.velocity(:,3))
