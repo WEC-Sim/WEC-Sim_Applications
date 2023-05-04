@@ -31,7 +31,7 @@ body(1).inertia = [Ixx Iyy Izz];
 %      1 (from control surface) 
 %      2 (from momentum conservation)
 %      3 (from pressure integration)
-body(1).meanDrift = 3;                                
+body(1).meanDrift = 1;                                
 
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
