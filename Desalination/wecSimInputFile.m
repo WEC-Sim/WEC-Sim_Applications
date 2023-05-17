@@ -3,11 +3,11 @@ simu = simulationClass();
 simu.simMechanicsFile = 'OSWEC_RO.slx';     % Specify Simulink Model File
 %simu.mode = 'rapid-accelerator';           % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer='off';                        % Turn SimMechanics Explorer (on/off)
-simu.startTime = 0;                         % Simulation Start Time [s]
-simu.endTime=300;
 simu.solver = 'ode4';                       %simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-simu.dt = 0.01;                             %Simulation time-step [s] for a convolution function in the radiation force calculation 
+simu.startTime = 0;                         % Simulation Start Time [s]
 simu.rampTime = 50;
+simu.endTime=300;
+simu.dt = 0.01;                             %Simulation time-step [s] for a convolution function in the radiation force calculation 
 simu.cicEndTime = 30;
 
 %% Wave Information
@@ -55,7 +55,7 @@ constraint(4)= constraintClass('Constraint4'); % Initialize ConstraintClass
 constraint(4).location = [0+0.9 0 -7];
 
 pto(1) = ptoClass('PTO1');                     % Initialize ptoClass for PTO1
-pto(1).stiffness = 0;                                  % PTO Stiffness Coeff [Nm/rad]
-pto(1).damping = 0;                                  % PTO Damping Coeff [Nsm/rad]
+pto(1).stiffness = 0;                          % PTO Stiffness Coeff [Nm/rad]
+pto(1).damping = 0;                            % PTO Damping Coeff [Nsm/rad]
 pto(1).location = [2.35106397378+0.9 0 -7.849998936];   % PTO Global Location [m]
-pto(1).orientation.z = [-4.7021271782/5 0 1.7/5];  % PTO orientation
+pto(1).orientation.z = [-4.7021271782/5 0 1.7/5];       % PTO orientation
