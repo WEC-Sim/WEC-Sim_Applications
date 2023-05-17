@@ -2,14 +2,14 @@
 % Traditional Morison Element case - hydro body
 
 %% Simulation Data
-simu = simulationClass();                      % Initialize Simulation Class
-simu.simMechanicsFile = 'monopile.slx';        % Specify Simulink Model File
+simu = simulationClass();                  % Initialize Simulation Class
+simu.simMechanicsFile = 'monopile.slx';    % Specify Simulink Model File
 simu.explorer = 'off';
 simu.solver = 'ode4';
 simu.rho = 1025;
 simu.cicEndTime = 30;
-simu.rampTime = 100;                           % Wave Ramp Time [s] 200
-simu.endTime = 400;                            % Simulation End Time [s] 400
+simu.rampTime = 100;                       % Wave Ramp Time [s] 200
+simu.endTime = 400;                        % Simulation End Time [s] 400
 simu.dt = 0.01;
 simu.stateSpace = 1;
 
@@ -18,31 +18,33 @@ simu.stateSpace = 1;
 % waves = waveClass('noWaveCIC');
 % waves.period = 5;
 
-% Regular Wave
-waves = waveClass('regular');
-waves.height = 2.0;
-waves.period = 5.0;
+% % Regular Wave
+% waves = waveClass('regular');
+% waves.height = 2.0;
+% waves.period = 5.0;
 
-% % Irregular Waves
-% waves = waveClass('irregular');               % Initialize Wave Class and Specify Type
-% waves.height = 2.0;                               % Significant Wave Height [m]
-% waves.period = 5.0;                                % Peak Period [s]
-% waves.spectrumType = 'PM';                    % Specify Spectrum Type
-% waves.phaseSeed = 5;
+waves = waveClass('irregular');             % Initialize Wave Class and Specify Type
+waves.height = 2.0;                         % Significant Wave Height [m]
+waves.period = 5.0;                         % Peak Period [s]
+waves.spectrumType = 'PM';                  % Specify Spectrum Type
+waves.phaseSeed = 5;                        % Set Random Phase Seed
+% Wave directionality was not included in BEM run
+% waves.direction = [0,30,90];                % Wave Directionality [deg]  
+% waves.spread = [0.1,0.2,0.7];               % Wave Directional Spreading [%}
 
-% waves.bem.range = [0 10]; % Not necessary to define wave frequency range without an .h5 / hydro body
-% waves.waterDepth = 30;    % Not necessary to define water depth without an .h5 / hydro body
+% waves.bem.range = [0 10]; % Not necessary to define wave frequency range with an .h5 / hydro body
+% waves.waterDepth = 30;    % Not necessary to define water depth with an .h5 / hydro body
 
 %% Body Data
 % Monopile - diameter 10m, height 30m
 body(1) = bodyClass('../hydroData/monopile.h5');
 body(1).geometryFile = '../geometry/monopile.stl';
-% body(1).name = 'monopile';                    % Hydro body name defined by h5 file
-body(1).nonHydro = 0;                             % Hydro body
+% body(1).name = 'monopile';                   % Hydro body name defined by h5 file
+body(1).nonHydro = 0;                          % Hydro body
 body(1).mass = 'equilibrium'; % 1044536
 body(1).inertia = [1.25 1.25 0.15]*1e9;
-% body(1).centerGravity = [0 0 -15];                       % Hydro body cg defined by h5 file
-% body(1).centerBuoyancy = [0 0 -15];                       % Hydro body centerBuoyancy defined by h5 file
+% body(1).centerGravity = [0 0 -15];           % Hydro body cg defined by h5 file
+% body(1).centerBuoyancy = [0 0 -15];          % Hydro body centerBuoyancy defined by h5 file
 % body(1).volume = pi*10^2*30;                 % Hydro body volume defined by h5 file
 
 % Morison Element Implementation not used for comparison with hydro body

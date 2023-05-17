@@ -1,4 +1,4 @@
-classdef TestTraditionalME < matlab.unittest.TestCase
+classdef TestMorisonElement < matlab.unittest.TestCase
     
     properties
         OriginalDefault
@@ -9,7 +9,7 @@ classdef TestTraditionalME < matlab.unittest.TestCase
     end
         
     methods (Access = 'public')        
-        function obj = TestTraditionalME
+        function obj = TestMorisonElement
             obj.testDir = fileparts(mfilename('fullpath'));
         end    
     end
@@ -50,13 +50,13 @@ classdef TestTraditionalME < matlab.unittest.TestCase
     end
     
     methods(Test)        
-        function testTraditionalME(testCase)
+        function testMorisonElement(testCase)
             cd('morisonElement')
             wecSim
             cd(testCase.testDir)
         end        
-        function testHydroBody(testCase)
-            cd('hydroBody')
+        function testMonopile(testCase)
+            cd('monopile')
             wecSim
             cd(testCase.testDir)
         end        
