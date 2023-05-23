@@ -39,9 +39,7 @@ pto(1).location = [0 0 0];                   % PTO Location [m]
 
 %% PTO-Sim block definition
 
-ptoSim(1) = ptoSimClass('PTOSim1');
-ptoSim(1).number  = 1;
-ptoSim(1).type = 9;
+ptoSim(1) = ptoSimClass('ddLinearGen');
 ptoSim(1).directLinearGenerator.Rs = 4.58;
 ptoSim(1).directLinearGenerator.Bfric = -100;
 ptoSim(1).directLinearGenerator.tau_p = 0.072;

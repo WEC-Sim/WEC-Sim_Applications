@@ -5,7 +5,7 @@ clear table
 %% Plots 
 
 figure();
-plot(output.ptosim(3).time,output.ptosim(3).pressure/1e6,output.ptosim(4).time,output.ptosim(4).pressure/1e6)
+plot(output.ptoSim(3).time,output.ptoSim(3).pressure/1e6,output.ptoSim(4).time,output.ptoSim(4).pressure/1e6)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
 ylabel('Pressure (MPa)')
@@ -14,7 +14,7 @@ legend('highPressure','lowPressure')
 grid on
 
 figure();
-plot(output.ptosim(1).time,output.ptosim(1).forcePTO/1e6)
+plot(output.ptoSim(1).time,output.ptoSim(1).forcePTO/1e6)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
 ylabel('Force (MN)')
@@ -23,7 +23,7 @@ grid on
 
 
 figure();
-plot(output.ptosim(6).time,output.ptosim(6).shaftSpeed)
+plot(output.ptoSim(6).time,output.ptoSim(6).shaftSpeed)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
 ylabel('Speed (rpm)')
@@ -33,7 +33,7 @@ grid on
 
 figure()
 subplot(2,1,1)
-plot(output.ptosim(5).time,output.ptosim(5).deltaP)
+plot(output.ptoSim(5).time,output.ptoSim(5).deltaP)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
 ylabel('Pressure (MPa)')
@@ -41,7 +41,7 @@ title('Pressure Differential in the Hydraulic Motor')
 grid on
 
 subplot(2,1,2)
-plot(output.ptosim(5).time,output.ptosim(5).flowRate)
+plot(output.ptoSim(5).time,output.ptoSim(5).flowRate)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
 ylabel('Volume (m^3)')

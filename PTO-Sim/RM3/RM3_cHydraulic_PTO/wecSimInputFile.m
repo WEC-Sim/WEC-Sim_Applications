@@ -42,9 +42,7 @@ pto(1).location = [0 0 0];                   % PTO Location [m]
 %% PTO new blocks
 
 %Hydraulic Cylinder
-ptoSim(1) = ptoSimClass('ptoSim1');
-ptoSim(1).number  = 1;
-ptoSim(1).type = 2;
+ptoSim(1) = ptoSimClass('hydraulicCyl');
 ptoSim(1).hydPistonCompressible.xi_piston = 35;
 ptoSim(1).hydPistonCompressible.Ap_A = 0.0378;
 ptoSim(1).hydPistonCompressible.Ap_B = 0.0378;
@@ -54,9 +52,7 @@ ptoSim(1).hydPistonCompressible.pAi = 2.1333e7;
 ptoSim(1).hydPistonCompressible.pBi = 2.1333e7;
 
 %Rectifying Check Valve
-ptoSim(2) = ptoSimClass('ptoSim2');
-ptoSim(2).number = 2;
-ptoSim(2).type = 4;
+ptoSim(2) = ptoSimClass('rectCheckValve');
 ptoSim(2).rectifyingCheckValve.Cd = 0.61;
 ptoSim(2).rectifyingCheckValve.Amax = 0.002;
 ptoSim(2).rectifyingCheckValve.Amin = 1e-8;
@@ -70,23 +66,17 @@ ptoSim(2).rectifyingCheckValve.k2 = ...
     1/(ptoSim(2).rectifyingCheckValve.pMin-(ptoSim(2).rectifyingCheckValve.pMax + ptoSim(2).rectifyingCheckValve.pMin)/2);
 
 %High Pressure Hydraulic Accumulator
-ptoSim(3) = ptoSimClass('ptoSim3');
-ptoSim(3).number  = 3;
-ptoSim(3).type = 3;
+ptoSim(3) = ptoSimClass('hydraulicAcc');
 ptoSim(3).gasHydAccumulator.vI0 = 8.5;
 ptoSim(3).gasHydAccumulator.pIprecharge = 2784.7*6894.75;
 
 %Low Pressure Hydraulic Accumulator
-ptoSim(4) = ptoSimClass('ptoSim4');
-ptoSim(4).number  = 4;
-ptoSim(4).type = 3;
+ptoSim(4) = ptoSimClass('hydraulicAcc');
 ptoSim(4).gasHydAccumulator.vI0 = 8.5;
 ptoSim(4).gasHydAccumulator.pIprecharge = 1392.4*6894.75;
 
 %Hydraulic Motor
-ptoSim(5) = ptoSimClass('ptoSim5');
-ptoSim(5).number  = 5;
-ptoSim(5).type = 5;
+ptoSim(5) = ptoSimClass('hydraulicMotor');
 ptoSim(5).hydraulicMotor.effModel = 2;
 ptoSim(5).hydraulicMotor.displacement = 120;
 ptoSim(5).hydraulicMotor.effTableShaftSpeed = linspace(0,2500,20);
@@ -95,9 +85,7 @@ ptoSim(5).hydraulicMotor.effTableVolEff = ones(20,20)*0.9;
 ptoSim(5).hydraulicMotor.effTableMechEff = ones(20,20)*0.85;
 
 %Electric generator
-ptoSim(6) = ptoSimClass('ptoSim6');
-ptoSim(6).number = 6;
-ptoSim(6).type = 1;
+ptoSim(6) = ptoSimClass('electricGen');
 ptoSim(6).electricGeneratorEC.Ra = 0.8;
 ptoSim(6).electricGeneratorEC.La = 0.8;
 ptoSim(6).electricGeneratorEC.Ke = 0.8;
