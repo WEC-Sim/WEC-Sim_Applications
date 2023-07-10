@@ -26,6 +26,7 @@ jobs:
         release: [R2020b, latest]
         folder: [Body-to-Body_Interactions,
                  Cable,
+                 Controls,                 
                  End_Stops,
                  Free_Decay,
                  Generalized_Body_Modes,

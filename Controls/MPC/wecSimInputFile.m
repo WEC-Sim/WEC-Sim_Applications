@@ -41,13 +41,13 @@ controller(1).modelPredictiveControl.maxPTOForce = 2e6;                     % (`
 controller(1).modelPredictiveControl.maxPTOForceChange = 1.5e6;             % (`float`) Maximum Change in PTO Force (N/s)
 controller(1).modelPredictiveControl.maxPos = 4;                            % (`float`) Maximum Position (m)
 controller(1).modelPredictiveControl.maxVel = 3;                            % (`float`) Maximum Velocity (m/s)
-controller(1).modelPredictiveControl.rScale = 4e-8;                         % (`float`) Scale for penalizing PTO force rate of change
+controller(1).modelPredictiveControl.rScale = 1e-7;                         % (`float`) Scale for penalizing PTO force rate of change
 controller(1).modelPredictiveControl.Ho = 200;                              % (`float`) Number of timesteps before MPC begins
 controller(1).modelPredictiveControl.predictionHorizon = 15;                % (`float`) Future time period predicted by plant model (s)
 controller(1).modelPredictiveControl.coeffFile = 'coeff.mat';               % (`string`) File containing frequnecy dependent coeffcients
 controller(1).modelPredictiveControl.plantFile = 'makePlantModel.m';        % (`string`) File used to create plant model
 controller(1).modelPredictiveControl.predictFile = 'makePredictiveModel.m'; % (`string`) File used to create prediction model
-controller(1).modelPredictiveControl.dt = 0.25;                              % (`float`) Timestep in which MPC is applied (s)
+controller(1).modelPredictiveControl.dt = 0.5;                              % (`float`) Timestep in which MPC is applied (s)
 controller(1).modelPredictiveControl.order = 4;                             % (`float`) Order of the plant model
 controller(1).modelPredictiveControl.yLen = 3;                              % (`float`) Length of the output variable
 
