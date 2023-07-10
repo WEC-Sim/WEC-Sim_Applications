@@ -27,6 +27,10 @@ function results = wecSimAppTest(testsPath)
     %   results = wecSimAppTest(testsPath)
     %        returns a matlab.unittest.TestResult object for the tests 
     %        located under the given path    
+    %
+    %   runtests <testDirectory>
+    %       runs a specific test directory (e.g., Controls)
+    %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     arguments
         testsPath string = "."
