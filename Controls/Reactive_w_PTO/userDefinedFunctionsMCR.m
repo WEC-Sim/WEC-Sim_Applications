@@ -8,36 +8,119 @@ for ii = 1:length(controllersOutput)
 end
 
 endInd = length(controllersOutput.power);
-startTime = controllersOutput.time(end) - 4*waves.period; % select last 4 periods
+startTime = controllersOutput.time(end) - 5*waves.period; % select last 10 periods
 [~,startInd] = min(abs(controllersOutput.time(:) - startTime));
 
-mcr.meanControlPower(imcr) = mean(controllersOutput.power(startInd:endInd,3));
-mcr.maxControlForce(imcr) = max(controllersOutput.force(startInd:endInd,3));
+mcr.meanElecPower(imcr) = mean(elecPower.Data(startInd:endInd));
+mcr.meanMechPower(imcr) = mean(mechPower.Data(startInd:endInd));
+mcr.meanForce(imcr) = mean(shaftTorque.Data(startInd:endInd));
 
-mcr.meanElecPower(imcr) = mean(elecPower);
-mcr.maxForce(imcr) = max(genForce);
+mcr.maxElecPower(imcr) = max(abs(elecPower.Data(startInd:endInd)));
+mcr.maxMechPower(imcr) = max(abs(mechPower.Data(startInd:endInd)));
+mcr.maxForce(imcr) = max(abs(shaftTorque.Data(startInd:endInd)));
 
-if imcr == 20
+if imcr == numel(mcr.cases(:,1))
+
+    % Kp and Ki gains
+    kps = unique(mcr.cases(:,1));
+    kis = unique(mcr.cases(:,2));
+
+    i = 1;
+    for kpIdx = 1:length(kps)
+        for kiIdx = 1:length(kis)
+            meanElecPowerMat(kiIdx, kpIdx) = mcr.meanElecPower(i);
+            meanMechPowerMat(kiIdx, kpIdx) = mcr.meanMechPower(i);
+            meanForceMat(kiIdx, kpIdx) = mcr.meanForce(i);
+
+            maxElecPowerMat(kiIdx, kpIdx) = mcr.maxElecPower(i);
+            maxMechPowerMat(kiIdx, kpIdx) = mcr.maxMechPower(i);
+            maxForceMat(kiIdx, kpIdx) = mcr.maxForce(i);
+            i = i+1;
+        end
+    end
 
     % Plot surface for controller power at each gain combination
     figure()
-    plot(mcr.cases, mcr.meanControlPower)
-    hold on
-    plot(mcr.cases, mcr.meanElecPower)
+    surf(kps,kis,meanElecPowerMat)
     % Create labels
-    ylabel('Mean Power (W)');
-    xlabel('Resistance (ohms)');
+    zlabel('Mean Electrical Power (W)');
+    ylabel('Integral Gain/Stiffness (N/m)');
+    xlabel('Proportional Gain/Damping (Ns/m)');
     % Set color bar and color map
-    legend('Control Power', 'Elec Power')
+    C = colorbar('location','EastOutside');
+    colormap(jet);
+    set(get(C,'XLabel'),'String','Power (Watts)')
+    % Create title
+    title('Mean Elec Power vs. Proportional and Integral Gains');
 
     % Plot surface for controller power at each gain combination
     figure()
-    plot(mcr.cases, mcr.maxControlForce)
-    hold on
-    plot(mcr.cases, mcr.maxForce)
+    surf(kps,kis,meanMechPowerMat)
     % Create labels
-    ylabel('Max Force (N)');
-    xlabel('Resistance (ohms)');
+    zlabel('Mean Mechanical Power (W)');
+    ylabel('Integral Gain/Stiffness (N/m)');
+    xlabel('Proportional Gain/Damping (Ns/m)');
     % Set color bar and color map
-    legend('Control Force', 'Gen Force')
+    C = colorbar('location','EastOutside');
+    colormap(jet);
+    set(get(C,'XLabel'),'String','Power (Watts)')
+    % Create title
+    title('Mean Mech Power vs. Proportional and Integral Gains');
+
+    % Plot surface for controller power at each gain combination
+    figure()
+    surf(kps,kis,meanForceMat)
+    % Create labels
+    zlabel('Mean Force (Nm)');
+    ylabel('Integral Gain/Stiffness (N/m)');
+    xlabel('Proportional Gain/Damping (Ns/m)');
+    % Set color bar and color map
+    C = colorbar('location','EastOutside');
+    colormap(jet);
+    set(get(C,'XLabel'),'String','Power (Watts)')
+    % Create title
+    title('Mean Force vs. Proportional and Integral Gains');
+
+    %
+    % Plot surface for controller power at each gain combination
+    figure()
+    surf(kps,kis,maxElecPowerMat)
+    % Create labels
+    zlabel('Max Electrical Power (W)');
+    ylabel('Integral Gain/Stiffness (N/m)');
+    xlabel('Proportional Gain/Damping (Ns/m)');
+    % Set color bar and color map
+    C = colorbar('location','EastOutside');
+    colormap(jet);
+    set(get(C,'XLabel'),'String','Power (Watts)')
+    % Create title
+    title('Max Elec Power vs. Proportional and Integral Gains');
+
+    % Plot surface for controller power at each gain combination
+    figure()
+    surf(kps,kis,maxMechPowerMat)
+    % Create labels
+    zlabel('Max Mechanical Power (W)');
+    ylabel('Integral Gain/Stiffness (N/m)');
+    xlabel('Proportional Gain/Damping (Ns/m)');
+    % Set color bar and color map
+    C = colorbar('location','EastOutside');
+    colormap(jet);
+    set(get(C,'XLabel'),'String','Power (Watts)')
+    % Create title
+    title('Max Mech Power vs. Proportional and Integral Gains');
+
+    % Plot surface for controller power at each gain combination
+    figure()
+    surf(kps,kis,maxForceMat)
+    % Create labels
+    zlabel('Max Force (Nm)');
+    ylabel('Integral Gain/Stiffness (N/m)');
+    xlabel('Proportional Gain/Damping (Ns/m)');
+    % Set color bar and color map
+    C = colorbar('location','EastOutside');
+    colormap(jet);
+    set(get(C,'XLabel'),'String','Power (Watts)')
+    % Create title
+    title('M Foaxrce vs. Proportional and Integral Gains');
 end
