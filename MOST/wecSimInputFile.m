@@ -4,8 +4,8 @@ simu.simMechanicsFile = 'OFWTmodel.slx';            % Specify Simulink Model Fil
 simu.mode = 'normal';                               % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'on';                               % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                                 % Simulation Start Time [s]
-simu.rampTime = 10;                                 % Wave Ramp Time [s]
-simu.endTime = 10;                                  % Simulation End Time [s]    
+simu.rampTime = 20;                                 % Wave Ramp Time [s]
+simu.endTime = 200;                                  % Simulation End Time [s]    
 simu.rho = 1025;                                    % Density [kg/m^3]
 simu.solver = 'ode4';                               % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.02;                                     % Simulation Time-Step [s]
@@ -15,23 +15,23 @@ simu.cicEndTime = 60;                               % Specify Convolution integr
 simu.gravity = 9.80665;                             % Gravity acceleration
 
 %% Wave class
-% Reguar Wave
-waves = waveClass('regular');                       % Initialize Wave Class and Specify Type
-waves.height = 0.5;                                 % Significant Wave Height [m]
-waves.period = 9;                                   % Peak Period [s]
-
-% % Irregular Waves using Spectrum with Directionality 
-% waves = waveClass('irregular');                     % Initialize Wave Class and Specify Type
-% waves.phaseSeed = 1;                                % needed to create different random waves
-% waves.height = 0;                                   % Significant Wave Height [m]
+% % Reguar Wave
+% waves = waveClass('regular');                       % Initialize Wave Class and Specify Type
+% waves.height = 0.5;                                 % Significant Wave Height [m]
 % waves.period = 9;                                   % Peak Period [s]
-% waves.spectrumType = 'JS';                          % Specify Spectrum Type JS=Jonswap, PM=Pierson-Moskovitz
-% waves.direction = [0];                              % Wave Directionality [deg]
+
+% Irregular Waves using Spectrum with Directionality 
+waves = waveClass('irregular');                     % Initialize Wave Class and Specify Type
+waves.phaseSeed = 1;                                % needed to create different random waves
+waves.height = 0;                                   % Significant Wave Height [m]
+waves.period = 9;                                   % Peak Period [s]
+waves.spectrumType = 'JS';                          % Specify Spectrum Type JS=Jonswap, PM=Pierson-Moskovitz
+waves.direction = [0];                              % Wave Directionality [deg]
 
 %% Platform body initialization
 platformdata = importdata('windTUrbine\VolturnUS15MW.mat');
 body(1) = bodyClass('hydroData\Volturn15MW_wamit.h5'); 
-body(1).geometryFile = 'geometry\VolturnUS15MW.STEP';     % Geometry File 
+body(1).geometryFile = 'geometry\VolturnUS15MW.STEPs';     % Geometry File 
 body(1).mass = platformdata.mass; % User-Defined mass [kg]
 body(1).inertia = platformdata.inertia; % Moment of Inertia [kg-m^2]
 body(1).quadDrag.drag = platformdata.viscDrag;
