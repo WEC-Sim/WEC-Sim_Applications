@@ -29,7 +29,8 @@ body(1).yaw.option=0;                           % Turn passive yaw OFF
 % Base NOTE: This test uses unique BEM for the OSWEC
 body(2) = bodyClass('../hydroData/oswec.h5');   % Initialize bodyClass for Base
 body(2).geometryFile = '../geometry/base.stl';  % Geometry File
-body(2).mass = 'fixed';                         % Creates Fixed Body
+body(2).mass = 999;                             % Placeholder mass for fixed body
+body(2).inertia = [999 999 999];                % Placeholder inertia for fixed body
 body(2).yaw.option=0;                           % Turn passive yaw OFF
 
 %% PTO and Constraint Parameters

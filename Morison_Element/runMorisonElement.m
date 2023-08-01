@@ -1,7 +1,7 @@
 % Example running traditional Morison Element vs hydrodynamic body
 % comparison
 
-casedir = {"morisonElement","hydroBody"};
+casedir = {"morisonElement","monpile"};
 
 for ii = 1:length(casedir)
     cd(casedir{ii})
@@ -9,5 +9,4 @@ for ii = 1:length(casedir)
     cd ..
 end
 
-plotTraditionalME
-    
+plotMorisonElement

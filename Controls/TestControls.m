@@ -1,29 +1,29 @@
-classdef TestTraditionalME < matlab.unittest.TestCase
+classdef TestControls < matlab.unittest.TestCase
     
     properties
         OriginalDefault
         testDir
-        h5Dir = fullfile("hydroData")
-        h5Name = 'monopile.h5'
-        outName = 'monopile.out'
-    end
-        
+        h5Dir = "hydroData"
+        h5Name = 'sphere.h5'
+        outName = 'sphere.out'
+    end    
+    
     methods (Access = 'public')        
-        function obj = TestTraditionalME
+        function obj = TestControls
             obj.testDir = fileparts(mfilename('fullpath'));
         end    
     end
     
-    methods (TestMethodSetup)        
+    methods (TestMethodSetup)
         function killPlots (~)
             set(0,'DefaultFigureVisible','off');
-        end        
+        end
     end
     
-    methods(TestClassSetup)        
+    methods(TestClassSetup)
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
+        end
         function runBemio(testCase)
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -32,33 +32,43 @@ classdef TestTraditionalME < matlab.unittest.TestCase
                 bemio
             end
             cd(testCase.testDir)
-        end
+        end        
     end
     
     methods(TestMethodTeardown)
         function returnHome(testCase)
             cd(testCase.testDir)
-        end        
+        end
     end
     
-    methods(TestClassTeardown)
+    methods(TestClassTeardown)        
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...
                                  testCase.OriginalDefault);
-        end            
+        end        
     end
     
     methods(Test)        
-        function testTraditionalME(testCase)
-            cd('morisonElement')
+        function testPassive(testCase)
+            cd('Passive (P)')
             wecSim
-            cd(testCase.testDir)
         end        
-        function testHydroBody(testCase)
-            cd('hydroBody')
+        function testReactive(testCase)
+            cd('Reactive (PI)')
             wecSim
-            cd(testCase.testDir)
+        end        
+        function testLatching(testCase)
+            cd('Latching')
+            wecSim
+        end        
+        function testDeclutching(testCase)
+            cd('Declutching')
+            wecSim
+        end        
+        function testMPC(testCase)
+            cd('MPC')
+            wecSim
         end        
     end    
 end

@@ -30,6 +30,7 @@ body(1).inertia = [Ixx Iyy Izz];
 %      0 (no), 
 %      1 (from control surface) 
 %      2 (from momentum conservation)
+%      3 (from pressure integration)
 body(1).meanDrift = 1;                                
 
 %% PTO and Constraint Parameters
