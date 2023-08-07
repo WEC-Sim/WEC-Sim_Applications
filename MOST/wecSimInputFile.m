@@ -31,7 +31,7 @@ waves.direction = [0];                              % Wave Directionality [deg]
 %% Platform body initialization
 platformdata = importdata('windTUrbine\VolturnUS15MW.mat');
 body(1) = bodyClass('hydroData\Volturn15MW_wamit.h5'); 
-body(1).geometryFile = 'geometry\VolturnUS15MW.STEPs';     % Geometry File 
+body(1).geometryFile = 'geometry\VolturnUS15MW.stl';     % Geometry File 
 body(1).mass = platformdata.mass; % User-Defined mass [kg]
 body(1).inertia = platformdata.inertia; % Moment of Inertia [kg-m^2]
 body(1).quadDrag.drag = platformdata.viscDrag;
