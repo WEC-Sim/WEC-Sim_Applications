@@ -51,7 +51,7 @@ if imcr == numel(mcr.cases(:,1))
     colormap(jet);
     set(get(C,'XLabel'),'String','Power (Watts)')
     % Create title
-    title('Mean Elec Power vs. Proportional and Integral Gains');
+    title('Mean Electrical Power vs. Proportional and Integral Gains');
 
     % Plot surface for controller power at each gain combination
     figure()

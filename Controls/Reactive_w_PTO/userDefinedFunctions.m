@@ -60,16 +60,16 @@ endInd = length(controllersOutput.power);
 startTime = controllersOutput.time(end) - 10*waves.period; % select last 10 periods
 [~,startInd] = min(abs(controllersOutput.time(:) - startTime));
 
-meanControllerPower = mean(controllersOutput.power(startInd:endInd,3));
-meanMechPower = mean(mechPower.Data(startInd:endInd));
-meanElecPower = mean(elecPower.Data(startInd:endInd));
+meanControllerPower = mean(controllersOutput.power(startInd:endInd,3))
+meanMechPower = mean(mechPower.Data(startInd:endInd))
+meanElecPower = mean(elecPower.Data(startInd:endInd))
 
-meanInertiaPower = mean(inertiaPower.Data(startInd:endInd));
-meanDampingPower = mean(dampingPower.Data(startInd:endInd));
-meanGenPower = mean(genPower.Data(startInd:endInd));
+meanInertiaPower = mean(inertiaPower.Data(startInd:endInd))
+meanDampingPower = mean(dampingPower.Data(startInd:endInd))
+meanGenPower = mean(genPower.Data(startInd:endInd))
 
-meanGenElecPower = mean(genElecPower.Data(startInd:endInd));
-meanElecPowerLoss = mean(elecPowerLoss.Data(startInd:endInd));
+meanGenElecPower = mean(genElecPower.Data(startInd:endInd))
+meanElecPowerLoss = mean(elecPowerLoss.Data(startInd:endInd))
 
 x = categorical({'Controller Power','Mechanical Drivetrain Power','Generator Electrical Power'});
 x = reordercats(x,{'Controller Power','Mechanical Drivetrain Power','Generator Electrical Power'});

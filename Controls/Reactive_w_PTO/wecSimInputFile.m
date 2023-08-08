@@ -32,8 +32,8 @@ pto(1).damping = 0;                       % PTO Damping [N/(m/s)]
 pto(1).location = [0 0 0];                      % PTO Location [m]
 
 % PI Controller
-controller(1).proportionalIntegral.Kp = 4.9181e4; % 4e+05;
-controller(1).proportionalIntegral.Ki = -5.7335e5; % -1.6e5;
+controller(1).proportionalIntegral.Kp = 3.8e+05; % 4.9181e4; % 
+controller(1).proportionalIntegral.Ki = -1.52e5; % -5.7335e5; % 
 
 %% generator details
 
