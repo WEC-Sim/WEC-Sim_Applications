@@ -1,6 +1,6 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'reactivePTO.slx';      % Specify Simulink Model File
+simu.simMechanicsFile = 'reactiveWithPTO.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'off';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
@@ -32,8 +32,8 @@ pto(1).damping = 0;                       % PTO Damping [N/(m/s)]
 pto(1).location = [0 0 0];                      % PTO Location [m]
 
 % PI Controller
-controller(1).proportionalIntegral.Kp = 3.8e+05; % 4.9181e4; % 
-controller(1).proportionalIntegral.Ki = -1.52e5; % -5.7335e5; % 
+controller(1).proportionalIntegral.Kp = 3.8e+05; % 4.9181e4; 
+controller(1).proportionalIntegral.Ki = -1.52e5; % -5.7335e5; 
 
 %% generator details
 
