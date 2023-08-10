@@ -29,7 +29,7 @@ waves.spectrumType = 'JS';                          % Specify Spectrum Type JS=J
 waves.direction = [0];                              % Wave Directionality [deg]
 
 %% Platform body initialization
-platformdata = importdata('windTUrbine\VolturnUS15MW.mat');
+platformdata = importdata('windTurbine\VolturnUS15MW.mat');
 body(1) = bodyClass('hydroData\Volturn15MW_wamit.h5'); 
 body(1).geometryFile = 'geometry\VolturnUS15MW.stl';     % Geometry File 
 body(1).mass = platformdata.mass; % User-Defined mass [kg]
@@ -43,12 +43,17 @@ mooring(1).lookupTableFlag = 1;
 mooring(1).location = [0 0 0];
 
 %% Wind turbine definition
-windturbine(1) = windturbineClass('IEA15MW');         % Initialize turbine size and specify type
-windturbine(1).control = 1; % 0-->baseline, 1-->ROSCO 
-windturbine(1).aeroloads_name = [pwd,filesep,'windTurbine',filesep,'aeroloads_IEA15MW.mat'];
-windturbine(1).omega0 = 7.55*pi/30; % initial value for rotor speed
-windturbine(1).turbine_name = [pwd,filesep,'windTurbine',filesep,'componentsIEA15MW.mat'];
-windturbine(1).rosco_name = [pwd,filesep,'windTurbine',filesep,'ROSCO_IEA15MW.mat'];
+windTurbine(1) = windTurbineClass('IEA15MW');         % Initialize turbine size and specify type
+windTurbine(1).control = 1; % 0-->baseline, 1-->ROSCO 
+windTurbine(1).aeroloadsName = [pwd,filesep,'windTurbine',filesep,'aeroloads_IEA15MW.mat'];
+windTurbine(1).omega0 = 7.55*pi/30; % initial value for rotor speed
+windTurbine(1).turbineName = [pwd,filesep,'windTurbine',filesep,'componentsIEA15MW.mat'];
+windTurbine(1).roscoName = [pwd,filesep,'windTurbine',filesep,'ROSCO_IEA15MW.mat'];
+
+% windTurbine(1).geometryFileTower = 'geometry\IEA15MW_Tower.stl';                              % Tower geometry file
+% windTurbine(1).geometryFileNacelle = 'geometry\IEA15MW_Nacelle.stl';                            % Nacelle geometry file
+% windTurbine(1).geometryFileHub = 'geometry\IEA15MW_Hub.stl';                                % Hub geometry file
+% windTurbine(1).geometryFileBlade = 'geometry\IEA15MW_Blade.stl';                              % Blade geometry file
 
 %% Wind conditions
 % wind = windClass('constant');
