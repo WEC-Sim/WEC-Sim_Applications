@@ -22,38 +22,66 @@ for ii = 1:length(controllersOutput)
     end
 end
 
-% Plot overall power
-figure()
-plot(controllersOutput.time,controllersOutput.power(:,3))
-hold on
-plot(elecPower)
-plot(mechPower)
-xlim([80, 100])
-legend('Controller Power','Electrical Power','Mechanical Power')
-ylabel('Power (W)')
+%% Plots
+figure();
+plot(output.ptoSim(1).time,output.ptoSim(1).velocity)
+set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
+ylabel('Velocity (rad/s)')
+title('PTO Velocity')
+grid on
 
+figure();
+plot(output.ptoSim(1).time,output.ptoSim(1).force)
+set(findall(gcf,'type','axes'),'fontsize',16)
+xlabel('Time (s)')
+ylabel('Torque (Nm)')
+title('PTO Shaft Torque')
+grid on
+
+figure();
+plot(output.ptoSim(1).time,output.ptoSim(1).current)
+set(findall(gcf,'type','axes'),'fontsize',16)
+xlabel('Time (s)')
+ylabel('Current (A)')
+title('Generator Current')
+grid on
+
+figure();
+plot(output.ptoSim(1).time,output.ptoSim(1).voltage)
+set(findall(gcf,'type','axes'),'fontsize',16)
+xlabel('Time (s)')
+ylabel('Voltage (V)')
+title('Generator Voltage')
+grid on
+
+figure();
+plot(output.ptoSim(1).time,output.ptoSim(1).I2RLosses)
+set(findall(gcf,'type','axes'),'fontsize',16)
+xlabel('Time (s)')
+ylabel('Losses (W)')
+title('I^2R Losses')
+grid on
+
+figure();
+plot(output.ptoSim(1).time,output.ptoSim(1).elecPower)
+set(findall(gcf,'type','axes'),'fontsize',16)
+xlabel('Time (s)')
+ylabel('Power (W)')
+title('Electric Power')
+grid on
+
+% Calculate averages to make sure results line up:
 % average last few periods:
 endInd = length(controllersOutput.power);
 startTime = controllersOutput.time(end) - 10*waves.period; % select last 10 periods
 [~,startInd] = min(abs(controllersOutput.time(:) - startTime));
 
-meanControllerPower = mean(controllersOutput.power(startInd:endInd,3));
-meanMechPower = mean(mechPower.Data(startInd:endInd));
-meanElecPower = mean(elecPower.Data(startInd:endInd));
-
-meanInertiaPower = mean(inertiaPower.Data(startInd:endInd));
-meanDampingPower = mean(dampingPower.Data(startInd:endInd));
-meanGenPower = mean(genPower.Data(startInd:endInd));
-
-meanGenElecPower = mean(genElecPower.Data(startInd:endInd));
-meanElecPowerLoss = mean(elecPowerLoss.Data(startInd:endInd));
-
-x = categorical({'Controller (Ideal)','Mechanical (Drivetrain)','Electrical (Generator)'});
-x = reordercats(x,{'Controller (Ideal)','Mechanical (Drivetrain)','Electrical (Generator)'});
-y = [meanControllerPower, meanInertiaPower + meanDampingPower + meanGenPower, meanGenElecPower + meanElecPowerLoss];
-figure()
-bar(x,y)
-ylabel('Power (kW)')
-xtickangle(45)
-hold on
+meanControllerPower = mean(controllersOutput.power(startInd:endInd,3))
+meanMechPower = mean(output.ptoSim.absPower(startInd:endInd))
+meanInertiaPower = mean(output.ptoSim.inertiaForce(startInd:endInd).*output.ptoSim.velocity(startInd:endInd))
+meanDampingPower = mean(output.ptoSim.fricForce(startInd:endInd).*output.ptoSim.velocity(startInd:endInd))
+meanGenPower = mean(output.ptoSim.genForce(startInd:endInd).*output.ptoSim.velocity(startInd:endInd))
+meanElecPower = mean(output.ptoSim.elecPower(startInd:endInd))
+meanVIPower = mean(output.ptoSim.current(startInd:endInd).*output.ptoSim.voltage(startInd:endInd))
+meanI2RLosses = mean(output.ptoSim.I2RLosses(startInd:endInd))

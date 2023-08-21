@@ -12,14 +12,14 @@ startTime = controllersOutput.time(end) - 5*waves.period; % select last 10 perio
 [~,startInd] = min(abs(controllersOutput.time(:) - startTime));
 
 mcr.meanControlPower(imcr) = mean(controllersOutput.power(startInd:endInd,3));
-mcr.meanMechPower(imcr) = mean(mechPower.Data(startInd:endInd));
-mcr.meanElecPower(imcr) = mean(elecPower.Data(startInd:endInd));
-mcr.meanForce(imcr) = mean(shaftTorque.Data(startInd:endInd));
+mcr.meanMechPower(imcr) = mean(output.ptoSim.absPower(startInd:endInd));
+mcr.meanElecPower(imcr) = mean(output.ptoSim.elecPower(startInd:endInd));
+mcr.meanShaftTorque(imcr) = mean(output.ptoSim.force(startInd:endInd));
 
 mcr.maxControlPower(imcr) = max(abs(controllersOutput.power(startInd:endInd,3)));
-mcr.maxMechPower(imcr) = max(abs(mechPower.Data(startInd:endInd)));
-mcr.maxElecPower(imcr) = max(abs(elecPower.Data(startInd:endInd)));
-mcr.maxForce(imcr) = max(abs(shaftTorque.Data(startInd:endInd)));
+mcr.maxMechPower(imcr) = max(abs(output.ptoSim.absPower(startInd:endInd)));
+mcr.maxElecPower(imcr) = max(abs(output.ptoSim.elecPower(startInd:endInd)));
+mcr.maxShaftTorque(imcr) = max(abs(output.ptoSim.force(startInd:endInd)));
 
 if imcr == numel(mcr.cases(:,1))
 
@@ -33,12 +33,12 @@ if imcr == numel(mcr.cases(:,1))
             meanControlPowerMat(kiIdx, kpIdx) = mcr.meanControlPower(i);
             meanMechPowerMat(kiIdx, kpIdx) = mcr.meanMechPower(i);
             meanElecPowerMat(kiIdx, kpIdx) = mcr.meanElecPower(i);
-            meanForceMat(kiIdx, kpIdx) = mcr.meanForce(i);
+            meanForceMat(kiIdx, kpIdx) = mcr.meanShaftTorque(i);
 
             maxControlPowerMat(kiIdx, kpIdx) = mcr.maxControlPower(i);
             maxMechPowerMat(kiIdx, kpIdx) = mcr.maxMechPower(i);
             maxElecPowerMat(kiIdx, kpIdx) = mcr.maxElecPower(i);
-            maxForceMat(kiIdx, kpIdx) = mcr.maxForce(i);
+            maxForceMat(kiIdx, kpIdx) = mcr.maxShaftTorque(i);
             i = i+1;
         end
     end

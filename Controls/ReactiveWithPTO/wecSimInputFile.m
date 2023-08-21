@@ -32,15 +32,15 @@ pto(1).damping = 0;                       % PTO Damping [N/(m/s)]
 pto(1).location = [0 0 0];                      % PTO Location [m]
 
 % PI Controller
-controller(1).proportionalIntegral.Kp = 3.8e+05; % 4.9181e4; 
-controller(1).proportionalIntegral.Ki = -1.52e5; % -5.7335e5; 
+controller(1).proportionalIntegral.Kp = 3.8e+05; %  4.9181e4;
+controller(1).proportionalIntegral.Ki = -1.52e5; % -5.7335e5;
 
-%% generator details
+%% PTO-Sim block definition
 
-Kt = 7.186; % Nm/A, motor torque constant
-Ng = 100; % gear ratio asscoiated with pinion system
-J = 2; % kg/m^2, inertia
-B = 1; % N*m*s, mechanical shaft damping
-R = .483; % ohms, generator series resistance
-L = 5.223e-3; % H, generator inductance
-tcControl = L/R; % motor control time constant
+ptoSim(1) = ptoSimClass('simpleDDPTO');
+ptoSim(1).simpleDirectDrivePTO.Kt = 7.186;
+ptoSim(1).simpleDirectDrivePTO.Ng = 100;
+ptoSim(1).simpleDirectDrivePTO.J = 2;
+ptoSim(1).simpleDirectDrivePTO.B = 1;
+ptoSim(1).simpleDirectDrivePTO.Rs = .483;
+ptoSim(1).simpleDirectDrivePTO.Ls = 5.223e-3;
