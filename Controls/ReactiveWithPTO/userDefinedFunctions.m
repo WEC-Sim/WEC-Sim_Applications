@@ -68,7 +68,7 @@ plot(output.ptoSim(1).time,output.ptoSim(1).elecPower)
 set(findall(gcf,'type','axes'),'fontsize',16)
 xlabel('Time (s)')
 ylabel('Power (W)')
-title('Electric Power')
+title('Electrical Power')
 grid on
 
 % Calculate averages to make sure results line up:
@@ -85,3 +85,18 @@ meanGenPower = mean(output.ptoSim.genForce(startInd:endInd).*output.ptoSim.veloc
 meanElecPower = mean(output.ptoSim.elecPower(startInd:endInd))
 meanVIPower = mean(output.ptoSim.current(startInd:endInd).*output.ptoSim.voltage(startInd:endInd))
 meanI2RLosses = mean(output.ptoSim.I2RLosses(startInd:endInd))
+
+figure()
+labels = categorical({'Controller (Ideal)','Mechanical (Drivetrain)','Electrical (Generator)'});
+labels = reordercats(labels,{'Controller (Ideal)','Mechanical (Drivetrain)','Electrical (Generator)'});
+values = [meanControllerPower,meanMechPower,meanElecPower]/1000;
+b = bar(labels, values,'FaceColor',[.4 .8 .2]);
+ylabel('Power (kW)')
+xtickangle(45)
+
+b.FaceColor = 'flat';
+for ii = 1:length(values)
+    if values(ii) > 0
+        b.CData(ii,:) = [.8 .2 .2];
+    end
+end
