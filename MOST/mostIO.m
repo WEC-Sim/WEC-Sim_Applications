@@ -11,7 +11,7 @@ cd ..
 
 %% Mooring Data
 cd mooring
-MooringStarter
+mooringStarter
 cd ..
 
 %% Turbine Data
