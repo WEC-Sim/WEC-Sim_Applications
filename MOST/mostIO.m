@@ -6,7 +6,7 @@ cd ..
 
 %% TurbSim Data
 cd turbSim
-%  TODO - move this function back out of the wind class
+readTurbSimOutput('WIND_11mps');
 cd ..
 
 %% Mooring Data
