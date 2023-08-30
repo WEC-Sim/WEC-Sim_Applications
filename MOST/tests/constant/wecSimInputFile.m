@@ -1,8 +1,8 @@
-%%Simulation class
+%% Simulation class
 simu = simulationClass();                           % Initialize Simulation Class
 simu.simMechanicsFile = 'OFWTmodel.slx';            % Specify Simulink Model File
 simu.mode = 'normal';                               % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer = 'on';                               % Turn SimMechanics Explorer (on/off)
+simu.explorer = 'off';                              % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                                 % Simulation Start Time [s]
 simu.rampTime = 20;                                 % Wave Ramp Time [s]
 simu.endTime = 200;                                 % Simulation End Time [s]    

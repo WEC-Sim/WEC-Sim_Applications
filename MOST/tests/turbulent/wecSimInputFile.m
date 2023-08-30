@@ -1,8 +1,8 @@
-%%Simulation class
+%% Simulation class
 simu = simulationClass();                           % Initialize Simulation Class
 simu.simMechanicsFile = 'OFWTmodel.slx';            % Specify Simulink Model File
 simu.mode = 'normal';                               % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer = 'on';                               % Turn SimMechanics Explorer (on/off)
+simu.explorer = 'off';                              % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                                 % Simulation Start Time [s]
 simu.rampTime = 20;                                 % Wave Ramp Time [s]
 simu.endTime = 200;                                 % Simulation End Time [s]    
@@ -46,7 +46,7 @@ windTurbine(1) = windTurbineClass('IEA15MW');         % Initialize turbine size 
 windTurbine(1).control = 1; % 0-->baseline, 1-->ROSCO 
 windTurbine(1).aeroLoadsName = fullfile('..','..','mostData','windTurbine','aeroloads_IEA15MW.mat');
 windTurbine(1).omega0 = 7.55*pi/30; % initial value for rotor speed
-windTurbine(1).turbineName = fullfile('..','..','mostData','windTurbine','componentsIEA15MW.mat');
+windTurbine(1).turbineName = fullfile('componentsIEA15MW.mat');
 windTurbine(1).roscoName = fullfile('..','..','mostData','windTurbine','ROSCO_IEA15MW.mat');
 
 %% Wind conditions
