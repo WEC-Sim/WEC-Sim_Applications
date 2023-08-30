@@ -1,9 +1,4 @@
 % Script to pre-process all required inputs for WEC-Sim+MOST
-%% Hydrodynamic Data
-cd hydroData\
-% bemio % TODO - get BEMIO script for the .out file
-cd ..
-
 %% TurbSim Data
 cd turbSim
 readTurbSimOutput('WIND_11mps');

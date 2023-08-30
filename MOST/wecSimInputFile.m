@@ -28,7 +28,7 @@ waves.period = 9;                                   % Peak Period [s]
 waves.spectrumType = 'JS';                          % Specify Spectrum Type JS=Jonswap, PM=Pierson-Moskovitz
 
 %% Platform body initialization
-platformdata = importdata('windTurbine\VolturnUS15MW.mat');
+platformdata = importdata('mostData\windTurbine\VolturnUS15MW.mat');
 body(1) = bodyClass('hydroData\Volturn15MW_wamit.h5'); 
 body(1).geometryFile = 'geometry\VolturnUS15MW.stl';     % Geometry File 
 body(1).mass = platformdata.mass; % User-Defined mass [kg]
@@ -37,31 +37,26 @@ body(1).quadDrag.drag = platformdata.viscDrag;
 
 %% Mooring initialization
 mooring(1) = mooringClass('mooring1');       % Initialize mooringClass
-mooring(1).lookupTableFile = ['mooring',filesep,'VolturnUS15MW'];
+mooring(1).lookupTableFile = fullfile('mostData','mooring','VolturnUS15MW');
 mooring(1).lookupTableFlag = 1;
 mooring(1).location = [0 0 0];
 
 %% Wind turbine definition
 windTurbine(1) = windTurbineClass('IEA15MW');         % Initialize turbine size and specify type
 windTurbine(1).control = 1; % 0-->baseline, 1-->ROSCO 
-windTurbine(1).aeroLoadsName = ['windTurbine',filesep,'aeroloads_IEA15MW.mat'];
+windTurbine(1).aeroLoadsName = fullfile('mostData','windTurbine','aeroloads_IEA15MW.mat');
 windTurbine(1).omega0 = 7.55*pi/30; % initial value for rotor speed
-windTurbine(1).turbineName = ['windTurbine',filesep,'componentsIEA15MW.mat'];
-windTurbine(1).roscoName = ['windTurbine',filesep,'ROSCO_IEA15MW.mat'];
-
-% windTurbine(1).geometryFileTower = 'geometry\IEA15MW_Tower.stl';                              % Tower geometry file
-% windTurbine(1).geometryFileNacelle = 'geometry\IEA15MW_Nacelle.stl';                            % Nacelle geometry file
-% windTurbine(1).geometryFileHub = 'geometry\IEA15MW_Hub.stl';                                % Hub geometry file
-% windTurbine(1).geometryFileBlade = 'geometry\IEA15MW_Blade.stl';                              % Blade geometry file
+windTurbine(1).turbineName = fullfile('mostData','windTurbine','componentsIEA15MW.mat');
+windTurbine(1).roscoName = fullfile('mostData','windTurbine','ROSCO_IEA15MW.mat');
 
 %% Wind conditions
-% Constant wind conditions
+% % Constant wind conditions
 % wind = windClass('constant');
 % wind.meanVelocity = 11;
 
 % Turbulent wind conditions
 wind = windClass('turbulent');
-wind.turbSimFile = ['turbSim',filesep,'WIND_11mps.mat'];
+wind.turbSimFile = fullfile('mostData','turbSim','WIND_11mps.mat');
 
 %% Constraint
 constraint(1) = constraintClass('Constraint1'); 
