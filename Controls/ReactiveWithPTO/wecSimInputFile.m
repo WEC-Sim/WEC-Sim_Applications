@@ -38,9 +38,9 @@ controller(1).proportionalIntegral.Ki = -1.52e5; % -5.7335e5;
 %% PTO-Sim block definition
 
 ptoSim(1) = ptoSimClass('simpleDDPTO');
-ptoSim(1).simpleDirectDrivePTO.Kt = 7.186;
-ptoSim(1).simpleDirectDrivePTO.Ng = 100;
-ptoSim(1).simpleDirectDrivePTO.J = 2;
-ptoSim(1).simpleDirectDrivePTO.B = 1;
-ptoSim(1).simpleDirectDrivePTO.Rs = .483;
-ptoSim(1).simpleDirectDrivePTO.Ls = 5.223e-3;
+ptoSim(1).simpleDirectDrivePTO.torqueConstant = 7.186;
+ptoSim(1).simpleDirectDrivePTO.gearRatio = 100;
+ptoSim(1).simpleDirectDrivePTO.drivetrainInertia = 2;
+ptoSim(1).simpleDirectDrivePTO.drivetrainFriction = 1;
+ptoSim(1).simpleDirectDrivePTO.windingResistance = .483;
+ptoSim(1).simpleDirectDrivePTO.windingInductance = 5.223e-3;
