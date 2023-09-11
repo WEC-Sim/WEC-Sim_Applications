@@ -1,24 +1,31 @@
-% Script to pre-process all required inputs for WEC-Sim+MOST
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Script to pre-process all required inputs for WEC-Sim+MOST %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Initialization
+clear  
+close all
+clc
 %% TurbSim Data
 cd turbSim
-readTurbSimOutput('WIND_11mps');
+run_turbsim
 cd ..
 
 %% Mooring Data
 cd mooring
-mooringStarter
+Create_Mooring_Matrix
 cd ..
 
 %% Turbine Data
 cd windTurbine
-platform_writer_Volturn15MW % TODO - missing the changeRefQuad function
-ROSCO_steadystates
-Linearisation
-lookupTable
-
-% One or the other
-WTcomponents_writer
-% componentsIEA15MW_writer
-
-ROSCO_gainSettings
+cd turbine_properties
+WTproperties
+BladeData
+cd ..
+cd control
+Steady_States
+Controller
+cd ..
+cd aeroloads
+AeroLoads
+cd ..
 cd ..

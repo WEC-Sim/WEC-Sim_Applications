@@ -27,27 +27,32 @@ waves.height = 0;                                   % Significant Wave Height [m
 waves.period = 9;                                   % Peak Period [s]
 waves.spectrumType = 'JS';                          % Specify Spectrum Type JS=Jonswap, PM=Pierson-Moskovitz
 
-%% Platform body initialization
-platformdata = importdata('..\..\mostData\windTurbine\VolturnUS15MW.mat');
-body(1) = bodyClass('..\..\hydroData\Volturn15MW_wamit.h5'); 
-body(1).geometryFile = '..\..\geometry\VolturnUS15MW.stl';     % Geometry File 
-body(1).mass = platformdata.mass; % User-Defined mass [kg]
-body(1).inertia = platformdata.inertia; % Moment of Inertia [kg-m^2]
-body(1).quadDrag.drag = platformdata.viscDrag;
+%% Body class (Platform)
 
-%% Mooring initialization
-mooring(1) = mooringClass('mooring1');       % Initialize mooringClass
-mooring(1).lookupTableFile = fullfile('..','..','mostData','mooring','VolturnUS15MW');
-mooring(1).lookupTableFlag = 1;
-mooring(1).location = [0 0 0];
+body(1) = bodyClass('..\..\hydroData\VolturnUS15MW_nemoh.h5');                                       % Initialize bodyClass (giving hydro data file as input)
+body(1).geometryFile = '..\..\geometry\VolturnUS15MW.STEP';                                          % Geometry File 
+body(1).mass = 17838000;                                                                       % User-Defined mass [kg]
+body(1).inertia = 1.0e+10*[1.2507    1.2507    2.3667];                                        % Moment of Inertia [kg-m^2]
+body(1).quadDrag.drag = [9.23E+05	0.00E+00	0.00E+00	0.00E+00	-8.92E+06	0.00E+00   %AddBQuad - Additional quadratic drag(N/(m/s)^2, N/(rad/s)^2, N-m(m/s)^2, N-m/(rad/s)^2) 
+                         0.00E+00	9.23E+05	0.00E+00	8.92E+06	0.00E+00	0.00E+00
+                         0.00E+00	0.00E+00	2.30E+06	0.00E+00	0.00E+00	0.00E+00
+                         0.00E+00	8.92E+06	0.00E+00	1.68E+10	0.00E+00	0.00E+00
+                        -8.92E+06	0.00E+00	0.00E+00	0.00E+00	1.68E+10	0.00E+00
+                         0.00E+00	0.00E+00	0.00E+00	0.00E+00	0.00E+00	4.80E+10];
 
-%% Wind turbine definition
-windTurbine(1) = windTurbineClass('IEA15MW');         % Initialize turbine size and specify type
-windTurbine(1).control = 1; % 0-->baseline, 1-->ROSCO 
-windTurbine(1).aeroLoadsName = fullfile('..','..','mostData','windTurbine','aeroloads_IEA15MW.mat');
-windTurbine(1).omega0 = 7.55*pi/30; % initial value for rotor speed
-windTurbine(1).turbineName = fullfile('componentsIEA15MW.mat');
-windTurbine(1).roscoName = fullfile('..','..','mostData','windTurbine','ROSCO_IEA15MW.mat');
+%%  Mooring class
+mooring(1) = mooringClass('mooring1');                                                                     % Initialize mooringClass
+mooring(1).lookupTableFile = fullfile('..','..','mostData','mooring','Mooring_VolturnUS15MW');             % Load file with mooring look-up table
+mooring(1).lookupTableFlag = 1;                                                                            % 1: mooring loads computed with look-up table, 0: other methods
+
+%% Windturbine class
+
+windTurbine(1) = windTurbineClass('IEA15MW');                                                                                                 % Initialize turbine size and Specify Type
+windTurbine(1).control = 1;                                                                                                                   % Controltype: 0-->Baseline, 1-->ROSCO 
+windTurbine(1).aeroLoadsName = fullfile('..','..','mostData','windTurbine','aeroloads','aeroloads_IEA15MW.mat');                              % Aeroloads filename
+windTurbine(1).turbineName = fullfile('Properties_IEA15MW.mat');                                                                              % Windturbine properties filename
+windTurbine(1).controlName = fullfile('..','..','mostData','windTurbine','control','Control_IEA15MW.mat');                                    % Controller filename
+windTurbine(1).omega0 = 7.55*pi/30;                                                                                                           % Initial value for rotor speed
 
 %% Wind conditions
 % Constant wind conditions
@@ -55,8 +60,9 @@ wind = windClass('constant');
 wind.meanVelocity = 11;
 
 % % Turbulent wind conditions
-% wind = windClass('turbulent');
-% wind.turbSimFile = fullfile('..','..','mostData','turbSim','WIND_11mps.mat');
+% wind = windClass('turbulent');                                                                                  % Initialize windClass with windtype as input: constant or turbulent
+% wind.turbSimFile = fullfile('..','..','mostData','turbSim',strcat('WIND_',num2str(11),'mps.mat'));    % Turbulent wind filename
+% wind.meanVelocity = 11;                                                                                         % Wind mean speed
 
 %% Constraint
 constraint(1) = constraintClass('Constraint1'); 
