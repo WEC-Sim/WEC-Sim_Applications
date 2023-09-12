@@ -100,3 +100,18 @@ for ii = 1:length(values)
         b.CData(ii,:) = [.8 .2 .2];
     end
 end
+
+figure()
+labels = categorical({'Controller (Ideal)','Mechanical (Drivetrain)','Electrical (Generator)'});
+labels = reordercats(labels,{'Controller (Ideal)','Mechanical (Drivetrain)','Electrical (Generator)'});
+values = [-meanControllerPower/waves.power,-meanMechPower/waves.power,-meanElecPower/waves.power];
+b = bar(labels, values,'FaceColor',[.4 .8 .2]);
+ylabel('Capture Width (m)')
+xtickangle(45)
+
+b.FaceColor = 'flat';
+for ii = 1:length(values)
+    if values(ii) < 0
+        b.CData(ii,:) = [.8 .2 .2];
+    end
+end

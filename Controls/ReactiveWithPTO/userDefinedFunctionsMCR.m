@@ -51,9 +51,9 @@ if imcr == numel(mcr.cases(:,1))
     ylabel('Integral Gain/Stiffness (N/m)');
     xlabel('Proportional Gain/Damping (Ns/m)');
     % Set color bar and color map
-    C = colorbar('location','EastOutside');
+    %C = colorbar('location','EastOutside');
     colormap(jet);
-    set(get(C,'XLabel'),'String','Power (Watts)')
+    %set(get(C,'XLabel'),'String','Power (Watts)')
     % Create title
     title('Mean Controller Power vs. Proportional and Integral Gains');
 
@@ -65,9 +65,9 @@ if imcr == numel(mcr.cases(:,1))
     ylabel('Integral Gain/Stiffness (N/m)');
     xlabel('Proportional Gain/Damping (Ns/m)');
     % Set color bar and color map
-    C = colorbar('location','EastOutside');
+    %C = colorbar('location','EastOutside');
     colormap(jet);
-    set(get(C,'XLabel'),'String','Power (Watts)')
+    %set(get(C,'XLabel'),'String','Power (Watts)')
     % Create title
     title('Mean Mechanical Power vs. Proportional and Integral Gains');
 
@@ -79,9 +79,9 @@ if imcr == numel(mcr.cases(:,1))
     ylabel('Integral Gain/Stiffness (N/m)');
     xlabel('Proportional Gain/Damping (Ns/m)');
     % Set color bar and color map
-    C = colorbar('location','EastOutside');
+    %C = colorbar('location','EastOutside');
     colormap(jet);
-    set(get(C,'XLabel'),'String','Power (Watts)')
+    %set(get(C,'XLabel'),'String','Power (Watts)')
     % Create title
     title('Mean Electrical Power vs. Proportional and Integral Gains');
 end
