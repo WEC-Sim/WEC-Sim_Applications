@@ -4,7 +4,7 @@ classdef TestMOST < matlab.unittest.TestCase
         OriginalDefault
         testDir = ''
         hydroDataDir = '../hydroData';
-        h5Name = 'Volturn15MW_wamit.h5';
+        h5Name = 'VolturnUS15MW_nemoh.h5';
         mostDataDir = '../mostData';
         turbSimName = fullfile('turbSim','WIND_11mps.mat');
         openCompare = []  % 1 opens all new run vs. stored run plots for comparison of each solver
