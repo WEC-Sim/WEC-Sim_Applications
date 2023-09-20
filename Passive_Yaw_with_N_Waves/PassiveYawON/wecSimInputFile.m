@@ -5,90 +5,48 @@ simu.mode = 'normal';                   % Specify Simulation Mode ('normal','acc
 simu.explorer='on';                    % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = .1;                    % Wave Ramp Time [s]
-simu.endTime=1;                       % Simulation End Time [s]        
+simu.endTime=100;                       % Simulation End Time [s]        
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.1;                         % Simulation Time-Step [s]
 simu.cicEndTime = 40;                   % Specify CI Time [s]
 
 %% Wave Information
 
-%%
-% % % noWaveCIC, no waves with radiation CIC  
-% waves = waveClass('elevationImport');       % Initialize Wave Class and Specify Type  
-% waves.elevationFile = 'elevationData.mat';
-
-
-waves = waveClass('irregular');
-waves.height = 1;                     % Wave Height [m]
-waves.period = 3; 
-waves.spectrumType = 'PM';
-waves.direction = 0;
-waves.spread = 1;
-
-
-% 
-marker = 1;
-distance = 10;
-[X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
-waves.marker.location = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
-clear('marker','distance','X','Y')
-waves.marker.style = 3; % 1: Sphere, 2: Cube, 3: Frame.
-waves.marker.size = 15; % Marker Size in Pixels
-waves.marker.graphicColor = [1,0,0];
-% waveGroup = [];
-% 
-% 
-% % % Regular Waves  
-%           % Initialize Wave Class and Specify Type       
-% % waves1 = waveClass('elevationImport');       % Initialize Wave Class and Specify Type  
-% % waves1.elevationFile = 'elevationData.mat';
-% 
-waves1 = waveClass('irregular'); 
-waves1.height = 5.0;                     % Wave Height [m]
-waves1.period = 2;                       % Wave Period [s]
-waves1.spectrumType = 'PM';
-waves1.direction = 0;
-waves1.spread = 1;
+waves(1) = waveClass('irregular'); 
+waves(1).height = 2;                     % Wave Height [m]
+waves(1).period = 3;                       % Wave Period [s]
+waves(1).spectrumType = 'PM';
+waves(1).direction = 0;
+waves(1).spread = 1;
 
 marker = 10;
 distance = 10;
 [X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
-waves1.marker.location = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
+waves(1).marker.location = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
 clear('marker','distance','X','Y')
-waves1.marker.style = 2; % 1: Sphere, 2: Cube, 3: Frame.
-waves1.marker.size = 20; % Marker Size in Pixels
-waves1.marker.graphicColor = [1,0,0];
+waves(1).marker.style = 2; % 1: Sphere, 2: Cube, 3: Frame.
+waves(1).marker.size = 20; % Marker Size in Pixels
+waves(1).marker.graphicColor = [1,0,0];
 % 
-% % w1 = waves1.waveAmpTime;
+% % w1 = waves(1).waveAmpTime;
 % 
 % 
-waves2 = waveClass('irregular');           % Initialize Wave Class and Specify Type                                 
-waves2.height = 5;                     % Wave Height [m]
-waves2.period = 3;                       % Wave Period [s]
-waves2.spectrumType = 'PM';
-waves2.direction = 90;
-waves2.spread = 1;
+waves(2) = waveClass('irregular');           % Initialize Wave Class and Specify Type                                 
+waves(2).height = 1;                     % Wave Height [m]
+waves(2).period = 3;                       % Wave Period [s]
+waves(2).spectrumType = 'PM';
+waves(2).direction = 90;
+waves(2).spread = 1;
 % 
 marker = 10;
 distance = 10;
 [X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
-waves2.marker.location = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
+waves(2).marker.location = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X,Y]
 clear('marker','distance','X','Y')
-waves2.marker.style = 1; % 1: Sphere, 2: Cube, 3: Frame.
-waves2.marker.size = 30; % Marker Size in Pixels
-waves2.marker.graphicColor = [0,0,1];
-% 
+waves(2).marker.style = 1; % 1: Sphere, 2: Cube, 3: Frame.
+waves(2).marker.size = 30; % Marker Size in Pixels
+waves(2).marker.graphicColor = [0,0,1];
 
-
-waves.waveGroup = [waveGen(waves1,simu,'../hydroData/oswec.h5');
-                   waveGen(waves2,simu,'../hydroData/oswec.h5')];
-
-% w1 = waves1.waveAmpTime;
-% w2 = waves2.waveAmpTime;
-% SwellandChop(:,1) = w1(:,1); 
-% SwellandChop(:,2) = w2(:,2);
-
-% save('SwellandChop.mat','SwellandChop')
 
 
 %% Body Data
