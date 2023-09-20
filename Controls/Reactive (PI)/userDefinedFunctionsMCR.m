@@ -39,9 +39,9 @@ if imcr == 81
     ylabel('Integral Gain/Stiffness (N/m)');
     xlabel('Proportional Gain/Damping (Ns/m)');
     % Set color bar and color map
-    C = colorbar('location','EastOutside');
+    %C = colorbar('location','EastOutside');
     colormap(jet);
-    set(get(C,'XLabel'),'String','Power (Watts)')
+    %set(get(C,'XLabel'),'String','Power (Watts)')
     % Create title
     title('Mean Power vs. Proportional and Integral Gains');
 end
