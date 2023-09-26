@@ -1,8 +1,10 @@
-% BEMIO script for the WEC-Sim+MOST application
+clear all
+close all
+clc
+foldernemoh = 'VolturnUS15MW_nemoh';
+
 hydro = struct();
-hydro = readWAMIT(hydro,'',[]);
-hydro = radiationIRF(hydro,30,[],[],[],15);
-hydro = radiationIRFSS(hydro,[],[]);
-hydro = excitationIRF(hydro,30,[],[],[],15);
-hydro = writeBEMIOH5(hydro);
-hydro = plotBEMIO(hydro);
+hydro = readNEMOH(hydro,[pwd,filesep,foldernemoh,filesep]);
+hydro = Radiation_IRF(hydro,90,201,201,[],[]);
+hydro = Excitation_IRF(hydro,90,[],[],[],[]);
+Write_H5(hydro)

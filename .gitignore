@@ -15,7 +15,7 @@ $ cat .gitignore
 *.blg
 *.c
 *.DS_Store
-*.dat
+#*.dat
 *.dvi
 *.exp
 *.glg
@@ -53,7 +53,7 @@ $ cat .gitignore
 *.synctex.gz(busy)
 *.toc
 *.tws
-*.txt
+#*.txt
 *.vtp
 *.zip
 
