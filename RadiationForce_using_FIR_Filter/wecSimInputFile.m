@@ -5,7 +5,7 @@ simu.mode = 'normal';                   % Specify Simulation Mode ('normal','acc
 simu.explorer = 'off';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 100;                    % Wave Ramp Time [s]
-simu.endTime = 1000;                     % Simulation End Time [s]
+simu.endTime = 500;                     % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.1; 							% Simulation time-step [s]
 
@@ -19,7 +19,7 @@ simu.FIR = 0;
 % Regular Waves  
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
 waves.height = 2.5;                     % Wave Height [m]
-waves.period = 8;    % Wave Period [s]
+waves.period = 12;    % Wave Period [s]
 end
 
 if enable_convolution == 1 && enable_FIR == 0 && enable_ss == 0
@@ -27,7 +27,7 @@ simu.FIR = 0;
 % Regular Waves with CIC
 waves = waveClass('regularCIC');          % Initialize Wave Class and Specify Type                                 
 waves.height = 2.5;                       % Wave Height [m]
-waves.period = 8;                         % Wave Period [s]
+waves.period = 12;                         % Wave Period [s]
 end
 
 if enable_convolution == 0 && enable_FIR == 1 && enable_ss == 0
@@ -35,7 +35,7 @@ simu.FIR = 1;
 % Regular Waves with CIC
 waves = waveClass('regularCIC');          % Initialize Wave Class and Specify Type                                 
 waves.height = 2.5;                       % Wave Height [m]
-waves.period = 8;                         % Wave Period [s]
+waves.period = 12;                         % Wave Period [s]
 end
 
 if enable_convolution == 0 && enable_FIR == 0 && enable_ss == 1
@@ -44,7 +44,7 @@ simu.stateSpace = 1;
 % Regular Waves with CIC
 waves = waveClass('regularCIC');          % Initialize Wave Class and Specify Type                                 
 waves.height = 2.5;                       % Wave Height [m]
-waves.period = 8;                         % Wave Period [s]
+waves.period = 12;                         % Wave Period [s]
 end
 
 
