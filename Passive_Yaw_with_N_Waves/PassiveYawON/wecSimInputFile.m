@@ -28,8 +28,7 @@ waves(1).marker.style = 2; % 1: Sphere, 2: Cube, 3: Frame.
 waves(1).marker.size = 20; % Marker Size in Pixels
 waves(1).marker.graphicColor = [1,0,0];
 % 
-% % w1 = waves(1).waveAmpTime;
-% 
+ 
 % 
 waves(2) = waveClass('irregular');           % Initialize Wave Class and Specify Type                                 
 waves(2).height = 1;                     % Wave Height [m]
