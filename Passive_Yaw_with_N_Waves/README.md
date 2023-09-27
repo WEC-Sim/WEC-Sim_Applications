@@ -1,8 +1,8 @@
 # Passive Yaw
 
-**Author:**  	Dominic Forbush
+**Author:**  	Salman Husain
 
-**Version:** 	WEC-Sim v4.0
+**Version:** 	WEC-Sim v5.0.1 and later
 
 **Geometry**	OSWEC
 
