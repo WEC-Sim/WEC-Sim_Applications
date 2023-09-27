@@ -1,4 +1,4 @@
-classdef TestPassiveYaw < matlab.unittest.TestCase
+classdef TestPassiveYaw_NWaves < matlab.unittest.TestCase
     
     properties
         OriginalDefault
@@ -9,7 +9,7 @@ classdef TestPassiveYaw < matlab.unittest.TestCase
     end    
     
     methods (Access = 'public')        
-        function obj = TestPassiveYaw
+        function obj = TestPassiveYaw_NWaves
             obj.testDir = fileparts(mfilename('fullpath'));
         end    
     end
@@ -50,11 +50,8 @@ classdef TestPassiveYaw < matlab.unittest.TestCase
     end
     
     methods(Test)        
-        function testPassiveYawOFF(testCase)
-            cd('PassiveYawOFF')
-            wecSim
-        end        
-        function testPassiveYawON(testCase)
+    
+        function TestPassiveYaw_NWaves(testCase)
             cd('PassiveYawON')
             wecSim
         end        
