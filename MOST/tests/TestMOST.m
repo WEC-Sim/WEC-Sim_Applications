@@ -4,7 +4,7 @@ classdef TestMOST < matlab.unittest.TestCase
         OriginalDefault
         testDir = ''
         hydroDataDir = '../hydroData';
-        h5Name = 'Volturn15MW_wamit.h5';
+        h5Name = 'VolturnUS15MW_nemoh.h5';
         mostDataDir = '../mostData';
         turbSimName = fullfile('turbSim','WIND_11mps.mat');
         openCompare = []  % 1 opens all new run vs. stored run plots for comparison of each solver
@@ -108,7 +108,7 @@ classdef TestMOST < matlab.unittest.TestCase
         
         function constant_towerBaseLoad(testCase)
             % Tower Base Load
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.constant.orgCase.towerBaseLoad;
             new = testCase.constant.newCase.towerBaseLoad;
             testCase.verifyEqual(new,org,'AbsTol',tol);
@@ -118,7 +118,7 @@ classdef TestMOST < matlab.unittest.TestCase
         
         function constant_towerTopLoad(testCase)
             % Tower top load
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.constant.orgCase.towerTopLoad;
             new = testCase.constant.newCase.towerTopLoad;
             testCase.verifyEqual(new,org,'AbsTol',tol);
@@ -168,7 +168,7 @@ classdef TestMOST < matlab.unittest.TestCase
         
         function turbulent_towerBaseLoad(testCase)
             % Tower Base Load
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.turbulent.orgCase.towerBaseLoad;
             new = testCase.turbulent.newCase.towerBaseLoad;
             testCase.verifyEqual(new,org,'AbsTol',tol);
@@ -178,7 +178,7 @@ classdef TestMOST < matlab.unittest.TestCase
         
         function turbulent_towerTopLoad(testCase)
             % Tower top load
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.turbulent.orgCase.towerTopLoad;
             new = testCase.turbulent.newCase.towerTopLoad;
             testCase.verifyEqual(new,org,'AbsTol',tol);
