@@ -10,7 +10,7 @@ enable_FIR         = 0;
 enable_ss          = 0;
 t_regular          = tic;
 wecSim
-run_time.baseline    = toc(t_regular)/toc(t_regular);
+run_time.baseline    = toc(t_regular);
 run_summary.baseline = output;
 clearvars -except run_summary run_time
 
@@ -49,9 +49,7 @@ run_time.convolution    = toc(t_conv)/run_time.baseline;
 run_summary.convolution = output;
 clearvars -except run_summary run_time
 
-
-
-
+run_time.baseline       = run_time.baseline/run_time.baseline;
 
 %% Plot time-history
 mode = 3;
