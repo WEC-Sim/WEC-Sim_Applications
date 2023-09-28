@@ -46,7 +46,6 @@ waves(2).marker.size = 30; % Marker Size in Pixels
 waves(2).marker.graphicColor = [0,0,1];
 
 
-
 %% Body Data
 % Flap NOTE: This test uses unique BEM for the OSWEC
 body(1) = bodyClass('hydroData/oswec.h5');   % Initialize bodyClass for Flap
