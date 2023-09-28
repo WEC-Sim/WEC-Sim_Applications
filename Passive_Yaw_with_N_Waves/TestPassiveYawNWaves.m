@@ -1,15 +1,16 @@
-classdef TestPassiveYaw_NWaves < matlab.unittest.TestCase
+classdef TestPassiveYawNWaves < matlab.unittest.TestCase
     
     properties
         OriginalDefault
         testDir
-        h5Dir = "hydroData"
+        h5Dir = fullfile("hydroData")
         h5Name = 'oswec.h5'
         outName = 'oswec.out'
     end    
     
+
     methods (Access = 'public')        
-        function obj = TestPassiveYaw_NWaves
+        function obj = TestPassiveYawNWaves
             obj.testDir = fileparts(mfilename('fullpath'));
         end    
     end
@@ -21,9 +22,11 @@ classdef TestPassiveYaw_NWaves < matlab.unittest.TestCase
     end
     
     methods(TestClassSetup)
+        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
+        
         function runBemio(testCase)
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -32,14 +35,11 @@ classdef TestPassiveYaw_NWaves < matlab.unittest.TestCase
                 bemio
             end
             cd(testCase.testDir)
-        end        
+        end
+
     end
     
-    methods(TestMethodTeardown)
-        function returnHome(testCase)
-            cd(testCase.testDir)
-        end
-    end
+
     
     methods(TestClassTeardown)        
         function checkVisibilityRestored(testCase)
@@ -50,9 +50,8 @@ classdef TestPassiveYaw_NWaves < matlab.unittest.TestCase
     end
     
     methods(Test)        
-    
-        function TestPassiveYaw_NWaves(testCase)
-            cd('PassiveYawON')
+        function testPassiveYawNWaves(testCase)
+           
             wecSim
         end        
     end    

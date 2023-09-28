@@ -17,7 +17,6 @@ waves(1).height = 2;                     % Wave Height [m]
 waves(1).period = 3;                       % Wave Period [s]
 waves(1).spectrumType = 'PM';
 waves(1).direction = 0;
-waves(1).spread = 1;
 
 marker = 10;
 distance = 10;
@@ -27,16 +26,16 @@ clear('marker','distance','X','Y')
 waves(1).marker.style = 2; % 1: Sphere, 2: Cube, 3: Frame.
 waves(1).marker.size = 20; % Marker Size in Pixels
 waves(1).marker.graphicColor = [1,0,0];
-% 
+
  
-% 
+% Adding second wave-spectra
+
 waves(2) = waveClass('irregular');           % Initialize Wave Class and Specify Type                                 
 waves(2).height = 1;                     % Wave Height [m]
 waves(2).period = 3;                       % Wave Period [s]
 waves(2).spectrumType = 'PM';
 waves(2).direction = 90;
-waves(2).spread = 1;
-% 
+
 marker = 10;
 distance = 10;
 [X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
@@ -50,16 +49,16 @@ waves(2).marker.graphicColor = [0,0,1];
 
 %% Body Data
 % Flap NOTE: This test uses unique BEM for the OSWEC
-body(1) = bodyClass('../hydroData/oswec.h5');   % Initialize bodyClass for Flap
-body(1).geometryFile = '../geometry/flap.stl';  % Geometry File
+body(1) = bodyClass('hydroData/oswec.h5');   % Initialize bodyClass for Flap
+body(1).geometryFile = 'geometry/flap.stl';  % Geometry File
 body(1).mass = 12700;                           % User-Defined mass [kg]
 body(1).inertia = [1.85e6 1.85e6 1.85e6];  % Moment of Inertia [kg-m^2]
 body(1).yaw.option=1;                           % Turn passive yaw ON
 body(1).yaw.threshold=0.01;                     % Set passive yaw threshold
 
 % Base NOTE: This test uses unique BEM for the OSWEC
-body(2) = bodyClass('../hydroData/oswec.h5');   % Initialize bodyClass for Base
-body(2).geometryFile = '../geometry/base.stl';  % Geometry File
+body(2) = bodyClass('hydroData/oswec.h5');   % Initialize bodyClass for Base
+body(2).geometryFile = 'geometry/base.stl';  % Geometry File
 body(2).mass = 999;                             % Placeholder mass for fixed body
 body(2).inertia = [999 999 999];                % Placeholder inertia for fixed body
 body(2).mass = 999;                         % Creates Fixed Body
