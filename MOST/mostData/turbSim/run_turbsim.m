@@ -2,7 +2,7 @@
 %% Script to create wind input file %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% INITIALIZATION
-clear 
+clearvars -except testCase
 %% SETTINGS
 WINDvector=[11];                     % how many velocities of the wind to put
 filename_Turbsim='Turbsim_inputfile.txt'; % name of the input file for turbsim

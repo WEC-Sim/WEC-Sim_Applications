@@ -2,7 +2,7 @@
 %% Script to create bladedata struct %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Initialization
-clear
+clearvars -except testCase
 load('Properties_IEA15MW')
 %% Blade
 bladefile=importdata('BladeData/IEA-15-240-RWT_blade.dat',' ',6);

@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% INITIALIZATION
 close all
-clear
+clearvars -except testCase
 %% SETTINGS
 if 1
 %% Line

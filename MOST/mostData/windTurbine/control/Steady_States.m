@@ -2,7 +2,7 @@
 %% Script to compute control steady states %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% INIT
-clear 
+clearvars -except testCase
 close all
 %% SETTINGS 
 if 1

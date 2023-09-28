@@ -2,7 +2,7 @@
 %% Script to compute controls data %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% INITIALIZATION
-clear 
+clearvars -except testCase
 %% SETTINGS 
 if 1
 %% Plot

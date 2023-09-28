@@ -2,7 +2,7 @@
 %% Script to compute aeroloads look-up table %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% INITIALIZATION
-clear 
+clearvars -except testCase
 %% SETTINGS 
 if 1
 %% Look up table settings

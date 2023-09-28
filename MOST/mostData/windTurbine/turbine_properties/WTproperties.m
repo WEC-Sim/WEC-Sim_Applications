@@ -2,7 +2,7 @@
 %% Script to create wind turbine properties struct %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Initialization
-clear 
+clearvars -except testCase
 clc
 WTcomponents=struct;
 %% Tower

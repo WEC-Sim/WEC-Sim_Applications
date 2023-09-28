@@ -2,7 +2,7 @@
 %% Script to pre-process all required inputs for WEC-Sim+MOST %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Initialization
-clear  
+clearvars -except testCase
 close all
 clc
 %% TurbSim Data
