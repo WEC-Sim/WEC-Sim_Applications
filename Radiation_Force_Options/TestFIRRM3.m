@@ -8,6 +8,7 @@ classdef TestFIRRM3 < matlab.unittest.TestCase
         outName = 'rm3.out'
     end    
     
+
     methods (Access = 'public')        
         function obj = TestFIRRM3
             obj.testDir = fileparts(mfilename('fullpath'));
@@ -20,10 +21,12 @@ classdef TestFIRRM3 < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassSetup)        
+    methods(TestClassSetup)
+
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
+
         function runBemio(testCase)
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -33,20 +36,23 @@ classdef TestFIRRM3 < matlab.unittest.TestCase
             end
             cd(testCase.testDir)
         end
+
     end
     
     methods(TestClassTeardown)
+
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...
                                  testCase.OriginalDefault);
         end
+
     end
     
     methods(Test)        
-        function TestFIRRM3(testCase)
-            cd RM3
-            wecSim
+        function TestFIRRM31(testCase)
+        compare_runs
         end               
-    end    
+    end 
+
 end
