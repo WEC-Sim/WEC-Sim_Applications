@@ -39,7 +39,11 @@ classdef TestPassiveYawNWaves < matlab.unittest.TestCase
 
     end
     
-
+%     methods(TestMethodTeardown)
+%         function returnHome(testCase)
+%             cd(testCase.testDir)
+%         end
+%     end
     
     methods(TestClassTeardown)        
         function checkVisibilityRestored(testCase)
@@ -51,7 +55,7 @@ classdef TestPassiveYawNWaves < matlab.unittest.TestCase
     
     methods(Test)        
         function testPassiveYawNWaves(testCase)
-           
+            cd("PassiveYawON")
             wecSim
         end        
     end    
