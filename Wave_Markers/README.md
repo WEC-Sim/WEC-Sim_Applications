@@ -1,6 +1,6 @@
 # Wave Markers
 
-**Author:**	Sal Husain
+**Author:**	Salman Husain
 
 **Version:** 	WEC-Sim v4.3
 
