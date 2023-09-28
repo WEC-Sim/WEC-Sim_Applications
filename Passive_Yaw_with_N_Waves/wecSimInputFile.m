@@ -75,5 +75,3 @@ pto(1) = ptoClass('PTO1');                      % Initialize ptoClass for PTO1
 pto(1).stiffness = 0;                                   % PTO Stiffness Coeff [Nm/rad]
 pto(1).damping = 120000;                               % PTO Damping Coeff [Nsm/rad]
 pto(1).location = [0 0 -8.9];                        % PTO Location [m]
-% pto(1).orientation.z=[0 1 0]; % switching so device will yaw
-% pto(1).orientation.y=[0 0 1]; % switching so device will yaw
