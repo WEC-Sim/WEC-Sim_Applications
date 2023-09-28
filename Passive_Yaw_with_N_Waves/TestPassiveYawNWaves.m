@@ -55,7 +55,6 @@ classdef TestPassiveYawNWaves < matlab.unittest.TestCase
     
     methods(Test)        
         function testPassiveYawNWaves(testCase)
-            cd("PassiveYawON")
             wecSim
         end        
     end    
