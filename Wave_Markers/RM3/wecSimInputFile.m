@@ -37,7 +37,7 @@ waves.marker.location = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X
 clear('marker','distance','X','Y')
 waves.marker.style = 1; % 1: Sphere, 2: Cube, 3: Frame.
 waves.marker.size = 10; % Marker Size in Pixels
-
+waves.marker.graphicColor = [1, 0, 0];
 %% Body Data
 % Float
 body(1) = bodyClass('hydroData/rm3.h5');      
