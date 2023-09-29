@@ -48,8 +48,7 @@ classdef TestPassiveYawNWaves < matlab.unittest.TestCase
     end
     
     methods(Test)        
-        function testPassiveYawNWaves(testCase)
-           
+        function testPassiveYawNWaves6(testCase)
             wecSim
         end        
     end    
