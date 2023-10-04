@@ -42,8 +42,10 @@ jobs:
                  WECCCOMP,
                  Write_Custom_h5]
         include:
+          - products: Simulink Simscape Simscape_Multibody
           - release: latest
             folder: Desalination
+            products: Simulink Simscape Simscape_Multibody Simscape_Fluids
     name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
     steps:
       - name: Check out repository (repository dispatch)
@@ -80,6 +82,8 @@ jobs:
         uses: matlab-actions/setup-matlab@v2-beta
         with:
           cache: true
+          products: ${{ matrix.products }}
+          release: ${{ matrix.release }}
       - name: Start display server
         if: matrix.folder == 'Desalination'
         run: |
