@@ -41,6 +41,9 @@ jobs:
                  Wave_Markers,
                  WECCCOMP,
                  Write_Custom_h5]
+        include:
+          - release: latest
+            folder: Desalination
     name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
     steps:
       - name: Check out repository (repository dispatch)
@@ -74,7 +77,15 @@ jobs:
         shell: bash
         working-directory: './MoorDyn'
       - name: Install MATLAB
-        uses: matlab-actions/setup-matlab@v1
+        uses: matlab-actions/setup-matlab@v2-beta
+        with:
+          cache: true
+      - name: Start display server
+        if: matrix.folder == 'Desalination'
+        run: |
+          sudo apt-get install xvfb
+          Xvfb :99 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
       - name: Install WEC-Sim
         uses: matlab-actions/run-command@v1
         with:
@@ -83,3 +94,4 @@ jobs:
         uses: matlab-actions/run-command@v1
         with:
           command: results = wecSimAppTest("${{ matrix.folder }}"), assertSuccess(results);
+
