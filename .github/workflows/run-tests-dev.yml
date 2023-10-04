@@ -46,6 +46,8 @@ jobs:
           - release: latest
             folder: Desalination
             products: Simulink Simscape Simscape_Multibody Simscape_Fluids
+          - folder: Controls
+            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox
     name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
     steps:
       - name: Check out repository (repository dispatch)
