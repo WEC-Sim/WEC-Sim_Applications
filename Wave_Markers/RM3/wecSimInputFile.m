@@ -2,10 +2,10 @@
 simu = simulationClass();               % Initialize Simulation Class
 simu.simMechanicsFile = 'RM3.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer='on';                     % Turn SimMechanics Explorer (on/off)
+simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 100;                   	% Wave Ramp Time [s]
-simu.endTime=400;                       % Simulation End Time [s]
+simu.endTime = 400;                     % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.1; 							% Simulation time-step [s]
 
@@ -29,7 +29,6 @@ waves.period = 8;                            % Wave Period [s]
 
 %% Wave Visualization Markers
 % Example with a square mesh of visualization markers
-
 marker = 20;
 distance = 10;
 [X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
@@ -41,13 +40,13 @@ waves.marker.size = 10; % Marker Size in Pixels
 %% Body Data
 % Float
 body(1) = bodyClass('hydroData/rm3.h5');      
-    %Create the body(1) Variable, Set Location of Hydrodynamic Data File 
-    %and Body Number Within this File.   
+    % Create the body(1) Variable, Set Location of Hydrodynamic Data File 
+    % and Body Number Within this File.   
 body(1).geometryFile = 'geometry/float.stl';    % Location of Geomtry File
 body(1).mass = 'equilibrium';                   
-    %Body Mass. The 'equilibrium' Option Sets it to the Displaced Water 
-    %Weight.
-body(1).inertia = [20907301 21306090.66 37085481.11];  %Moment of Inertia [kg*m^2]     
+    % Body Mass. The 'equilibrium' Option Sets it to the Displaced Water 
+    % Weight.
+body(1).inertia = [20907301 21306090.66 37085481.11]; % Moment of Inertia [kg*m^2]     
 
 % Spar/Plate
 body(2) = bodyClass('hydroData/rm3.h5'); 
@@ -62,6 +61,6 @@ constraint(1).location = [0 0 0];                    % Constraint Location [m]
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize PTO Class for PTO1
-pto(1).stiffness = 0;                                   % PTO Stiffness [N/m]
-pto(1).damping = 1200000;                             % PTO Damping [N/(m/s)]
+pto(1).stiffness = 0;                                % PTO Stiffness [N/m]
+pto(1).damping = 1200000;                            % PTO Damping [N/(m/s)]
 pto(1).location = [0 0 0];                           % PTO Location [m]
