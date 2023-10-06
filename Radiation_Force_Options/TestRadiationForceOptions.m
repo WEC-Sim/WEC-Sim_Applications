@@ -1,4 +1,4 @@
-classdef TestFIRRM3 < matlab.unittest.TestCase
+classdef TestRadiationForceOptions < matlab.unittest.TestCase
     
     properties
         OriginalDefault
@@ -10,7 +10,7 @@ classdef TestFIRRM3 < matlab.unittest.TestCase
     
 
     methods (Access = 'public')        
-        function obj = TestFIRRM3
+        function obj = TestRadiationForceOptions
             obj.testDir = fileparts(mfilename('fullpath'));
         end    
     end
@@ -50,8 +50,8 @@ classdef TestFIRRM3 < matlab.unittest.TestCase
     end
     
     methods(Test)        
-        function TestFIRRM31(testCase)
-        compare_runs
+        function TestRadiation_Force_Options(testCase)
+            compare_runs
         end               
     end 
 
