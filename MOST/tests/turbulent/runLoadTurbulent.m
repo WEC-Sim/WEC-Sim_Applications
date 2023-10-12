@@ -41,13 +41,6 @@ turbulent.newCase = newCase;
 
 save('turbulent','turbulent')
 
-%% Plot Old vs. New Comparison
-if plotNO == 1 % global variable 
-    cd ..
-    plotTests(newCase,orgCase)
-    cd turbulent
-end
-
 %% Clear output and .slx directory
 try
 	rmdir('output','s')

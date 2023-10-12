@@ -31,7 +31,6 @@ waves.period = 8;                            % Wave Period [s]
 
 %% Wave Visualization Markers
 % Example with a square mesh of visualization markers
-
 marker = 20;
 distance = 10;
 [X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);

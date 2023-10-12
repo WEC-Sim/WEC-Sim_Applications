@@ -30,7 +30,7 @@ controller_init                                     % Initializes the variables 
 % waves = waveClass('regularCIC');                  % Initialize waveClass
 % waves.height             = 0.0625;                % Wave Height [m]
 % waves.period             = 1.412;                 % Wave Period [s]
-% waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];  % Wave Gauge locatations
+% waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];  % Wave Gauge locations
 
 %% Irregular Waves  
 waves = waveClass('irregular');                     % Initialize waveClass
@@ -42,6 +42,8 @@ waves.phaseSeed     = 1;                            % Phase is seeded so eta is 
 waves.gamma         = 1;
 waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];  % Wave Gauge locatations
 waves.marker.graphicColor = [1,0,0];
+waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];  % Wave Gauge locations
+
 %% Body Class
 %% Float - 3 DOF
 body(1) = bodyClass('../hydroData/wavestar.h5');    % Initialize bodyClass

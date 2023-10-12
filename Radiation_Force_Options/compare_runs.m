@@ -1,10 +1,8 @@
 % This script runs the RM3 example and compares the accuracy and run-times
 % when the radiation force is calculated using the radiation convolution 
 % method, the FIR filter method, and the state-space realization.
-clc;close all;clear;
 
 % Baseline case with no-convolution for Radiation Force calculations,
-
 enable_convolution = 0;
 enable_FIR         = 0;
 enable_ss          = 0;
@@ -16,7 +14,6 @@ clearvars -except run_summary run_time
 
 
 % FIR for Radiation Force calculations,
-
 enable_convolution = 0; 
 enable_FIR         = 1;
 enable_ss          = 0;
@@ -28,7 +25,6 @@ clearvars -except run_summary run_time
 
 
 % State-Space for Radiation Force calculations,
-
 enable_convolution = 0; 
 enable_FIR         = 0;
 enable_ss          = 1;
@@ -39,7 +35,6 @@ run_summary.state_space = output;
 clearvars -except run_summary run_time
 
 % Convolution for Radiation Force calculations,
-
 enable_convolution = 1; 
 enable_FIR         = 0;
 enable_ss          = 0;
@@ -83,10 +78,9 @@ plotting_function(y_data,y_name,x_data,x_name,Title,FS,LW,style,color)
 legend('Baseline', 'Convolution', 'FIR Filter', 'State-Space')
 
 % Calculate RMSE
-
-run_RMSE.FIR         = rmse(pos_FIR, pos_baseline);
-run_RMSE.state_space = rmse(pos_state_space, pos_baseline);
-run_RMSE.convolution = rmse(pos_convolution, pos_baseline);
+run_RMSE.FIR         = sqrt(mean((pos_FIR-pos_baseline).^2));
+run_RMSE.state_space = sqrt(mean((pos_state_space-pos_baseline).^2));
+run_RMSE.convolution = sqrt(mean((pos_convolution-pos_baseline).^2));
 
 
 % Display Results
@@ -105,8 +99,6 @@ disp('===================================================================')
 %% Plotting Function
 
 function[] = plotting_function(y_data,y_name,x_data,x_name,Title,FS,LW,style,color)
-
-
 
 plot(x_data,y_data,style,'Linewidth',LW,'Color',color)
 ylabel(y_name, 'FontSize', FS,'interpreter','latex')
