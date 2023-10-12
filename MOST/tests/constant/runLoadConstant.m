@@ -1,5 +1,4 @@
 %% Run the WEC-Sim+MOST case in constant wind conditions
-global plotNO
 locdir = pwd;
 
 %% Run Simulation
@@ -40,13 +39,6 @@ constant.orgCase = orgCase;
 constant.newCase = newCase;
 
 save('constant','constant')
-
-%% Plot Old vs. New Comparison
-if plotNO == 1 % global variable 
-    cd ..
-    plotTests(newCase,orgCase)
-    cd constant
-end
 
 %% Clear output and .slx directory
 try

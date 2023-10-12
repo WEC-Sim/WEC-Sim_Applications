@@ -7,18 +7,17 @@ classdef TestMOST < matlab.unittest.TestCase
         h5Name = 'VolturnUS15MW_nemoh.h5';
         mostDataDir = '../mostData';
         turbSimName = fullfile('turbSim','WIND_11mps.mat');
-        openCompare = []  % 1 opens all new run vs. stored run plots for comparison of each solver
+        plotComparison = []  % 1 plots a comparison of new and original cases
         constant = []
         turbulent = []
     end
     
     methods (Access = 'public')
-        function obj = TestMOST(openCompare)
+        function obj = TestMOST(plotComparison)
             arguments
-                openCompare (1,1) double = 1
+                plotComparison (1,1) double = 0
             end
-
-            obj.openCompare = openCompare;
+            obj.plotComparison = plotComparison;
             obj.testDir = fileparts(mfilename('fullpath'));
             obj.OriginalDefault = get(0,'DefaultFigureVisible');            
         end
@@ -67,6 +66,18 @@ classdef TestMOST < matlab.unittest.TestCase
     end
     
     methods(TestClassTeardown)
+        function plotTests(testCase)
+            % Plot Old vs. New Comparison
+            if testCase.plotComparison == 1
+                % Constant
+                load('constant/constant.mat','constant');
+                plotTests(constant.newCase,constant.orgCase);
+
+                % Turbulent
+                load('turbulent/turbulent.mat','turbulent');
+                plotTests(turbulent.newCase,turbulent.orgCase);
+            end
+        end
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),...
