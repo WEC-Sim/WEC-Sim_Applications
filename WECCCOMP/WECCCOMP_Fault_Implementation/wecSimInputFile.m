@@ -31,7 +31,7 @@ waves.height             = 0.0625;                       % Wave Height [m]
 waves.period             = 1.412;                        % Wave Period [s]
 waves.spectrumType  = 'JS';
 waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];  % Wave Gauge locations
-
+waves.marker.graphicColor = [1,0,0,];
 %% Irregular Waves  
 % waves = waveClass('irregular');                   % Initialize waveClass
 % waves.height             = 0.0625;                     % Wave Height [m]
