@@ -1,4 +1,4 @@
-classdef Test_NWaves < matlab.unittest.TestCase
+classdef TestMultipleWaveHeadings < matlab.unittest.TestCase
     
     properties
         OriginalDefault
@@ -10,7 +10,7 @@ classdef Test_NWaves < matlab.unittest.TestCase
     
 
     methods (Access = 'public')        
-        function obj = Test_NWaves
+        function obj = TestMultipleWaveHeadings
             obj.testDir = fileparts(mfilename('fullpath'));
         end    
     end
@@ -48,7 +48,7 @@ classdef Test_NWaves < matlab.unittest.TestCase
     end
     
     methods(Test)        
-        function TestNWaves(testCase)
+        function testMultiple_Wave_Headings(testCase)
             wecSim
         end        
     end    

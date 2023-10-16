@@ -35,6 +35,7 @@ jobs:
                  Morison_Element,
                  MOST,
                  Multiple_Condition_Runs,
+                 Multiple_Wave_Headings,
                  Nonhydro_Body,
                  Nonlinear_Hydro,
                  Paraview_Visualization,
