@@ -66,7 +66,7 @@ figure(fig1)
     text(40,(uyl-10),txt1,'Color','blue','FontSize',18,'EdgeColor', 'blue','LineWidth',2, 'Margin', 10);
 
 % Control and instantaneous power
-tL = tiledlayout(fig2,2,1,'TileSpacing','compact','TileIndexing','rowmajor');
+tL = tiledlayout(fig2,2,1,'TileSpacing','compact');
 nexttile(tL,1)
     stairs( t, u,'-b','LineWidth',1); hold on; grid on; 
     ylabel('Control input [Nm]');                                                                               
