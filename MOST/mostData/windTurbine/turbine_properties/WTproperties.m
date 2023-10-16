@@ -1,9 +1,5 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Script to create wind turbine properties struct %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Initialization
-clearvars -except testCase
-clc
+function WTcomponents = WTproperties()
+%% Function to create wind turbine properties struct
 WTcomponents=struct;
 %% Tower
 WTcomponents.tower.mass= 1.4667e+06;
@@ -109,8 +105,10 @@ WTcomponents.geometryFileHub = 'geometry\IEA15MW_Hub.STEP';
 WTcomponents.geometryFileBlade = 'geometry\IEA15MW_Blade.STEP'; 
 %% Save
 save('Properties_IEA15MW','WTcomponents')
-%% FUNCTIONS
 
+end
+
+%% FUNCTIONS
 function [Rx] = Rx(phi)
 
 Rx=[1      0             0;

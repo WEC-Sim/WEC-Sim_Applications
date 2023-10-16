@@ -1,8 +1,5 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Script to compute controls data %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% INITIALIZATION
-clearvars -except testCase
+function [BEM_data, Ctrl] = Controller()
+%% Function to compute controls data
 %% SETTINGS 
 if 1
 %% Plot
@@ -242,8 +239,9 @@ end
 %% SAVE
 save("Control_IEA15MW","Ctrl")
 
-%% FUNCTIONS
+end
 
+%% FUNCTIONS
 function om_d = Omega_dot(C_gen,wind,omega,bladepitch,BEM_data,RotorInertia)
 
 F_aero = BEM(wind,omega,bladepitch,BEM_data);

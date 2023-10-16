@@ -1,8 +1,5 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Script to compute aeroloads look-up table %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% INITIALIZATION
-clearvars -except testCase
+function [BEM_data, aeroloads] = AeroLoads()
+%% Function to compute aeroloads look-up table
 %% SETTINGS 
 if 1
 %% Look up table settings
@@ -88,9 +85,9 @@ aeroloads.Baseline.F_aero=F_aero;
 %% SAVE 
 save('Aeroloads_IEA15MW','aeroloads')
 
+end
 
 %% FUNCTIONS
-
 function F_aero = BEM(v_wind_rel,omega,bladepitch,data)
 
 pntm=[0 0 0].*data.r;

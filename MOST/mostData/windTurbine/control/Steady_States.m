@@ -1,9 +1,5 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Script to compute control steady states %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% INIT
-clearvars -except testCase
-close all
+function [BEM_data, SS] = Steady_States()
+%% Function to compute control steady states
 %% SETTINGS 
 if 1
 %% Plot
@@ -28,8 +24,6 @@ BEM_data.func_tol2=1e-3;
 BEM_data.root_tol_rel2=1/40;   
 BEM_data.maxit2=50;
 BEM_data.eps=1e-6;
-
-
 
 end
 %% DATA 
@@ -163,6 +157,8 @@ end
 end
 %% SAVE
 save('SteadyStates_IEA15MW','SteadyStates')
+
+end
 
 %% FUNCTIONS
 
