@@ -50,7 +50,9 @@ jobs:
             folder: Desalination
             products: Simulink Simscape Simscape_Multibody Simscape_Fluids
           - folder: Controls
-            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox
+            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
+          - folder: WECCCOMP
+            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox 
     name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
     steps:
       - name: Check out repository (repository dispatch)
@@ -103,4 +105,3 @@ jobs:
         uses: matlab-actions/run-command@v1
         with:
           command: results = wecSimAppTest("${{ matrix.folder }}"), assertSuccess(results);
-
