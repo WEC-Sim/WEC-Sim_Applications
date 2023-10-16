@@ -76,7 +76,7 @@ nexttile(tL,1)
     yticklabels({'-15','-12', '-10', '-5', '0', '5', '10', '12','15' })
     yline(Umax, 'r--', 'LineWidth', 2 );
     yline(Umin, 'r--', 'LineWidth', 2 );
-    title( "pto Moment", FontSize=16 );
+    title( "pto Moment", 'FontSize', 16 );
 
 nexttile(tL,2)
     plot( t, p,'-b','LineWidth',1); hold on; grid on; 
@@ -85,7 +85,7 @@ nexttile(tL,2)
     ylabel( 'Power [w]' ); 
     ylim([1.2*min(p) 1.2*max(p)]);
     xlim([20 t_end+5])
-    title( txtPower, FontSize=16);
+    title( txtPower, 'FontSize', 16);
 %% Calculate Evaluation Criteria (EC)
 pto_force = -output.ptos.forceActuation(ii:end,3);
 pto_displacement = motor_displacement.signals.values(ii:end);
