@@ -16,7 +16,7 @@ if isfile('TurbSim64.exe')
         raw1{37,1} = [num2str(WINDvector(V_i)) '	                URef            - Mean (total) wind speed at the reference height [m/s] (or "default" for JET wind profile)'];
         writecell((raw1),['WIND_' num2str(WINDvector(V_i)) 'mps.txt'],'QuoteStrings',false)
         fclose('all');
-        system(['.\TurbSim64.exe WIND_',num2str(WINDvector(V_i)),'mps.txt']);
+        system(['./TurbSim64.exe WIND_',num2str(WINDvector(V_i)),'mps.txt']);
     end
 end
 

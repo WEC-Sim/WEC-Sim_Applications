@@ -69,13 +69,8 @@ classdef TestMOST < matlab.unittest.TestCase
         function plotTests(testCase)
             % Plot Old vs. New Comparison
             if testCase.plotComparison == 1
-                % Constant
-                load('constant/constant.mat','constant');
-                plotTests(constant.newCase,constant.orgCase);
-
-                % Turbulent
-                load('turbulent/turbulent.mat','turbulent');
-                plotTests(turbulent.newCase,turbulent.orgCase);
+                plotTests(testCase.constant.newCase,testCase.constant.orgCase);
+                plotTests(testCase.turbulent.newCase,testCase.turbulent.orgCase);
             end
         end
         function checkVisibilityRestored(testCase)
