@@ -47,8 +47,7 @@ jobs:
                  Write_Custom_h5]
         include:
           - products: Simulink Simscape Simscape_Multibody
-          - release: latest
-            folder: Desalination
+          - folder: Desalination
             products: Simulink Simscape Simscape_Multibody Simscape_Fluids
           - folder: Controls
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
