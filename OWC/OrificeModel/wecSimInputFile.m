@@ -1,21 +1,23 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'GBM1.slx';      % Specify Simulink Model File
+simu.simMechanicsFile = 'GBM1.slx';     % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer='on';                    % Turn SimMechanics Explorer (on/off)
+simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 10;                   	% Wave Ramp Time [s]
-simu.endTime=130;                       % Simulation End Time [s]
-simu.solver = 'ode23t';                  % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
+simu.endTime = 130;                     % Simulation End Time [s]
+simu.solver = 'ode23t';                 % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.005; 						% Simulation time-step [s]
 simu.cicEndTime = 15;
-simu.mcrMatFile = 'mcrOrifice.mat'
-%% Wave Information 
+simu.mcrMatFile = 'mcrOrifice.mat';
 
-% Regular Waves  
-%waves = waveClass('spectrumImport');           % Initialize Wave Class and Specify Type    
-%waves.spectrumFile = './Tuning/WaveFw83.mat';
-waves = waveClass('irregular')
+%% Wave Information 
+% % Regular Waves
+% waves = waveClass('spectrumImport');           % Initialize Wave Class and Specify Type    
+% waves.spectrumFile = './Tuning/WaveFw83.mat';
+
+% Irregular waves
+waves = waveClass('irregular');
 waves.spectrumType = 'PM';
 waves.height = 1;                            % Wave Height [m]
 waves.period = 4;                            % Wave Period [s]
@@ -61,12 +63,8 @@ constraint(1).location = [0 0 0];                    % Constraint Location [m]
 % %mooring(1).matrix.stiffness(5,5)=1; 
 
 %% orifice details
-
 A1 = pi * 0.25^2; % piston area m^2
 A2 = pi * 0.01^2; % orifice area m^2
 C = 0.62; % discharge coefficient
 rhoAir = 1.2; % air density kg/m^3 
 thresh = 0.3; % threshold above which compressibility is an issue
-
-
-
