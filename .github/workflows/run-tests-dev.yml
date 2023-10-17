@@ -18,8 +18,8 @@ jobs:
     if: github.event_name == 'repository_dispatch'
     steps:
         - run: echo "Triggered by WEC-Sim commit ${{ github.event.client_payload.sha }}"
-  run_tests:
-    runs-on: ubuntu-latest
+  run_windows_tests:
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
