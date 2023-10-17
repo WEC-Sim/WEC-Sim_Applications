@@ -49,7 +49,7 @@ mooring(1).lookupTableFlag = 1;                                                 
 
 windTurbine(1) = windTurbineClass('IEA15MW');                                                                                                 % Initialize turbine size and Specify Type
 windTurbine(1).control = 1;                                                                                                                   % Controltype: 0-->Baseline, 1-->ROSCO 
-windTurbine(1).aeroLoadsName = fullfile('..','..','mostData','windTurbine','aeroloads','aeroloads_IEA15MW.mat');                              % Aeroloads filename
+windTurbine(1).aeroLoadsName = fullfile('..','..','mostData','windTurbine','aeroloads','Aeroloads_IEA15MW.mat');                              % Aeroloads filename
 windTurbine(1).turbineName = fullfile('Properties_IEA15MW.mat');                                                                              % Windturbine properties filename
 windTurbine(1).controlName = fullfile('..','..','mostData','windTurbine','control','Control_IEA15MW.mat');                                    % Controller filename
 windTurbine(1).omega0 = 7.55*pi/30;                                                                                                           % Initial value for rotor speed
