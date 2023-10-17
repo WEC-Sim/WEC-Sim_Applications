@@ -99,10 +99,10 @@ WTcomponents.Inertia_TOT_wrf=I_tow_wrf_wrf+I_yawBearing_wrf_wrf+I_nacelle_wrf_wr
 
 
 %% Geometry files
-WTcomponents.geometryFileTower = 'geometry\IEA15MW_Tower.STEP';
-WTcomponents.geometryFileNacelle = 'geometry\IEA15MW_Nacelle.STEP';
-WTcomponents.geometryFileHub = 'geometry\IEA15MW_Hub.STEP';
-WTcomponents.geometryFileBlade = 'geometry\IEA15MW_Blade.STEP'; 
+WTcomponents.geometryFileTower = 'geometry/IEA15MW_Tower.STEP';
+WTcomponents.geometryFileNacelle = 'geometry/IEA15MW_Nacelle.STEP';
+WTcomponents.geometryFileHub = 'geometry/IEA15MW_Hub.STEP';
+WTcomponents.geometryFileBlade = 'geometry/IEA15MW_Blade.STEP'; 
 %% Save
 save('Properties_IEA15MW','WTcomponents')
 
