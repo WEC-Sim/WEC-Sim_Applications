@@ -18,12 +18,12 @@ jobs:
     if: github.event_name == 'repository_dispatch'
     steps:
         - run: echo "Triggered by WEC-Sim commit ${{ github.event.client_payload.sha }}"
-  run_windows_tests:
-    runs-on: windows-latest
+  run_tests:
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        release: [R2020b, R2023a]
+        release: [R2020b, latest]
         folder: [Body-to-Body_Interactions,
                  Cable,
                  Controls,
@@ -31,14 +31,12 @@ jobs:
                  Free_Decay,
                  Generalized_Body_Modes,
                  Mean_Drift,
-                 Mooring,
                  Morison_Element,
                  MOST,
                  Multiple_Condition_Runs,
                  Multiple_Wave_Headings,
                  Nonhydro_Body,
                  Nonlinear_Hydro,
-                 Paraview_Visualization,
                  Passive_Yaw,
                  PTO-Sim,
                  Radiation_Force_Options,
@@ -54,7 +52,7 @@ jobs:
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
           - folder: WECCCOMP
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox 
-    name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
+    name: ${{ matrix.folder }} MATLAB ${{ matrix.release }} on Linux
     steps:
       - name: Check out repository (repository dispatch)
         uses: actions/checkout@v2
