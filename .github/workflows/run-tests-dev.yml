@@ -13,7 +13,7 @@ on:
       - wecsim-dev
 jobs:
   dispatch_event:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     name: Identify dispatch event
     if: github.event_name == 'repository_dispatch'
     steps:
@@ -47,13 +47,14 @@ jobs:
                  Write_Custom_h5]
         include:
           - products: Simulink Simscape Simscape_Multibody
-          - folder: Desalination
+          - release: R2023a
+            folder: Desalination
             products: Simulink Simscape Simscape_Multibody Simscape_Fluids
           - folder: Controls
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
           - folder: WECCCOMP
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox 
-    name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
+    name: ${{ matrix.folder }} MATLAB ${{ matrix.release }} on Windows
     steps:
       - name: Check out repository (repository dispatch)
         uses: actions/checkout@v2
