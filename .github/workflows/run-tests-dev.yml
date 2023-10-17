@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [R2020b, latest]
+        release: [R2020b, R2023a]
         folder: [Body-to-Body_Interactions,
                  Cable,
                  Controls,
