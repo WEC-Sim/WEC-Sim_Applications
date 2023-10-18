@@ -42,6 +42,8 @@ gStiffness =0; %125.96; % coupling stiffness (N/m) to apply to GBM surface (1 x 
 gDamping = 0;%54.74; % coupling damping to apply (N s/m) to GBM surface (1 x 1)
 gInertia = 0;
 lpf50 = tf(2*pi*50,[1 2*pi*50]);
+lpfNum = 2*pi*50;
+lpfDen = [1 2*pi*50];
 LPF50 = [lpf50 0 0 0 0 0 0; 0 lpf50 0 0 0 0 0; 0 0 lpf50 0 0 0 0; 0 0 0 lpf50 0 0 0; ...
     0 0 0 0 lpf50 0 0; 0 0 0 0 0 lpf50 0; 0 0 0 0 0 0 lpf50];
 %% tuning drag components
