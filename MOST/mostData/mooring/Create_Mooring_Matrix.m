@@ -1,9 +1,5 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Script to compute mooring look-up table %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% INITIALIZATION
-close all
-clearvars -except testCase
+function moor_matrix = Create_Mooring_Matrix()
+%% Function to compute mooring look-up table
 %% SETTINGS
 if 1
 %% Line
@@ -73,8 +69,9 @@ moor_matrix = moor_matrix_6dof(moor_matrix,Data_moor);
 
 %% SAVE
 save('Mooring_VolturnUS15MW','moor_matrix');
-%% FUNCTIONS
+end
 
+%% FUNCTIONS
 function moor_matrix = moor_matrix_6dof(moor_matrix,Data_moor)
 
 HV_out=zeros(Data_moor.number_lines,2);

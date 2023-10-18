@@ -23,21 +23,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        release: [R2020b, latest]
+        release: [latest]
         folder: [Body-to-Body_Interactions,
                  Cable,
                  Controls,
+                 Desalination,
                  End_Stops,
                  Free_Decay,
                  Generalized_Body_Modes,
                  Mean_Drift,
-                 Mooring,
                  Morison_Element,
                  MOST,
                  Multiple_Condition_Runs,
+                 Multiple_Wave_Headings,
                  Nonhydro_Body,
                  Nonlinear_Hydro,
-                 Paraview_Visualization,
                  Passive_Yaw,
                  PTO-Sim,
                  Radiation_Force_Options,
@@ -46,14 +46,13 @@ jobs:
                  Write_Custom_h5]
         include:
           - products: Simulink Simscape Simscape_Multibody
-          - release: latest
-            folder: Desalination
+          - folder: Desalination
             products: Simulink Simscape Simscape_Multibody Simscape_Fluids
           - folder: Controls
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
           - folder: WECCCOMP
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox 
-    name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
+    name: ${{ matrix.folder }} MATLAB ${{ matrix.release }} on Linux
     steps:
       - name: Check out repository (repository dispatch)
         uses: actions/checkout@v2

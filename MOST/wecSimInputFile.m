@@ -31,8 +31,8 @@ waves.direction = 0;                                % Wave Directionality [deg]
 
 %% Body class (Platform)
 
-body(1) = bodyClass('hydroData\VolturnUS15MW_nemoh.h5');                                       % Initialize bodyClass (giving hydro data file as input)
-body(1).geometryFile = 'geometry\VolturnUS15MW.STEP';                                          % Geometry File 
+body(1) = bodyClass('hydroData/VolturnUS15MW_nemoh.h5');                                       % Initialize bodyClass (giving hydro data file as input)
+body(1).geometryFile = 'geometry/VolturnUS15MW.STEP';                                          % Geometry File 
 body(1).mass = 17838000;                                                                       % User-Defined mass [kg]
 body(1).inertia = 1.0e+10*[1.2507    1.2507    2.3667];                                        % Moment of Inertia [kg-m^2]
 body(1).quadDrag.drag = [9.23E+05	0.00E+00	0.00E+00	0.00E+00	-8.92E+06	0.00E+00   %AddBQuad - Additional quadratic drag(N/(m/s)^2, N/(rad/s)^2, N-m(m/s)^2, N-m/(rad/s)^2) 
