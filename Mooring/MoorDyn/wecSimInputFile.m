@@ -1,8 +1,8 @@
 %% Simulation Data
 simu = simulationClass();             
-simu.simMechanicsFile = 'RM3MoorDyn.slx';       % WEC-Sim Model File
+simu.simMechanicsFile = 'RM3MoorDyn_test.slx';       % WEC-Sim Model File
 simu.mode='accelerator';                
-simu.explorer = 'off';
+simu.explorer = 'on';
 simu.rampTime = 40;                        
 simu.endTime=400;                       
 simu.dt = 0.01;                          
@@ -32,6 +32,10 @@ body(2).initial.displacement = [0 0 -0.21];     % Initial Displacement
 constraint(1) = constraintClass('Constraint1'); 
 constraint(1).location = [0 0 0];    
 
+% Floating (3DOF) Joint
+% constraint(2) = constraintClass('Constraint1'); 
+% constraint(2).location = [0 0 0];    
+
 % Translational PTO
 pto(1) = ptoClass('PTO1');              	
 pto(1).stiffness=0;                             	
@@ -40,8 +44,33 @@ pto(1).location = [0 0 0];
 
 %% Mooring
 % Moordyn
-mooring(1) = mooringClass('mooring');           % Initialize mooringClass
-mooring(1).moorDynLines = 6;                    % Specify number of lines
-mooring(1).moorDynNodes(1:3) = 16;              % Specify number of nodes per line
-mooring(1).moorDynNodes(4:6) = 6;               % Specify number of nodes per line
-mooring(1).initial.displacement = [0 0 -0.21];  % Initial Displacement
+
+% First moordyn block is main mooring block
+% mooring(1) = mooringClass('mooring1');           % Initialize mooringClass
+% mooring(1).moorDyn = 1;
+% mooring(1).moorDynLines = 6;                    % Specify number of lines
+% mooring(1).moorDynNodes(1:3) = 16;              % Specify number of nodes per line
+% mooring(1).moorDynNodes(4:6) = 6;               % Specify number of nodes per line
+% mooring(1).initial.displacement = [0 0 -0.21];  % Initial Displacement
+% mooring(1).moorDynBlocks = 2;
+
+% Other moordyn blocks are 
+mooring(1) = mooringClass('mooring1');           % Initialize mooringClass
+mooring(1).moorDyn = 1;
+mooring(1).moorDynLines = 2;                    % Specify number of lines
+mooring(1).moorDynNodes(1:3) = 6;              % Specify number of nodes per line
+mooring(1).moorDynNodes(4:6) = 16;              % Specify number of nodes per line
+mooring(1).initial.displacement = [0 0 -.21];  % Initial Displacement
+
+mooring(2) = mooringClass('mooring2');           % Initialize mooringClass
+mooring(2).moorDyn = 1;
+mooring(2).moorDynLines = 2;                    % Specify number of lines
+mooring(2).moorDynNodes(1:3) = 6;              % Specify number of nodes per line
+mooring(2).moorDynNodes(4:6) = 16;              % Specify number of nodes per line
+mooring(2).initial.displacement = [0 0 0];  % Initial Displacement
+
+% % Other moordyn blocks are 
+% mooring(3) = mooringClass('mooring');           % Initialize mooringClass
+% mooring(3).moorDynLines = 1;                    % Specify number of lines
+% mooring(3).moorDynNodes(1) = 20;              % Specify number of nodes per line
+% mooring(3).initial.displacement = [0 0 0];  % Initial Displacement
