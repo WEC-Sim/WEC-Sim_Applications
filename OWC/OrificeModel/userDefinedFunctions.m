@@ -83,7 +83,7 @@ switch widx
 end
 clear widx aidx
 
-if imcr == 20;
+if imcr == 20
     save('AStudyAvgs','avgOrifCFlag','avgOrifdP','avgOrifPower','avgOrifQ')
     figure; clf;
     [A2GRD,TGRD] = meshgrid(AVec,pdVec);

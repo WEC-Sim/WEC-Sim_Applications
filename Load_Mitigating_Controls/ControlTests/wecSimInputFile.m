@@ -105,27 +105,27 @@ T =300; % the amount of time presumed for wave-state/controller operation for fa
 %% Body Data
 % Float
 body(1) = bodyClass('../hydroData/waveBotBuoy.h5');      
-body(1).geometryFile = '../geometry/float.stl'   % Location of Geomtry File
-body(1).mass =1156.5; % heave mass is 893, surge mass is 1420, averaged used 
-body(1).inertia = [84 84 84];  %Moment of Inertia [kg*m^2], roll and yaw unused 
-body(1).linearDamping(1:2:5)=[1000 1000 100]; 
+body(1).geometryFile = '../geometry/float.stl';   % Location of Geomtry File
+body(1).mass = 1156.5; % heave mass is 893, surge mass is 1420, averaged used 
+body(1).inertia = [84 84 84];  % Moment of Inertia [kg*m^2], roll and yaw unused 
+body(1).linearDamping(1:2:5) = [1000 1000 100]; 
 body(1).quadDrag.cd = [1.15 1.15 1 0.5 0.5 0]; 
 body(1).quadDrag.area = [2.9568 2.9568 5.4739 5.4739 5.4739 0]; %
 
-% 
-% %% PTO and Constraint Parameters
-% % Floating (3DOF) Joint
+%% PTO and Constraint Parameters
+% Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); % Initialize Constraint Class for Constraint1
 constraint(1).location = [0 0 0];                    % Constraint Location [m]
 
-% % mooring matrix specs
+%% Mooring Parameters
 mooring(1) = mooringClass('mooring');
 mooring(1).location = [0,0,0];
 mooring(1).matrix.stiffness = zeros(6,6);
-mooring(1).matrix.stiffness(1,1) =24000; mooring(1).matrix.stiffness(2,2) = 24000;
-mooring(1).matrix.damping = zeros(6,6);
+mooring(1).matrix.stiffness(1,1) = 24000;
+mooring(1).matrix.stiffness(2,2) = 24000;
 mooring(1).matrix.stiffness(3,3) = 5000;
 mooring(1).matrix.stiffness(5,5) = 1000;
+mooring(1).matrix.damping = zeros(6,6);
 mooring(1).matrix.damping(1,1) = 5;
 mooring(1).matrix.damping(3,3) = 5;
 mooring(1).matrix.preTension = zeros(1,6); 

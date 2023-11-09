@@ -1,18 +1,18 @@
-classdef TestOWC < matlab.unittest.TestCase
-
+classdef TestLoadMitigatingControls < matlab.unittest.TestCase
+    
     properties
         OriginalDefault
         testDir
         h5Dir = 'hydroData'
-        h5Name = 'test17a.h5'
+        h5Name = 'waveBotBuoy.h5'
     end
-
-    methods (Access = 'public')
-        function obj = TestOWC
+        
+    methods (Access = 'public')        
+        function obj = TestLoadMitigatingControls
             obj.testDir = fileparts(mfilename('fullpath'));
-        end
+        end    
     end
-
+    
     methods (TestMethodSetup)
         function killPlots (~)
             set(0,'DefaultFigureVisible','off');
@@ -48,8 +48,13 @@ classdef TestOWC < matlab.unittest.TestCase
         end
     end
     
-    methods(Test)
-        function testOWC(testCase)
+    methods(Test)        
+        function testLoad_Mitigating_Control_ControlTests(testCase)
+            cd('ControlTests')
+            wecSim
+        end
+        function testLoad_Mitigating_Control_CalcImpedance(testCase)
+            cd('CalcImpedance')
             wecSim
         end
     end
