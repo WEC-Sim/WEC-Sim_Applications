@@ -34,4 +34,4 @@ endInd = length(controllersOutput.power(:,3));
 startTime = controllersOutput.time(end) - 10*waves.period; % select last 10 periods
 [~,startInd] = min(abs(controllersOutput.time(:) - startTime));
 disp('Controller Power:')
-mean( mean(controllersOutput.power(startInd:endInd,3)))
+mean(controllersOutput.power(startInd:endInd,3))

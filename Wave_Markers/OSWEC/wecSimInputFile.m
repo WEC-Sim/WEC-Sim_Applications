@@ -31,7 +31,6 @@ waves.period = 8;                            % Wave Period [s]
 
 %% Wave Visualization Markers
 % Example with a square mesh of visualization markers
-
 marker = 20;
 distance = 10;
 [X,Y] = meshgrid(-marker:distance:marker,-marker:distance:marker);
@@ -39,7 +38,7 @@ waves.marker.location = [reshape(X,[],1),reshape(Y,[],1)]; % Marker Locations [X
 clear('marker','distance','X','Y')
 waves.marker.style = 2; % 1: Sphere, 2: Cube, 3: Frame.
 waves.marker.size = 10; % Marker Size in Pixels
-
+waves.marker.graphicColor = [1,0,0];
 
 %% Body Data
 % Flap

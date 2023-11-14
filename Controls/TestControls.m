@@ -69,6 +69,10 @@ classdef TestControls < matlab.unittest.TestCase
         function testMPC(testCase)
             cd('MPC')
             wecSim
-        end        
+        end     
+        function testReactiveWithPTO(testCase)
+            cd('ReactiveWithPTO')
+            wecSim
+        end     
     end    
 end

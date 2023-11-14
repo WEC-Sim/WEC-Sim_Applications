@@ -15,44 +15,63 @@ jobs:
   dispatch_event:
     runs-on: ubuntu-latest
     name: Identify dispatch event
-    steps:
-      - run: echo "Triggered by WEC-Sim commit ${{ github.event.client_payload.sha }}"
     if: github.event_name == 'repository_dispatch'
+    steps:
+        - run: echo "Triggered by WEC-Sim commit ${{ github.event.client_payload.sha }}"
   run_tests:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        release: [R2020b, latest]
+        release: [latest]
         folder: [Body-to-Body_Interactions,
                  Cable,
-                 Controls,                 
+                 Controls,
+                 Desalination,
                  End_Stops,
                  Free_Decay,
                  Generalized_Body_Modes,
-                 Mooring,
+                 Mean_Drift,
                  Morison_Element,
+                 MOST,
                  Multiple_Condition_Runs,
+                 Multiple_Wave_Headings,
                  Nonhydro_Body,
                  Nonlinear_Hydro,
-                 Paraview_Visualization,
                  Passive_Yaw,
                  PTO-Sim,
+                 Radiation_Force_Options,
                  Wave_Markers,
                  WECCCOMP,
                  Write_Custom_h5]
-    name: ${{ matrix.folder }} on MATLAB ${{ matrix.release }}
+        include:
+          - products: Simulink Simscape Simscape_Multibody
+          - folder: Desalination
+            products: Simulink Simscape Simscape_Multibody Simscape_Fluids
+          - folder: Controls
+            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
+          - folder: WECCCOMP
+            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox 
+    name: ${{ matrix.folder }} MATLAB ${{ matrix.release }} on Linux
     steps:
-      - name: Check out repository
+      - name: Check out repository (repository dispatch)
         uses: actions/checkout@v2
         with:
           lfs: true
+          ref: 'master'
+        if: github.event_name == 'repository_dispatch'
+      - name: Check out repository (push or pull request)
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+        if: github.event_name != 'repository_dispatch'
       - name: Checkout LFS objects
         run: git lfs checkout
       - name: Check out WEC-Sim
         uses: actions/checkout@v2
         with:
           repository: WEC-Sim/WEC-Sim
+          ref: 'master'
           path: './WEC-Sim'
       - name: Check out MoorDyn
         uses: actions/checkout@v2
@@ -66,7 +85,17 @@ jobs:
         shell: bash
         working-directory: './MoorDyn'
       - name: Install MATLAB
-        uses: matlab-actions/setup-matlab@v1
+        uses: matlab-actions/setup-matlab@v2-beta
+        with:
+          cache: true
+          products: ${{ matrix.products }}
+          release: ${{ matrix.release }}
+      - name: Start display server
+        if: matrix.folder == 'Desalination'
+        run: |
+          sudo apt-get install xvfb
+          Xvfb :99 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
       - name: Install WEC-Sim
         uses: matlab-actions/run-command@v1
         with:
