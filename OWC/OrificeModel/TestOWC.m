@@ -52,5 +52,8 @@ classdef TestOWC < matlab.unittest.TestCase
         function testOWC(testCase)
             wecSim
         end
+        function testOWC_MCR(testCase)
+            wecSimMCR
+        end
     end
 end
