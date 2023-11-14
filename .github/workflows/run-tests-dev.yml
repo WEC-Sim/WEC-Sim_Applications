@@ -40,7 +40,6 @@ jobs:
                  Nonhydro_Body,
                  Nonlinear_Hydro,
                  OWC,
-                 Paraview_Visualization,
                  Passive_Yaw,
                  PTO-Sim,
                  Radiation_Force_Options,
