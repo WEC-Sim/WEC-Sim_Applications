@@ -2,30 +2,30 @@
 simu = simulationClass();               % Initialize Simulation Class
 simu.simMechanicsFile = 'WaveBot3Dof_Control'; % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer='on';                    % Turn SimMechanics Explorer (on/off)
+simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 20;                   	% Wave Ramp Time [s]
-simu.endTime=100;                       % Simulation End Time [s]
-simu.solver = 'ode45';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
+simu.endTime = 100;                     % Simulation End Time [s]
+simu.solver = 'ode45';                  % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01; 						% Simulation time-step [s]
-simu.rho=1025;                          % water density
-simu.domainSize=100;                     % domain size for visualization
+simu.rho = 1025;                        % water density
+simu.domainSize = 100;                  % domain size for visualization
 simu.cicEndTime = 10;
 simu.mcrMatFile = 'mcrWeights.mat'; 
-load('multisine3DOFA.mat')
+load('../CalcImpedance/multisine3DOFA.mat')
 %simu.paraview = 1; 
 %simu.StartTimeParaview = 0;
 %simu.EndTimeParaview = 200; 
 
 %% Wave Information 
 % % noWaveCIC, no waves with radiation CIC  
-%waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
+% waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
 
 % Regular Waves  
-%waves = waveClass('regularCIC');           % Initialize Wave Class and Specify Type                                 
-%waves.H = 1;                          % Wave Height [m]
-%waves.T = 5.5;                            % Wave Period [s]
-%  
+% waves = waveClass('regularCIC');      % Initialize Wave Class and Specify Type                                 
+% waves.H = 1;                          % Wave Height [m]
+% waves.T = 5.5;                        % Wave Period [s]
+
  % irregular waves
 waves = waveClass('irregular');
 waves.height = 0.254;
@@ -39,21 +39,19 @@ FBEnable = 1; % one to enable feedback controller
 FFEnable = 0; % one to enable feedforward actuation
 
 %% define forcing multisines
-
-%load('multisine3DOFA')
+% load('../CalcImpedance/multisine3DOFA.mat')
 OpenLoopGains = [50;100;2]; 
 
 %% Controller  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % frequency estimation
 load('Z_included'); % load calc'd impedance model.
 load('f_vec'); % freq vec for calculated impedance
-spectEstMethod= 1; 
+spectEstMethod = 1; 
 spect.DownSample = 25; % downsample factor above simu.dt. 
 spect.winLen = 1024;% window length over which FFT will be taken
 spect.winOvr = 1020; % length of overlap between two adjacent windows
 dt = 0.01; % sampling time of the time series
-Ts=dt;
+Ts = dt;
 spect.dt = Ts * spect.DownSample; % time separating successive window points 
 spect.T = spect.dt * spect.winLen; % time span covered by a window
 spect.df = 1/spect.T; % frequency spacing of Fourier-transformed window (Hz)
@@ -62,7 +60,6 @@ spect.f_max = 1; % maximum frequency of interest (Hz)
 
 % WARNING: Do not specify an f_min or f_max range beyond that covered by
 % the identified impedance model.
-
 N_min = ceil(spect.f_min/spect.df);
 N_max = floor(spect.f_max/spect.df);
 spect.f = (N_min:N_max)*spect.df';

@@ -8,7 +8,7 @@
 
 **Dependencies:**
 
-   Control System Toolbox		            -->	for LTI block
+   Control System Toolbox		            -->	for tf() function
 
 OWC example modeling an orifice for a floating body cylindrical OWC.
 Body has a broken link to couple the GBM mode representing the heaving 

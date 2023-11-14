@@ -32,7 +32,6 @@ jobs:
                  Free_Decay,
                  Generalized_Body_Modes,
                  Load_Mitigating_Controls,
-                 Mooring,
                  Mean_Drift,
                  Morison_Element,
                  MOST,
@@ -54,8 +53,12 @@ jobs:
             products: Simulink Simscape Simscape_Multibody Simscape_Fluids
           - folder: Controls
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
+          - folder: Load_Mitigating_Controls
+            products: Simulink Simscape Simscape_Multibody DSP_System_Toolbox
+          - folder: OWC
+            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox
           - folder: WECCCOMP
-            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox 
+            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox
     name: ${{ matrix.folder }} MATLAB ${{ matrix.release }} on Linux
     steps:
       - name: Check out repository (repository dispatch)

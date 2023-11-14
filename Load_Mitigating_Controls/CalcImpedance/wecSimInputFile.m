@@ -14,10 +14,9 @@ simu.cicEndTime = 10;
 simu.mcrMatFile = 'mcrImpedanceRuns.mat'; 
 
 %% load multisine
-% this is handled by the 'LoadFile' header in mcrCaseFile, so keep
+% This is handled by the 'LoadFile' header in mcrCaseFile, so keep
 % commented out for wecSimMCR runs. For single wecSim runs, uncomment:
-
-% load('multisine3DOFA'); 
+load('multisine3DOFA'); 
 
 %% Wave Information 
 % noWaveCIC, no waves with radiation CIC  

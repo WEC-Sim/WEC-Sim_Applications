@@ -57,5 +57,9 @@ classdef TestLoadMitigatingControls < matlab.unittest.TestCase
             cd('CalcImpedance')
             wecSim
         end
+        function testLoad_Mitigating_Control_CalcImpedance_MCR(testCase)
+            cd('CalcImpedance')
+            wecSimMCR
+        end
     end
 end
