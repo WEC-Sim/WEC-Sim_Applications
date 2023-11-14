@@ -6,7 +6,7 @@
 
 **Geometry**	WaveBot
 
-Example on using load-mitigating linear adaptive controller. See documentation for more details. Tested on MATLAB2020b.
+Example on using load-mitigating linear adaptive controller. See documentation for more details. Tested on MATLAB 2020b.
 
 
 
