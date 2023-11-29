@@ -3,7 +3,7 @@ classdef TestControls < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = "hydroData"
+        h5Dir = '../_Common_Input_Files/Sphere/hydroData/'
         h5Name = 'sphere.h5'
         outName = 'sphere.out'
     end    
