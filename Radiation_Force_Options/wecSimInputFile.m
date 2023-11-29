@@ -47,8 +47,6 @@ waves.height = 2.5;                       % Wave Height [m]
 waves.period = 12;                         % Wave Period [s]
 end
 
-
-
 %% Body Data
 % Float
 body(1) = bodyClass('../../_Common_Input_Files/RM3/hydroData/rm3.h5');
