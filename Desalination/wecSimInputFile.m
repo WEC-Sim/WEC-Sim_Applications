@@ -22,8 +22,8 @@ waves.phaseSeed = 1;
 
 %% Body Data
 % Flap
-body(1) = bodyClass('../../_Common_Input_Files/OSWEC/hydroData/oswec.h5');   % Initialize bodyClass for Flap
-body(1).geometryFile = '../../_Common_Input_Files/OSWEC/geometry/flap.stl';  % Geometry File
+body(1) = bodyClass('../_Common_Input_Files/OSWEC/hydroData/oswec.h5');   % Initialize bodyClass for Flap
+body(1).geometryFile = '../_Common_Input_Files/OSWEC/geometry/flap.stl';  % Geometry File
 body(1).mass = 127000;                         % User-Defined mass [kg]
 body(1).inertia = [1.85e6 1.85e6 1.85e6]; % Moment of Inertia [kg-m^2]
 body(1).morisonElement.option = 1;
@@ -36,8 +36,8 @@ body(1).morisonElement.VME  = zeros(5,1);
 body(1).morisonElement.rgME = [0 0 -3; 0 0 -1.2; 0 0 0.6; 0 0 2.4; 0 0 4.2];
 
 % Base
-body(2) = bodyClass('../../_Common_Input_Files/OSWEC/hydroData/oswec.h5');   % Initialize bodyClass for Flap
-body(2).geometryFile = '../../_Common_Input_Files/OSWEC/geometry/base.stl';  % Geometry File
+body(2) = bodyClass('../_Common_Input_Files/OSWEC/hydroData/oswec.h5');   % Initialize bodyClass for Flap
+body(2).geometryFile = '../_Common_Input_Files/OSWEC/geometry/base.stl';  % Geometry File
 body(2).mass = 999;                            % Placeholder mass for fixed body
 body(2).inertia = [999 999 999];               % Placeholder inertia for fixed body
 
