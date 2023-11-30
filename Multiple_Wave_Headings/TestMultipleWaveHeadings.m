@@ -3,7 +3,7 @@ classdef TestMultipleWaveHeadings < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = fullfile("hydroData")
+        h5Dir = '../_Common_Input_Files/OSWEC/hydroData/'
         h5Name = 'oswec.h5'
         outName = 'oswec.out'
     end    

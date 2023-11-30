@@ -18,8 +18,8 @@ waves.period = 9.6664;                       % Wave Period [s]
 
 %% Body Data
 % Sphere
-body(1) = bodyClass('../hydroData/sphere.h5');          % Create the body(1) Variable
-body(1).geometryFile = '../geometry/sphere.stl';        % Location of Geomtry File
+body(1) = bodyClass('../../_Common_Input_Files/Sphere/hydroData/sphere.h5');          % Create the body(1) Variable
+body(1).geometryFile = '../../_Common_Input_Files/Sphere/geometry/sphere.stl';        % Location of Geomtry File
 body(1).mass = 'equilibrium';                           % Body Mass
 body(1).inertia = [20907301 21306090.66 37085481.11];   % Moment of Inertia [kg*m^2]     
 
