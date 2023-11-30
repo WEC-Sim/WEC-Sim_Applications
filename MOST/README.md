@@ -2,7 +2,7 @@
 
 **Author:**  	MORE Energy Lab
 
-**Version:** 	WEC-Sim v5.2
+**Version:** 	WEC-Sim v6.0
 
 **Geometry**	Floating offshore wind simulation using WEC-Sim+MOST
 
