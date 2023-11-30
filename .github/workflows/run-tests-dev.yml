@@ -43,6 +43,7 @@ jobs:
                  Passive_Yaw,
                  PTO-Sim,
                  Radiation_Force_Options,
+                 RM3_PTO_Extension,
                  Wave_Markers,
                  WECCCOMP,
                  Write_Custom_h5]
