@@ -27,7 +27,7 @@ body(1).inertia = [1.85e6 1.85e6 1.85e6]; % Moment of Inertia [kg-m^2]
 body(1).nonlinearHydro = 2;                 % Turns non-linear hydro on
 
 % Base (Non-hydro Body)
-body(2) = bodyClass('../../_Common_Input_Files/OSWEC/hydroData/oswec.h5');   % Initialize bodyClass for Flap
+body(2) = bodyClass('../../_Common_Input_Files/OSWEC/hydroData/oswec.h5');   % Initialize bodyClass for Base
 body(2).geometryFile = '../../_Common_Input_Files/OSWEC/geometry/base.stl';  % Geometry File
 body(2).nonHydro = 1;                       % Turn non-hydro body on
 body(2).name = 'base';                      % Specify body name

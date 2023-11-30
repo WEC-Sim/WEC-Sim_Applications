@@ -26,7 +26,7 @@ body(1).mass = 12700;                           % User-Defined mass [kg]
 body(1).inertia = [1.85e6 1.85e6 1.85e6];       % Moment of Inertia [kg-m^2]
 body(1).yaw.option = 0;                         % Turn passive yaw OFF
 
-% Base NOTE: This test uses unique BEM for the OSWEC
+% Base
 body(2) = bodyClass('../../_Common_Input_Files/OSWEC/hydroData/oswec.h5');   % Initialize bodyClass for Base
 body(2).geometryFile = '../../_Common_Input_Files/OSWEC/geometry/base.stl';  % Geometry File
 body(2).mass = 999;                             % Placeholder mass for fixed body

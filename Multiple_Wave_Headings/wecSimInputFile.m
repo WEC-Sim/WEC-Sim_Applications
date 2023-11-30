@@ -43,7 +43,7 @@ waves(2).marker.size = 30; % Marker Size in Pixels
 waves(2).marker.graphicColor = [0,0,1];
 
 %% Body Data
-% Flap NOTE: This test uses unique BEM for the OSWEC
+% Flap
 body(1) = bodyClass('../_Common_Input_Files/OSWEC/hydroData/oswec.h5');      % Initialize bodyClass for Flap
 body(1).geometryFile = '../_Common_Input_Files/OSWEC/geometry/flap.stl';     % Geometry File
 body(1).mass = 12700;                           % User-Defined mass [kg]
@@ -51,7 +51,7 @@ body(1).inertia = [1.85e6 1.85e6 1.85e6];       % Moment of Inertia [kg-m^2]
 body(1).yaw.option=1;                           % Turn passive yaw ON
 body(1).yaw.threshold=0.01;                     % Set passive yaw threshold
 
-% Base NOTE: This test uses unique BEM for the OSWEC
+% Base
 body(2) = bodyClass('../_Common_Input_Files/OSWEC/hydroData/oswec.h5');      % Initialize bodyClass for Base
 body(2).geometryFile = '../_Common_Input_Files/OSWEC/geometry/base.stl';     % Geometry File
 body(2).mass = 999;                             % Placeholder mass for fixed body
