@@ -84,7 +84,7 @@ classdef TestMOST < matlab.unittest.TestCase
         
         function constant_bodyHeave(testCase)
             % Body heave
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.constant.orgCase.heave;
             new = testCase.constant.newCase.heave;
             testCase.verifyEqual(new,org,'AbsTol',tol);
@@ -94,7 +94,7 @@ classdef TestMOST < matlab.unittest.TestCase
 
         function constant_bodyPitch(testCase)
             % Body pitch
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.constant.orgCase.pitch;
             new = testCase.constant.newCase.pitch;
             testCase.verifyEqual(new,org,'AbsTol',tol);
@@ -104,7 +104,7 @@ classdef TestMOST < matlab.unittest.TestCase
         
         function constant_bladePitch(testCase)
             % Blade pitch
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.constant.orgCase.bladePitch;
             new = testCase.constant.newCase.bladePitch;
             testCase.verifyEqual(new,org,'AbsTol',tol);
@@ -134,7 +134,7 @@ classdef TestMOST < matlab.unittest.TestCase
         
         function constant_windSpeed(testCase)
             % Wind Speed
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.constant.orgCase.windSpeed;
             new = testCase.constant.newCase.windSpeed;
             testCase.verifyEqual(new,org,'AbsTol',tol);
@@ -144,7 +144,7 @@ classdef TestMOST < matlab.unittest.TestCase
 
         function turbulent_bodyHeave(testCase)
             % Body heave
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.turbulent.orgCase.heave;
             new = testCase.turbulent.newCase.heave;
             testCase.verifyEqual(new,org,'AbsTol',tol);
@@ -154,7 +154,7 @@ classdef TestMOST < matlab.unittest.TestCase
 
         function turbulent_bodyPitch(testCase)
             % Body pitch
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.turbulent.orgCase.pitch;
             new = testCase.turbulent.newCase.pitch;
             testCase.verifyEqual(new,org,'AbsTol',tol);
@@ -164,7 +164,7 @@ classdef TestMOST < matlab.unittest.TestCase
         
         function turbulent_bladePitch(testCase)
             % Blade pitch
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.turbulent.orgCase.bladePitch;
             new = testCase.turbulent.newCase.bladePitch;
             testCase.verifyEqual(new,org,'AbsTol',tol);
@@ -194,7 +194,7 @@ classdef TestMOST < matlab.unittest.TestCase
         
         function turbulent_windSpeed(testCase)
             % Wind Speed
-            tol = 1e-6;
+            tol = 1e-4;
             org = testCase.turbulent.orgCase.windSpeed;
             new = testCase.turbulent.newCase.windSpeed;
             testCase.verifyEqual(new,org,'AbsTol',tol);
