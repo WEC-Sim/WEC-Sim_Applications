@@ -66,6 +66,7 @@ $ cat .gitignore
 # Applications
 **/mooring/*.out
 !**/mooring/lines.txt
+!**/mooring/lines_2bod.txt
 **/vtk/*
 savedData*.mat
 WECCCOMP/**/SS*.mat

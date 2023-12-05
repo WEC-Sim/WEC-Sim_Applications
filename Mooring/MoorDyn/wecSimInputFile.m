@@ -1,6 +1,6 @@
 %% Simulation Data
 simu = simulationClass();             
-simu.simMechanicsFile = 'RM3MoorDyn_test.slx';       % WEC-Sim Model File
+simu.simMechanicsFile = 'RM3MoorDyn_2bod.slx';       % WEC-Sim Model File
 simu.mode='accelerator';                
 simu.explorer = 'on';
 simu.rampTime = 40;                        
