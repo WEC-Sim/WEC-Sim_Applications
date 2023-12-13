@@ -1,7 +1,8 @@
 %% Simulation Data
 simu = simulationClass();             
 simu.simMechanicsFile = 'RM3MoorDyn_2bod.slx';       % WEC-Sim Model File
-simu.mode='accelerator';                
+simu.simMechanicsFile = 'RM3MoorDyn_test.slx';       % test 1 body with new blocks
+simu.mode='normal';                
 simu.explorer = 'on';
 simu.rampTime = 40;                        
 simu.endTime=400;                       
@@ -62,12 +63,15 @@ mooring(1).moorDynNodes(1:3) = 6;              % Specify number of nodes per lin
 mooring(1).moorDynNodes(4:6) = 16;              % Specify number of nodes per line
 mooring(1).initial.displacement = [0 0 -.21];  % Initial Displacement
 
-mooring(2) = mooringClass('mooring2');           % Initialize mooringClass
-mooring(2).moorDyn = 1;
-mooring(2).moorDynLines = 2;                    % Specify number of lines
-mooring(2).moorDynNodes(1:3) = 6;              % Specify number of nodes per line
-mooring(2).moorDynNodes(4:6) = 16;              % Specify number of nodes per line
-mooring(2).initial.displacement = [0 0 0];  % Initial Displacement
+% mooring(2) = mooringClass('mooring2');           % Initialize mooringClass
+% mooring(2).moorDyn = 1;
+% mooring(2).moorDynLines = 2;                    % Specify number of lines
+% mooring(2).moorDynNodes(1:3) = 6;              % Specify number of nodes per line
+% mooring(2).moorDynNodes(4:6) = 16;              % Specify number of nodes per line
+% mooring(2).initial.displacement = [0 0 0];  % Initial Displacement
+
+% mooring(3) = mooringClass('mooring3');
+% mooring(3).numMoorDyn = 2;
 
 % % Other moordyn blocks are 
 % mooring(3) = mooringClass('mooring');           % Initialize mooringClass
