@@ -103,3 +103,7 @@ jobs:
             addpath(genpath('WEC-Sim/source'));
             results = wecSimAppTest("${{ matrix.folder }}"),
             assertSuccess(results);
+          startup-options: -logfile matlab.log
+      - name: Print matlab.log
+        if: success() || failure()
+        run: cat matlab.log
