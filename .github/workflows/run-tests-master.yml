@@ -88,7 +88,6 @@ jobs:
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v2-beta
         with:
-          cache: true
           products: ${{ matrix.products }}
           release: ${{ matrix.release }}
       - name: Start display server (Linux)
