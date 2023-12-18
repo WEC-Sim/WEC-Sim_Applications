@@ -59,7 +59,7 @@ jobs:
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox
           - folder: WECCCOMP
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox
-    name: ${{ matrix.folder }} MATLAB ${{ matrix.release }} on ${{ matrix.os }}
+    name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
     steps:
       - name: Check out repository (repository dispatch)
         uses: actions/checkout@v2
