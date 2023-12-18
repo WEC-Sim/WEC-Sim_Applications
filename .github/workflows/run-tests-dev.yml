@@ -23,6 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, windows-latest]
         folder: [Body-to-Body_Interactions,
                  Cable,
                  Controls,
@@ -46,7 +47,6 @@ jobs:
                  WECCCOMP,
                  Write_Custom_h5]
         release: [R2023b]
-        os: [ubuntu-latest, windows-latest]
         include:
           - products: Simulink Simscape Simscape_Multibody
           - folder: Desalination
