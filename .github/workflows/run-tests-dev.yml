@@ -62,26 +62,26 @@ jobs:
     name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
     steps:
       - name: Check out repository (repository dispatch)
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
           ref: 'dev'
         if: github.event_name == 'repository_dispatch'
       - name: Check out repository (push or pull request)
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
         if: github.event_name != 'repository_dispatch'
       - name: Checkout LFS objects
         run: git lfs checkout
       - name: Check out WEC-Sim
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: WEC-Sim/WEC-Sim
           ref: 'dev'
           path: './WEC-Sim'
       - name: Check out MoorDyn
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: WEC-Sim/MoorDyn
           path: './MoorDyn'
