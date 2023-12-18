@@ -19,11 +19,11 @@ jobs:
     steps:
         - run: echo "Triggered by WEC-Sim commit ${{ github.event.client_payload.sha }}"
   run_tests:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        release: [latest]
+        os: [ubuntu-latest, windows-latest]
         folder: [Body-to-Body_Interactions,
                  Cable,
                  Controls,
@@ -46,6 +46,7 @@ jobs:
                  Wave_Markers,
                  WECCCOMP,
                  Write_Custom_h5]
+        release: [R2023b]
         include:
           - products: Simulink Simscape Simscape_Multibody
           - folder: Desalination
@@ -58,29 +59,30 @@ jobs:
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox
           - folder: WECCCOMP
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox
-    name: ${{ matrix.folder }} MATLAB ${{ matrix.release }} on Linux
+    name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
+    timeout-minutes: 45
     steps:
       - name: Check out repository (repository dispatch)
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
           ref: 'dev'
         if: github.event_name == 'repository_dispatch'
       - name: Check out repository (push or pull request)
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
         if: github.event_name != 'repository_dispatch'
       - name: Checkout LFS objects
         run: git lfs checkout
       - name: Check out WEC-Sim
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: WEC-Sim/WEC-Sim
           ref: 'dev'
           path: './WEC-Sim'
       - name: Check out MoorDyn
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: WEC-Sim/MoorDyn
           path: './MoorDyn'
@@ -93,20 +95,22 @@ jobs:
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v2-beta
         with:
-          cache: true
           products: ${{ matrix.products }}
           release: ${{ matrix.release }}
-      - name: Start display server
-        if: matrix.folder == 'Desalination'
+      - name: Start display server (Linux)
+        if: matrix.folder == 'Desalination' && matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get install xvfb
           Xvfb :99 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
-      - name: Install WEC-Sim
+      - name: Install WEC-Sim, run tests and generate artifacts
         uses: matlab-actions/run-command@v1
         with:
-          command: addpath(genpath('WEC-Sim/source'));, savepath pathdef.m;
-      - name: Run tests and generate artifacts
-        uses: matlab-actions/run-command@v1
-        with:
-          command: results = wecSimAppTest("${{ matrix.folder }}"), assertSuccess(results);
+          command: |
+            addpath(genpath('WEC-Sim/source'));
+            results = wecSimAppTest("${{ matrix.folder }}"),
+            assertSuccess(results);
+          startup-options: -logfile matlab.log
+      - name: Print matlab.log
+        if: success() || failure()
+        run: cat matlab.log
