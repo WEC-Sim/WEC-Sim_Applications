@@ -97,8 +97,8 @@ jobs:
           cache: true
           products: ${{ matrix.products }}
           release: ${{ matrix.release }}
-      - name: Start display server
-        if: matrix.folder == 'Desalination'
+      - name: Start display server (Linux)
+        if: matrix.folder == 'Desalination' && matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get install xvfb
           Xvfb :99 &
