@@ -60,6 +60,7 @@ jobs:
           - folder: WECCCOMP
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox
     name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
+    timeout-minutes: 45
     steps:
       - name: Check out repository (repository dispatch)
         uses: actions/checkout@v4
