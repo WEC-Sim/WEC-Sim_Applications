@@ -23,8 +23,11 @@ plot(output.moorDyn.Lines.Time, output.moorDyn.Lines.FairTen6,'-.')
 legend('FairTen 4', 'FairTen 5', 'FairTen 6')
 
 figure()
-plot(output.moorDyn.Lines.Time, output.moorDyn.Lines.FairTen10)
-hold on
-plot(output.moorDyn.Lines.Time, output.moorDyn.Lines.FairTen11,'--')
-plot(output.moorDyn.Lines.Time, output.moorDyn.Lines.FairTen12,'-.')
-legend('FairTen 10', 'FairTen 11', 'FairTen 12')
+plot(output.mooring(1).time,output.mooring(1).position(:,3))
+
+% figure()
+% plot(output.moorDyn.Lines.Time, output.moorDyn.Lines.FairTen10)
+% hold on
+% plot(output.moorDyn.Lines.Time, output.moorDyn.Lines.FairTen11,'--')
+% plot(output.moorDyn.Lines.Time, output.moorDyn.Lines.FairTen12,'-.')
+% legend('FairTen 10', 'FairTen 11', 'FairTen 12')

@@ -20,11 +20,11 @@ ID      Attachment    X      Y     Z            Mass   Volume     CdA     CA
 7         Free    -40.0     0      -10.00     16755   33.510     12.566   1
 8         Free     20.0   34.642   -10.00     16755   33.510     12.566   1
 9         Free     20.0  -34.642   -10.00     16755   33.510     12.566   1
-10        Body2    -3.0     0      -10.00       0        0         0      0
+10        Body2    -3.0     0      0       0        0         0      0
 11        Fixed     -267.0     0      -70.00       0        0         0      0
-12        Body2     1.5   2.598    -10.00       0        0         0      0
+12        Body2     1.5   2.598    0       0        0         0      0
 13        Fixed      133.5   231.23   -70.00       0        0         0      0
-14        Body2     1.5  -2.598    -10.00       0        0         0      0
+14        Body2     1.5  -2.598    0       0        0         0      0
 15        Fixed      133.5  -231.23   -70.00       0        0         0      0
 16        Free    -40.0     0      -10.00     16755   33.510     12.566   1
 17        Free     20.0   34.642   -10.00     16755   33.510     12.566   1
@@ -41,9 +41,9 @@ ID     LineType  AttachA  AttachB  UnstrLen     NumSegs   LineOutputs
 7        Chain     11        16       240.0        15        tp
 8        Chain     13        17       240.0        15        tp
 9        Chain     15        18       240.0        15        tp
-10       Chain     16        10        40.0         5        tp
-11       Chain     17        12        40.0         5        tp
-12       Chain     18        14        40.0         5        tp
+10       Chain     16        10        50.0         5        tp
+11       Chain     17        12        50.0         5        tp
+12       Chain     18        14        50.0         5        tp
 ---------------------- SOLVER OPTIONS-----------------------------------------
 0.0005   dtM          - time step to use in mooring integration
 0        WaveKin      - wave kinematics flag (0=neglect, the only option currently supported)
