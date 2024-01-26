@@ -1,10 +1,10 @@
-% Simulation Data
+%% Simulation Data
 simu = simulationClass();             
-simu.simMechanicsFile = 'RM3MoorDyn.slx';  	% Location of Simulink Model File with MoorDyn
-simu.mode='accelerator';                
+simu.simMechanicsFile = 'RM3MoorDyn.slx';  	% WEC-Sim Model File with MoorDyn
+simu.mode = 'accelerator';                
 simu.explorer = 'off';
 simu.rampTime = 0;  
-simu.endTime=80;                      
+simu.endTime = 80;                      
 simu.dt = 0.01;                          
 simu.dtOut = 0.1;                           % Specifies output time-step  
 simu.cicDt = 0.05;           
@@ -50,6 +50,6 @@ pto(1).location = [0 0 0];
 %% Mooring
 % Moordyn
 mooring(1) = mooringClass('mooring');       	% Initialize mooringClass
+mooring(1).moorDyn = 1;                         % Initialize MoorDyn
 mooring(1).moorDynLines = 3;                	% Specify number of lines
 mooring(1).moorDynNodes = [21 21 21];       	% Specify number of nodes per line
-
