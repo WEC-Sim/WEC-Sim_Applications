@@ -30,19 +30,19 @@ body(2).initial.displacement = [0 0 -0.21];     % Initial Displacement
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
 constraint(1) = constraintClass('Constraint1'); 
-constraint(1).location = [0 0 0];       
+constraint(1).location = [0 0 0];    
 
 % Translational PTO
 pto(1) = ptoClass('PTO1');              	
 pto(1).stiffness=0;                             	
 pto(1).damping=1200000;                       	
-pto(1).location = [0 0 0];  
+pto(1).location = [0 0 0];     
 
 %% Mooring
 % Moordyn
-mooring(1) = mooringClass('mooring');          % Initialize mooringClass
+mooring(1) = mooringClass('mooring');           % Initialize mooringClass
 mooring(1).moorDyn = 1;                         % Initialize MoorDyn                                                                    
 mooring(1).moorDynLines = 6;                    % Specify number of lines
-mooring(1).moorDynNodes(1:3) = 16;               % Specify number of nodes per line
-mooring(1).moorDynNodes(4:6) = 6;              % Specify number of nodes per line
+mooring(1).moorDynNodes(1:3) = 16;              % Specify number of nodes per line
+mooring(1).moorDynNodes(4:6) = 6;               % Specify number of nodes per line
 mooring(1).initial.displacement = [0 0 -0.21];  % Initial Displacement
