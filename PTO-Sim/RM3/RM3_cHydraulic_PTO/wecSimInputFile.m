@@ -3,7 +3,7 @@ simu = simulationClass();
 simu.simMechanicsFile = 'RM3_cHydraulic_PTO.slx'; %Location of Simulink Model File with PTO-Sim                 
 simu.startTime = 0;                     
 simu.rampTime = 100;                       
-simu.endTime=2000;   
+simu.endTime=400;   
 simu.dt = 0.01;                         
 simu.explorer = 'off';                     % Turn SimMechanics Explorer (on/off)
 
