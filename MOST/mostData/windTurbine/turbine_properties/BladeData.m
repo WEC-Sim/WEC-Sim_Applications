@@ -1,9 +1,7 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Script to create bladedata struct %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Initialization
-clearvars -except testCase
-load('Properties_IEA15MW')
+function bladedata = BladeData()
+%% Function to create bladedata struct
+load('Properties_IEA15MW');
+
 %% Blade
 bladefile=importdata('BladeData/IEA-15-240-RWT_blade.dat',' ',6);
 bladedata.radius=bladefile.data(:,1)+WTcomponents.hub.Rhub;
@@ -26,3 +24,4 @@ end
 %% Save
 save('Bladedata_IEA_15MW.mat','bladedata')
 
+end
