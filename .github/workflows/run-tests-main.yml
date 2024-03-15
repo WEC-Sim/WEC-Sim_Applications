@@ -1,16 +1,16 @@
-name: Run MATLAB tests on master branch
+name: Run MATLAB tests on main branch
 on:
-  # Trigger the workflow on push or pull requests on the master branch and on 
-  # pushes to WEC-Sim/WEC-Sim master branch
+  # Trigger the workflow on push or pull requests on the main branch and on 
+  # pushes to WEC-Sim/WEC-Sim main branch
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
   repository_dispatch:
     types:
-      - wecsim-master
+      - wecsim-main
 jobs:
   dispatch_event:
     runs-on: ubuntu-latest
@@ -70,7 +70,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
-          ref: 'master'
+          ref: 'main'
         if: github.event_name == 'repository_dispatch'
       - name: Check out repository (push or pull request)
         uses: actions/checkout@v4
@@ -83,7 +83,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: WEC-Sim/WEC-Sim
-          ref: 'master'
+          ref: 'main'
           path: './WEC-Sim'
       - name: Check out MoorDyn
         if: matrix.folder == 'Mooring'

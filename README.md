@@ -1,6 +1,6 @@
 # WEC-Sim_Applications
 
-[![master build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-master.yml/badge.svg)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-master.yml)
+[![main build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-main.yml/badge.svg)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-main.yml)
 [![dev build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-dev.yml/badge.svg)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-dev.yml)
 
 This repository contains applications of the WEC-Sim code, including tutorials by the WEC-Sim team as well as user-shared examples. 
@@ -23,8 +23,8 @@ Individual test files are typically found at the same level as a `hydroData`
 directory, with a file name like `Test<Something>.m`. These test files may test 
 multiple application cases that use the same hydrodynamic data.
 
-For the latest release of WEC-Sim_Applications, or the `master` branch, it is 
-assumed that the latest release or `master` branch of [WEC-Sim][103] is 
+For the latest release of WEC-Sim_Applications, or the `main` branch, it is 
+assumed that the latest release or `main` branch of [WEC-Sim][103] is 
 installed. For tests containing the name "MoorDyn", it is also necessary to 
 install the [MoorDyn][104] module into WEC-Sim. The tests in the 
 `Desalination` folder require the [Simscape Fluids][105] toolbox.
