@@ -11,4 +11,4 @@ Can be useful if you want to modify your coefficients, use experimental coeffici
 Load custom or experimental coefficients and assign them to the hydro structure as shown in the sample. 
 Use the IRF and state space functions where appropriate. 
 Write data to an .h5 file using the ``writeBEMIOH5`` function.
-For more details see the [Documentation](https://wec-sim.github.io/WEC-Sim/master/user/advanced_features.html#writing-your-own-h5-file).
+For more details see the [Documentation](https://wec-sim.github.io/WEC-Sim/main/user/advanced_features.html#writing-your-own-h5-file).
