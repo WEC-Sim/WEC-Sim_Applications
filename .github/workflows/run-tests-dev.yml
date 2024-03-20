@@ -33,6 +33,7 @@ jobs:
                  Generalized_Body_Modes,
                  Load_Mitigating_Controls,
                  Mean_Drift,
+                 Mooring,
                  Morison_Element,
                  MOST,
                  Multiple_Condition_Runs,
@@ -60,6 +61,9 @@ jobs:
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox
           - folder: WECCCOMP
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox
+        exclude:
+          - os: ubuntu-latest
+            folder: Mooring
     name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
     timeout-minutes: 45
     steps:
@@ -83,35 +87,33 @@ jobs:
           ref: 'dev'
           path: './WEC-Sim'
       - name: Check out MoorDyn
+        if: matrix.folder == 'Mooring'
         uses: actions/checkout@v4
         with:
           repository: WEC-Sim/MoorDyn
           path: './MoorDyn'
       - name: Copy MoorDyn Files
+        if: matrix.folder == 'Mooring'
         run: |
             cp * ../WEC-Sim/source/functions/moorDyn
             ls ../WEC-Sim/source/functions/moorDyn
         shell: bash
         working-directory: './MoorDyn'
       - name: Install MATLAB
-        uses: matlab-actions/setup-matlab@v2-beta
+        uses: matlab-actions/setup-matlab@v2
         with:
           products: ${{ matrix.products }}
           release: ${{ matrix.release }}
-      - name: Start display server (Linux)
+      - name: Start display server (Desalination on Linux)
         if: matrix.folder == 'Desalination' && matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get install xvfb
           Xvfb :99 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
       - name: Install WEC-Sim, run tests and generate artifacts
-        uses: matlab-actions/run-command@v1
+        uses: matlab-actions/run-command@v2
         with:
           command: |
             addpath(genpath('WEC-Sim/source'));
             results = wecSimAppTest("${{ matrix.folder }}"),
             assertSuccess(results);
-          startup-options: -logfile matlab.log
-      - name: Print matlab.log
-        if: success() || failure()
-        run: cat matlab.log
