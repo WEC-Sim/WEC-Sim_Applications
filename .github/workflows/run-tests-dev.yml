@@ -61,9 +61,6 @@ jobs:
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox
           - folder: WECCCOMP
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox
-        exclude:
-          - os: ubuntu-latest
-            folder: Mooring
     name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
     timeout-minutes: 45
     steps:
@@ -90,7 +87,7 @@ jobs:
         if: matrix.folder == 'Mooring'
         uses: actions/checkout@v4
         with:
-          repository: WEC-Sim/MoorDyn
+          repository: jtgrasb/MoorDyn
           path: './MoorDyn'
       - name: Copy MoorDyn Files
         if: matrix.folder == 'Mooring'
