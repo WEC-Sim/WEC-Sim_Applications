@@ -21,6 +21,7 @@ waves.spectrumType = 'JS';
 waves.bem.option = 'Traditional';
 waves.viz.numPointsX = 1000;
 waves.viz.numPointsY = 2;
+waves.waterDepth = 70;
 
 %% Body Data
 % Float
@@ -53,4 +54,4 @@ mooring(1) = mooringClass('mooring');       	% Initialize mooringClass
 mooring(1).moorDyn = 1;                         % Initialize MoorDyn
 mooring(1).moorDynLines = 3;                	% Specify number of lines
 mooring(1).moorDynNodes = [21 21 21];       	% Specify number of nodes per line
-mooring(1).initial.displacement = [0 0 -0.21];  % Initial Displacement
+mooring(1).initial.displacement = [0 0 -21.29-.21]; % Initial Displacement (includes body cg and body initial displacement)
