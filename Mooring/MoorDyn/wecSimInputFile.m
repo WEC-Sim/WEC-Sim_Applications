@@ -1,10 +1,10 @@
 %% Simulation Data
 simu = simulationClass();             
 simu.simMechanicsFile = 'RM3MoorDyn.slx';       % WEC-Sim Model File
-simu.mode='accelerator';                
+simu.mode = 'accelerator';                
 simu.explorer = 'off';
 simu.rampTime = 40;                        
-simu.endTime=400;                       
+simu.endTime = 400;                       
 simu.dt = 0.01;                          
 simu.cicDt = 0.05;
 
@@ -12,6 +12,7 @@ simu.cicDt = 0.05;
 % User-Defined Time-Series
 waves = waveClass('elevationImport');           % Create the Wave Variable and Specify Type
 waves.elevationFile = 'etaData.mat';            % Name of User-Defined Time-Series File [:,2] = [time, eta]
+waves.waterDepth = 70;
 
 %% Body Data
 % Float
@@ -41,7 +42,8 @@ pto(1).location = [0 0 0];
 %% Mooring
 % Moordyn
 mooring(1) = mooringClass('mooring');           % Initialize mooringClass
+mooring(1).moorDyn = 1;                         % Initialize MoorDyn                                                                    
 mooring(1).moorDynLines = 6;                    % Specify number of lines
 mooring(1).moorDynNodes(1:3) = 16;              % Specify number of nodes per line
 mooring(1).moorDynNodes(4:6) = 6;               % Specify number of nodes per line
-mooring(1).initial.displacement = [0 0 -0.21];  % Initial Displacement
+mooring(1).initial.displacement = [0 0 -21.29-.21]; % Initial Displacement (includes body cg and body initial displacement)
