@@ -46,4 +46,4 @@ mooring(1).moorDyn = 1;                         % Initialize MoorDyn
 mooring(1).moorDynLines = 6;                    % Specify number of lines
 mooring(1).moorDynNodes(1:3) = 16;              % Specify number of nodes per line
 mooring(1).moorDynNodes(4:6) = 6;               % Specify number of nodes per line
-mooring(1).initial.displacement = [0 0 -21.29-.21]; % Initial Displacement (includes body cg and body initial displacement)
+mooring(1).initial.displacement = [0 0 -0.21]; % Initial Displacement (includes body cg and body initial displacement)
