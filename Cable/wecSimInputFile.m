@@ -79,3 +79,4 @@ cable(1).cableLength = 17.8; % Cable equilibrium length [m]
 % cable(1).preTension = 5100000; % Cable equilibrium pre-tension [N]
 cable(1).quadDrag.cd = [1.4 1.4 1.4 0 0 0];
 cable(1).quadDrag.area = [10 10 10 0 0 0];
+cable(1).paraview = 0;
