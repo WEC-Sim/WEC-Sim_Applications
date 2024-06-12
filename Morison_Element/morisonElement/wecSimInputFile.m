@@ -8,10 +8,10 @@ simu.explorer = 'off';
 simu.solver = 'ode4';
 simu.rho = 1025;
 simu.cicEndTime = 30;
-simu.rampTime = 100;                        % Wave Ramp Time [s] 200
-simu.endTime = 400;                         % Simulation End Time [s] 400
+simu.rampTime = 1;                        % Wave Ramp Time [s] 200
+simu.endTime = 100;                         % Simulation End Time [s] 400
 simu.dt = 0.01;
-simu.stateSpace = 1;
+simu.stateSpace = 0;
 
 %% Wave Cases
 % % No wave
@@ -31,8 +31,8 @@ waves.spectrumType = 'PM';                  % Specify Spectrum Type
 waves.phaseSeed = 5;                        % Set Random Phase Seed
 waves.direction = [0,30,90];                % Wave Directionality [deg]
 waves.spread = [0.1,0.2,0.7];               % Wave Directional Spreading [%}
-
-waves.bem.range = [0 10]; % Must define wave frequency range without an .h5 / hydro body
+% 
+waves.bem.range = [0.001 10]; % Must define wave frequency range without an .h5 / hydro body
 waves.waterDepth = 30;    % Must define water depth without an .h5 / hydro body
 
 %% Body Data
