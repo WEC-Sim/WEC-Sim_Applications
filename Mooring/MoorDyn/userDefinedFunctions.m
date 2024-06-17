@@ -14,3 +14,13 @@ output.plotForces(1,3);
 
 %Plot pitch moments for body 2
 output.plotForces(2,5);
+
+%Plot fairlead tensions from MoorDyn
+figure()
+plot(output.moorDyn.Lines.Time, output.moorDyn.Lines.FairTen4)
+hold on
+plot(output.moorDyn.Lines.Time, output.moorDyn.Lines.FairTen5,'--')
+plot(output.moorDyn.Lines.Time, output.moorDyn.Lines.FairTen6,'-.')
+xlabel('Time (s)')
+ylabel('Fairlead Tension (N)')
+legend('FairTen 4', 'FairTen 5', 'FairTen 6')
