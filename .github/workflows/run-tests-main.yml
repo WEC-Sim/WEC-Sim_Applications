@@ -43,5 +43,5 @@ jobs:
     needs: dispatch_event
     uses: ./.github/workflows/tests-reusable.yml
     with:
-      folder: ${{ toJSON(needs.dispatch_event.outputs.folder) }}
+      folder: ${{ needs.dispatch_event.outputs.folder }}
       branch: ${{ needs.dispatch_event.outputs.branch }}
