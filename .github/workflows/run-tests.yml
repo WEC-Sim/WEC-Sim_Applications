@@ -84,4 +84,4 @@ jobs:
     with:
       folder: ${{ needs.other_event.outputs.folder }}
       branch: ${{ needs.other_event.outputs.branch }}
-    if: needs.other_event.outputs.folder
+    if: ${{ needs.other_event.outputs.folder != ''}}
