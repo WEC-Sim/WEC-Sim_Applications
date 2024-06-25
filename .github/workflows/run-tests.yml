@@ -59,6 +59,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+          fetch-depth: 0
       - name: Generate git diff
         uses: GrantBirki/git-diff-action@v2
         id: git-diff-action
