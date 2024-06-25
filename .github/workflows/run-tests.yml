@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       folder: ${{ steps.output.outputs.targets }}
-      branch: ${{ github.event.client_payload.branch }}
+      branch: ${{ github.head_ref || github.ref_name }} 
     if: github.event_name != 'repository_dispatch'
     steps:
       - name: Check out repository
@@ -84,3 +84,4 @@ jobs:
     with:
       folder: ${{ needs.other_event.outputs.folder }}
       branch: ${{ needs.other_event.outputs.branch }}
+    if: needs.other_event.outputs.folder
