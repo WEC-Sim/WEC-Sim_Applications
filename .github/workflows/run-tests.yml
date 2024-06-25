@@ -4,10 +4,12 @@ on:
   # pushes to WEC-Sim/WEC-Sim main branch
   push:
     branches:
+      - dev
       - main
       - dynamic_test_workflow
   pull_request:
     branches:
+      - dev
       - main
   repository_dispatch:
     types:
@@ -41,7 +43,43 @@ jobs:
           echo "targets=$(cat targets.json | jq -cr)" >> $GITHUB_OUTPUT
   run_dispatch_tests:
     needs: dispatch_event
-    uses: ./.github/workflows/tests-reusable.yml
+    uses: ./.github/workflows/run-tests-reusable.yml
     with:
       folder: ${{ needs.dispatch_event.outputs.folder }}
       branch: ${{ needs.dispatch_event.outputs.branch }}
+  other_event:
+    name: Process event
+    runs-on: ubuntu-latest
+    outputs:
+      folder: ${{ steps.output.outputs.targets }}
+      branch: ${{ github.event.client_payload.branch }}
+    if: github.event_name != 'repository_dispatch'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Generate git diff
+        uses: GrantBirki/git-diff-action@v2
+        id: git-diff-action
+        with:
+          json_diff_file_output: diff.json
+          file_output_only: "true"
+      - name: Install MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          release: R2024a
+      - name: Get test target folders
+        uses: matlab-actions/run-command@v2
+        with:
+          command: getTestTargets("diff.json")
+      - name: Save output
+        id: output
+        run: |
+          echo "targets=$(cat targets.json | jq -cr)" >> $GITHUB_OUTPUT
+  run_other_event_tests:
+    needs: other_event
+    uses: ./.github/workflows/run-tests-reusable.yml
+    with:
+      folder: ${{ needs.other_event.outputs.folder }}
+      branch: ${{ needs.other_event.outputs.branch }}
