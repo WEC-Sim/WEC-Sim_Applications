@@ -30,7 +30,7 @@ jobs:
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
-          release: "2024a"
+          release: 2023b
       - name: Get test target folders
         uses: matlab-actions/run-command@v2
         with:
