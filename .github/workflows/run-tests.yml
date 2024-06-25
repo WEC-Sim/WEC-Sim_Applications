@@ -41,14 +41,8 @@ jobs:
         id: output
         run: |
           echo "targets=$(cat targets.json | jq -cr)" >> $GITHUB_OUTPUT
-  run_dispatch_tests:
-    needs: dispatch_event
-    uses: ./.github/workflows/run-tests-reusable.yml
-    with:
-      folder: ${{ needs.dispatch_event.outputs.folder }}
-      branch: ${{ needs.dispatch_event.outputs.branch }}
   other_event:
-    name: Process event
+    name: Process other events
     runs-on: ubuntu-latest
     outputs:
       folder: ${{ steps.output.outputs.targets }}
@@ -78,13 +72,16 @@ jobs:
         id: output
         run: |
           echo "targets=$(cat targets.json | jq -cr)" >> $GITHUB_OUTPUT
+  run_dispatch_event_tests:
+    needs: dispatch_event
+    uses: ./.github/workflows/run-tests-reusable.yml
+    with:
+      folder: ${{ needs.dispatch_event.outputs.folder }}
+      branch: ${{ needs.dispatch_event.outputs.branch }}
   run_other_event_tests:
     needs: other_event
-    # uses: ./.github/workflows/run-tests-reusable.yml
-    # with:
-    #   folder: ${{ needs.other_event.outputs.folder }}
-    #   branch: ${{ needs.other_event.outputs.branch }}
+    uses: ./.github/workflows/run-tests-reusable.yml
+    with:
+      folder: ${{ needs.other_event.outputs.folder }}
+      branch: ${{ needs.other_event.outputs.branch }}
     if: ${{ needs.other_event.outputs.folder != '[]'}}
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "${{ needs.other_event.outputs.folder }}"

@@ -9,10 +9,10 @@ classdef TestCable < matlab.unittest.TestCase
     end
     
     
-    methods (Access = 'public')        
+    methods (Access = 'public')
         function obj = TestCable
             obj.testDir = fileparts(mfilename('fullpath'));
-        end    
+        end
     end
     
     methods (TestMethodSetup)
@@ -21,23 +21,23 @@ classdef TestCable < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassSetup)        
+    methods(TestClassSetup)
         
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
         
-        function runBemio(testCase)            
+        function runBemio(testCase)
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
                 fprintf('runBemio skipped, *.h5 already exists\n')
             else
                 bemio
             end
-            cd(testCase.testDir)            
+            cd(testCase.testDir)
         end
         
-    end    
+    end
     
     methods(TestClassTeardown)
         
@@ -45,14 +45,14 @@ classdef TestCable < matlab.unittest.TestCase
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...
                                  testCase.OriginalDefault);
-        end       
+        end
         
     end
     
-    methods(Test)        
+    methods(Test)
         function testCable(testCase)
             wecSim
-        end        
+        end
     end
     
 end
