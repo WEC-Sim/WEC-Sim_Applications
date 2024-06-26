@@ -20,7 +20,7 @@ classdef TestB2B < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassSetup)        
+    methods(TestClassSetup)
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end        
