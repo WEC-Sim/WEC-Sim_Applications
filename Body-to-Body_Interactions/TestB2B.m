@@ -24,7 +24,7 @@ classdef TestB2B < matlab.unittest.TestCase
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
-        function runBemio(testCase)            
+        function runBemio(testCase)
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
                 fprintf('runBemio skipped, *.h5 already exists\n')

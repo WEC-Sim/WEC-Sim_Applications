@@ -40,19 +40,14 @@ jobs:
           - products: Simulink Simscape Simscape_Multibody
           - folder: Controls
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
-            isControls: true
           - folder: Desalination
             products: Simulink Simscape Simscape_Multibody Simscape_Fluids
-            isDesalination: true
           - folder: Load_Mitigating_Controls
             products: Simulink Simscape Simscape_Multibody DSP_System_Toolbox
-            isLoad_Mitigating_Controls: true
           - folder: OWC
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox
-            isOWC: true
           - folder: WECCCOMP
             products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox
-            isWECCCOMP: true
         exclude:
           - os: ubuntu-latest
             folder: Mooring
