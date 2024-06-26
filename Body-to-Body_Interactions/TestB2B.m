@@ -8,7 +8,7 @@ classdef TestB2B < matlab.unittest.TestCase
         outName = 'rm3.out'
     end
         
-    methods (Access = 'public')        
+    methods (Access = 'public')
         function obj = TestB2B
             obj.testDir = fileparts(mfilename('fullpath'));
         end    

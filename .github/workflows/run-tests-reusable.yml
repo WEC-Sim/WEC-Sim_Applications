@@ -19,7 +19,7 @@ jobs:
           echo branch: ${{ inputs.branch }}
           echo folder: ${{ inputs.folder }}
   run_tests:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
