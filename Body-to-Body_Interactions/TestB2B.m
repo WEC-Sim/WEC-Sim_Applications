@@ -23,7 +23,7 @@ classdef TestB2B < matlab.unittest.TestCase
     methods(TestClassSetup)
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
+        end
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)

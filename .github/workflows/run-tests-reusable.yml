@@ -56,6 +56,16 @@ jobs:
         exclude:
           - os: ubuntu-latest
             folder: Mooring
+          - folder: Controls
+            isControls: false
+          - folder: Desalination
+            isDesalination: false
+          - folder: Load_Mitigating_Controls
+            isLoad_Mitigating_Controls: false
+          - folder: OWC
+            isOWC: false
+          - folder: WECCCOMP
+            isWECCCOMP: false
     name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
     timeout-minutes: 45
     steps:
