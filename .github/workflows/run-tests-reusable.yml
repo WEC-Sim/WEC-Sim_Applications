@@ -12,6 +12,12 @@ on:
 
 
 jobs:
+  show_inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo ${{ inputs.branch }}
+          echo ${{ fromJSON(inputs.folder) }}
   run_tests:
     runs-on: ${{ matrix.os }}
     strategy:
