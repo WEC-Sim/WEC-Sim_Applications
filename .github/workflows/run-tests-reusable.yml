@@ -16,15 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo ${{ inputs.branch }}
-          echo ${{ fromJSON(inputs.folder) }}
+          echo branch: ${{ inputs.branch }}
+          echo folder: ${{ inputs.folder }}
   run_tests:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
         folder: ${{ fromJSON(inputs.folder) }}
+        os: [ubuntu-latest, windows-latest]
         release: [R2023b]
         include:
           - products: Simulink Simscape Simscape_Multibody

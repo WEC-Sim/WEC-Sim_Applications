@@ -17,14 +17,14 @@ classdef TestCable < matlab.unittest.TestCase
     
     methods (TestMethodSetup)
         function killPlots (~)
-            set(0,'DefaultFigureVisible','off');
+            set(0, 'DefaultFigureVisible', 'off');
         end
     end
     
     methods(TestClassSetup)
         
         function captureVisibility(testCase)
-            testCase.OriginalDefault = get(0,'DefaultFigureVisible');
+            testCase.OriginalDefault = get(0, 'DefaultFigureVisible');
         end
         
         function runBemio(testCase)
@@ -42,8 +42,8 @@ classdef TestCable < matlab.unittest.TestCase
     methods(TestClassTeardown)
         
         function checkVisibilityRestored(testCase)
-            set(0,'DefaultFigureVisible',testCase.OriginalDefault);
-            testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...
+            set(0, 'DefaultFigureVisible', testCase.OriginalDefault);
+            testCase.assertEqual(get(0, 'DefaultFigureVisible'),    ...
                                  testCase.OriginalDefault);
         end
         
