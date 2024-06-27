@@ -49,7 +49,7 @@ classdef TestB2B < matlab.unittest.TestCase
         end
     end
     
-    methods(Test)        
+    methods(Test)
         function testB2B_Case1(testCase)
             cd('B2B_Case1')
             wecSim

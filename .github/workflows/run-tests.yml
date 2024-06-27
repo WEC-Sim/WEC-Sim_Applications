@@ -47,7 +47,7 @@ jobs:
     name: Process other events
     runs-on: ubuntu-latest
     outputs:
-      branch: ${{ github.event.client_payload.branch }}
+      branch: ${{ github.head_ref || github.ref_name }}
       folder: ${{ steps.output.outputs.folders }}
       include: ${{ steps.output.outputs.include }}
     if: github.event_name != 'repository_dispatch'
@@ -75,7 +75,7 @@ jobs:
         id: output
         run: |
           echo "folders=$(cat folders.json | jq -cr)" >> $GITHUB_OUTPUT
-          echo "include=$(cat products.json | jq -cr)" >> $GITHUB_OUTPUT
+          echo "include=$(cat include.json | jq -cr)" >> $GITHUB_OUTPUT
   run_dispatch_event_tests:
     needs: dispatch_event
     uses: ./.github/workflows/run-tests-reusable.yml
