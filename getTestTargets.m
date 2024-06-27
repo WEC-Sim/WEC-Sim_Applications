@@ -15,29 +15,56 @@ function getTestTargets(diffFile)
         targets = getAllTargets();
     end
     
-    getPackages(targets)
+    products = getProducts(targets);
     
-    filename = 'targets.json'; 
+    filename = 'folders.json'; 
     fid = fopen(filename, 'w');  
     fprintf(fid, '%s', jsonencode(targets)); 
+    fclose(fid);
+    
+    filename = 'products.json'; 
+    fid = fopen(filename, 'w');  
+    fprintf(fid, '%s', jsonencode(products)); 
     fclose(fid);
 
 end
 
-function packages = getPackages(targets)
+function products = getProducts(targets)
     arguments
         targets (1,:) cell
     end
     
-    for target = targets
-        disp(target)
+    arguments (Output)
+        products (1, :) cell
     end
+    
+    function products = loadProductFiles(product_file, file_exists)
+        if ~file_exists
+            products = "";
+            return
+        end
+        
+        fileID = fopen(product_file);
+        C = textscan(fileID,'%s');
+        fclose(fileID);
+        products = strjoin(C{:, 1});
+        
+    end
+    
+    product_files = fullfile(targets, "products.txt");
+    products = arrayfun(@loadProductFiles,      ...
+                        product_files,          ...
+                        isfile(product_files),  ...
+                        'UniformOutput', 0);
 
 end
 
 function targets = getDiffTargets(diffFile)
     arguments
         diffFile (1,1) string
+    end
+    
+    arguments (Output)
         targets (1, :) cell
     end
     
@@ -69,7 +96,7 @@ function targets = getDiffTargets(diffFile)
 end
 
 function targets = getAllTargets
-    arguments
+    arguments (Output)
         targets (1, :) cell
     end
     

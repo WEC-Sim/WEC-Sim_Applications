@@ -9,6 +9,9 @@ on:
       folder:
         required: true
         type: string
+      products:
+        required: true
+        type: string
 
 
 jobs:
@@ -18,49 +21,19 @@ jobs:
       - run: |
           echo branch: ${{ inputs.branch }}
           echo folder: ${{ inputs.folder }}
+          echo products: ${{ inputs.products }}
   run_tests:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         folder: ${{ fromJSON(inputs.folder) }}
-        isControls:
-          - ${{ contains(fromJson(inputs.folder), 'Controls') }}
-        isDesalination:
-          - ${{ contains(fromJson(inputs.folder), 'Desalination') }}
-        isLoad_Mitigating_Controls:
-          - ${{ contains(fromJson(inputs.folder), 'Load_Mitigating_Controls') }}
-        isOWC:
-          - ${{ contains(fromJson(inputs.folder), 'OWC') }}
-        isWECCCOMP:
-          - ${{ contains(fromJson(inputs.folder), 'WECCCOMP') }}
         os: [ubuntu-latest, windows-latest]
+        products: ${{ fromJSON(inputs.products) }}
         release: [R2023b]
-        include:
-          - products: Simulink Simscape Simscape_Multibody
-          - folder: Controls
-            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox Symbolic_Math_Toolbox
-          - folder: Desalination
-            products: Simulink Simscape Simscape_Multibody Simscape_Fluids
-          - folder: Load_Mitigating_Controls
-            products: Simulink Simscape Simscape_Multibody DSP_System_Toolbox
-          - folder: OWC
-            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox
-          - folder: WECCCOMP
-            products: Simulink Simscape Simscape_Multibody Control_System_Toolbox Optimization_Toolbox System_Identification_Toolbox Statistics_and_Machine_Learning_Toolbox
         exclude:
           - os: ubuntu-latest
             folder: Mooring
-          - folder: Controls
-            isControls: false
-          - folder: Desalination
-            isDesalination: false
-          - folder: Load_Mitigating_Controls
-            isLoad_Mitigating_Controls: false
-          - folder: OWC
-            isOWC: false
-          - folder: WECCCOMP
-            isWECCCOMP: false
     name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
     timeout-minutes: 45
     steps:

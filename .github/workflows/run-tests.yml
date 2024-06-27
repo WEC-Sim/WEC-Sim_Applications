@@ -19,8 +19,9 @@ jobs:
     name: Process dispatch event
     runs-on: ubuntu-latest
     outputs:
-      folder: ${{ steps.output.outputs.targets }}
       branch: ${{ github.event.client_payload.branch }}
+      folder: ${{ steps.output.outputs.folders }}
+      products: ${{ steps.output.outputs.products }}
     if: github.event_name == 'repository_dispatch'
     steps:
       - run: echo "Triggered by WEC-Sim commit ${{ github.event.client_payload.sha }}"
@@ -40,13 +41,15 @@ jobs:
       - name: Save output
         id: output
         run: |
-          echo "targets=$(cat targets.json | jq -cr)" >> $GITHUB_OUTPUT
+          echo "folders=$(cat folders.json | jq -cr)" >> $GITHUB_OUTPUT
+          echo "products=$(cat products.json | jq -cr)" >> $GITHUB_OUTPUT
   other_event:
     name: Process other events
     runs-on: ubuntu-latest
     outputs:
-      folder: ${{ steps.output.outputs.targets }}
-      branch: ${{ github.head_ref || github.ref_name }} 
+      branch: ${{ github.event.client_payload.branch }}
+      folder: ${{ steps.output.outputs.folders }}
+      products: ${{ steps.output.outputs.products }}
     if: github.event_name != 'repository_dispatch'
     steps:
       - name: Check out repository
@@ -71,17 +74,20 @@ jobs:
       - name: Save output
         id: output
         run: |
-          echo "targets=$(cat targets.json | jq -cr)" >> $GITHUB_OUTPUT
+          echo "folders=$(cat folders.json | jq -cr)" >> $GITHUB_OUTPUT
+          echo "products=$(cat products.json | jq -cr)" >> $GITHUB_OUTPUT
   run_dispatch_event_tests:
     needs: dispatch_event
     uses: ./.github/workflows/run-tests-reusable.yml
     with:
-      folder: ${{ needs.dispatch_event.outputs.folder }}
       branch: ${{ needs.dispatch_event.outputs.branch }}
+      folder: ${{ needs.dispatch_event.outputs.folder }}
+      products: ${{ needs.dispatch_event.outputs.products }}
   run_other_event_tests:
     needs: other_event
     uses: ./.github/workflows/run-tests-reusable.yml
     with:
-      folder: ${{ needs.other_event.outputs.folder }}
       branch: ${{ needs.other_event.outputs.branch }}
+      folder: ${{ needs.other_event.outputs.folder }}
+      products: ${{ needs.other_event.outputs.products }}
     if: ${{ needs.other_event.outputs.folder != '[]'}}
