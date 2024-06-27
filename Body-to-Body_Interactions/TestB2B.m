@@ -53,7 +53,7 @@ classdef TestB2B < matlab.unittest.TestCase
         function testB2B_Case1(testCase)
             cd('B2B_Case1')
             wecSim
-        end        
+        end
         function testB2B_Case2(testCase)
             cd('B2B_Case2')
             wecSim

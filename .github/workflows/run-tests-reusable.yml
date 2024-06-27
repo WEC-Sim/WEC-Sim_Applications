@@ -21,7 +21,7 @@ jobs:
       - run: |
           echo branch: ${{ inputs.branch }}
           echo folder: ${{ inputs.folder }}
-          echo products: ${{ inputs.products }}
+          echo include: ${{ inputs.include }}
   run_tests:
     runs-on: ubuntu-latest
     strategy:
