@@ -9,7 +9,7 @@ on:
       folder:
         required: true
         type: string
-      products:
+      include:
         required: true
         type: string
 
@@ -29,8 +29,8 @@ jobs:
       matrix:
         folder: ${{ fromJSON(inputs.folder) }}
         os: [ubuntu-latest, windows-latest]
-        products: ${{ fromJSON(inputs.products) }}
         release: [R2023b]
+        include: ${{ fromJSON(inputs.include) }}
         exclude:
           - os: ubuntu-latest
             folder: Mooring

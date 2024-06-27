@@ -31,8 +31,8 @@ classdef TestB2B < matlab.unittest.TestCase
             else
                 bemio
             end
-            cd(testCase.testDir)            
-        end        
+            cd(testCase.testDir)
+        end
     end
     
     methods(TestMethodTeardown)

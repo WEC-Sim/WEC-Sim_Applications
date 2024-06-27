@@ -15,17 +15,14 @@ function getTestTargets(diffFile)
         targets = getAllTargets();
     end
     
-    products = getProducts(targets);
-    
     filename = 'folders.json'; 
     fid = fopen(filename, 'w');  
     fprintf(fid, '%s', jsonencode(targets)); 
     fclose(fid);
     
-    filename = 'products.json'; 
-    fid = fopen(filename, 'w');  
-    fprintf(fid, '%s', jsonencode(products)); 
-    fclose(fid);
+    products = getProducts(targets);
+    include = struct('folder', targets, 'products', products);
+    writestruct(include, 'include.json')
 
 end
 
