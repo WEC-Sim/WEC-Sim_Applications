@@ -5,8 +5,8 @@ function getTestTargets(diffFile)
     % getTestTargets  Return modified test directories
     %
     %   Returns a list of target directories in JSON formatted file
-    %   'folders.json' and a list of required MATLAB products in JSON formatted
-    %   file 'products.json'. A JSON formatted diff file can be passed as an
+    %   'folder.json' and a list of required MATLAB products in JSON formatted
+    %   file 'include.json'. A JSON formatted diff file can be passed as an
     %   argument, otherwise all valid test directories are returned.
     
     if (diffFile ~= "")
@@ -15,14 +15,19 @@ function getTestTargets(diffFile)
         targets = getAllTargets();
     end
     
-    filename = 'folders.json'; 
+    filename = 'folder.json'; 
     fid = fopen(filename, 'w');  
     fprintf(fid, '%s', jsonencode(targets)); 
     fclose(fid);
     
     products = getProducts(targets);
-    include = struct('folder', targets, 'products', products);
-    writestruct(include, 'include.json')
+    include_struct = struct('folder', targets, 'products', products);
+    include = num2cell(include_struct);
+    
+    filename = 'include.json'; 
+    fid = fopen(filename, 'w');  
+    fprintf(fid, '%s', jsonencode(include)); 
+    fclose(fid);
 
 end
 

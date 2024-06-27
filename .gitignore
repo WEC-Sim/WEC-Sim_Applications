@@ -93,5 +93,5 @@ yaw*.mat
 .DS_Store
 view_html.sh
 *vis-temp*
-folders.json
+folder.json
 include.json
