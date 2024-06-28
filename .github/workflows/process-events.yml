@@ -1,25 +1,25 @@
-name: Run MATLAB tests on main branch
+name: Process events for test running
 on:
-  # Trigger the workflow on push or pull requests on the main branch and on 
-  # pushes to WEC-Sim/WEC-Sim main branch
+  # Trigger the workflow on push or pull requests and on pushes to WEC-Sim
   push:
     branches:
       - dev
       - main
-      - dynamic_test_workflow
   pull_request:
     branches:
       - dev
       - main
   repository_dispatch:
     types:
+      - wecsim-dev
       - wecsim-main
 jobs:
   dispatch_event:
     name: Process dispatch event
     runs-on: ubuntu-latest
     outputs:
-      branch: ${{ github.event.client_payload.branch }}
+      base_ref: ${{ github.event.client_payload.branch }}
+      head_ref: ${{ github.event.client_payload.branch }}
       folder: ${{ steps.output.outputs.folder }}
       include: ${{ steps.output.outputs.include }}
     if: github.event_name == 'repository_dispatch'
@@ -47,7 +47,8 @@ jobs:
     name: Process other events
     runs-on: ubuntu-latest
     outputs:
-      branch: ${{ github.head_ref || github.ref_name }}
+      base_ref: ${{ github.base_ref || github.ref_name }}
+      head_ref: ${{ github.head_ref || github.ref_name }}
       folder: ${{ steps.output.outputs.folder }}
       include: ${{ steps.output.outputs.include }}
     if: github.event_name != 'repository_dispatch'
@@ -80,14 +81,16 @@ jobs:
     needs: dispatch_event
     uses: ./.github/workflows/run-tests-reusable.yml
     with:
-      branch: ${{ needs.dispatch_event.outputs.branch }}
+      base_ref: ${{ needs.dispatch_event.outputs.base_ref }}
+      head_ref: ${{ needs.dispatch_event.outputs.head_ref }}
       folder: ${{ needs.dispatch_event.outputs.folder }}
       include: ${{ needs.dispatch_event.outputs.include }}
   run_other_event_tests:
     needs: other_event
     uses: ./.github/workflows/run-tests-reusable.yml
     with:
-      branch: ${{ needs.other_event.outputs.branch }}
+      base_ref: ${{ needs.other_event.outputs.base_ref }}
+      head_ref: ${{ needs.other_event.outputs.head_ref }}
       folder: ${{ needs.other_event.outputs.folder }}
       include: ${{ needs.other_event.outputs.include }}
     if: ${{ needs.other_event.outputs.folder != '[]'}}
