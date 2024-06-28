@@ -1,4 +1,4 @@
-name: Process events for test running
+name: Run MATLAB tests
 on:
   # Trigger the workflow on push or pull requests and on pushes to WEC-Sim
   push:

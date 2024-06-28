@@ -1,7 +1,7 @@
 # WEC-Sim_Applications
 
-[![main build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-reusable.yml/badge.svg?branch=main)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-reusable.yml)
-[![dev build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-reusable.yml/badge.svg?branch=dev)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/run-tests-reusable.yml)
+[![main build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/process-events.yml/badge.svg?branch=main)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/process-events.yml)
+[![dev build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/process-events.yml/badge.svg?branch=dev)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/process-events.yml)
 
 This repository contains applications of the WEC-Sim code, including tutorials by the WEC-Sim team as well as user-shared examples.
 
