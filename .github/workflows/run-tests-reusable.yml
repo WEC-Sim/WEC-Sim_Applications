@@ -6,16 +6,18 @@ on:
       base_ref:
         required: true
         type: string
-      head_ref:
-        required: false
-        type: string
       folder:
         required: true
+        type: string
+      head_ref:
+        required: false
         type: string
       include:
         required: true
         type: string
-
+      repository:
+        required: true
+        type: string
 
 jobs:
   run_tests:
@@ -38,6 +40,7 @@ jobs:
         with:
           lfs: true
           ref: ${{ inputs.head_ref }}
+          repository: ${{ inputs.repository }}
       - name: Checkout LFS objects
         run: git lfs checkout
       - name: Check out WEC-Sim

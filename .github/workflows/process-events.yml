@@ -19,9 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       base_ref: ${{ github.event.client_payload.branch }}
-      head_ref: ${{ github.event.client_payload.branch }}
       folder: ${{ steps.output.outputs.folder }}
+      head_ref: ${{ github.event.client_payload.branch }}
       include: ${{ steps.output.outputs.include }}
+      repository: ${{ github.repository }}
     if: github.event_name == 'repository_dispatch'
     steps:
       - run: echo "Triggered by WEC-Sim commit ${{ github.event.client_payload.sha }}"
@@ -51,6 +52,7 @@ jobs:
       head_ref: ${{ github.head_ref || github.ref_name }}
       folder: ${{ steps.output.outputs.folder }}
       include: ${{ steps.output.outputs.include }}
+      repository: ${{ github.event.pull_request.head.repo.name || github.repository }}
     if: github.event_name != 'repository_dispatch'
     steps:
       - name: Check out repository
