@@ -84,9 +84,10 @@ jobs:
     uses: ./.github/workflows/run-tests-reusable.yml
     with:
       base_ref: ${{ needs.dispatch_event.outputs.base_ref }}
-      head_ref: ${{ needs.dispatch_event.outputs.head_ref }}
       folder: ${{ needs.dispatch_event.outputs.folder }}
+      head_ref: ${{ needs.dispatch_event.outputs.head_ref }}
       include: ${{ needs.dispatch_event.outputs.include }}
+      repository: ${{ needs.dispatch_event.outputs.repository }}
   run_other_event_tests:
     needs: other_event
     uses: ./.github/workflows/run-tests-reusable.yml
@@ -95,4 +96,5 @@ jobs:
       head_ref: ${{ needs.other_event.outputs.head_ref }}
       folder: ${{ needs.other_event.outputs.folder }}
       include: ${{ needs.other_event.outputs.include }}
+      repository: ${{ needs.other_event.outputs.repository }}
     if: ${{ needs.other_event.outputs.folder != '[]'}}
