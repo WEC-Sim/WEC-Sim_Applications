@@ -11,12 +11,12 @@ simu.dt = 0.01;                         % Simulation time-step [s]
 
 %% Wave Information 
 % % noWaveCIC, no waves with radiation CIC  
-% waves = waveClass('noWaveCIC');         % Initialize Wave Class and Specify Type  
+% waves = waveClass('noWaveCIC');         % Initialize Wave Class and Specify Type
 
 % Regular Waves  
-waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.height = 1;                            % Wave Height [m]
-waves.period = 8;                            % Wave Period [s]
+waves = waveClass('regular');           % Initialize Wave Class and Specify Type
+waves.height = 1;                       % Wave Height [m]
+waves.period = 8;                       % Wave Period [s]
 
 %% Body Data
 % Float

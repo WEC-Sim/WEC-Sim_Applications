@@ -30,4 +30,3 @@ for i = 1:length(cases)
 end
 legend('Regular','Regular B2B','RegularCIC','RegularCIC B2B','RegularCIC SS','RegularCIC B2B SS',...
     'Location','northwest')
-    
