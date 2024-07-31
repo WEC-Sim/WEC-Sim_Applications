@@ -8,10 +8,10 @@ classdef TestB2B < matlab.unittest.TestCase
         outName = 'rm3.out'
     end
         
-    methods (Access = 'public')        
+    methods (Access = 'public')
         function obj = TestB2B
             obj.testDir = fileparts(mfilename('fullpath'));
-        end    
+        end
     end
     
     methods (TestMethodSetup)
@@ -20,19 +20,19 @@ classdef TestB2B < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassSetup)        
+    methods(TestClassSetup)
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
-        function runBemio(testCase)            
+        end
+        function runBemio(testCase)
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
                 fprintf('runBemio skipped, *.h5 already exists\n')
             else
                 bemio
             end
-            cd(testCase.testDir)            
-        end        
+            cd(testCase.testDir)
+        end
     end
     
     methods(TestMethodTeardown)
@@ -49,15 +49,15 @@ classdef TestB2B < matlab.unittest.TestCase
         end
     end
     
-    methods(Test)        
+    methods(Test)
         function testB2B_Case1(testCase)
             cd('B2B_Case1')
             wecSim
-        end        
+        end
         function testB2B_Case2(testCase)
             cd('B2B_Case2')
             wecSim
-        end        
+        end
         function testB2B_Case3(testCase)
             cd('B2B_Case3')
             wecSim
