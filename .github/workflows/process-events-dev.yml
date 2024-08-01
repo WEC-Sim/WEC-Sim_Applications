@@ -1,18 +1,14 @@
-name: Run MATLAB tests
+name: Run MATLAB tests (dev)
 on:
-  # Trigger the workflow on push or pull requests and on pushes to WEC-Sim
   push:
     branches:
       - dev
-      - main
   pull_request:
     branches:
       - dev
-      - main
   repository_dispatch:
     types:
       - wecsim-dev
-      - wecsim-main
 concurrency: 
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
@@ -83,6 +79,7 @@ jobs:
           echo "folder=$(cat folder.json | jq -cr)" >> $GITHUB_OUTPUT
           echo "include=$(cat include.json | jq -cr)" >> $GITHUB_OUTPUT
   run_dispatch_event_tests:
+    name: Run tests
     needs: dispatch_event
     uses: ./.github/workflows/run-tests-reusable.yml
     with:
@@ -92,6 +89,7 @@ jobs:
       include: ${{ needs.dispatch_event.outputs.include }}
       repository: ${{ needs.dispatch_event.outputs.repository }}
   run_other_event_tests:
+    name: Run tests
     needs: other_event
     uses: ./.github/workflows/run-tests-reusable.yml
     with:

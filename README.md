@@ -1,7 +1,7 @@
 # WEC-Sim_Applications
 
-![GitHub Actions Workflow Status](<https://img.shields.io/github/actions/workflow/status/WEC-Sim/WEC-Sim_Applications/process-events.yml?branch=main&label=Run%20MATLAB%20tests%20(main)>)
-![GitHub Actions Workflow Status](<https://img.shields.io/github/actions/workflow/status/WEC-Sim/WEC-Sim_Applications/process-events.yml?branch=dev&label=Run%20MATLAB%20tests%20(dev)>)
+[![main build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/process-events-main.yml/badge.svg)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/process-events-main.yml)
+[![dev build status](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/process-events-dev.yml/badge.svg)](https://github.com/WEC-Sim/WEC-Sim_Applications/actions/workflows/process-events-dev.yml)
 
 This repository contains applications of the WEC-Sim code, including tutorials by the WEC-Sim team as well as user-shared examples.
 
