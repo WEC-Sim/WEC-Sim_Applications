@@ -6,12 +6,12 @@ IrrYaw.Pos_new = output.bodies(1).position(:,6);
 IrrYaw.Force_new = output.bodies(1).forceTotal(:,6);
 
 % % Spectrum
-% IrrYaw.Sp.WEC_Sim_new.m0 = calcSpectralMoment(waves.omega,waves.spectrum,0);
 % IrrYaw.Sp.WEC_Sim_new.m2 = calcSpectralMoment(waves.omega,waves.spectrum,2);
+% IrrYaw.Sp.WEC_Sim_new.m0 = calcSpectralMoment(waves.omega,waves.spectrum,0);
 
 %% Load Data
 irrCICouput_new = output;  % Keeps the new run in the workspace
-load('IrrYaw_org.mat')   % Load Previous WEC-Sim Data
+load('..\..\Passive_Yaw\PassiveYawRegression\IrrYaw_org.mat') % Load Previous WEC-Sim Data
 
 %% Post-Process Data
 % Flap position and force

@@ -5,6 +5,10 @@ hydro = struct();
 hydro = readWAMIT(hydro,'../../../_Common_Input_Files/OSWEC/hydroData/oswec.out',[]);
 hydro = radiationIRF(hydro,40,[],[],[],[]);
 hydro = excitationIRF(hydro,40,[],[],[],[]);
+hydro.plotDirections = [36 1 2 3];
+hydro.plotDofs = [6 6];
+hydro.plotBodies = 1;
+% plotBEMIO(hydro)
 % writeBEMIOH5(hydro);
 
 %% Split into multiple hydro structures by wave direction
@@ -13,13 +17,12 @@ for i = 1:length(iDirs)
     iDir = iDirs(i);
 
     temp_hydro = hydro;
-    dir_dependent_vars = {'theta', 'ex_K',...
-        'ex_ma', 'ex_ph', 'ex_re', 'ex_im', ...
-        'sc_ma', 'sc_ph', 'sc_re', 'sc_im', ...
-        'fk_ma', 'fk_ph', 'fk_re', 'fk_im'};
+    vars = {'ex_K','ex_ma', 'ex_ph', 'ex_re', 'ex_im', ...
+                   'sc_ma', 'sc_ph', 'sc_re', 'sc_im', ...
+                   'fk_ma', 'fk_ph', 'fk_re', 'fk_im'}; % directionally dependent variables
     
-    for iVar = 1:length(dir_dependent_vars)
-        temp_hydro.(dir_dependent_vars{iVar}) = hydro.(dir_dependent_vars{iVar})(:,iDir,:);
+    for iVar = 1:length(vars)
+        temp_hydro.(vars{iVar}) = hydro.(vars{iVar})(:,iDir,:);
     end
     temp_hydro.Nh = 1;
     % temp_hydro.file = [hydro.file '_' num2str(temp_hydro.theta)];
@@ -37,9 +40,10 @@ end
 theta = wrapTo180(theta);
 nTheta0 = length(theta);
 thetaInds = 1:nTheta0;
-% newDirs = [-2:0.25:-0.25 0.25:0.25:9.75 10.25:0.25:15];
-% newDirs = setdiff(-2:0.25:15,theta)
-newDirs = -2:0.25:15;
+
+% extras2Remove = -2:0.25:15;
+% extras2Remove = [];
+newDirs = -10:0.25:-2;
 newDirs = setdiff(newDirs,theta); % remove values repeated in theta
 
 % Append the interpolated direction and hydro structue to theta and
@@ -53,13 +57,14 @@ for i = nTheta0 + 1 : length(theta)
     ind2 = ind2(1);
 
     hydro_split(i) = hydro_split(1);
-    hydro_split(i).theta = wrapTo360(theta(i));
-    hydro_split(i).file = [hydro.file '_' num2str(hydro_split(i).theta)];
+    % hydro_split(i).theta = wrapTo360(theta(i));
+    hydro_split(i).theta = 10;
+    hydro_split(i).file = [hydro.file '_' num2str(wrapTo360(theta(i)))];
 
     dTheta = (theta(i) - theta(ind1)) / (theta(ind2) - theta(ind1));
-    for iVar = 2:length(dir_dependent_vars) % start at 2 to skip theta
-        hydro_split(i).(dir_dependent_vars{iVar}) = hydro_split(ind1).(dir_dependent_vars{iVar}) * (1-dTheta) +...
-                                                  hydro_split(ind2).(dir_dependent_vars{iVar}) * dTheta;
+    for iVar = 2:length(vars) % start at 2 to skip theta
+        hydro_split(i).(vars{iVar}) = hydro_split(ind1).(vars{iVar}) * (1-dTheta) +...
+                                                  hydro_split(ind2).(vars{iVar}) * dTheta;
     end
 end
 
@@ -69,7 +74,33 @@ theta = wrapTo360(theta);
 thetaSorted = wrapTo360(thetaSorted);
 hydro_sorted = hydro_split(iSorted);
 
+%% Analyze interpolated data
+% hydro2 = recombineDir(hydro_sorted);
+% hydro2.theta = thetaSorted;
+% hydro2.Nh = length(thetaSorted);
+% hydro2.plotDirections = [find(thetaSorted==0):find(thetaSorted==10)];
+% plotBEMIO(hydro2);
+
 %% Write all data to h5 files
-for iDir = 1:length(hydro_sorted)
-    writeBEMIOH5(hydro_sorted(iDir));
+for i = 1:length(hydro_sorted)
+    % Skip files that have already been written because writeBEMIOH5 is slow
+    % if ~isfile([hydro_sorted(i).file '.h5'])
+    writeBEMIOH5(hydro_sorted(i));
+    % end
+end
+
+%% Functions
+function hydro = recombineDir(hydro_split)
+    vars = {'theta', 'ex_K',...
+        'ex_ma', 'ex_ph', 'ex_re', 'ex_im', ...
+        'sc_ma', 'sc_ph', 'sc_re', 'sc_im', ...
+        'fk_ma', 'fk_ph', 'fk_re', 'fk_im'}; % directionally dependent variables
+    hydro = hydro_split(1);
+
+    for iVar = 1:length(vars)
+        for iH = 2:length(hydro_split)
+            hydro.(vars{iVar})(:,iH,:) = hydro_split(iH).(vars{iVar});
+        end
+    end
+
 end

@@ -5,13 +5,13 @@ RegYaw.time_new = output.bodies(1).time;
 RegYaw.Pos_new = output.bodies(1).position(:,6);
 RegYaw.Force_new = output.bodies(1).forceTotal(:,6);
 
-% Spectrum
-RegYaw.Sp.WEC_Sim_new.m0 = calcSpectralMoment(waves.omega,waves.spectrum,0);
-RegYaw.Sp.WEC_Sim_new.m2 = calcSpectralMoment(waves.omega,waves.spectrum,2);
+% % Spectrum
+% RegYaw.Sp.WEC_Sim_new.m0 = calcSpectralMoment(waves.omega,waves.spectrum,0);
+% RegYaw.Sp.WEC_Sim_new.m2 = calcSpectralMoment(waves.omega,waves.spectrum,2);
 
 %% Load Data
 irrCICouput_new = output;  % Keeps the new run in the workspace
-load('RegYaw_org.mat')   % Load Previous WEC-Sim Data
+load('..\..\Passive_Yaw\PassiveYawRegression\RegYaw_org.mat') % Load Previous WEC-Sim Data
 
 %% Post-Process Data
 % Flap position and force
@@ -40,10 +40,10 @@ xlabel('Time(s)');
 ylabel('Yaw position (rad)')
 
 subplot(1,2,2)
-plot(RegYaw.time_new,RegYaw.Pos_new,':k','LineWidth',1.4)
+plot(RegYaw.time_new,RegYaw.Force_new,':k','LineWidth',1.4)
 hold on;
 grid on;
-plot(RegYaw.time_org,RegYaw.Pos_org,'-k')
+plot(RegYaw.time_org,RegYaw.Force_org,'-k')
 xlabel('Time(s)');
 ylabel('Total Yaw Force (N)')
 legend('New','Original')

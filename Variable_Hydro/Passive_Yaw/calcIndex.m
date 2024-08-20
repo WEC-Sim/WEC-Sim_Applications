@@ -1,4 +1,4 @@
-function body1_hydroForceIndex  = calcIndex(Rz,theta)
+function body1_hydroForceIndex  = calcIndex(Rz,waveDirection,bemDirections)
 % This case is mimicking passive yaw. Passive yaw is going to interpolate
 % and pull BEM data from the direction corresponding to the relative angle
 % between the incoming wave and the device yaw position:. So with an
@@ -8,10 +8,9 @@ function body1_hydroForceIndex  = calcIndex(Rz,theta)
 % yaw = 10  --> BEM at 0 deg
 % yaw = 20  --> BEM at -10 deg
 
-relativeAngle = theta - Rz*180/pi;
+relativeAngle = waveDirection - Rz*180/pi;
 
-dataDirs = -2:0.25:15;
-[~,dataInd] = min(abs(dataDirs-relativeAngle));
+[~,dataInd] = min(abs(bemDirections-relativeAngle));
 body1_hydroForceIndex = dataInd;
 
 % % wave directions of h5 files, in order: 350 (-10), 0, 10, 20

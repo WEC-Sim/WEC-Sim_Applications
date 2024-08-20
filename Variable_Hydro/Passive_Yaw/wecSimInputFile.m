@@ -9,36 +9,39 @@ simu.endTime = 250;                             % Simulation End Time [s]
 simu.solver = 'ode4';                           % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01;                                 % Simulation Time-Step [s]
 simu.cicEndTime = 40;                           % Specify CI Time [s]
+% simu.dtOut = 0.01;
 
 %% Wave Information
-% Regular Waves
-waves = waveClass('regular');                   % Initialize Wave Class and Specify Type                                 
-waves.height = 2.5;                             % Wave Height [m]
-waves.period = 8;                               % Wave Period [s]
-waves.direction = 10;                           % Wave Directionality [deg]
-waves.spread = 1;                               % Wave Directional Spreading [%}
-
-% % Irregular Waves
-% waves = waveClass('irregular');                 % Initialize Wave Class and Specify Type                                 
+% % Regular Waves
+% waves = waveClass('regular');                   % Initialize Wave Class and Specify Type                                 
 % waves.height = 2.5;                             % Wave Height [m]
 % waves.period = 8;                               % Wave Period [s]
 % waves.direction = 10;                           % Wave Directionality [deg]
 % waves.spread = 1;                               % Wave Directional Spreading [%}
-% waves.spectrumType = 'PM';                      % Wave spectrum type
-% waves.phaseSeed = 1;                            % Specify phase so repeatable
+
+% Irregular Waves
+waves = waveClass('irregular');                 % Initialize Wave Class and Specify Type                                 
+waves.height = 2.5;                             % Wave Height [m]
+waves.period = 8;                               % Wave Period [s]
+waves.direction = 10;                           % Wave Directionality [deg]
+waves.spread = 1;                               % Wave Directional Spreading [%}
+waves.spectrumType = 'PM';                      % Wave spectrum type
+waves.phaseSeed = 1;                            % Specify phase so repeatable
 
 %% Body Data
 % Flap
-theta = -2:0.25:15;
-theta360 = wrapTo360(theta);
+bemDirections = sort(unique([-10:0.25:15 -0.5:0.05:0.5]));
+theta360 = wrapTo360(bemDirections);
 files = strcat('hydroData/oswec_', arrayfun(@num2str, theta360, 'UniformOutput', 0), '.h5');
 body(1) = bodyClass(files);  % Initialize bodyClass for Flap
 body(1).geometryFile = '../../_Common_Input_Files/OSWEC/geometry/flap.stl';  % Geometry File
 body(1).mass = 12700;                           % User-Defined mass [kg]
 body(1).inertia = [1.85e6 1.85e6 1.85e6];       % Moment of Inertia [kg-m^2]
 body(1).variableHydro.option = 1;
-body(1).variableHydro.hydroForceIndexInitial = find(theta==10); % default = 10 deg incident wave
-% body(1).meanDrift = 1;
+body(1).variableHydro.hydroForceIndexInitial = find(bemDirections==10); % default = 10 deg incident wave
+% body(1).quadDrag.cd(6) = 1;
+% body(1).quadDrag.area(6) = 2 * (18*11.5*11.5/4); % width = 18, height = 11.5
+% body(1).linearDamping = 1e6;
 
 % % Flap
 % body(1) = bodyClass('../../_Common_Input_Files/OSWEC/hydroData/oswec.h5');   % Initialize bodyClass for Flap
@@ -46,7 +49,7 @@ body(1).variableHydro.hydroForceIndexInitial = find(theta==10); % default = 10 d
 % body(1).mass = 12700;                           % User-Defined mass [kg]
 % body(1).inertia = [1.85e6 1.85e6 1.85e6];       % Moment of Inertia [kg-m^2]
 % body(1).yaw.option = 1;                         % Turn passive yaw ON
-% body(1).yaw.threshold = 1;                      % Set passive yaw threshold
+% body(1).yaw.threshold = 0.01;                      % Set passive yaw threshold
 
 % Base
 body(2) = bodyClass('hydroData/oswec_10.h5');   % Initialize bodyClass for Base
