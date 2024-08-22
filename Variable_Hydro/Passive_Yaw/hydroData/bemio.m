@@ -1,6 +1,4 @@
-% clc; clear all; close all;
-
-%% Passive Yaw hydro data
+%% Read OSWEC hydro data
 hydro = struct();
 hydro = readWAMIT(hydro,'../../../_Common_Input_Files/OSWEC/hydroData/oswec.out',[]);
 hydro = radiationIRF(hydro,40,[],[],[],[]);
@@ -11,8 +9,8 @@ hydro.plotBodies = 1;
 % plotBEMIO(hydro)
 % writeBEMIOH5(hydro);
 
-%% Split into multiple hydro structures by wave direction
-iDirs = [33 34 35 36 1 2 3 4 5]; % select directions to use
+%% Split hydro into multiple hydro structures by wave direction
+iDirs = [33 34 35 36 1 2 3 4 5]; % select direction indices to use
 for i = 1:length(iDirs)
     iDir = iDirs(i);
 
@@ -41,8 +39,6 @@ theta = wrapTo180(theta);
 nTheta0 = length(theta);
 thetaInds = 1:nTheta0;
 
-% extras2Remove = -2:0.25:15;
-% extras2Remove = [];
 newDirs = -30:0.25:30;
 newDirs = setdiff(newDirs,theta); % remove values repeated in theta
 
@@ -57,14 +53,13 @@ for i = nTheta0 + 1 : length(theta)
     ind2 = ind2(1);
 
     hydro_split(i) = hydro_split(1);
-    % hydro_split(i).theta = wrapTo360(theta(i));
-    hydro_split(i).theta = 10;
+    hydro_split(i).theta = 10; % this has to be the same as the wave direction so that the BEM data processes correctly.
     hydro_split(i).file = [hydro.file '_' num2str(wrapTo360(theta(i)))];
 
     dTheta = (theta(i) - theta(ind1)) / (theta(ind2) - theta(ind1));
     for iVar = 2:length(vars) % start at 2 to skip theta
         hydro_split(i).(vars{iVar}) = hydro_split(ind1).(vars{iVar}) * (1-dTheta) +...
-                                                  hydro_split(ind2).(vars{iVar}) * dTheta;
+                                      hydro_split(ind2).(vars{iVar}) * dTheta;
     end
 end
 
@@ -74,33 +69,10 @@ theta = wrapTo360(theta);
 thetaSorted = wrapTo360(thetaSorted);
 hydro_sorted = hydro_split(iSorted);
 
-%% Analyze interpolated data
-% hydro2 = recombineDir(hydro_sorted);
-% hydro2.theta = thetaSorted;
-% hydro2.Nh = length(thetaSorted);
-% hydro2.plotDirections = [find(thetaSorted==0):find(thetaSorted==10)];
-% plotBEMIO(hydro2);
-
 %% Write all data to h5 files
 for i = 1:length(hydro_sorted)
     % Skip files that have already been written because writeBEMIOH5 is slow
-    % if ~isfile([hydro_sorted(i).file '.h5'])
-    writeBEMIOH5(hydro_sorted(i));
-    % end
-end
-
-%% Functions
-function hydro = recombineDir(hydro_split)
-    vars = {'theta', 'ex_K',...
-        'ex_ma', 'ex_ph', 'ex_re', 'ex_im', ...
-        'sc_ma', 'sc_ph', 'sc_re', 'sc_im', ...
-        'fk_ma', 'fk_ph', 'fk_re', 'fk_im'}; % directionally dependent variables
-    hydro = hydro_split(1);
-
-    for iVar = 1:length(vars)
-        for iH = 2:length(hydro_split)
-            hydro.(vars{iVar})(:,iH,:) = hydro_split(iH).(vars{iVar});
-        end
+    if ~isfile([hydro_sorted(i).file '.h5'])
+        writeBEMIOH5(hydro_sorted(i));
     end
-
 end
