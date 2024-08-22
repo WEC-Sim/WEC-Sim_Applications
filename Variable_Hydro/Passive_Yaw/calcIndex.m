@@ -1,8 +1,9 @@
-function body1_hydroForceIndex  = calcIndex(Rz,waveDirection,bemDirections)
+function body1_hydroForceIndex  = calcIndex(Rz, waveDirection, bemDirections, previousIndex)
 % This case is mimicking passive yaw. Passive yaw is going to interpolate
-% and pull BEM data from the direction corresponding to the relative angle
-% between the incoming wave and the device yaw position:. So with an
+% and pull BEM data for the incident wave direction closest to the relative
+% angle between the incoming wave and the device yaw position. So with an
 % incoming wave angle of 10 deg, and some instantaneous yaw position:
+% 
 % yaw = -10 --> BEM at 20 deg
 % yaw = 0   --> BEM at 10 deg
 % yaw = 10  --> BEM at 0 deg
@@ -10,20 +11,20 @@ function body1_hydroForceIndex  = calcIndex(Rz,waveDirection,bemDirections)
 
 relativeAngle = waveDirection - Rz*180/pi;
 
-[~,dataInd] = min(abs(bemDirections-relativeAngle));
-body1_hydroForceIndex = dataInd;
-
-% % wave directions of h5 files, in order: 350 (-10), 0, 10, 20
-% if relativeAngle >= 185 || relativeAngle < -5
-%     body1_hydroForceIndex = 1;
-% elseif relativeAngle >= -5 && relativeAngle < 5
-%     body1_hydroForceIndex = 2;
-% elseif relativeAngle >= 5 && relativeAngle < 15
-%     body1_hydroForceIndex = 3;
-% elseif relativeAngle >= 15 && relativeAngle < 185
-%     body1_hydroForceIndex = 4;
+% % This indexing method is indentical to the passive yaw implementation
+% % but converges more slowly. To use, add a `memory` block in the simulink
+% % model that connects body1_hydroForceIndex to previousIndex.
+% previousDir = bemDirections(previousIndex);
+% dTheta = bemDirections(2) - bemDirections(1); % assume BEM discretization is constant and equivalent to passive yaw's threshold
+% if abs(relativeAngle - previousDir) > dTheta
+%     [~, body1_hydroForceIndex] = min(abs(bemDirections-relativeAngle));
 % else
-%     body1_hydroForceIndex = 3; % default case
+%     body1_hydroForceIndex = previousIndex;
 % end
+
+% This indexing method (always choosing the closest BEM dataset) is not
+% identical to the passive yaw implementation, but is simple, precise, and
+% converges quickly.
+[~, body1_hydroForceIndex] = min(abs(bemDirections-relativeAngle));
 
 end
