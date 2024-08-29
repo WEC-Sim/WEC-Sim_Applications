@@ -7,7 +7,7 @@ hydro.plotDirections = [36 1 2 3];
 hydro.plotDofs = [6 6];
 hydro.plotBodies = 1;
 % plotBEMIO(hydro)
-% writeBEMIOH5(hydro);
+% hydro = writeBEMIOH5(hydro);
 
 %% Split hydro into multiple hydro structures by wave direction
 iDirs = [33 34 35 36 1 2 3 4 5]; % select direction indices to use
@@ -39,7 +39,7 @@ theta = wrapTo180(theta);
 nTheta0 = length(theta);
 thetaInds = 1:nTheta0;
 
-newDirs = -30:0.25:30;
+newDirs = -30:0.05:30;
 newDirs = setdiff(newDirs,theta); % remove values repeated in theta
 
 % Append the interpolated direction and hydro structue to theta and
