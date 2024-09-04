@@ -6,7 +6,7 @@
 % comparison to passive yaw and variable hydro.
 
 % To visualize results without runCases.m or re-running simulations, load
-% output_reg4.mat and reg_passiveYaw.m (or the irregular wave outputs
+% output_regX.mat and reg_passiveYaw.m (or the irregular wave outputs
 % respectively)
 
 % Case independent parameters
@@ -44,8 +44,9 @@ legend(legendStrings)
 
 % Computational time
 figure()
-bar([yaw.compTime, compTime]);
+bar([yaw.compTime, compTime]/yaw.compTime);
 xticklabels(legendStrings);
 xlabel('Case');
-ylabel('CPU Time (s) via MATLAB `cputime` function');
+ylabel('CPU Time / Yaw CPU Time (-), via MATLAB `cputime` function');
 title('Computational time comparison');
+
