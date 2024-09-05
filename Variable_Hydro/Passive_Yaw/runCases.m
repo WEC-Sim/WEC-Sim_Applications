@@ -2,8 +2,8 @@
 % outputs to the passive yaw implementation.
 
 % Choose a wave type. This is used by the wecSimInputFile.m
-% waveFlag = 'regular';
-waveFlag = 'irregular';
+waveFlag = 'regular';
+% waveFlag = 'irregular';
 
 if isequal(waveFlag,'regular')
     saveStr = 'reg';
