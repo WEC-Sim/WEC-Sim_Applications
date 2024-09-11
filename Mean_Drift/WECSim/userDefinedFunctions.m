@@ -1,6 +1,6 @@
 inds = find(output.wave.time >= simu.rampTime + waves.period*5);
 %%
-surgeMeanDriftTH = body.hydroForce.fExt.md(1)*waves.amplitude^2;
+surgeMeanDriftTH = body.hydroForce.hf1.fExt.md(1)*waves.amplitude^2;
 surgeMeanDriftWS = mean(output.bodies.forceExcitation(inds,1));
 %%
 close all
