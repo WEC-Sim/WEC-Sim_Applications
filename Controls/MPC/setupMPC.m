@@ -1,7 +1,7 @@
 % This method sets up the variables to run model predictive control 
 
 % Load hydrodynamic data for float from BEM
-hydro = readBEMIOH5(body.h5File, 1, body.meanDrift);
+hydro = readBEMIOH5(body.h5File{1}, 1, body.meanDrift);
 
 disp('setting up MPC')
 

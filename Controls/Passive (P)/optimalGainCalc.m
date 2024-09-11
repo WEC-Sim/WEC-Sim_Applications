@@ -11,7 +11,7 @@ waves.height = 2.5;
 waves.period = 9.6664; % One of periods from BEM
 
 % Load hydrodynamic data for float from BEM
-hydro = readBEMIOH5(body.h5File, 1, body.meanDrift);
+hydro = readBEMIOH5(body.h5File{1}, 1, body.meanDrift);
 
 % Define wave conditions
 H = waves.height;

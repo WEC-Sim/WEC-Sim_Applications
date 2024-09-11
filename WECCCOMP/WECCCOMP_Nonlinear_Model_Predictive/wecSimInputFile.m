@@ -21,7 +21,7 @@ simu = simulationClass();                           % Create the Simulation Vari
         case { 2, 5 };        simu.endTime        = 150 + simu.rampTime;
         case { 3, 6 };        simu.endTime        = 200 + simu.rampTime;
     end
-    simu.cicEndTime     = [];                       % Convolution Time [s]
+    simu.cicEndTime     = 2;                        % Convolution Time [s]
     simu.explorer       = 'off';                    % Explorer on
     simu.solver         = 'ode8';                   % Turn on ode45
     simu.domainSize     = 5;

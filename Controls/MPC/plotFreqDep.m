@@ -7,7 +7,7 @@ waves.height = 2.5;
 waves.period = 9.52;
 
 % Load hydrodynamic data for float from BEM
-hydro = readBEMIOH5(body.h5File, 1, body.meanDrift);
+hydro = readBEMIOH5(body.h5File{1}, 1, body.meanDrift);
 
 % Define the intrinsic mechanical impedance for the device
 mass = simu.rho*hydro.properties.volume;
