@@ -42,13 +42,13 @@ classdef TestMOST < matlab.unittest.TestCase
             end
             cd(testCase.testDir)
         end
-        % function runTurbSim(testCase)
-        %     % Only re-run turbSim before testing. The *.mat file is too
-        %     % large to commit to the repo. 
-        %     cd(fullfile(testCase.mostDataDir,'turbSim'));
-        %     run_turbsim();
-        %     cd(testCase.testDir)
-        % end
+        function runTurbSim(testCase)
+            % Only re-run turbSim before testing. The *.mat file is too
+            % large to commit to the repo. 
+            cd(fullfile(testCase.mostDataDir,'turbSim'));
+            run_turbsim();
+            cd(testCase.testDir)
+        end
         function runConstantTest(testCase)
             cd(fullfile(testCase.testDir,'constant'))
             runLoadConstant;
