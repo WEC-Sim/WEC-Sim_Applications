@@ -42,15 +42,13 @@ classdef TestMOST < matlab.unittest.TestCase
             end
             cd(testCase.testDir)
         end
-        function runMOSTIO(testCase)
-            cd(testCase.mostDataDir);
-            if isfile(testCase.turbSimName)
-                fprintf('runMOSTIO skipped, turbSim/*.mat already exists\n');
-            else
-                mostIO
-            end
-            cd(testCase.testDir)
-        end
+        % function runTurbSim(testCase)
+        %     % Only re-run turbSim before testing. The *.mat file is too
+        %     % large to commit to the repo. 
+        %     cd(fullfile(testCase.mostDataDir,'turbSim'));
+        %     run_turbsim();
+        %     cd(testCase.testDir)
+        % end
         function runConstantTest(testCase)
             cd(fullfile(testCase.testDir,'constant'))
             runLoadConstant;
@@ -200,6 +198,14 @@ classdef TestMOST < matlab.unittest.TestCase
             testCase.verifyEqual(new,org,'RelTol',tol);
             fprintf(['Wind speed, Diff = '     ...
                      num2str(max(abs(org-new))) '\n']);
+        end
+
+        function runMOSTIO(testCase)
+            % Test the pre-processing here so that it does not interfere
+            % with the precise comparison of results.
+            cd(testCase.mostDataDir);
+            mostIO
+            cd(testCase.testDir)
         end
     end
 end
