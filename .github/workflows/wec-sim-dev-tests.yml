@@ -1,0 +1,13 @@
+name: Test WEC-Sim dev branch
+on:
+  repository_dispatch:
+    types:
+      - wecsim-dev
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+jobs:
+  main:
+    uses: ./.github/workflows/all-tests-reusable.yml
+    with:
+      client_payload: ${{ toJSON(github.event.client_payload) }}
