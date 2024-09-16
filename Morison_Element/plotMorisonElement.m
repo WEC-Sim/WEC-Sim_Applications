@@ -1,7 +1,8 @@
 % Example plotting traditional Morison Element vs hydrodynamic body
 % comparison
 
-casedir = {"morisonElement","hydroBody"};
+% casedir = {"morisonElement","hydroBody"};
+casedir = {"morisonElement","monopile"};
 
 % Load output data
 cd(fullfile(string(casedir{1}),'output'))

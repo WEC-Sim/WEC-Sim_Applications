@@ -8,10 +8,10 @@ simu.explorer = 'off';
 simu.solver = 'ode4';
 simu.rho = 1025;
 simu.cicEndTime = 30;
-simu.rampTime = 1;                        % Wave Ramp Time [s] 200
-simu.endTime = 100;                         % Simulation End Time [s] 400
+simu.rampTime = 100;                        % Wave Ramp Time [s] 200
+simu.endTime = 400;                         % Simulation End Time [s] 400
 simu.dt = 0.01;
-simu.stateSpace = 0;
+simu.stateSpace = 1;
 
 %% Wave Cases
 % % No wave
