@@ -20,7 +20,7 @@ on:
         type: string
 
 jobs:
-  run_tests:
+  main:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
