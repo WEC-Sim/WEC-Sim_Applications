@@ -1,0 +1,49 @@
+name: Reusable all application test workflow
+  
+on:
+  workflow_call:
+    inputs:
+      client_payload:
+        required: true
+        type: string
+
+jobs:
+  targets:
+    name: Collect folders
+    runs-on: ubuntu-latest
+    outputs:
+      base_ref: ${{ fromJSON(inputs.client_payload).branch }}
+      folder: ${{ steps.output.outputs.folder }}
+      head_ref: ${{ fromJSON(inputs.client_payload).branch }}
+      include: ${{ steps.output.outputs.include }}
+      repository: ${{ github.repository }}
+    steps:
+      - run: echo "Triggered by WEC-Sim commit ${{ fromJSON(inputs.client_payload).sha }}"
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          ref: ${{ fromJSON(inputs.client_payload).branch }}
+      - name: Install MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          release: R2024a
+      - name: Get test target folder
+        uses: matlab-actions/run-command@v2
+        with:
+          command: getTestTargets
+      - name: Save output
+        id: output
+        run: |
+          echo "folder=$(cat folder.json | jq -cr)" >> $GITHUB_OUTPUT
+          echo "include=$(cat include.json | jq -cr)" >> $GITHUB_OUTPUT
+  run_tests:
+    name: Run tests
+    needs: targets
+    uses: ./.github/workflows/run-tests-reusable.yml
+    with:
+      base_ref: ${{ needs.targets.outputs.base_ref }}
+      folder: ${{ needs.targets.outputs.folder }}
+      head_ref: ${{ needs.targets.outputs.head_ref }}
+      include: ${{ needs.targets.outputs.include }}
+      repository: ${{ needs.targets.outputs.repository }}
