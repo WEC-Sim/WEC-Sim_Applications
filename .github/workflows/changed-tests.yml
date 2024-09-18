@@ -39,6 +39,7 @@ jobs:
         uses: matlab-actions/setup-matlab@v2
         with:
           release: R2024a
+          cache: true
       - name: Get test target folder
         uses: matlab-actions/run-command@v2
         with:
