@@ -23,9 +23,9 @@ function getTestTargets(diffFile)
     fclose(fid);
     
     products = getProducts(all_targets);
-    filename = 'products.json';
+    filename = 'products.txt';
     fid = fopen(filename, 'w');
-    fprintf(fid, '%s', jsonencode(products));
+    fprintf(fid, '%s', strjoin(products));
     fclose(fid);
     
     include_struct = struct('folder', targets);

@@ -38,7 +38,7 @@ jobs:
         run: |
           echo "folder=$(cat folder.json | jq -cr)" >> $GITHUB_OUTPUT
           echo "include=$(cat include.json | jq -cr)" >> $GITHUB_OUTPUT
-          echo "products=$(cat products.json | jq -cr)" >> $GITHUB_OUTPUT
+          echo "products=$(cat products.txt)" >> $GITHUB_OUTPUT
   run_tests:
     name: Run tests
     needs: targets
