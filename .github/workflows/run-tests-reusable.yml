@@ -15,6 +15,9 @@ on:
       include:
         required: true
         type: string
+      products:
+        required: true
+        type: string
       repository:
         required: true
         type: string
@@ -65,8 +68,9 @@ jobs:
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
-          products: ${{ matrix.products }}
+          products: ${{ fromJSON(inputs.products) }}
           release: ${{ matrix.release }}
+          cache: true
       - name: Start display server (Desalination on Linux)
         if: matrix.folder == 'Desalination' && matrix.os == 'ubuntu-latest'
         run: |

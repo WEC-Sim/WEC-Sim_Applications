@@ -16,6 +16,7 @@ jobs:
       folder: ${{ steps.output.outputs.folder }}
       head_ref: ${{ fromJSON(inputs.client_payload).branch }}
       include: ${{ steps.output.outputs.include }}
+      products: ${{ steps.output.outputs.products }}
       repository: ${{ github.repository }}
     steps:
       - run: echo "Triggered by WEC-Sim commit ${{ fromJSON(inputs.client_payload).sha }}"
@@ -37,6 +38,7 @@ jobs:
         run: |
           echo "folder=$(cat folder.json | jq -cr)" >> $GITHUB_OUTPUT
           echo "include=$(cat include.json | jq -cr)" >> $GITHUB_OUTPUT
+          echo "products=$(cat products.json | jq -cr)" >> $GITHUB_OUTPUT
   run_tests:
     name: Run tests
     needs: targets
@@ -46,4 +48,5 @@ jobs:
       folder: ${{ needs.targets.outputs.folder }}
       head_ref: ${{ needs.targets.outputs.head_ref }}
       include: ${{ needs.targets.outputs.include }}
+      products: ${{ needs.targets.outputs.products }}
       repository: ${{ needs.targets.outputs.repository }}
