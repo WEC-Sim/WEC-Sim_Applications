@@ -9,29 +9,31 @@ function getTestTargets(diffFile)
     %   file 'include.json'. A JSON formatted diff file can be passed as an
     %   argument, otherwise all valid test directories are returned.
     
+    all_targets = getAllTargets();
+    
     if (diffFile ~= "")
         targets = getDiffTargets(diffFile);
     else
-        targets = getAllTargets();
+        targets = all_targets;
     end
     
-    filename = 'folder.json'; 
-    fid = fopen(filename, 'w');  
-    fprintf(fid, '%s', jsonencode(targets)); 
+    filename = 'folder.json';
+    fid = fopen(filename, 'w');
+    fprintf(fid, '%s', jsonencode(targets));
     fclose(fid);
     
-    products = getProducts(targets);
-    filename = 'products.json'; 
-    fid = fopen(filename, 'w');  
-    fprintf(fid, '%s', jsonencode(products)); 
+    products = getProducts(all_targets);
+    filename = 'products.json';
+    fid = fopen(filename, 'w');
+    fprintf(fid, '%s', jsonencode(products));
     fclose(fid);
-
+    
     include_struct = struct('folder', targets);
     include = num2cell(include_struct);
     
-    filename = 'include.json'; 
-    fid = fopen(filename, 'w');  
-    fprintf(fid, '%s', jsonencode(include)); 
+    filename = 'include.json';
+    fid = fopen(filename, 'w');
+    fprintf(fid, '%s', jsonencode(include));
     fclose(fid);
 
 end
