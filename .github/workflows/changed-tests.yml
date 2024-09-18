@@ -20,6 +20,7 @@ jobs:
       head_ref: ${{ github.head_ref || github.ref_name }}
       folder: ${{ steps.output.outputs.folder }}
       include: ${{ steps.output.outputs.include }}
+      products: ${{ steps.output.outputs.products }}
       repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
     if: github.event_name != 'repository_dispatch'
     steps:
@@ -47,6 +48,7 @@ jobs:
         run: |
           echo "folder=$(cat folder.json | jq -cr)" >> $GITHUB_OUTPUT
           echo "include=$(cat include.json | jq -cr)" >> $GITHUB_OUTPUT
+          echo "products=$(cat products.json | jq -cr)" >> $GITHUB_OUTPUT
   run_tests:
     name: Run tests
     needs: targets
@@ -56,5 +58,6 @@ jobs:
       head_ref: ${{ needs.targets.outputs.head_ref }}
       folder: ${{ needs.targets.outputs.folder }}
       include: ${{ needs.targets.outputs.include }}
+      products: ${{ needs.targets.outputs.products }}
       repository: ${{ needs.targets.outputs.repository }}
     if: ${{ needs.targets.outputs.folder != '[]'}}
