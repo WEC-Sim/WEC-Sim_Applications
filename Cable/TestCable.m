@@ -8,7 +8,6 @@ classdef TestCable < matlab.unittest.TestCase
         outName = 'mbari.out'
     end
     
-    
     methods (Access = 'public')
         function obj = TestCable
             obj.testDir = fileparts(mfilename('fullpath'));
@@ -44,7 +43,7 @@ classdef TestCable < matlab.unittest.TestCase
         function checkVisibilityRestored(testCase)
             set(0, 'DefaultFigureVisible', testCase.OriginalDefault);
             testCase.assertEqual(get(0, 'DefaultFigureVisible'),    ...
-                                 testCase.OriginalDefault);
+                testCase.OriginalDefault);
         end
         
     end
