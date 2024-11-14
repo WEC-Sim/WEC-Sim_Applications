@@ -36,7 +36,6 @@ jobs:
           - os: ubuntu-latest
             folder: Mooring
     name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
-    timeout-minutes: 45
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -79,6 +78,7 @@ jobs:
           echo "DISPLAY=:99" >> $GITHUB_ENV
       - name: Install WEC-Sim, run tests and generate artifacts
         uses: matlab-actions/run-command@v2
+        timeout-minutes: 45
         with:
           command: |
             addpath(genpath('WEC-Sim/source'));
