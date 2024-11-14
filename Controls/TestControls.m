@@ -6,12 +6,12 @@ classdef TestControls < matlab.unittest.TestCase
         h5Dir = '../_Common_Input_Files/Sphere/hydroData/'
         h5Name = 'sphere.h5'
         outName = 'sphere.out'
-    end    
+    end
     
-    methods (Access = 'public')        
+    methods (Access = 'public')
         function obj = TestControls
             obj.testDir = fileparts(mfilename('fullpath'));
-        end    
+        end
     end
     
     methods (TestMethodSetup)
@@ -32,7 +32,7 @@ classdef TestControls < matlab.unittest.TestCase
                 bemio
             end
             cd(testCase.testDir)
-        end        
+        end
     end
     
     methods(TestMethodTeardown)
@@ -41,38 +41,38 @@ classdef TestControls < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassTeardown)        
+    methods(TestClassTeardown)
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...
                                  testCase.OriginalDefault);
-        end        
+        end
     end
     
-    methods(Test)        
+    methods(Test)
         function testPassive(testCase)
             cd('Passive (P)')
             wecSim
-        end        
+        end
         function testReactive(testCase)
             cd('Reactive (PI)')
             wecSim
-        end        
+        end
         function testLatching(testCase)
             cd('Latching')
             wecSim
-        end        
+        end
         function testDeclutching(testCase)
             cd('Declutching')
             wecSim
-        end        
+        end
         function testMPC(testCase)
             cd('MPC')
             wecSim
-        end     
+        end
         function testReactiveWithPTO(testCase)
             cd('ReactiveWithPTO')
             wecSim
-        end     
-    end    
+        end
+    end
 end
