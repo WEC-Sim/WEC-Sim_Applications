@@ -1,4 +1,0 @@
-Simulink
-Simscape
-Simscape_Multibody
-Control_System_Toolbox
