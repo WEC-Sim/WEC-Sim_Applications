@@ -1,4 +1,5 @@
 % Triton OWC - WAMIT GBM simulation
+warning('off')
 hydro = struct();
 hydro = readWAMIT(hydro,'test17a.out',[]);
 hydro = radiationIRF(hydro,20,[],[],[],11);
