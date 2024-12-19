@@ -3,8 +3,10 @@ classdef TestOWC < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5Dir = 'hydroData'
-        h5Name = 'test17a.h5'
+        h5DirOrifice = 'OrificeModel/hydroData'
+        h5NameOrifice = 'test17a.h5'
+        h5DirFloating = '../_Common_Input_Files/Floating_OWC/hydroData'
+        h5NameFloating = 'floatingOWC.h5'
     end
     
     methods (Access = 'public')
@@ -23,9 +25,18 @@ classdef TestOWC < matlab.unittest.TestCase
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
-        function runBemio(testCase)
-            cd(testCase.h5Dir);
-            if isfile(testCase.h5Name)
+        function runBemioOrifice(testCase)
+            cd(testCase.h5DirOrifice);
+            if isfile(testCase.h5NameOrifice)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
+                bemio
+            end
+            cd(testCase.testDir)
+        end
+        function runBemioFloating(testCase)
+            cd(testCase.h5DirFloating);
+            if isfile(testCase.h5NameFloating)
                 fprintf('runBemio skipped, *.h5 already exists\n')
             else
                 bemio
@@ -49,7 +60,12 @@ classdef TestOWC < matlab.unittest.TestCase
     end
     
     methods(Test)
-        function testOWC(testCase)
+        function testOWCOrifice(testCase)
+            cd('OrificeModel')
+            wecSim
+        end
+        function testOWCFloating(testCase)
+            cd('FloatingOWC_W2W')
             wecSim
         end
     end

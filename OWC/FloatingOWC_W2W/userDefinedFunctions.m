@@ -56,7 +56,7 @@ connections = [
 ];
 
 % Load the STL file
-stlData = stlread('../../../_Common_Input_Files/Floating_OWC/geometry/Sparbuoy_Floater.stl'); % Replace with the path to your STL file
+stlData = stlread('../../_Common_Input_Files/Floating_OWC/geometry/Sparbuoy_Floater.stl'); % Replace with the path to your STL file
 
 vertices = stlData.Points;  % Extract vertices and faces from the STL data
 vertices(:,3) = vertices(:,3) + body(1, 1).centerGravity(3);

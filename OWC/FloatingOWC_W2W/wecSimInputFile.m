@@ -62,16 +62,16 @@ waves.waterDepth = 80;
 
 %% Body Data
 % Floater
-body(1) = bodyClass('../../../_Common_Input_Files/Floating_OWC/hydroData/floatingOWC.h5');
-body(1).geometryFile = '../../../_Common_Input_Files/Floating_OWC/geometry/Sparbuoy_Floater.stl';    % Location of Geomtry File
+body(1) = bodyClass('../../_Common_Input_Files/Floating_OWC/hydroData/floatingOWC.h5');
+body(1).geometryFile = '../../_Common_Input_Files/Floating_OWC/geometry/Sparbuoy_Floater.stl';    % Location of Geomtry File
 body(1).mass = 'equilibrium';                                                               % Body Mass. The 'equilibrium' Option Sets it to the Displaced Water Weight.
 body(1).inertia =   1.0e+09*[1.5310    1.5310    0.1118];                                   % Moment of Inertia [kg*m^2]
 % body(1).quadDrag.cd = [1.25, 1.25, 1.25, 1.25, 1.25 , 0.1];
 % body(1).quadDrag.area = [250, 250, 201, 250, 250, 100];
 
 % Spar/Plate
-body(2) = bodyClass('../../../_Common_Input_Files/Floating_OWC/hydroData/floatingOWC.h5');
-body(2).geometryFile = '../../../_Common_Input_Files/Floating_OWC/geometry/Sparbuoy_OWC.stl';
+body(2) = bodyClass('../../_Common_Input_Files/Floating_OWC/hydroData/floatingOWC.h5');
+body(2).geometryFile = '../../_Common_Input_Files/Floating_OWC/geometry/Sparbuoy_OWC.stl';
 body(2).mass = 'equilibrium';
 
 
