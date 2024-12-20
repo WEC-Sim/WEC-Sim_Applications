@@ -87,7 +87,7 @@ yaw*.mat
 !/Generalized_Body_Modes/hydroData/WAMIT/*
 !/Mean_Drift/WAMIT/inputFiles/*
 !/Mean_Drift/WAMIT/outputFiles/*
-!/OWC/OrificeModel/OrificeModel/hydroData/*.h5
+!/OWC/OrificeModel/hydroData/*.h5
 
 # Other
 .DS_Store
