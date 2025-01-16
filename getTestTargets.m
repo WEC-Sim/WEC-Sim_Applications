@@ -9,35 +9,42 @@ function getTestTargets(diffFile)
     %   file 'include.json'. A JSON formatted diff file can be passed as an
     %   argument, otherwise all valid test directories are returned.
     
+    all_targets = getAllTargets();
+    
     if (diffFile ~= "")
         targets = getDiffTargets(diffFile);
     else
-        targets = getAllTargets();
+        targets = all_targets;
     end
     
-    filename = 'folder.json'; 
-    fid = fopen(filename, 'w');  
-    fprintf(fid, '%s', jsonencode(targets)); 
+    filename = 'folder.json';
+    fid = fopen(filename, 'w');
+    fprintf(fid, '%s', jsonencode(targets));
     fclose(fid);
     
-    products = getProducts(targets);
-    include_struct = struct('folder', targets, 'products', products);
+    products = getProducts(all_targets);
+    filename = 'products.txt';
+    fid = fopen(filename, 'w');
+    fprintf(fid, '%s', strjoin(products));
+    fclose(fid);
+    
+    include_struct = struct('folder', targets);
     include = num2cell(include_struct);
     
-    filename = 'include.json'; 
-    fid = fopen(filename, 'w');  
-    fprintf(fid, '%s', jsonencode(include)); 
+    filename = 'include.json';
+    fid = fopen(filename, 'w');
+    fprintf(fid, '%s', jsonencode(include));
     fclose(fid);
 
 end
 
-function products = getProducts(targets)
-    arguments
+function product = getProducts(targets)
+    arguments (Input)
         targets (1,:) cell
     end
     
     arguments (Output)
-        products (1, :) cell
+        product (1, :) string
     end
     
     function products = loadProductFiles(product_file, file_exists)
@@ -49,7 +56,7 @@ function products = getProducts(targets)
         fileID = fopen(product_file);
         C = textscan(fileID,'%s');
         fclose(fileID);
-        products = strjoin(C{:, 1});
+        products = convertCharsToStrings(C{:, 1}).';
         
     end
     
@@ -58,6 +65,7 @@ function products = getProducts(targets)
                         product_files,          ...
                         isfile(product_files),  ...
                         'UniformOutput', 0);
+    product = unique(horzcat(products{:}));
 
 end
 

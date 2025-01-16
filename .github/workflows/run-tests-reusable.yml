@@ -15,6 +15,9 @@ on:
       include:
         required: true
         type: string
+      products:
+        required: true
+        type: string
       repository:
         required: true
         type: string
@@ -33,7 +36,6 @@ jobs:
           - os: ubuntu-latest
             folder: Mooring
     name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
-    timeout-minutes: 45
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -65,8 +67,9 @@ jobs:
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
-          products: ${{ matrix.products }}
+          products: ${{ inputs.products }}
           release: ${{ matrix.release }}
+          cache: true
       - name: Start display server (Desalination on Linux)
         if: matrix.folder == 'Desalination' && matrix.os == 'ubuntu-latest'
         run: |
@@ -75,6 +78,7 @@ jobs:
           echo "DISPLAY=:99" >> $GITHUB_ENV
       - name: Install WEC-Sim, run tests and generate artifacts
         uses: matlab-actions/run-command@v2
+        timeout-minutes: 45
         with:
           command: |
             addpath(genpath('WEC-Sim/source'));
