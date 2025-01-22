@@ -31,7 +31,9 @@ jobs:
         include: ${{ fromJSON(inputs.include) }}
         exclude:
           - os: ubuntu-latest
-            folder: [Mooring, Paraview_Visualization]
+            folder: Mooring
+          - os: ubuntu-latest
+            folder: Paraview_Visualization
     name: "${{ matrix.folder }} - ${{ matrix.os }} - ${{ matrix.release }}"
     timeout-minutes: 45
     steps:
@@ -56,7 +58,7 @@ jobs:
           repository: WEC-Sim/MoorDyn
           path: './MoorDyn'
       - name: Copy MoorDyn Files
-        if: matrix.folder == 'Mooring'
+        if: matrix.folder == 'Mooring' || matrix.folder == 'Paraview_Visualization'
         run: |
             cp * ../WEC-Sim/source/functions/moorDyn
             ls ../WEC-Sim/source/functions/moorDyn
