@@ -4,7 +4,7 @@
 % only, and has PTO damping=1200[kN-s/m].
 
 %% Run Simulation
-wecSim;                     % Run Simulation
+% wecSim;                     % Run Simulation
 
 %% Post-Process Data
 % Flap position and force
@@ -39,14 +39,19 @@ subplot(1,2,1)
 plot(IrrYaw.time_new,IrrYaw.Pos_new,':k','LineWidth',1.4)
 hold on; grid on;
 plot(IrrYaw.time_org,IrrYaw.Pos_org,'-k')
-title('Passive Yaw, irregular wave')
 xlabel('Time(s)'); ylabel('Yaw position (rad)')
+title('Yaw position comparison')
+
 subplot(1,2,2) % plots of yaw position
-plot(IrrYaw.time_new,IrrYaw.Pos_new,':k','LineWidth',1.4)
+plot(IrrYaw.time_new,IrrYaw.Force_new,':k','LineWidth',1.4)
 hold on; grid on;
-plot(IrrYaw.time_org,IrrYaw.Pos_org,'-k')
+
+plot(IrrYaw.time_org,IrrYaw.Force_org,'-k')
 xlabel('Time(s)'); ylabel('Total Yaw Force (N)')
 legend('New','Original')
+title('Yaw force comparison')
+
+sgtitle('Passive yaw regression, irregular wave')
 savefig('figYawIrr');                
 
 %% Clear output and .slx directory
