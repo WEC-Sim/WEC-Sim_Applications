@@ -4,7 +4,7 @@
 % only, and has PTO damping=1200[kN-s/m].
 
 %% Run Simulation
-% wecSim;                     % Run Simulation
+wecSim;                     % Run Simulation
 
 %% Post-Process Data
 % Flap position and force
