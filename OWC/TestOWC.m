@@ -35,7 +35,7 @@ classdef TestOWC < matlab.unittest.TestCase
             cd(testCase.testDir)
         end
         function runBemioFloating(testCase)
-            cd(git o);
+            cd(testCase.h5DirFloating);
             if isfile(testCase.h5NameFloating)
                 fprintf('runBemio skipped, *.h5 already exists\n')
             else
