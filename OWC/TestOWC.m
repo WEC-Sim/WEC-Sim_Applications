@@ -65,6 +65,9 @@ classdef TestOWC < matlab.unittest.TestCase
             wecSim
         end
         function testOWCFloating(testCase)
+            assumeEqual(testCase, exist("MoorDyn_caller", "file"), 2, ...
+                "MoorDyn is not installed");
+
             cd('FloatingOWC_W2W')
             wecSim
         end
