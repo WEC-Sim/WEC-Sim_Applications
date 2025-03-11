@@ -62,10 +62,6 @@ classdef TestMoorDynViz < matlab.unittest.TestCase
     
     methods(Test)        
         function testParaview_Visualization_RM3_MoorDyn_Viz(testCase)
-%             assumeError(testCase,                               ...
-%                         @() run("wecSim"),                      ...
-%                         'Simulink:Engine:CallbackEvalErr',      ...
-%                         'Expected failure');
             wecSim
         end        
     end    
