@@ -1,0 +1,6 @@
+TEST17a cylinder with moonpool -- undamped patch on free surface
+1. 9.80665  ULEN GRAV
+1  1        ISX  ISY
+4  -7       NPATCH  IGDEF
+1           NLINES
+0.5 1.0 0.25     radius, draft, moonpool radius

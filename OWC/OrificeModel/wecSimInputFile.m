@@ -25,7 +25,7 @@ waves.phaseSeed = 128;                       % wave phase seed
 
 %% Body Data
 % Float
-body(1) = bodyClass('./hydroData/test17a.h5');      
+body(1) = bodyClass('./hydroData/test17a_clean.h5');      
     %Create the body(1) Variable, Set Location of Hydrodynamic Data File 
     %and Body Number Within this File.   
 body(1).geometryFile = './geometry/test17a_low.stl';    % Location of Geomtry File

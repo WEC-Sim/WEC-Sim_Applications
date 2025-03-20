@@ -1,0 +1,5 @@
+! generic configuration file:  config.wam
+ RAMGBMAX=8
+ NCPU=1
+ USERID_PATH=\wamitv7   (directory for *.exe, *.dll, and userid.wam)
+
