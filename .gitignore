@@ -67,12 +67,17 @@ $ cat .gitignore
 !**/mooring/lines.txt
 **/vtk/*
 savedData*.mat
-WECCCOMP/**/SS*.mat
-WECCCOMP/**/SS*.fig
-!WECCCOMP/WECCCOMP_Nonlinear_Model_Predictive/waveData/*.mat
+!/Generalized_Body_Modes/hydroData/WAMIT/*
+!/Mean_Drift/WAMIT/inputFiles/*
+!/Mean_Drift/WAMIT/outputFiles/*
+MOST/mostData/turbSim/*.mat
+!/OWC/OrificeModel/hydroData/deSpike.mat
 Passive_Yaw/**/IrrYaw.mat
 Passive_Yaw/**/figYawIrr.fig
 yaw*.mat
+WECCCOMP/**/SS*.mat
+WECCCOMP/**/SS*.fig
+!WECCCOMP/WECCCOMP_Nonlinear_Model_Predictive/waveData/*.mat
 
 # BEM
 *.1
@@ -84,10 +89,7 @@ yaw*.mat
 *.hst
 *.p2f
 *.pot
-!/Generalized_Body_Modes/hydroData/WAMIT/*
-!/Mean_Drift/WAMIT/inputFiles/*
-!/Mean_Drift/WAMIT/outputFiles/*
-!/OWC/OrificeModel/hydroData/deSpike.mat
+
 
 # Other
 .DS_Store
