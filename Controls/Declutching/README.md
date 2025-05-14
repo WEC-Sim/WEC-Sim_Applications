@@ -9,3 +9,7 @@
 **Description**
 
 Numerical model for a semi-submerged sphere (diameter = 10 m)  with a declutching controller. "wecSim" can be typed into the command window to run the example with the default setup. "optimalTimeCalc.m" is used to calculate the optimal declutching time. The "mcrBuildTimes.m" script can be run to set up multiple conditions runs, then "wecSimMCR" can be typed into the command window to run the different cases with varying declutching times.
+
+**Relevant Citation(s)**
+
+Leon, J.; Grasberger, J.; Forbush, D.; Sirigu, M.; Ancellin, M.; Tom, N.; Keester, A.; Ruehl, K.; Ogden, D.; Husain, S. (2024). Advanced Features and Recent Developments in the WEC-Sim Open-Source Design Tool . Paper presented at Pan American Marine Energy Conference (PAMEC 2024), Barranquilla, Colombia.
