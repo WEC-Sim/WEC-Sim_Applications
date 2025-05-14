@@ -9,7 +9,6 @@
 **Dependency:**	SimScape Fluids
 
 **Description**	
-
 Example using WEC-Sim for desalination based on the OSWEC. 
 
 **Relevant Citation(s)**

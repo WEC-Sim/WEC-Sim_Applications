@@ -7,7 +7,6 @@
 **Original Version:** v4.2
 
 **Description**
-
 Numerical model for the WEC Control Competition (WECCCOMP) using WEC-Sim to model the WaveStar.
 
 **Relevant Citation(s)**
