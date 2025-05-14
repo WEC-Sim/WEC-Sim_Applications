@@ -1,4 +1,4 @@
-# Multiple Condition Runs
+# Multiple Condition Runs (MCR)
 
 **Author:**	Yi-Hsiang Yu and Kelley Ruehl
 

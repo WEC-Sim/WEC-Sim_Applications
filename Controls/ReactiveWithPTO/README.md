@@ -1,4 +1,4 @@
-# Reactive Controller with direct drive power take-off
+# Reactive Controller with Direct Drive Power Take-Off
 
 **Author:**          Jeff Grasberger 
 
