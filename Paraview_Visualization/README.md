@@ -14,4 +14,6 @@ The **RM3_MoorDyn_Viz** example uses ParaView for WEC-Sim data visualization of 
 
 The **OSWEC_NonLinear_Viz** example uses ParaView for WEC-Sim data visualization of a WEC-Sim model with [Non-linear Hydro](https://wec-sim.github.io/WEC-Sim/main/user/advanced_features.html#nonlinear-buoyancy-and-froude-krylov-excitation) to simulate non-linear wave excitation on the flap of the OSWEC geometry. This example uses Non-linear Hydro to model wave loading on the flap, and Non-Hydro Body to model the base of the OSWEC.
 
+**Relevant Citation(s)**
 
+Ruehl, K.; Michelen, C.; Yu, Y.; Lawson, M. (2016). Update on WEC-Sim Validation Testing and Code Development. Paper presented at 4th Annual Marine Energy Technology Symposium (METS), Washington D.C., USA.
