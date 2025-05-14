@@ -7,6 +7,7 @@
 **Original Version:** 	WEC-Sim v5.0
 
 **Description**	
+
 Examples using [PTO-Sim](https://wec-sim.github.io/WEC-Sim/main/user/advanced_features.html#pto-sim). Examples of WEC-Sim models using PTO-Sim are included for the RM3 geometry and OSWEC geometry.
 
 **Relevant Citation(s)**	

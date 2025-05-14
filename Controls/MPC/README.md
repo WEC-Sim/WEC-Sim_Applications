@@ -14,7 +14,8 @@
    Control System Toolbox		            -->	for frd command
    Symbolic Math Toolbox		            -->	for subs command
 
-**Description:**
+**Description**
+
 Numerical model for a semi-submerged sphere (diameter = 10 m) with a model predictive controller (MPC). "wecSim" can be typed into the command window to run the example with the default setup. "plotFreqDep.m" solves for and plots the frequency dependent coefficients, which are stored in "coeff.mat". "setupMPC.m" sets the controller up using "makePlantModel.m" and "makePredictiveModel.m" and is called by the input file when "wecSim" is run from the command window. "fexcPrediction.m" and "mpcFcn.m" predict the excitation forces and solve the quadratic programming problem, respectively, and are both called by "sphereMPC.slx" during the simulation. The model predictive controller parameters can be changed in the input file. 	
 
 **Relevant Citation(s)**

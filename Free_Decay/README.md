@@ -7,6 +7,7 @@
 **Geometry:**	Sphere
 
 **Description**
+
 Example using WEC-Sim to simulate [free decay](https://wec-sim.github.io/WEC-Sim/main/user/advanced_features.html#decay-tests) of a sphere in heave, using [Multiple Condition Runs](https://wec-sim.github.io/WEC-Sim/main/user/advanced_features.html#multiple-condition-runs-mcr).  Execute the `runFreeDecay.m` script to run this case. 
 
 This case was developed for IEA OES Task 10 international comparison of numerical simulations to experimental data.
