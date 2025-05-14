@@ -1,6 +1,8 @@
-# WEC-Sim Controls Examples
+# Model Predictive Controller (MPC)
 
-**Author:**          Jeff Grasberger (Sandia)
+**Author:**          Ratanak So and Jeff Grasberger 
+
+**Geometry:**	Sphere
 
 **Original Version:** v5.0 
 

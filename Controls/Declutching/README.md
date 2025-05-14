@@ -1,16 +1,10 @@
-# WEC-Sim Controls Examples
+# Declutching Controller
 
-**Author:**          Jeff Grasberger (Sandia)
+**Author:**          Jeff Grasberger 
 
-**WEC-Sim Version:** v5.0 (or newer)
+**Geometry:**	Sphere
 
-**Matlab Version:** 2020b (or newer)
+**Original Version:** v5.0 
 
-**WEC-Sim Model**
-Numerical model for a semi-submerged sphere (diameter = 10 m)  with a declutching controller. "wecSim" can be typed into 
-the command window to run the example with the default setup. "optimalTimeCalc.m" is used to calculate the 
-optimal declutching time. The "mcrBuildTimes.m" script can be run to set up multiple conditions runs, then 
-"wecSimMCR" can be typed into the command window to run the different cases with varying declutching times.
-
-**Questions?**
-* Post all WEC-Sim modeling questions to the [WEC-Sim online forum](https://github.com/WEC-Sim/WEC-Sim/issues).
+**Description**
+Numerical model for a semi-submerged sphere (diameter = 10 m)  with a declutching controller. "wecSim" can be typed into the command window to run the example with the default setup. "optimalTimeCalc.m" is used to calculate the optimal declutching time. The "mcrBuildTimes.m" script can be run to set up multiple conditions runs, then "wecSimMCR" can be typed into the command window to run the different cases with varying declutching times.
