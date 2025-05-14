@@ -2,9 +2,7 @@
 
 **Author:**          Jeff Grasberger (Sandia)
 
-**WEC-Sim Version:** v5.0 (or newer)
-
-**Matlab Version:** 2020b (or newer)
+**Original Version:** v5.0 
 
 **Dependencies:**
 
@@ -15,14 +13,9 @@
    Symbolic Math Toolbox		            -->	for subs command
 
 **Description:**
-Numerical model for a semi-submerged sphere (diameter = 10 m) with a model predictive controller (MPC).
-"wecSim" can be typed into the command window to run the example with the default setup. 
-"plotFreqDep.m" solves for and plots the frequency dependent coefficients, 
-which are stored in "coeff.mat". "setupMPC.m" sets the controller up using "makePlantModel.m" 
-and "makePredictiveModel.m" and is called by the input file when "wecSim" 
-is run from the command window. "fexcPrediction.m" and "mpcFcn.m" predict the excitation forces 
-and solve the quadratic programming problem, respectively, and are both called by "sphereMPC.slx" 
-during the simulation. The model predictive controller parameters can be changed in the input file. 
+Numerical model for a semi-submerged sphere (diameter = 10 m) with a model predictive controller (MPC). "wecSim" can be typed into the command window to run the example with the default setup. "plotFreqDep.m" solves for and plots the frequency dependent coefficients, which are stored in "coeff.mat". "setupMPC.m" sets the controller up using "makePlantModel.m" and "makePredictiveModel.m" and is called by the input file when "wecSim" is run from the command window. "fexcPrediction.m" and "mpcFcn.m" predict the excitation forces and solve the quadratic programming problem, respectively, and are both called by "sphereMPC.slx" during the simulation. The model predictive controller parameters can be changed in the input file. 	
 
-**Questions?**
-* Post all WEC-Sim modeling questions to the [WEC-Sim online forum](https://github.com/WEC-Sim/WEC-Sim/issues).
+**Relevant Citation(s)**
+
+R. So, M. Starrett, K. Ruehl and T. K. A. Brekken, "Development of control-Sim: Control strategies for power take-off integrated wave energy converter," 2017 IEEE Power & Energy Society General Meeting, Chicago, IL, USA, 2017, pp. 1-5, doi: 10.1109/PESGM.2017.8274314. keywords: {Force;Damping;Cost function;Springs;Sea state;Laboratories;wave energy;optimization;power take off;model predictive control},
+
