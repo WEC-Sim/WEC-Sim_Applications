@@ -1,8 +1,6 @@
 %% OWC - WAMIT GBM simulation
 
 %% Run BEMIO for WAMIT Run and despike the hydro data
-
-% It is recommended to:
 % 1) load deSpike.mat, to create structure depSpike in workspace.
 % 2) call >> outHydro=badBemioFix_fcn({'test17a.out'},'WAMIT',deSpike,[1,1;3,3;5,5;7,7])
 % This will despike the resonance associated with the OWC moonpool and generate an h5

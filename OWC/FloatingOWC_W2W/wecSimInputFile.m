@@ -7,71 +7,33 @@ simu.simMechanicsFile = 'OWC_rigid.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                      % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'off';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                        % Simulation Start Time [s]
-simu.rampTime = 50;                        % Wave Ramp Time [s]
-simu.endTime = 500;                        % Simulation End Time [s]
+simu.rampTime = 1;                        % Wave Ramp Time [s]
+simu.endTime = 5;                        % Simulation End Time [s]
+% simu.rampTime = 50;                        % Wave Ramp Time [s]
+% simu.endTime = 500;                        % Simulation End Time [s]
 simu.solver = 'ode45';                     % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step
 simu.dt = 0.01; 						   % Simulation time-step [s]
 
 %% Wave Information
-% % noWaveCIC, no waves with radiation wecSimCIC
-% waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type
 
-% % Regular Waves
+% Regular Waves
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type
 waves.height = 4.5;                     % Wave Height [m]
 waves.period = 11.2;                      % Wave Period [s]
 waves.waterDepth = 80;
 
-% % Regular Waves with CIC
-% waves = waveClass('regularCIC');          % Initialize Wave Class and Specify Type
-% waves.height = 2.5;                       % Wave Height [m]
-% waves.period = 8;                         % Wave Period [s]
-
-% Irregular Waves using PM Spectrum
-% waves = waveClass('irregular');           % Initialize Wave Class and Specify Type
-% waves.height = 4.5;                       % Significant Wave Height [m]
-% waves.period = 11.2;                         % Peak Period [s]
-% waves.spectrumType = 'PM';                % Specify Wave Spectrum Type
-% waves.direction=[0];
-% waves.waterDepth = 80;
-% waves.phaseSeed = 2;
-
-% % Irregular Waves using JS Spectrum with Equal Energy and Seeded Phase
-% waves = waveClass('irregular');           % Initialize Wave Class and Specify Type
-% waves.height = 2.5;                       % Significant Wave Height [m]
-% waves.period = 8;                         % Peak Period [s]
-% waves.spectrumType = 'JS';                % Specify Wave Spectrum Type
-% waves.bem.option = 'EqualEnergy';         % Uses 'EqualEnergy' bins (default)
-% waves.phaseSeed = 1;                      % Phase is seeded so eta is the same
-
-% % Irregular Waves using PM Spectrum with Traditional and State Space
-% waves = waveClass('irregular');           % Initialize Wave Class and Specify Type
-% waves.height = 2.5;                       % Significant Wave Height [m]
-% waves.period = 8;                         % Peak Period [s]
-% waves.spectrumType = 'PM';                % Specify Wave Spectrum Type
-% simu.stateSpace = 1;                      % Turn on State Space
-% waves.bem.option = 'Traditional';         % Uses 1000 frequnecies
-
-% % Irregular Waves with imported spectrum
-% waves = waveClass('spectrumImport');      % Create the Wave Variable and Specify Type
-% waves.spectrumFile = 'spectrumData.mat';  % Name of User-Defined Spectrum File [:,2] = [f, Sf]
-
-% % Waves with imported wave elevation time-history
-% waves = waveClass('elevationImport');          % Create the Wave Variable and Specify Type
-% waves.elevationFile = 'elevationData.mat';     % Name of User-Defined Time-Series File [:,2] = [time, eta]
-
 %% Body Data
 % Floater
-body(1) = bodyClass('../../_Common_Input_Files/Floating_OWC/hydroData/floatingOWC.h5');
-body(1).geometryFile = '../../_Common_Input_Files/Floating_OWC/geometry/Sparbuoy_Floater.stl';    % Location of Geomtry File
+body(1) = bodyClass('./hydroData/floatingOWC.h5');
+body(1).geometryFile = './geometry/Sparbuoy_Floater.stl';    % Location of Geomtry File
 body(1).mass = 'equilibrium';                                                               % Body Mass. The 'equilibrium' Option Sets it to the Displaced Water Weight.
 body(1).inertia =   1.0e+09*[1.5310    1.5310    0.1118];                                   % Moment of Inertia [kg*m^2]
 % body(1).quadDrag.cd = [1.25, 1.25, 1.25, 1.25, 1.25 , 0.1];
 % body(1).quadDrag.area = [250, 250, 201, 250, 250, 100];
 
 % Spar/Plate
-body(2) = bodyClass('../../_Common_Input_Files/Floating_OWC/hydroData/floatingOWC.h5');
-body(2).geometryFile = '../../_Common_Input_Files/Floating_OWC/geometry/Sparbuoy_OWC.stl';
+body(2) = bodyClass('./hydroData/floatingOWC.h5');
+body(2).geometryFile = './geometry/Sparbuoy_OWC.stl';
 body(2).mass = 'equilibrium';
 
 
