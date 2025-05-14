@@ -7,10 +7,8 @@ simu.simMechanicsFile = 'OWC_rigid.slx';      % Specify Simulink Model File
 simu.mode = 'normal';                      % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'off';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                        % Simulation Start Time [s]
-simu.rampTime = 1;                        % Wave Ramp Time [s]
-simu.endTime = 5;                        % Simulation End Time [s]
-% simu.rampTime = 50;                        % Wave Ramp Time [s]
-% simu.endTime = 500;                        % Simulation End Time [s]
+simu.rampTime = 50;                        % Wave Ramp Time [s]
+simu.endTime = 500;                        % Simulation End Time [s]
 simu.solver = 'ode45';                     % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step
 simu.dt = 0.01; 						   % Simulation time-step [s]
 
