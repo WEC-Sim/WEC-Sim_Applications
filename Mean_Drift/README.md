@@ -2,9 +2,9 @@
 
 **Author:**  	Thanh Toan Tran
 
-**Original Version:** 	WEC-Sim v4.4
-
 **Geometry:**	Floating hemisphere with 1 m radius
+
+**Original Version:** 	WEC-Sim v4.4
 
 **Description**
 

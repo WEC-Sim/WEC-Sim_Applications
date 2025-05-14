@@ -2,9 +2,9 @@
 
 **Author:** 	Yi-Hsiang Yu
 
-**Original Version:**	WEC-Sim v4.0
-
 **Geometry:**	Barge
+
+**Original Version:**	WEC-Sim v4.0
 
 **Description**
 

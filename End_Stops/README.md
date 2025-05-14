@@ -2,9 +2,9 @@
 
 **Author:**  	Dominic Forbush
 
-**Original Version:** 	WEC-Sim v4.1
-
 **Geometry**	RM3
+
+**Original Version:** 	WEC-Sim v4.1
 
 **Description**
 

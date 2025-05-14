@@ -2,9 +2,9 @@
 
 **Author:**	Fabian Wendt
 
-**Original Version:**	WEC-Sim v2.2
-
 **Geometry:**	Sphere
+
+**Original Version:**	WEC-Sim v2.2
 
 **Description**
 
