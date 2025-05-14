@@ -49,14 +49,14 @@ simu = simulationClass();                           % Create the Simulation Vari
 %     waves.period        = Tp;                         % Wave Period [s]
 %     waves.marker.location = [-1.70, 0; -1.50, 0;-1.25, 0];   % Wave Gauge locations
 
-%%%%%%%%%%%%%%%%%%%% Irregular Waves  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%% Irregular Waves  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     waves = waveClass('irregular');                     % Initialize waveClass
     waves.height        = Hm0;                          % Wave Height [m]
     waves.period        = Tp;                           % Wave Period [s]
     waves.spectrumType  = 'JS';                         % Specify Wave Spectrum Type
     waves.bem.option    = 'EqualEnergy';                % Uses 'EqualEnergy' bins (default) 
     waves.gamma         = gamma;
-    waves.phaseSeed     = 3.3;                          % Phase is seeded so eta is the same    
+    waves.phaseSeed     = 1;                          % Phase is seeded so eta is the same    
 
 % %%%%%%%%%%%%%%%%%%% Custom Wave Elevation (eta) Import %%%%%%%%%%%%%%%%%%
 % waves = waveClass('elevationImport');
