@@ -9,7 +9,7 @@
 **Dependencies:** 
 
 * Signal Processing Toolbox  
-* Control System Toolbox --> for tf() function
+* Control System Toolbox --> for `tf`
 
 **Relevant Citation(s)**
 
