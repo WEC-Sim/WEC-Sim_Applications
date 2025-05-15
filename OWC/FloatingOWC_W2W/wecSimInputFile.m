@@ -13,10 +13,10 @@ simu.solver = 'ode45';                     % simu.solver = 'ode4' for fixed step
 simu.dt = 0.01; 						   % Simulation time-step [s]
 
 %% Wave Information
-% % noWaveCIC, no waves with radiation wecSimCIC
+% noWaveCIC, no waves with radiation wecSimCIC
 % waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type
 
-% % Regular Waves
+% Regular Waves
 waves = waveClass('regular');           % Initialize Wave Class and Specify Type
 waves.height = 4.5;                     % Wave Height [m]
 waves.period = 11.2;                      % Wave Period [s]
@@ -62,17 +62,20 @@ waves.waterDepth = 80;
 
 %% Body Data
 % Floater
-body(1) = bodyClass('../../_Common_Input_Files/Floating_OWC/hydroData/floatingOWC.h5');
-body(1).geometryFile = '../../_Common_Input_Files/Floating_OWC/geometry/Sparbuoy_Floater.stl';    % Location of Geomtry File
+body(1) = bodyClass('./hydroData/floatingOWC.h5');
+body(1).geometryFile = './geometry/Sparbuoy_Floater.stl';    % Location of Geomtry File
 body(1).mass = 'equilibrium';                                                               % Body Mass. The 'equilibrium' Option Sets it to the Displaced Water Weight.
 body(1).inertia =   1.0e+09*[1.5310    1.5310    0.1118];                                   % Moment of Inertia [kg*m^2]
 % body(1).quadDrag.cd = [1.25, 1.25, 1.25, 1.25, 1.25 , 0.1];
 % body(1).quadDrag.area = [250, 250, 201, 250, 250, 100];
 
 % Spar/Plate
-body(2) = bodyClass('../../_Common_Input_Files/Floating_OWC/hydroData/floatingOWC.h5');
-body(2).geometryFile = '../../_Common_Input_Files/Floating_OWC/geometry/Sparbuoy_OWC.stl';
-body(2).mass = 'equilibrium';
+waterColumnMass = 4493450;
+waterColumnHeight = 50.69;
+
+body(2) = bodyClass('./hydroData/floatingOWC.h5');
+body(2).geometryFile = './geometry/Sparbuoy_OWC.stl';
+body(2).mass = waterColumnMass;
 
 
 
@@ -126,10 +129,8 @@ airChamber(1).p0 = 101325;                          % Atompspheric Pressure (abs
 airChamber(1).Ae = (pi / 4) * airChamber(1).owcDiameter^2;        % Air chamber area - Circular in this model
 airChamber(1).rho_air = 1.25;
 airChamber(1).Vo = airChamber(1).Ae * airChamber(1).airChamberHeight;           % Inital Volume of the air chamber
-% airChamber(1).mass = 4493450;
-airChamber(1).Mass = pi * (airChamber(1).owcDiameter^2)/4 * airChamber(1).airChamberHeight * 1025;
-Izz = 0.5* airChamber(1).Mass * (airChamber(1).owcDiameter/2)^2; 
-Ixx = airChamber(1).Mass * (3 * (airChamber(1).owcDiameter/2)^2 + airChamber(1).airChamberHeight^2) /12;
+Izz = 0.5* waterColumnMass * (airChamber(1).owcDiameter/2)^2; 
+Ixx = waterColumnMass * (3 * (airChamber(1).owcDiameter/2)^2 + waterColumnHeight^2) /12;
 
 body(2).inertia =  [Ixx    Ixx   Izz];
 

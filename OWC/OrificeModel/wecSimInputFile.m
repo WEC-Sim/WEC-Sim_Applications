@@ -1,35 +1,33 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'GBM1.slx';     % Specify Simulink Model File
+simu.simMechanicsFile = 'OWC_GBM.slx';  % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 10;                   	% Wave Ramp Time [s]
 simu.endTime = 130;                     % Simulation End Time [s]
+% simu.solver = 'ode45';                  % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.solver = 'ode23t';                 % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.005; 						% Simulation time-step [s]
 simu.cicEndTime = 15;
 simu.mcrMatFile = 'mcrOrifice.mat';
 
 %% Wave Information 
-% % Regular Waves
-% waves = waveClass('spectrumImport');           % Initialize Wave Class and Specify Type    
-% waves.spectrumFile = './Tuning/WaveFw83.mat';
-
 % Irregular waves
 waves = waveClass('irregular');
 waves.spectrumType = 'PM';
 waves.height = 1;                            % Wave Height [m]
 waves.period = 4;                            % Wave Period [s]
-waves.phaseSeed = 128;                       % wave phase seed
+waves.phaseSeed = 128;                       % Wave phase seed
 
 %% Body Data
 % Float
-body(1) = bodyClass('./hydroData/test17a.h5');      
+% body(1) = bodyClass('./hydroData/test17a.h5');      
+body(1) = bodyClass('./hydroData/test17a_clean.h5');      
     %Create the body(1) Variable, Set Location of Hydrodynamic Data File 
     %and Body Number Within this File.   
 body(1).geometryFile = './geometry/test17a_low.stl';    % Location of Geomtry File
-body(1).mass = 'equilibrium';%49.604;                   
+body(1).mass = 'equilibrium';                  
     %Body Mass. The 'equilibrium' Option Sets it to the Displaced Water 
     %Weight.
 body(1).centerBuoyancy = [0 0 0];
@@ -48,7 +46,7 @@ lpfNum = 2*pi*50;
 lpfDen = [1 2*pi*50];
 LPF50 = [lpf50 0 0 0 0 0 0; 0 lpf50 0 0 0 0 0; 0 0 lpf50 0 0 0 0; 0 0 0 lpf50 0 0 0; ...
     0 0 0 0 lpf50 0 0; 0 0 0 0 0 lpf50 0; 0 0 0 0 0 0 lpf50];
-%% tuning drag components
+% tuning drag components
 
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint
