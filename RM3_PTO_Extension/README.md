@@ -1,9 +1,12 @@
-# RM3 PTO Extension
+# PTO Extension
 
 **Author:**	Allison File
 
-**Version:** 	WEC-Sim v6.0
+**Geometry:**	RM3
 
-**Geometry:**	Two-Body Point Absorber
+**Original Version:** 	WEC-Sim v6.0
 
-Examples setting [PTO Extension] (https://wec-sim.github.io/WEC-Sim/master/user/advanced_features.html#constraint-and-pto-features) feature for both the float and spar bodies for the [RM3] (https://wec-sim.github.io/WEC-Sim/master/user/tutorials.html#two-body-point-absorber-rm3) geometry. 
+**Description**
+
+Examples setting [PTO Extension] (https://wec-sim.github.io/WEC-Sim/main/user/advanced_features.html#constraint-and-pto-features) feature for the RM3. For more information, refer to https://github.com/WEC-Sim/WEC-Sim_Applications/pull/56.
+

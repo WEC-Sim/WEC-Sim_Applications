@@ -1,15 +1,17 @@
-# WECCCOMP – WEC Control Competition
+# WEC Control Competition (WECCCOMP)
 
-**Author:**          Kelley Ruehl (Sandia), Nathan Tom (NREL), Yi-Hsiang Yu (NREL) and Francesco Ferri (Aalborg)
+**Author:**	Kelley Ruehl, Nathan Tom, Yi-Hsiang Yu, and Francesco Ferri
 
-**WEC-Sim Version:** v4.2 (or newer)
+**Geometry:**	WaveStar
 
-**Matlab Version:** 2019b (or newer), and Statistics and Machine Learning Toolbox for [prctile](
-https://www.mathworks.com/help/stats/prctile.html) function.
+**Original Version:** v4.2
 
-**WEC-Sim Model**
-Numerical model for the WEC Control Competition (WECCCOMP) using WEC-Sim to model the WaveStar.
+**Description**
 
-**Questions?**
-* Post all WEC-Sim modeling questions to the [WEC-Sim online forum](https://github.com/WEC-Sim/WEC-Sim/issues).
-* Post all WECCCOMP control competition questions to the [WECCCOMP online forum](http://www.eeng.nuim.ie/coer/control-competition-forum-login/). 
+Numerical model for the WEC Control Competition (WECCCOMP) to model the WaveStar.
+
+**Relevant Citation(s)**
+
+Ringwood, J.; Tom, N.; Ferri, F.; Yu, Y.; Coe, R.; Ruehl, K.; Bacelli, G.; Shi, S.; Patton, R.; Tona, P.; Sabrion, G.; Mérigaud, A.; Ling, B.; Faedo, N. (2023). The wave energy converter control competition (WECCCOMP): Wave energy control algorithms compared in both simulation and tank testing. Applied Ocean Research, 138 https://doi.org/10.1016/j.apor.2023.103653
+
+Tom, N.; Ruehl, K.; Ferri, F. (2018). Numerical Model Development and Validation for the WECCOMP Control Competition. Paper presented at 37th International Conference on Ocean, Offshore & Arctic Engineering (OMAE 2018), Madrid, Spain.

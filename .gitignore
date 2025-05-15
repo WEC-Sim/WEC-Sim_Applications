@@ -56,17 +56,39 @@ $ cat .gitignore
 *.vtp
 *.zip
 
+# Other
+.DS_Store
+view_html.sh
+*vis-temp*
+folder.json
+include.json
+
 # MATLAB
 **/output/
 **/output_previous/
 **/slprj/
 *build_exception*
 
+# WAMIT
+*.1
+*.3
+*.3fk
+*.3sc
+*.4
+*.h5
+*.p2f
+*.pot
+
 # Applications
 **/mooring/*.out
 !**/mooring/lines.txt
 **/vtk/*
 savedData*.mat
+!/Generalized_Body_Modes/hydroData/WAMIT/*
+!/Mean_Drift/WAMIT/inputFiles/*
+!/Mean_Drift/WAMIT/outputFiles/*
+MOST/**/**/*.mat
+MOST/**/**/**/*.mat
 WECCCOMP/**/SS*.mat
 WECCCOMP/**/SS*.fig
 !WECCCOMP/WECCCOMP_Nonlinear_Model_Predictive/waveData/*.mat
@@ -74,24 +96,5 @@ Passive_Yaw/**/IrrYaw.mat
 Passive_Yaw/**/figYawIrr.fig
 yaw*.mat
 
-# BEM
-*.1
-*.3
-*.3fk
-*.3sc
-*.4
-*.h5
-*.hst
-*.p2f
-*.pot
-!/Generalized_Body_Modes/hydroData/WAMIT/*
-!/Mean_Drift/WAMIT/inputFiles/*
-!/Mean_Drift/WAMIT/outputFiles/*
-!/OWC/OrificeModel/hydroData/*.h5
 
-# Other
-.DS_Store
-view_html.sh
-*vis-temp*
-folder.json
-include.json
+

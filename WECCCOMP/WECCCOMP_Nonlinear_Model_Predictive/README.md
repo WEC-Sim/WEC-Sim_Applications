@@ -65,16 +65,7 @@ This solution offers 2 options. 1. to use the precalculated excM obtained from w
 
 _**Other parameters:**_ Additional parameters that the user can change include the prediction horizon (_NP_) for the NMPC, or the proportional gain (_prop_gain_), Max/Min value for the control input (_McSat_), the input rate penalisation matrix (_R_crtl_), and the efficiency of the actuator whether functioning as a generator (_eta_generator_) or a motor (_eta_motoring_). For the approximation of the efficiency function, the "smoothness" factor (_phi_eff_) is used.  Parameters for the predictor, number of lag terms (ARorder) or the number of past values to compute the AR coefficients (ARtrainingSet). All these parameters are defined in the controller_init.m file.
 
-## Broken Library Link
-
-The body(1) block in WaveStar.slx contains a broken library link. 
-A goto block from the signal F_excitation has been added, resulting in a broken library link.
-This goto block named excForce is input to the function transfExcMoment
-to transform the excitation forces into excitation moment around pivot point A at each time step.
-
 If the user wishes to conduct the simulation with perfect prediction of the wave excitation moment for a different sea state than
 those specified in the wecSim.m file, a simulation without a controller must first be run (a proportional controller with proportional
 gain equl to zero.). To utilise the Prediction algorithm predictionType = 1, the variable excM wecSim from this simulation must be 
 saved in the folder waveData.
-
-

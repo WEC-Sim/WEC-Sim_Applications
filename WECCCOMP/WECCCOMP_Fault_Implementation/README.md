@@ -1,4 +1,4 @@
-# WECCCOMP – WEC Control Competition Fault Implementation
+# WECCCOMP WEC Control Competition Fault Implementation
 
 **Author:**  	Erica Lindbeck (University of Central Florida) and Nathan Tom (NREL)
 
@@ -7,9 +7,11 @@
 **Matlab Version:** 2018b (or newer)
 
 **WEC-Sim Model**
+
 Numerical model for the WEC Control Competition (WECCCOMP) using WEC-Sim to model the WaveStar with various fault implementations.
 
-** Project Report **
+**Relevant Citation(s)**
+
 See project report written by Erica Lindbeck in the "report" folder.
 
 **Questions?**

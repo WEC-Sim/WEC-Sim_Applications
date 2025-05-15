@@ -2,9 +2,11 @@
 
 **Authors:** Mohamed Shabara, Jeff Grasberger and Jorge Leon-Quiroga
 
-**Version:** WEC-Sim v6.1.x
-
 **Geometry:** Floating OWC Rigid Body Approach
+
+**Original Version:** WEC-Sim v6.1.2
+
+**Description:**
 
 This model simulates a Floating Oscillating Water Column (OWC) device using a rigid-body approach. 
 It incorporates performance curves for both a Wells Turbine and a generator, providing a realistic 
