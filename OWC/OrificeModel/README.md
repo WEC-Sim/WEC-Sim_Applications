@@ -8,10 +8,7 @@
 
 **Dependencies:** Signal Processing Toolbox
 
-OWC example modeling an orifice for a floating body cylindrical OWC. Body has a
-broken link to couple the GBM mode representing the heaving free surface to the
-rigid body heave mode. Intended to demonstrate ways user can modify library
-blocks to meet OWC modeling needs.
+* Control System Toolbox
 
 Run bemio to generate the H5 file in ./OrificeModel/hydroData, it is recommended to:
 1) load deSpike.mat, to create structure depSpike in workspace.

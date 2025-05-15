@@ -1,10 +1,12 @@
-# Radiation Force Calculation using FIR Filters
+#  Finite Impulse Response (FIR) Filters for Radiation Force Calculation
 
 **Author:**  	Salman Husain
 
-**Version:** 	WEC-Sim v5.0.1 and later
+**Geometry:**	RM3
 
-**Geometry**	RM3
+**Original Version:** 	WEC-Sim v5.0.1
 
-Example using [FIR Filters](http://wec-sim.github.io/WEC-Sim/advanced_features.html#FIR) using
-[RM3](http://wec-sim.github.io/WEC-Sim/tutorials.html#two-body-point-absorber-rm3) geometry
+**Description**
+
+Example using [Finite Impulse Response (FIR) Filters](https://wec-sim.github.io/WEC-Sim/main/user/advanced_features.html#finite-impulse-response-fir-filters) using the RM3. 
+
