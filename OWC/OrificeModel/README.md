@@ -8,8 +8,7 @@
 
 **Dependencies:** 
 
-* Signal Processing Toolbox  
-* Control System Toolbox --> for `tf`
+* Control System Toolbox
 
 **Relevant Citation(s)**
 
