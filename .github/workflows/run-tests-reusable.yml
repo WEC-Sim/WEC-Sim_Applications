@@ -53,13 +53,13 @@ jobs:
           ref: ${{ inputs.base_ref }}
           path: './WEC-Sim'
       - name: Check out MoorDyn
-        if: matrix.folder == 'Mooring' || matrix.folder == 'OWC'
+        if: matrix.folder == 'Mooring' 
         uses: actions/checkout@v4
         with:
           repository: WEC-Sim/MoorDyn
           path: './MoorDyn'
       - name: Copy MoorDyn Files
-        if: matrix.folder == 'Mooring' || matrix.folder == 'OWC' 
+        if: matrix.folder == 'Mooring' 
         run: |
             cp * ../WEC-Sim/source/functions/moorDyn
             ls ../WEC-Sim/source/functions/moorDyn
