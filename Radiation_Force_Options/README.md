@@ -2,7 +2,7 @@
 
 **Author:**  	Salman Husain
 
-**Geometry**	RM3
+**Geometry:**	RM3
 
 **Original Version:** 	WEC-Sim v5.0.1
 
