@@ -6,11 +6,11 @@
 
 **Original Version:**	WEC-Sim v4.0
 
-**Dependency:**	SimScape Fluids
+**Dependencies:**	SimScape Fluids
 
 **Description**	
 
-Example using WEC-Sim for desalination based on the OSWEC. 
+Example using WEC-Sim for wave-powered desalination using the OSWEC. 
 
 **Relevant Citation(s)**
 
