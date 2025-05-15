@@ -8,4 +8,4 @@
 
 **Description**
 
-Examples setting [PTO Extension] (https://wec-sim.github.io/WEC-Sim/main/user/advanced_features.html#constraint-and-pto-features) feature for both the float and spar bodies for the RM3. 
+Examples setting [PTO Extension] (https://wec-sim.github.io/WEC-Sim/main/user/advanced_features.html#constraint-and-pto-features) feature for the RM3. 
