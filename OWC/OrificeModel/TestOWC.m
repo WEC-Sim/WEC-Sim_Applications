@@ -50,7 +50,6 @@ classdef TestOWC < matlab.unittest.TestCase
     
     methods(Test)
         function testOWCOrifice(testCase)
-            cd('OrificeModel')
             wecSim
         end
     end
