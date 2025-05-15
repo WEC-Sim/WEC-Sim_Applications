@@ -3,7 +3,7 @@ classdef TestOWC < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir
-        h5DirOrifice = 'OrificeModel/hydroData'
+        h5DirOrifice = 'hydroData'
         h5NameOrifice = 'test17a.h5'
     end
     
