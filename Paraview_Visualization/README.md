@@ -6,7 +6,8 @@
 
 **Original Version:** 	WEC-Sim v4.2 
 
-**Dependencies:**	Paraview 5.11.1
+**Dependencies:**	
+* Paraview 5.11.1
 
 **Description**
 
