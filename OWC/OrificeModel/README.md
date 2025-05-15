@@ -8,8 +8,8 @@
 
 **Dependencies:** 
 
-Signal Processing Toolbox  
-Control System Toolbox --> for tf() function
+* Signal Processing Toolbox  
+* Control System Toolbox --> for tf() function
 
 **Relevant Citation(s)**
 

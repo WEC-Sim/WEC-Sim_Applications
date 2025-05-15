@@ -6,9 +6,11 @@
 
 **Original Version:** 	WEC-Sim v4.3
 
+**Dependencies:** MATLAB v2020a 
+
 **Description**
 
-Example on using Traditional Morison Element (no hydro bodies) to run WEC-Sim for a monopile geometry. Execute WEC-Sim in either the v2020a or newer to run this case.  
+Example on using a traditional Morison Element (without hydrodynamic bodies) to run WEC-Sim for a monopile geometry.  
 
 **Relevant Citation(s)**
 
