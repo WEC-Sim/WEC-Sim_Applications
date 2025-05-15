@@ -8,11 +8,9 @@
 
 **Dependencies:**
 
-* Optimization Toolbox 		            	-->	for `quadprog`
-* System Identification Toolbox	        	-->	for `ssdata`, `tfest`, `tfdata` 
-* Statistics and Machine Learning Toolbox	-->	for `regress`
-* Control System Toolbox		    	-->	for `frd`
-* Symbolic Math Toolbox		            	-->	for `subs`
+* Control System Toolbox
+* Optimization Toolbox
+* Statistics and Machine Learning Toolbox
 
 **Description**
 
