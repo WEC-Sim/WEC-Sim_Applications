@@ -1,5 +1,4 @@
 %% Simulation class
-
 simu = simulationClass();                           % Initialize Simulation Class
 simu.simMechanicsFile = 'OFWTmodel.slx';            % Specify Simulink Model File
 simu.mode = 'normal';                               % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
@@ -30,7 +29,6 @@ waves.spectrumType = 'JS';                          % Specify Spectrum Type JS=J
 waves.direction = 0;                                % Wave Directionality [deg]
 
 %% Body class (Platform)
-
 body(1) = bodyClass('hydroData/VolturnUS15MW_nemoh.h5');                                       % Initialize bodyClass (giving hydro data file as input)
 body(1).geometryFile = 'geometry/VolturnUS15MW.STEP';                                          % Geometry File 
 body(1).mass = 17838000;                                                                       % User-Defined mass [kg]
@@ -43,13 +41,11 @@ body(1).quadDrag.drag = [9.23E+05	0.00E+00	0.00E+00	0.00E+00	-8.92E+06	0.00E+00 
                          0.00E+00	0.00E+00	0.00E+00	0.00E+00	0.00E+00	4.80E+10];
 
 %%  Mooring class
-
 mooring(1) = mooringClass('mooring1');                                                                     % Initialize mooringClass
 mooring(1).lookupTableFile = fullfile('mostData','mooring','Mooring_VolturnUS15MW');                       % Load file with mooring look-up table
 mooring(1).lookupTableFlag = 1;                                                                            % 1: mooring loads computed with look-up table, 0: other methods
 
 %% Windturbine class
-
 windTurbine(1) = windTurbineClass('IEA15MW');                                                                                                 % Initialize turbine size and Specify Type
 windTurbine(1).control = 1;                                                                                                                   % Controltype: 0-->Baseline, 1-->ROSCO 
 windTurbine(1).aeroLoadsName = fullfile('mostData','windTurbine','aeroloads','aeroloads_IEA15MW.mat');                                        % Aeroloads filename
@@ -58,12 +54,10 @@ windTurbine(1).controlName = fullfile('mostData','windTurbine','control','Contro
 windTurbine(1).omega0 = 7.55*pi/30;                                                                                                           % Initial value for rotor speed
 
 %% Wind class
-
 wind = windClass('turbulent');                                                                          % Initialize windClass with windtype as input: constant or turbulent
 wind.turbSimFile = fullfile('mostData','turbSim',strcat('WIND_',num2str(11),'mps.mat'));                        % Turbulent wind filename
 wind.meanVelocity = 11;                                                                                 % Wind mean speed
 
 %% Constraint
-
 constraint(1) = constraintClass('Constraint1');      % Initialize constraintClass with name as input
 constraint(1).location = [0 0 0];                    % Constraint Location [m]
