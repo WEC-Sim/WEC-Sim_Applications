@@ -1,24 +1,23 @@
 classdef TestOWC < matlab.unittest.TestCase
-    
+
     properties
         OriginalDefault
         testDir
-        h5DirOrifice = 'hydroData'
+        h5DirOrifice = ['OrificeModel',filesep,'hydroData']
         h5NameOrifice = 'test17a.h5'
+        h5DirFloating = ['FloatingOWC',filesep,'hydroData']
+        h5NameFloating = 'floatingOWC.h5'
     end
-    
     methods (Access = 'public')
         function obj = TestOWC
             obj.testDir = fileparts(mfilename('fullpath'));
         end
     end
-    
     methods (TestMethodSetup)
         function killPlots (~)
             set(0,'DefaultFigureVisible','off');
         end
     end
-    
     methods(TestClassSetup)
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
@@ -32,14 +31,21 @@ classdef TestOWC < matlab.unittest.TestCase
             end
             cd(testCase.testDir)
         end
+        function runBemioFloating(testCase)
+            cd(testCase.h5DirFloating);
+            if isfile(testCase.h5NameFloating)
+                fprintf('runBemio skipped, *.h5 already exists\n')
+            else
+                bemio
+            end
+            cd(testCase.testDir)
+        end
     end
-    
     methods(TestMethodTeardown)
         function returnHome(testCase)
             cd(testCase.testDir)
         end
     end
-    
     methods(TestClassTeardown)
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
@@ -47,9 +53,17 @@ classdef TestOWC < matlab.unittest.TestCase
                 testCase.OriginalDefault);
         end
     end
-    
+
     methods(Test)
         function testOWCOrifice(testCase)
+            cd('OrificeModel')
+            wecSim
+        end
+
+        function testOWCFloating(testCase)
+            assumeEqual(testCase, exist("MoorDyn_caller", "file"), 2, ...
+                "MoorDyn is not installed");
+            cd('FloatingOWC')
             wecSim
         end
     end

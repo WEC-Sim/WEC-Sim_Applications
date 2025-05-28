@@ -133,6 +133,3 @@ Izz = 0.5* waterColumnMass * (airChamber(1).owcDiameter/2)^2;
 Ixx = waterColumnMass * (3 * (airChamber(1).owcDiameter/2)^2 + waterColumnHeight^2) /12;
 
 body(2).inertia =  [Ixx    Ixx   Izz];
-
-
-
