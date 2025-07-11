@@ -1,4 +1,4 @@
-# Oscillating Water Column
+# Orifice Oscillating Water Column
 
 **Author:** Dominic Forbush
 

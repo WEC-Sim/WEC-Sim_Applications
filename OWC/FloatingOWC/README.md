@@ -1,4 +1,4 @@
-# Oscillating Water Column
+# Floating Oscillating Water Column
 
 **Authors:** Mohamed Shabara, Jeff Grasberger and Jorge Leon-Quiroga
 
