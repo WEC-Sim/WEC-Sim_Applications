@@ -2,11 +2,16 @@
 
 **Author:**	First Last
 
-**Version:** 	WEC-Sim version (e.g. v2.0)
+**Original Version:** 	WEC-Sim version (e.g. v2.0)
 
 **Geometry:**	Name of geometry
 
-**Dependency:**	(optional) additional toolbox dependencies
+**Dependencies:**	(optional) additional toolbox dependencies
 
+**Description**
 
 Brief description of the example. 
+
+**Relevant Citation(s)**
+
+Add relevant citaions. 

@@ -2,9 +2,9 @@
 
 **Author:**  	Kelley Ruehl
 
-**Geometry:**	RM3
-
 **Original Version:** 	WEC-Sim v2.2
+
+**Geometry:**	RM3
 
 **Description**	
 
