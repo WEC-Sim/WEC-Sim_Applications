@@ -1,6 +1,6 @@
-# Variable Hydrodynamics
+# Passive Yaw
 
-**Author:** Adam Keester
+**Author:** Adam Keester and Dominic Forbush
 
 **Geometry:**	OSWEC
 

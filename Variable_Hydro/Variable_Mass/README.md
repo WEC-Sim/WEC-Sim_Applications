@@ -1,4 +1,4 @@
-# Variable Hydrodynamics Variable Mass
+# Variable Mass
 
 **Author:** Jeff Grasberger
 

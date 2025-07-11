@@ -18,3 +18,11 @@ file with the _clean suffix.
 
 Run wecSimMCR for orifice area study in mcrOrifice.mat which will work with the
 userDefinedFunctions.m
+
+**Relevant Citation(s)**
+
+Add relevant citaions. 
+
+Kelly, T., Zabala, I., Peña-Sanchez, Y., Penalba, M., Ringwood, J. V., Henriques, J. C., & Blanco, J. M. (2022). A post-processing technique for removing ‘irregular frequencies’ and other issues in the results from BEM solvers. International Marine Energy Journal, 5(1), 123–131. https://doi.org/10.36688/imej.5.123-131
+
+Lee, C.H., and Newman, J.N. WAMIT User Manual, Cambridge, MA: WAMIT, Inc., 2006. refer to Generalized Body Modes chapter
