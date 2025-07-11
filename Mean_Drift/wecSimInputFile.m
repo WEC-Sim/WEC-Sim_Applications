@@ -17,7 +17,7 @@ waves.height = 0.1;
 %% Body Data
 % Float
 body(1) = bodyClass('hydroData/sphere.h5');    	
-body(1).geometryFile = 'geometry/sphere.stl';      
+body(1).geometryFile = '../_Common_Input_Files/Sphere/geometry/sphere.stl';      
 body(1).mass = 'equilibrium';
 sphereRadius    = 1;
 sphereVol       = 4/3*pi*sphereRadius^3;
