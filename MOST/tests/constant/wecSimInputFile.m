@@ -39,7 +39,7 @@ body(1).quadDrag.drag = [9.23E+05	0.00E+00	0.00E+00	0.00E+00	-8.92E+06	0.00E+00 
                          0.00E+00	8.92E+06	0.00E+00	1.68E+10	0.00E+00	0.00E+00
                         -8.92E+06	0.00E+00	0.00E+00	0.00E+00	1.68E+10	0.00E+00
                          0.00E+00	0.00E+00	0.00E+00	0.00E+00	0.00E+00	4.80E+10];
-body(1).QTFs = 1;
+body(1).QTFs = 0;
 
 %%  Mooring class
 mooring(1) = mooringClass('mooring1');                                                                     % Initialize mooringClass
