@@ -3,25 +3,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TurbSim Data
 cd turbSim
-Wind = run_turbsim();
+Wind = RunTurbsim;
 cd ..
 
 %% Mooring Data
 cd mooring
-moor_matrix = Create_Mooring_Matrix();
+MooringLUTMaker;
 cd ..
 
 %% Turbine Data
 cd windTurbine
-cd turbine_properties
-WTcomponents = WTproperties();
-bladedata = BladeData();
-cd ..
-cd control
-[BEM_data, SS] = Steady_States();
-[BEM_data, Ctrl] = Controller();
-cd ..
-cd aeroloads
-[BEM_data, aeroloads] = AeroLoads();
-cd ..
+WindTurbineMaker
 cd ..

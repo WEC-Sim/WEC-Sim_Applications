@@ -32,7 +32,7 @@ if fid > 0
     % get the header information
     %----------------------------
    
-    tmp   = fread( fid, 1, 'int16');        % TurbSim format identifier (should = 7 or 8 if periodic), INT(2)
+    tmp   = fread( fid, 1, 'int16');        %#ok<*NASGU> % TurbSim format identifier (should = 7 or 8 if periodic), INT(2)
 
     nz    = fread( fid, 1, 'int32');        % the number of grid points vertically, INT(4)
     ny    = fread( fid, 1, 'int32');        % the number of grid points laterally, INT(4)
@@ -69,7 +69,6 @@ if fid > 0
     nPts        = ny*nz;
     nv          = nffc*nPts;               % the size of one time step
     nvTwr       = nffc*ntwr;
-%   velocity    = zeros(nt,nffc,nPts);
     velocity    = zeros(nt,nffc,ny,nz);
     twrVelocity = zeros(nt,nffc,ntwr);       
    
@@ -126,8 +125,8 @@ else
 end
 
 
-y = [0:ny-1]*dy - dy*(ny-1)/2;
-z = [0:nz-1]*dz + z1;
-zTwr = z1 - [0:ntwr-1]*dz;
+y = (0:ny-1)*dy - dy*(ny-1)/2;
+z = (0:nz-1)*dz + z1;
+zTwr = z1 - (0:ntwr-1)*dz;
 
 return;
