@@ -79,7 +79,7 @@ P_max = -sum(abs(Fexc).^2./(8*real(Zi)));
 fprintf('Maximum potential power P_max = %f\n', P_max);
 
 % Optimal proportional gain for passive control:
-KpOpt = sqrt(radiationDamping(omegaIndex)^2 + ((hydrostaticStiffness/omega) - omega*(mass + addedMass(omegaIndex)))^2)
+KpOpt = sqrt(radiationDamping(omegaIndex)^2 + ((hydrostaticStiffness/omega) - omega*(mass + addedMass(omegaIndex)))^2);
 Ki = 0;
 fprintf('Optimal proportional gain for passive control KpOpt = %f\n', KpOpt);
 
