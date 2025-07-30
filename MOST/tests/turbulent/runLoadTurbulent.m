@@ -3,7 +3,9 @@ global plotNO
 locdir = pwd;
 
 %% Run Simulation
+cd ../..
 wecSim;
+cd tests/turbulent/
 
 %% Post-Process Data
 % Body 1

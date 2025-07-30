@@ -15,7 +15,8 @@ simu.cicEndTime = 60;                               % Specify Convolution integr
 simu.gravity = 9.80665;                             % Gravity acceleration [m/s2]
 simu.b2b = 0;                                       % Flag for body2body interactions, Options: 0 (off), 1 (on)
 simu.saveWorkspace=0;                               % Flag to save .mat file for each run, Options: 0 (off), 1 (on)
-        
+simu.dtOut = 0.05;
+
 %% Wave class
 % Irregular Waves using Jonswap Spectrum
 waves = waveClass('irregular');                     % Initialize WaveClass and Specify Type
@@ -30,7 +31,7 @@ Body_data_folder = fullfile(fileparts(mfilename('fullpath')),'hydroData','Voltur
 load([Body_data_folder filesep 'Mass_Inertia_Properties.mat'])
 pltf_names=fields(Platform);
 
-body(1) = bodyClass([Body_data_folder filesep 'hydro.h5']);                                    %#ok<*SAGROW> % Initialize bodyClass (giving hydro data file as input)
+body(1) = bodyClass([Body_data_folder filesep 'VolturnUS15MW_nemoh.h5']);        %#ok<*SAGROW> % Initialize bodyClass (giving hydro data file as input)
 body(1).geometryFile = ['geometry' filesep  pltf_names{1} '.STEP'];                            % Geometry File 
 body(1).mass = Platform.(pltf_names{1}).mass;                                                  % User-Defined mass [kg]
 body(1).inertia = diag(Platform.(pltf_names{1}).I_COG);                                        % Moment of Inertia (diagonal part) [kg-m^2]
