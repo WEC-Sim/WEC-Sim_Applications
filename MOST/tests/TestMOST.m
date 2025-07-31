@@ -3,7 +3,7 @@ classdef TestMOST < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir = ''
-        hydroDataDir = '../hydroData';
+        hydroDataDir = '../hydroData/VolturnUS/';
         h5Name = 'VolturnUS15MW_nemoh.h5';
         mostDataDir = '../mostData';
         turbSimName = fullfile('turbSim','WIND_11mps.mat');
