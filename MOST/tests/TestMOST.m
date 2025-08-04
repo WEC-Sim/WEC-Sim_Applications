@@ -34,7 +34,7 @@ classdef TestMOST < matlab.unittest.TestCase
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
         function runBEMIO(testCase)
-            cd(testCase.hydroDataDir);
+            cd(fullfile(testCase.testDir, testCase.hydroDataDir));
             if isfile(testCase.h5Name)
                 fprintf('runBEMIO skipped, *.h5 already exists\n');
             else
@@ -45,7 +45,7 @@ classdef TestMOST < matlab.unittest.TestCase
         function runMOSTIO(testCase)
             % Test the pre-processing here so that it does not interfere
             % with the precise comparison of results.
-            cd(testCase.mostDataDir);
+            cd(fullfile(testCase.testDir, testCase.mostDataDir));
             mostIO
             cd(testCase.testDir)
         end
