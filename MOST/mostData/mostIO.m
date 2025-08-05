@@ -3,15 +3,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TurbSim Data
 cd turbSim
-Wind = RunTurbsim;
+Wind = RunTurbsim();
 cd ..
 
 %% Mooring Data
 cd mooring
-MooringLUTMaker;
+moor_LUT = MooringLUTMaker();
 cd ..
 
 %% Turbine Data
 cd windTurbine
-WindTurbineMaker
+WindTurbineMaker();
 cd ..

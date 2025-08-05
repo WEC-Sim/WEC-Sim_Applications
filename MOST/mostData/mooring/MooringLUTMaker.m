@@ -1,11 +1,7 @@
-%% INTRO
-clc
-clear
-close all
-%% SETTINGS
-if 1
+function moor_LUT = MooringLUTMaker()
 %% Output
 Outpufile_name='Mooring_IEA15MW_VolturnUS';
+
 %% Line
 rho_water=1025;                                % Water density [kg/m3]
 gravity=9.80665;                               % [m/s2]
@@ -29,6 +25,7 @@ Data_moor.CB=1;                                % Seabed friction coefficient
 
 Data_moor.fminsearch_options=optimset('MaxIter',150,'TolFun',1e-5,'TolX', 1e-5,'Display','none');
 Data_moor.HV_try=[1e6    2e6];                 % Horizzontal and Vertical fairlead forces at rest position (first try)
+
 %% Mooring LUT
 moor_LUT.X=-10:5:20;                     % Surge positions at which mooring loads are computed
 moor_LUT.Y=-15:5:15;                     % Sway positions at which mooring loads are computed
@@ -36,11 +33,11 @@ moor_LUT.Z=-10:2.5:10;                   % Heave positions at which mooring load
 moor_LUT.RX=deg2rad(-5:5:15);            % Roll rotations at which mooring loads are computed
 moor_LUT.RY=deg2rad(-5:5:15);            % Pitch rotations at which mooring loads are computed
 moor_LUT.RZ=deg2rad(-10:5:10);           % Yaw rotations at which mooring loads are computed
+
 %% Flag
 plot_linearized_Moor_K=1;
-end
+
 %% DATA
-if 1
 %% Nodes
 Data_moor.beta=linspace(0,360*(1-1/Data_moor.number_lines),Data_moor.number_lines);
 Data_moor.w=(linear_mass_air-pi*d^2/4*rho_water)*gravity;
@@ -48,10 +45,9 @@ Data_moor.nodes(Data_moor.nodes==-inf)=-depth;
 Data_moor.nodes=repmat(Data_moor.nodes,1,Data_moor.number_lines);
 
 for i=2:Data_moor.number_lines
-
-Data_moor.nodes(:,2*i-1:2*i)=[cosd(Data_moor.beta(i))  -sind(Data_moor.beta(i))   0;
-                              sind(Data_moor.beta(i))   cosd(Data_moor.beta(i))   0;
-                                        0                         0               1]*Data_moor.nodes(:,2*i-1:2*i);      
+    Data_moor.nodes(:,2*i-1:2*i)=[cosd(Data_moor.beta(i))  -sind(Data_moor.beta(i))   0;
+                                  sind(Data_moor.beta(i))   cosd(Data_moor.beta(i))   0;
+                                            0                         0               1]*Data_moor.nodes(:,2*i-1:2*i);      
 
 end
 
@@ -62,14 +58,18 @@ moor_LUT.FZ=moor_LUT.FX;
 moor_LUT.MX=moor_LUT.FX;
 moor_LUT.MY=moor_LUT.FX;
 moor_LUT.MZ=moor_LUT.FX;
-   
-end
+
 %% MOORING LUT
 moor_LUT = Moor_LUT(moor_LUT,Data_moor);
+
 %% MOORING K MATRIX
 [moor_K,x0,F0] = lineariseMatrix(moor_LUT,zeros(6,1),plot_linearized_Moor_K);
+
 %% SAVE
 save(Outpufile_name,'moor_LUT');
+
+end
+
 %% FUNCTIONS
 function moor_LUT = Moor_LUT(moor_LUT,Data_moor)
 
