@@ -14,8 +14,7 @@ simu.domainSize = 300;                              % Size of free surface and s
 simu.cicEndTime = 60;                               % Specify Convolution integral Time [s]
 simu.gravity = 9.80665;                             % Gravity acceleration [m/s2]
 simu.b2b = 0;                                       % Flag for body2body interactions, Options: 0 (off), 1 (on)
-simu.saveWorkspace=0;                               % Flag to save .mat file for each run, Options: 0 (off), 1 (on)
-simu.dtOut = 0.05;
+simu.dtOut = 0.1;
 
 %% Wave class
 % Irregular Waves using Jonswap Spectrum

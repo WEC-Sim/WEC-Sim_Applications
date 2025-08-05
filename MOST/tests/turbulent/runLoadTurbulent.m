@@ -45,7 +45,6 @@ save('turbulent','turbulent')
 
 %% Clear output and .slx directory
 try
-	rmdir('output','s')
 	rmdir('temp','s')
 	rmdir('slprj','s')
 catch
