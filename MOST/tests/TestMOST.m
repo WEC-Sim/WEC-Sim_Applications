@@ -3,8 +3,8 @@ classdef TestMOST < matlab.unittest.TestCase
     properties
         OriginalDefault
         testDir = ''
-        hydroDataDir = '../hydroData/VolturnUS/';
-        h5Name = 'VolturnUS15MW_nemoh.h5';
+        hydroDataDir = '../hydroData/';
+        h5Name = 'VolturnUS.h5';
         mostDataDir = '../mostData';
         turbSimName = fullfile('turbSim','WIND_11mps.mat');
         plotComparison = []  % 1 plots a comparison of new and original cases
