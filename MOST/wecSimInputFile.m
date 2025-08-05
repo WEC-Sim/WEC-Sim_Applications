@@ -27,11 +27,11 @@ waves.spectrumType = 'JS';                          % Specify Spectrum Type JS=J
 waves.direction = 0;                                % Wave Directionality [deg]
 
 %% Body class (Platform)
-Body_data_folder = fullfile(fileparts(mfilename('fullpath')),'hydroData','VolturnUS');
+Body_data_folder = fullfile(fileparts(mfilename('fullpath')),'hydroData');
 load([Body_data_folder filesep 'Mass_Inertia_Properties.mat'])
 pltf_names=fields(Platform);
 
-body(1) = bodyClass([Body_data_folder filesep 'VolturnUS15MW_nemoh.h5']);        %#ok<*SAGROW> % Initialize bodyClass (giving hydro data file as input)
+body(1) = bodyClass([Body_data_folder filesep 'VolturnUS.h5']);        %#ok<*SAGROW> % Initialize bodyClass (giving hydro data file as input)
 body(1).geometryFile = ['geometry' filesep  pltf_names{1} '.STEP'];                            % Geometry File 
 body(1).mass = Platform.(pltf_names{1}).mass;                                                  % User-Defined mass [kg]
 body(1).inertia = diag(Platform.(pltf_names{1}).I_COG);                                        % Moment of Inertia (diagonal part) [kg-m^2]
