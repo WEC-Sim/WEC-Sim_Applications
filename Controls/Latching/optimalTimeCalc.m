@@ -1,6 +1,6 @@
 % This script identifies the dynamics of the float in the respective wave 
-% conditions and determines the optimal proportional gain value for a 
-% passive controller (for regular waves)
+% conditions and determines the optimal proportional gain and latching time
+% value for a regular wave
 
 close all; clear all; clc;
 
