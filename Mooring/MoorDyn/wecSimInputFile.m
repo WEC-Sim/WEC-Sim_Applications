@@ -6,7 +6,6 @@ simu.explorer = 'off';
 simu.rampTime = 40;
 simu.endTime = 400;                       
 simu.dt = 0.01;
-simu.cicDt = 0.05;
 
 %% Wave Information
 % User-Defined Time-Series
