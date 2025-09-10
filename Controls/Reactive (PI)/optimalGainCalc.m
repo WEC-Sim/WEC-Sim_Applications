@@ -4,7 +4,6 @@
 close all; clear all; clc;
 
 dof = 3;            % Caluclate for heave motion
-
 % Inputs (from wecSimInputFile)
 simu = simulationClass();
 body(1) = bodyClass('../../_Common_Input_Files/Sphere/hydroData/sphere.h5');
@@ -49,10 +48,9 @@ Zi = Gi./(1j*hydro.simulation_parameters.w_extended');
 Mag = 20*log10(abs(Zi));
 Phase = (angle(Zi))*(180/pi);
 
-% Determine natural frequency based on the phase of the impedance
-[~,closestIndNat] = min(abs(imag(Zi)));
-natFreq = hydro.simulation_parameters.w_extended(closestIndNat);
-T0 = (2*pi)/natFreq;
+% Determine resonant frequency based on the phase of the impedance
+resonantFreq = interp1(Phase, hydro.simulation_parameters.w_extended, 0, 'spline','extrap');
+resonantPeriod = (2*pi)/resonantFreq;
 
 % Create bode plot for impedance
 figure()
@@ -61,18 +59,18 @@ semilogx((hydro.simulation_parameters.w_extended)/(2*pi),Mag)
 xlabel('freq (hz)','interpreter','latex')
 ylabel('mag (dB)','interpreter','latex')
 grid on
-xline(natFreq/(2*pi))
+xline(resonantFreq/(2*pi))
 xline(1/T,'--')
-legend('','Natural Frequency','Wave Frequency','Location','southwest','interpreter','latex')
+legend('','resonant Frequency','Wave Frequency','Location','southwest','interpreter','latex')
 
 subplot(2,1,2)
 semilogx((hydro.simulation_parameters.w_extended)/(2*pi),Phase)
 xlabel('freq (hz)','interpreter','latex')
 ylabel('phase (deg)','interpreter','latex')
 grid on
-xline(natFreq/(2*pi))
+xline(resonantFreq/(2*pi))
 xline(1/T,'--')
-legend('','Natural Frequency','Wave Frequency','Location','northwest','interpreter','latex')
+legend('','resonant Frequency','Wave Frequency','Location','northwest','interpreter','latex')
 
 % Calculate the maximum potential power
 P_max = -sum(abs(Fexc).^2./(8*real(Zi)));

@@ -1,15 +1,14 @@
 % This script identifies the dynamics of the float in the respective wave 
 % conditions and determines the optimal proportional gain value for a 
 % passive controller (for regular waves)
-
 close all; clear all; clc;
 
+dof = 3;            % Caluclate for heave motion
 % Inputs (from wecSimInputFile)
 simu = simulationClass();
 body(1) = bodyClass('../../_Common_Input_Files/Sphere/hydroData/sphere.h5');
 waves.height = 2.5;                          % Wave Height [m]
 waves.period = 9.6664;                       % Wave Period [s]
-dof = 3;        % changing this value reguires changing the device mass
 
 % Load hydrodynamic data for float from BEM
 hydro = readBEMIOH5(body.h5File{1}, 1, body.meanDrift);
@@ -49,10 +48,9 @@ Zi = Gi./(1j*hydro.simulation_parameters.w_extended');
 Mag = 20*log10(abs(Zi));
 Phase = (angle(Zi))*(180/pi);
 
-% Determine natural frequency based on the phase of the impedance
-[~,closestIndNat] = min(abs(imag(Zi)));
-natFreq = hydro.simulation_parameters.w_extended(closestIndNat);
-natT = (2*pi)/natFreq;
+% Determine resonant frequency based on the phase of the impedance
+resonantFreq = interp1(Phase, hydro.simulation_parameters.w_extended, 0, 'spline','extrap');
+resonantPeriod = (2*pi)/resonantFreq;
 
 % Create bode plot for impedance
 figure()
@@ -61,21 +59,21 @@ semilogx((hydro.simulation_parameters.w_extended)/(2*pi),Mag)
 xlabel('freq (hz)')
 ylabel('mag (dB)')
 grid on
-xline(natFreq/(2*pi))
+xline(resonantFreq/(2*pi))
 xline(1/T,'--')
-legend('','Natural Frequency','Wave Frequency','Location','southwest')
+legend('','resonant Frequency','Wave Frequency','Location','southwest')
 
 subplot(2,1,2)
 semilogx((hydro.simulation_parameters.w_extended)/(2*pi),Phase)
 xlabel('freq (hz)')
 ylabel('phase (deg)')
 grid on
-xline(natFreq/(2*pi))
+xline(resonantFreq/(2*pi))
 xline(1/T,'--')
-legend('','Natural Frequency','Wave Frequency','Location','northwest')
+legend('','resonant Frequency','Wave Frequency','Location','northwest')
 
 % Determine optimal latching time
-optDeclutchTime = 0.5*(natT - T)
+optDeclutchTime = 0.5*(resonantPeriod - T)
 KpOpt = sqrt(radiationDamping(omegaIndex)^2 + ((hydrostaticStiffness/omega) - omega*(mass + addedMass(omegaIndex)))^2)
 
 % Calculate the maximum potential power
