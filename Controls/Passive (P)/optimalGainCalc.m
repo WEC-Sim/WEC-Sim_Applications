@@ -8,7 +8,7 @@ dof = 3;            % Caluclate for heave motion
 simu = simulationClass();
 body(1) = bodyClass('../../_Common_Input_Files/Sphere/hydroData/sphere.h5');
 waves.height = 2.5;
-waves.period = 4.5; % One of periods from BEM
+waves.period = 9.6664; % One of periods from BEM
 
 % Load hydrodynamic data for float from BEM
 hydro = readBEMIOH5(body.h5File{1}, 1, body.meanDrift);
