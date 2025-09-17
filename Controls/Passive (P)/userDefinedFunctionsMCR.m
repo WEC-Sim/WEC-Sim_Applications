@@ -17,7 +17,7 @@ mcr.meanForce(imcr) = mean(controllersOutput.force(startInd:endInd,3));
 mcr.maxPower(imcr) = max(controllersOutput.power(startInd:endInd,3));
 mcr.maxForce(imcr) = max(controllersOutput.force(startInd:endInd,3));
 
-if imcr == 9
+if imcr == length(mcr.cases)
     figure()
     plot(mcr.cases,mcr.meanPower)
     title('Mean Power vs. Proportional Gain')

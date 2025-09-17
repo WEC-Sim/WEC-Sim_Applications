@@ -36,6 +36,7 @@ Fexc = ampSpect.*Fe_interp;
 mass = simu.rho * hydro.properties.volume;
 addedMass = squeeze(hydro.hydro_coeffs.added_mass.all(dof, dof, :)) * simu.rho;
 addedMass = interp1(hydro.simulation_parameters.w, addedMass, hydro.simulation_parameters.w_extended, 'spline', 'extrap')';
+addedMass = squeeze(hydro.hydro_coeffs.added_mass.inf_freq(dof, dof, :)) * simu.rho;
 
 radiationDamping = squeeze(hydro.hydro_coeffs.radiation_damping.all(dof,dof,:)).*squeeze(hydro.simulation_parameters.w')*simu.rho;
 radiationDamping = interp1(hydro.simulation_parameters.w, radiationDamping, hydro.simulation_parameters.w_extended, 'spline', 'extrap')';
@@ -77,7 +78,7 @@ P_max = -sum(abs(Fexc).^2./(8*real(Zi)));
 fprintf('Maximum potential power P_max = %f\n', P_max);
 
 % Optimal proportional gain for passive control:
-KpOpt = sqrt(radiationDamping(omegaIndex)^2 + ((hydrostaticStiffness/omega) - omega*(mass + addedMass(omegaIndex)))^2);
+KpOpt = sqrt(radiationDamping(omegaIndex)^2 + ((hydrostaticStiffness/omega) - omega*(mass + addedMass))^2);
 Ki = 0;
 fprintf('Optimal proportional gain for passive control KpOpt = %f\n', KpOpt);
 

@@ -61,7 +61,7 @@ ylabel('mag (dB)','interpreter','latex')
 grid on
 xline(resonantFreq/(2*pi))
 xline(1/T,'--')
-legend('','resonant Frequency','Wave Frequency','Location','southwest','interpreter','latex')
+legend('','Resonant Frequency','Wave Frequency','Location','southwest','interpreter','latex')
 
 subplot(2,1,2)
 semilogx((hydro.simulation_parameters.w_extended)/(2*pi),Phase)
@@ -70,7 +70,7 @@ ylabel('phase (deg)','interpreter','latex')
 grid on
 xline(resonantFreq/(2*pi))
 xline(1/T,'--')
-legend('','resonant Frequency','Wave Frequency','Location','northwest','interpreter','latex')
+legend('','Resonant Frequency','Wave Frequency','Location','northwest','interpreter','latex')
 
 % Calculate the maximum potential power
 P_max = -sum(abs(Fexc).^2./(8*real(Zi)));

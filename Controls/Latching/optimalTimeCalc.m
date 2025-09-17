@@ -62,7 +62,7 @@ ylabel('mag (dB)')
 grid on
 xline(resonantFreq/(2*pi))
 xline(1/T,'--')
-legend('','resonant Frequency','Wave Frequency','Location','southwest')
+legend('','Resonant Frequency','Wave Frequency','Location','southwest')
 
 subplot(2,1,2)
 semilogx((hydro.simulation_parameters.w_extended)/(2*pi),Phase)
@@ -71,7 +71,7 @@ ylabel('phase (deg)')
 grid on
 xline(resonantFreq/(2*pi))
 xline(1/T,'--')
-legend('','resonant Frequency','Wave Frequency','Location','northwest')
+legend('','Resonant Frequency','Wave Frequency','Location','northwest')
 
 % Determine optimal latching time
 optLatchTime = 0.5*(T - resonantPeriod)
