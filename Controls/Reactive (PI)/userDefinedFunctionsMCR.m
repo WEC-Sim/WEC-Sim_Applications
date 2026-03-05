@@ -17,7 +17,7 @@ mcr.meanForce(imcr) = mean(controllersOutput.force(startInd:endInd,3));
 mcr.maxPower(imcr) = max(controllersOutput.power(startInd:endInd,3));
 mcr.maxForce(imcr) = max(controllersOutput.force(startInd:endInd,3));
 
-if imcr == length(mcr.cases)
+if imcr == 81
 
     % Kp and Ki gains
     kps = unique(mcr.cases(:,1));
