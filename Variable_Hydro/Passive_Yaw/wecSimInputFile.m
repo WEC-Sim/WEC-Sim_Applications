@@ -2,7 +2,7 @@
 simu = simulationClass();                       % Initialize Simulation Class
 simu.simMechanicsFile = 'OSWEC.slx';            % Specify Simulink Model File
 simu.mode = 'normal';                           % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer = 'off';                          % Turn SimMechanics Explorer (on/off)
+simu.explorer = 'on';                           % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                             % Simulation Start Time [s]
 simu.rampTime = 100;                            % Wave Ramp Time [s]
 simu.endTime = 600;                             % Simulation End Time [s]        
@@ -11,7 +11,7 @@ simu.dt = 0.01;                                 % Simulation Time-Step [s]
 simu.cicEndTime = 40;                           % Specify CI Time [s]
 
 %% Wave Information
-if exist('waveFlag','var') && isequal(waveFlag, 'irregular')
+if exist('waveFlag','var') && isequal(waveFlag, "irr")
     % Irregular Waves
     waves = waveClass('irregular');                 % Initialize Wave Class and Specify Type                                 
     waves.height = 2.5;                             % Wave Height [m]

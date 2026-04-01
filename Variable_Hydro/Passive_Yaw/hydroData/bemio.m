@@ -39,7 +39,7 @@ theta = wrapTo180(theta);
 nTheta0 = length(theta);
 thetaInds = 1:nTheta0;
 
-newDirs = -40:0.05:40;
+newDirs = -5:0.01:20;
 newDirs = setdiff(newDirs,theta); % remove values repeated in theta
 
 % Append the interpolated direction and hydro structue to theta and

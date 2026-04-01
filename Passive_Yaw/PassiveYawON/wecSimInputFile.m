@@ -11,12 +11,23 @@ simu.dt = 0.01;                         % Simulation Time-Step [s]
 simu.cicEndTime = 40;                   % Specify CI Time [s]
 
 %% Wave Information
-% % Regular Waves 
-waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
-waves.height = 2.5;                     % Wave Height [m]
-waves.period = 8;                       % Wave Period [s]
-waves.direction = 10;                   % Wave Directionality [deg]
-waves.spread = 1;                       % Wave Directional Spreading [%}
+if isequal(waveFlag, "reg")
+    % Regular Waves 
+    waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
+    waves.height = 2.5;                     % Wave Height [m]
+    waves.period = 8;                       % Wave Period [s]
+    waves.direction = 10;                   % Wave Directionality [deg]
+    waves.spread = 1;                       % Wave Directional Spreading [%}
+elseif isequal(waveFlag, "irr")
+    % Irregular Waves
+    waves = waveClass('irregular');                 % Initialize Wave Class and Specify Type
+    waves.height = 2.5;                             % Wave Height [m]
+    waves.period = 8;                               % Wave Period [s]
+    waves.direction = 10;                           % Wave Directionality [deg]
+    waves.spread = 1;                               % Wave Directional Spreading [%}
+    waves.spectrumType = 'PM';                      % Wave spectrum type
+    waves.phaseSeed = 1;                            % Specify phase so repeatable
+end
 
 %% Body Data
 % Flap
@@ -25,7 +36,7 @@ body(1).geometryFile = '../../_Common_Input_Files/OSWEC/geometry/flap.stl';  % G
 body(1).mass = 12700;                           % User-Defined mass [kg]
 body(1).inertia = [1.85e6 1.85e6 1.85e6];       % Moment of Inertia [kg-m^2]
 body(1).yaw.option = 1;                         % Turn passive yaw ON
-body(1).yaw.threshold = 0.01;                   % Set passive yaw threshold
+body(1).yaw.threshold = dTheta;                   % Set passive yaw threshold
 
 % Base
 body(2) = bodyClass('../../_Common_Input_Files/OSWEC/hydroData/oswec.h5');   % Initialize bodyClass for Base
@@ -33,7 +44,7 @@ body(2).geometryFile = '../../_Common_Input_Files/OSWEC/geometry/base.stl';  % G
 body(2).mass = 999;                             % Placeholder mass for fixed body
 body(2).inertia = [999 999 999];                % Placeholder inertia for fixed body
 body(2).yaw.option = 1;                         % Turn passive yaw ON
-body(2).yaw.threshold = 0.01;                   % Set passive yaw threshold
+body(2).yaw.threshold = dTheta;                   % Set passive yaw threshold
 
 %% PTO and Constraint Parameters
 % Fixed
