@@ -79,6 +79,9 @@ include.json
 *.p2f
 *.pot
 
+# Python
+**/__pycache__/
+
 # Applications
 **/mooring/*.out
 !**/mooring/lines.txt
