@@ -21,7 +21,7 @@ def ceto(depth, resolution, output_dir, output_file):
     ----------
     depth: float
         depth of the cylinder center (positive up) [m]
-    resolution: 3x1 tuple
+    resolution: 3x1 list-like
         Number of panels in the cylinder nr, ntheta, nz directions [-,-,-]
     output_dir: string
         Path to the directory where the results and hydrostatic information are saved
@@ -40,8 +40,10 @@ def ceto(depth, resolution, output_dir, output_file):
         length=5,
         radius=12.5,
         center=cg,
-        resolution=resolution,
+        resolution=tuple(resolution),
     )
+    cpt.io.mesh_writers.write_GDF(output_file + ".gdf", mesh.vertices, mesh.faces)
+
     body = cpt.FloatingBody(
         mesh=mesh,
         dofs=cpt.rigid_body_dofs(rotation_center=cg),
@@ -51,7 +53,8 @@ def ceto(depth, resolution, output_dir, output_file):
     body.inertia_matrix = body.compute_rigid_body_inertia()
     body.hydrostatic_stiffness = body.immersed_part().compute_hydrostatic_stiffness()
 
-    # body.show()  # Uncomment to display the mesh in 3D for verification
+    body.show()  # Uncomment to display the mesh in 3D for verification
+    return 0
 
     test_matrix = xr.Dataset(
         coords={
@@ -81,5 +84,4 @@ def ceto(depth, resolution, output_dir, output_file):
     )
 
     # Save dataset to .nc
-    cpt.export_dataset(os.path.join(output_dir, output_file), dataset)
-
+    cpt.export_dataset(os.path.join(output_dir, output_file + ".nc"), dataset)
