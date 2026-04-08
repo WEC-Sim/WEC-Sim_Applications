@@ -58,7 +58,7 @@ elseif largeXY == 1
     body(1).largeXYDisplacement.option = 1;
 else
     % Sphere - large xy option
-    body(1) = bodyClass('hydroData/h5s_phaseShift/sphere0_0000.h5');
+    body(1) = bodyClass('hydroData/h5s_phaseShift/sphere0_0.h5');
     body(1).geometryFile = 'geometry/sphere.stl';        % Location of Geomtry File
     body(1).mass = 'equilibrium';                           % Body Mass
     body(1).inertia = [20907301 21306090.66 37085481.11];   % Moment of Inertia [kg*m^2]     

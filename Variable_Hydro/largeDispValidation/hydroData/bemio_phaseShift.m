@@ -105,7 +105,9 @@ xlim([0, 4])
 xlabel('Frequency (rad/s)')
 ylabel('Normalized excitation magnitude ()')
 legend('BEM: x = 12.5 m', 'Phase shifted: x = 12.5 m')
-exportgraphics(gcf, 'excMag.pdf', 'ContentType', 'vector')
+ax = gca;
+ax.FontSize = 12;
+% exportgraphics(gcf, 'excMag.pdf', 'ContentType', 'vector')
 
 figure()
 plot(hydro125.w, hydro125.ex_ph(3,:),'k-','Marker','x','MarkerSize',8)
@@ -115,4 +117,6 @@ xlim([0, 4])
 xlabel('Frequency (rad/s)')
 ylabel('Normalized excitation phase ()')
 legend('BEM: x = 12.5 m', 'Phase shifted: x = 12.5 m')
-exportgraphics(gcf, 'excPhase.pdf', 'ContentType', 'vector')
+ax = gca;
+ax.FontSize = 12;
+% exportgraphics(gcf, 'excPhase.pdf', 'ContentType', 'vector')

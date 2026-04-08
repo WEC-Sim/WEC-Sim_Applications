@@ -54,8 +54,10 @@ plot(varHydro_02.output.bodies(1).time, varHydro_02.output.bodies(1).position(:,
 plot(varHydro_0025.output.bodies(1).time, varHydro_0025.output.bodies(1).position(:,1),'k--','Marker','^')
 xlabel('time (s)')
 ylabel('surge (m)')
-legend('Large XY', 'variable hydro (\Deltax = 0.1 m)', 'variable hydro (\Deltax = 0.02 m)', 'variable hydro (\Deltax = 0.0025 m)')
+legend('Large XY', 'variable hydro (\Deltax = 0.1 m)', 'variable hydro (\Deltax = 0.02 m)', 'variable hydro (\Deltax = 0.0025 m)','Location','southeast')
 xlim([395, 400])
+ax = gca;
+ax.FontSize = 12;
 % exportgraphics(gcf, 'compareSurge.pdf', 'ContentType', 'vector')
 
 figure()
@@ -70,25 +72,34 @@ xlabel('time (s)')
 ylabel('heave (m)')
 legend('Large XY', 'variable hydro (\Deltax = 0.1 m)', 'variable hydro (\Deltax = 0.02 m)', 'variable hydro (\Deltax = 0.0025 m)')
 xlim([395, 400])
+ax = gca;
+ax.FontSize = 12;
 % exportgraphics(gcf, 'compareHeave.pdf', 'ContentType', 'vector')
 
 %% compare elapsed time
 
-cases = {'largeXY','varHydro_0p1','varHydro_0p02','varHydro_0p0025'};
+cases = {'large XY','variable hydro (\Deltax = 0.1 m)','variable hydro (\Deltax = 0.02 m)','variable hydro (\Deltax = 0.0025 m)'};
 S = {largeXY, varHydro_1, varHydro_02, varHydro_0025};
 
 tSec = cellfun(@(x) double(x.tElapsed), S(:));
+
+% Format as hh:mm:ss (duration)
+tHMS = seconds(tSec);
+tHMS.Format = 'hh:mm:ss';
+
+% Also keep minutes if you want
 tMin = tSec/60;
 
-% Table
-T = table(string(cases(:)), tSec, tMin, ...
-    'VariableNames', {'Case','tElapsed_s','tElapsed_min'});
+T = table(string(cases(:)), tSec, tMin, tHMS, ...
+    'VariableNames', {'Case','tElapsed_s','tElapsed_min','tElapsed_hms'});
 disp(T)
 
-% Plot
+% Plot (minutes)
 figure
-bar(tMin)
+bar(tMin,'k')
 set(gca,'XTick',1:numel(cases), 'XTickLabel',cases, 'XTickLabelRotation',30)
-ylabel('tElapsed (min)')
-title('tElapsed by case')
+ylabel('Computation time (min)')
 grid on
+ax = gca;
+ax.FontSize = 12;
+% exportgraphics(gcf, 'verificationCompTime.pdf', 'ContentType', 'vector')
