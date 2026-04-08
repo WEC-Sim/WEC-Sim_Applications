@@ -42,7 +42,8 @@ def ceto(depth, resolution, output_dir, output_file):
         center=cg,
         resolution=tuple(resolution),
     )
-    cpt.io.mesh_writers.write_GDF(output_file + ".gdf", mesh.vertices, mesh.faces)
+    mesh_file = os.join(output_dir, output_file + ".gdf")
+    cpt.io.mesh_writers.write_GDF(mesh_file, mesh.vertices, mesh.faces)
 
     body = cpt.FloatingBody(
         mesh=mesh,
@@ -53,12 +54,12 @@ def ceto(depth, resolution, output_dir, output_file):
     body.inertia_matrix = body.compute_rigid_body_inertia()
     body.hydrostatic_stiffness = body.immersed_part().compute_hydrostatic_stiffness()
 
-    body.show()  # Uncomment to display the mesh in 3D for verification
-    return 0
+    # body.show()  # Uncomment to display the mesh in 3D for verification
+    # return 0
 
     test_matrix = xr.Dataset(
         coords={
-            "omega": np.linspace(0.5, 20.0, 40),
+            "omega": np.linspace(0.25, 7.0, 28),
             "radiating_dof": list(body.dofs),
             "wave_direction": [0],
             "water_depth": [30.0],
@@ -67,7 +68,7 @@ def ceto(depth, resolution, output_dir, output_file):
     )
 
     solver = cpt.BEMSolver()
-    dataset = solver.fill_dataset(test_matrix, body.immersed_part(), n_jobs=4)
+    dataset = solver.fill_dataset(test_matrix, body.immersed_part(), n_jobs=16)
 
     # add extras to the dataset
     dataset["center_of_mass"] = (
@@ -84,4 +85,5 @@ def ceto(depth, resolution, output_dir, output_file):
     )
 
     # Save dataset to .nc
-    cpt.export_dataset(os.path.join(output_dir, output_file + ".nc"), dataset)
+    output_file = os.path.join(output_dir, output_file + ".nc")
+    cpt.export_dataset(output_file, dataset)
