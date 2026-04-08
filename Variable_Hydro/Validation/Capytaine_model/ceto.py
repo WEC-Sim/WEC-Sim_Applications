@@ -21,7 +21,7 @@ def ceto(depth, resolution, output_dir, output_file):
     ----------
     depth: float
         depth of the cylinder center (positive up) [m]
-    resolution: 3x1 tuple
+    resolution: 3x1 list-like
         Number of panels in the cylinder nr, ntheta, nz directions [-,-,-]
     output_dir: string
         Path to the directory where the results and hydrostatic information are saved
@@ -40,8 +40,11 @@ def ceto(depth, resolution, output_dir, output_file):
         length=5,
         radius=12.5,
         center=cg,
-        resolution=resolution,
+        resolution=tuple(resolution),
     )
+    mesh_file = os.join(output_dir, output_file + ".gdf")
+    cpt.io.mesh_writers.write_GDF(mesh_file, mesh.vertices, mesh.faces)
+
     body = cpt.FloatingBody(
         mesh=mesh,
         dofs=cpt.rigid_body_dofs(rotation_center=cg),
@@ -52,10 +55,11 @@ def ceto(depth, resolution, output_dir, output_file):
     body.hydrostatic_stiffness = body.immersed_part().compute_hydrostatic_stiffness()
 
     # body.show()  # Uncomment to display the mesh in 3D for verification
+    # return 0
 
     test_matrix = xr.Dataset(
         coords={
-            "omega": np.linspace(0.5, 20.0, 40),
+            "omega": np.linspace(0.25, 7.0, 28),
             "radiating_dof": list(body.dofs),
             "wave_direction": [0],
             "water_depth": [30.0],
@@ -64,7 +68,7 @@ def ceto(depth, resolution, output_dir, output_file):
     )
 
     solver = cpt.BEMSolver()
-    dataset = solver.fill_dataset(test_matrix, body.immersed_part(), n_jobs=4)
+    dataset = solver.fill_dataset(test_matrix, body.immersed_part(), n_jobs=16)
 
     # add extras to the dataset
     dataset["center_of_mass"] = (
@@ -81,5 +85,5 @@ def ceto(depth, resolution, output_dir, output_file):
     )
 
     # Save dataset to .nc
-    cpt.export_dataset(os.path.join(output_dir, output_file), dataset)
-
+    output_file = os.path.join(output_dir, output_file + ".nc")
+    cpt.export_dataset(output_file, dataset)

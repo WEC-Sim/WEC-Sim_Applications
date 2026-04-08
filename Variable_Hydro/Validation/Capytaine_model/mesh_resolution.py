@@ -1,15 +1,27 @@
 import os as os
 import ceto as ceto
 import xarray as xr
+import numpy as np
 
 input_data_dir = os.path.dirname(".")
 
 depths = [-9]  # nominal depth about which the CETO will oscillate
-dataset = [xr.Dataset(), xr.Dataset(), xr.Dataset()]
+# resolutions = [(5, 16, 3), (10, 32, 5), (20, 64, 10), (40, 128, 20)]
+nCases = 5
+resolutions = np.ones([nCases, 3], int)
+resolutions[0][:] = [10, 32, 3]
+for i in np.arange(1, nCases):
+    resolutions[i][:] = resolutions[i - 1][:] * 1.5
+
+resolutions[4][:] = resolutions[3][:] * 1.5 * 1.3
+
+nPanels = (
+    2 * resolutions[:, 0] * resolutions[:, 1] + resolutions[:, 1] * resolutions[:, 2]
+)  # 2*nr*ntheta + ntheta*nz;
+
 for depth in depths:
-    for i, resolution in enumerate(
-        [(5, 16, 3), (10, 32, 5), (20, 64, 10), (40, 128, 20)]
-    ):
+    for i in np.arange(0, nCases):
+        resolution = resolutions[i, :]
         output_dir = os.path.join(input_data_dir, "mesh_resolution")
         os.makedirs(output_dir, exist_ok=True)
 
@@ -19,7 +31,7 @@ for depth in depths:
             + str(resolution[1])
             + "_"
             + str(resolution[2])
-            + "_output.nc"
+            + "_output"
         )
         print("Running ", resolution)
-        dataset[i] = ceto.ceto(depth, resolution, output_dir, output_file)
+        dataset = ceto.ceto(depth, resolution, output_dir, output_file)
