@@ -81,11 +81,5 @@ def ceto(depth, resolution, output_dir, output_file):
     )
 
     # Save dataset to .nc
-    dataset["radiating_dof"] = dataset["radiating_dof"].astype(str)
-    dataset["influenced_dof"] = dataset["influenced_dof"].astype(str)
-    # cpt.io.xarray.separate_complex_values(dataset).to_netcdf(
-    #     os.path.join(output_dir, output_file)
-    # )
-
     cpt.export_dataset(os.path.join(output_dir, output_file), dataset)
-    # export_hydrostatics(output_dir, body)
+
