@@ -43,10 +43,10 @@ def ceto(depth, resolution, output_dir, output_file):
         resolution=tuple(resolution),
     )
 
-    mesh = mesh.translate_z(cg[2])
+    mesh = mesh.translate_z(-cg[2])
     mesh_file = os.path.join(output_dir, output_file + ".gdf")
     cpt.io.mesh_writers.write_GDF(mesh_file, mesh.vertices, mesh.faces)
-    mesh = mesh.translate_z(-cg[2])
+    mesh = mesh.translate_z(cg[2])
 
     body = cpt.FloatingBody(
         mesh=mesh,
