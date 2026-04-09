@@ -62,7 +62,7 @@ def ceto(depth, resolution, output_dir, output_file):
 
     test_matrix = xr.Dataset(
         coords={
-            "omega": np.linspace(0.25, 7.0, 28),
+            "omega": np.linspace(0.035, 7.0, 200),
             "radiating_dof": list(body.dofs),
             "wave_direction": [0],
             "water_depth": [30.0],
