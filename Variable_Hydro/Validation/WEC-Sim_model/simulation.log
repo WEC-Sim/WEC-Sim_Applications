@@ -1,0 +1,49 @@
+WEC-Sim: An open-source code for simulating wave energy converters
+Version: 7.0.0
+
+Initializing the Simulation Class...
+	Case Dir: C:\Users\megande\Documents\GitHub\WEC-Sim\examples\Variable_Hydro 
+wecSimMCR Case 4
+
+WEC-Sim Pre-processing ...   
+	Infinite water depth specified in BEM and "waves.waterDepth" not specified in input file.
+Set water depth to 200m for visualization.
+Elapsed time is 0.399115 seconds.
+
+WEC-Sim Simulation Settings:
+	Start Time                     (sec) = 0
+	End Time                       (sec) = 400
+	Time Step Size                 (sec) = 0.1
+	Ramp Function Time             (sec) = 100
+	 Number of Time Steps     = 4000 
+
+Wave Environment: 
+	Wave Type                            = No Wave (Convolution Integral Calculation)
+
+List of Body:
+ 
+Number of Hydro Bodies = 1 
+
+	***** Body Number 1, Name: float *****
+	Body CG                          (m) = [0,0,-0.72]
+	Body Mass                       (kg) = 725833 
+	Body Moments of Inertia       (kgm2) = [2.09073E+07,2.13061E+07,3.70855E+07]
+	Body Products of Inertia      (kgm2) = [0,0,0]
+
+List of PTO(s): Number of PTOs = 1 
+
+	***** PTO Name: PTO1 *****
+	PTO Stiffness           (N/m;Nm/rad) = 0
+	PTO Damping           (Ns/m;Nsm/rad) = 1.2E+06
+
+List of Constraint(s): Number of Constraints = 1 
+
+	***** Constraint Name: Constraint1 *****
+
+Elapsed time is 0.083461 seconds.
+
+Simulating the WEC device defined in the SimMechanics model C:\Users\megande\Documents\GitHub\WEC-Sim\examples\Variable_Hydro\variable_hydro.slx...   
+Elapsed time is 4.635092 seconds.
+
+Post-processing and saving...   
+Elapsed time is 0.106840 seconds.
