@@ -6,7 +6,7 @@ import numpy as np
 input_data_dir = os.path.dirname(".")
 
 depths = [-9]  # nominal depth about which the CETO will oscillate
-# resolutions = [(5, 16, 3), (10, 32, 5), (20, 64, 10), (40, 128, 20)]
+
 nCases = 5
 resolutions = np.ones([nCases, 3], int)
 resolutions[0][:] = [10, 32, 3]
