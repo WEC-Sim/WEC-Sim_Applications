@@ -1,0 +1,23 @@
+# Create cylindrical mesh
+
+# surface_area = 1375 m^2
+# n_elements_approx = 1000
+# approx_size = ...
+# 736: size = 2.74
+# 1632: size = 1.82
+# 3600: size = 1.2
+# 8100: size = 0.81
+# 30450: size = 0.402
+
+reset
+
+create cylinder height 5 radius 25
+surface all size 0.402
+mesh surface all
+
+block 1 add surface all
+block 1 name "Cylinder"
+
+export gdf "C:/Users/jtgrasb/Downloads/cylinder_30450.gdf" isx 1 isy 1 overwrite
+
+
