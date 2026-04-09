@@ -12,12 +12,26 @@
 reset
 
 create cylinder height 5 radius 25
-surface all size 0.402
+
+webcut volume all with plane xplane offset 0
+webcut volume all with plane yplane offset 0
+delete volume 2 3 4
+
+separate surface with x_coord 0
+delete surface with x_coord 0
+
+separate surface with y_coord 0
+delete surface with y_coord 0
+
+# Mesh the remaining surfaces (curved quarter-cylinder + end caps, if you kept them)
+surface all size 2.74
 mesh surface all
 
 block 1 add surface all
 block 1 name "Cylinder"
 
-export gdf "C:/Users/jtgrasb/Downloads/cylinder_30450.gdf" isx 1 isy 1 overwrite
+export gdf "C:/Users/jtgrasb/Downloads/cylinder_736.gdf" isx 1 isy 1 overwrite
+
+
 
 
