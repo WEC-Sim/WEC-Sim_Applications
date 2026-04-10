@@ -10,6 +10,7 @@ depths = cellfun(@str2num, depth_str);
 depth_str = depth_str(i_sort);
 
 % Read all .nc files
+hydroData = cell(1, length(depths));
 for i = 1:length(depth_str)
     file = "depth_" + depth_str(i) + ".nc";
     hydro = readCAPYTAINE(struct(), file);
@@ -23,5 +24,5 @@ end
 plotBEMIO(hydroData{1:2:end});
 for i = 1:6
     figure(i)
-    legend(string(depths)');
+    legend(string(depths(1:2:end))');
 end
