@@ -36,17 +36,21 @@ def ceto(depth, resolution, output_dir, output_file):
     """
     cg = (0, 0, depth)
 
-    mesh = cpt.mesh_vertical_cylinder(
-        length=5,
-        radius=12.5,
-        center=cg,
-        resolution=tuple(resolution),
-    )
+    # for capytaine meshing
+    # mesh = cpt.mesh_vertical_cylinder(
+    #     length=5,
+    #     radius=12.5,
+    #     center=cg,
+    #     resolution=tuple(resolution),
+    # )
+    # mesh = mesh.translate_z(-cg[2])
+    # mesh_file = os.path.join(output_dir, output_file + ".gdf")
+    # cpt.io.mesh_writers.write_GDF(mesh_file, mesh.vertices, mesh.faces)
+    # mesh = mesh.translate_z(cg[2])
 
-    mesh = mesh.translate_z(-cg[2])
-    mesh_file = os.path.join(output_dir, output_file + ".gdf")
-    cpt.io.mesh_writers.write_GDF(mesh_file, mesh.vertices, mesh.faces)
-    mesh = mesh.translate_z(cg[2])
+    # to read in cubit meshes (use resolution as the file path instead of nr, ntheta, nz)
+    mesh = cpt.load_mesh(resolution)
+    mesh.translate_z(depth)
 
     body = cpt.FloatingBody(
         mesh=mesh,
@@ -62,7 +66,7 @@ def ceto(depth, resolution, output_dir, output_file):
 
     test_matrix = xr.Dataset(
         coords={
-            "omega": np.linspace(0.035, 7.0, 200),
+            "omega": np.linspace(0.015, 6.0, 400),
             "radiating_dof": list(body.dofs),
             "wave_direction": [0],
             "water_depth": [30.0],
