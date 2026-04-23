@@ -1,5 +1,8 @@
 %Example of user input MATLAB file for post processing
 
+%heave position and heave forces of body 
+
+
 % %Plot waves
 % waves.plotElevation(simu.rampTime);
 % try 
