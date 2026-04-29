@@ -5,7 +5,7 @@ from capytaine.io.legacy import export_hydrostatics
 import os as os
 
 
-def ceto(depth, resolution, output_dir, output_file):
+def ceto(depth, resolution, output_dir, output_file, n_jobs=16):
     """
     Capytaine simulations of the Carnegie Energy CETO device.
 
@@ -27,6 +27,8 @@ def ceto(depth, resolution, output_dir, output_file):
         Path to the directory where the results and hydrostatic information are saved
     output_file: string
         Name of the output file in directory where the results and hydrostatic information are saved
+    n_jobs: int
+        Number of parallel threads to use
 
     Returns
     -------
@@ -75,7 +77,7 @@ def ceto(depth, resolution, output_dir, output_file):
     )
 
     solver = cpt.BEMSolver()
-    dataset = solver.fill_dataset(test_matrix, body.immersed_part(), n_jobs=16)
+    dataset = solver.fill_dataset(test_matrix, body.immersed_part(), n_jobs=n_jobs)
 
     # add extras to the dataset
     dataset["center_of_mass"] = (
@@ -94,3 +96,4 @@ def ceto(depth, resolution, output_dir, output_file):
     # Save dataset to .nc
     output_file = os.path.join(output_dir, output_file + ".nc")
     cpt.export_dataset(output_file, dataset)
+

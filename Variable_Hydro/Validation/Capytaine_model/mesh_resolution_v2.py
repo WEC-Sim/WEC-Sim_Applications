@@ -16,6 +16,7 @@ for i in np.arange(1, nCases):
 resolutions[4][:] = resolutions[3][:] * 1.5 * 1.3
 
 nPanels = [736, 1632, 3600, 8100, 30450]
+nJobs = [16, 16, 16, 8, 2]
 
 for depth in depths:
     for i in np.arange(0, nCases):
@@ -36,4 +37,5 @@ for depth in depths:
         resolution = os.path.join(
             "uniform_elements_cubit", "cylinder_" + str(nPanels[i]) + ".gdf"
         )
-        dataset = ceto.ceto(depth, resolution, output_dir, output_file)
+        dataset = ceto.ceto(depth, resolution, output_dir, output_file, nJobs[i])
+
