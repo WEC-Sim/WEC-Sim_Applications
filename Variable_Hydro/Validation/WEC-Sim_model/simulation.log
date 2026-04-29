@@ -45,3 +45,9 @@ evalin('caller', strcat(scriptStem, ';'));
 Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('wecSim', 'C:\Users\megande\Documents\GitHub\WEC-Sim\source\wecSim.m', 39)" style="font-weight:bold">wecSim</a> (<a href="matlab: opentoline('C:\Users\megande\Documents\GitHub\WEC-Sim\source\wecSim.m',39,0)">line 39</a>)
 run('initializeWecSim');
 } 
+
+Cannot acquire a MATLAB license.
+There will be 10 more attempt(s) to acquire a license before the application exits.
+Save any work now.
+
+clear all
