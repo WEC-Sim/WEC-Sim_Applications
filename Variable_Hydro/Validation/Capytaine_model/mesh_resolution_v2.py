@@ -19,12 +19,10 @@ nPanels = [736, 1632, 3600, 8100, 30450]
 
 for depth in depths:
     for i in np.arange(0, nCases):
-        resolution = os.path.join(
-            "uniform_elements_cubit", "cylinder_" + str(nPanels[i]) + ".gdf"
-        )
-        output_dir = os.path.join(input_data_dir, "mesh_resolution_v2")
+        output_dir = os.path.join(input_data_dir, "uniform_elements_cubit")
         os.makedirs(output_dir, exist_ok=True)
 
+        resolution = resolutions[i,:]
         output_file = (
             str(resolution[0])
             + "_"
@@ -34,4 +32,8 @@ for depth in depths:
             + "_output"
         )
         print("Running ", resolution)
+
+        resolution = os.path.join(
+            "uniform_elements_cubit", "cylinder_" + str(nPanels[i]) + ".gdf"
+        )
         dataset = ceto.ceto(depth, resolution, output_dir, output_file)

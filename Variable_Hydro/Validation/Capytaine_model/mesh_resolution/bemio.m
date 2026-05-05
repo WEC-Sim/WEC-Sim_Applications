@@ -24,8 +24,16 @@ for i = 1:length(res_str)
     hydroData(i) = hydro;
 end
 
+for i = 1:length(res_str)-1
+    file = fullfile("..", "uniform_elements_cubit", res_str(i) + "_output.nc");
+    hydro = readCAPYTAINE(struct(), file);
+    hydro = radiationIRF(hydro, 60, [], [], [], []);
+    hydro = excitationIRF(hydro, 60, [], [], [], []);
+    hydroCubit(i) = hydro;
+end
+
 for i = 1:length(res_str)-2
-    file = fullfile("..","..","WAMIT_model", res_str(i) + "_output.out");
+    file = fullfile("..", "..", "WAMIT_model", res_str(i) + "_output.out");
     hydro = readWAMIT(struct(), file, []);
     hydro = radiationIRF(hydro, 60, [], [], [], []);
     hydro = excitationIRF(hydro, 60, [], [], [], []);
@@ -35,9 +43,17 @@ end
 %%
 % Plot all data
 plotBEMIO(hydroData(1), hydroData(2), hydroData(3), hydroData(4), hydroData(5), ...
+    hydroCubit(1), hydroCubit(2), hydroCubit(3), hydroCubit(4),...
     hydroWAMIT(1), hydroWAMIT(2), hydroWAMIT(3));
-legendStr = [string(nPanels)' string(nPanels)'+" - wamit"];
+legendStr = [string(nPanels)' string(nPanels(1:4))'+" - cubit" string(nPanels(1:3))'+" - wamit"];
 for i = 1:6
-    figure(i)
-    legend(legendStr);
+    f = figure(i);
+    for j = 1:2:5
+        f.Children(j).String = cellstr(legendStr);
+    end
+    for j = 2:2:6
+        if i ~= 3 && i ~= 6
+            f.Children(j).XLim = [0 5];
+        end
+    end
 end

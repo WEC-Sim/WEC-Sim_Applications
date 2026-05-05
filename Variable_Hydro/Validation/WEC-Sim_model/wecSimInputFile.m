@@ -8,10 +8,9 @@ simu.rampTime = 100;                    % Wave Ramp Time [s]
 simu.endTime = 400;                     % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.1; 							% Simulation time-step [s]
-simu.mcrMatFile = 'mcr_variablehydro.mat';
+%simu.mcrMatFile = 'mcr_variablehydro.mat';
 
-
-%PTO_motion_amplitude = 2.5;
+PTO_motion_amplitude = 2.5;
 
 %% Wave Information 
 % % noWaveCIC, no waves with radiation CIC  
@@ -60,15 +59,19 @@ waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type
 % waves.elevationFile = 'elevationData.mat';     % Name of User-Defined Time-Series File [:,2] = [time, eta]
 
 %% Body Data
-% Float
-body(1) = bodyClass('hydroData/rm3.h5');      
-    % Create the body(1) Variable, Set Location of Hydrodynamic Data File 
-    % and Body Number Within this File.   
-body(1).geometryFile = 'geometry/cylinder.stl';    % Location of Geomtry File
-body(1).mass = 'equilibrium';                   
-    % Body Mass. The 'equilibrium' Option Sets it to the Displaced Water 
-    % Weight.
-body(1).inertia = [20907301 21306090.66 37085481.11];  % Moment of Inertia [kg*m^2]     
+% Define h5 files for the cylinder
+bemDepths = -3.0; %-3.0:-0.5:-15.0;
+
+files = strcat('hydroData/depth_', arrayfun(@(x) num2str(x, '%.1f'), abs(bemDepths), 'UniformOutput', false), '.h5');
+
+% Cylinder
+body(1) = bodyClass(files);  % Initialize bodyClass for Flap
+body(1).geometryFile = 'geometry/cylinder.stl';    % Location of Geomtry File 
+body(1).mass = 'equilibrium';                           % User-Defined mass [kg]
+body(1).inertia = [1.85e6 1.85e6 1.85e6];       % Moment of Inertia [kg-m^2]
+body(1).variableHydro.option = 0;
+%body(1).variableHydro.hydroForceIndexInitial = find(bemDepths==-9); % default = 10 deg incident wave
+
 
 %% PTO and Constraint Parameters
 % Floating (3DOF) Joint

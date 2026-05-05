@@ -2,48 +2,52 @@ WEC-Sim: An open-source code for simulating wave energy converters
 Version: 7.0.0
 
 Initializing the Simulation Class...
-	Case Dir: C:\Users\megande\Documents\GitHub\WEC-Sim\examples\Variable_Hydro 
-wecSimMCR Case 4
+	Case Dir: C:\Users\megande\Documents\GitHub\WEC-Sim_Applications\Variable_Hydro\Validation\WEC-Sim_model 
 
 WEC-Sim Pre-processing ...   
-	Infinite water depth specified in BEM and "waves.waterDepth" not specified in input file.
-Set water depth to 200m for visualization.
-Elapsed time is 0.399115 seconds.
+<a href="matlab: opentoline('C:\Users\megande\Documents\GitHub\WEC-Sim\source\objects\bodyClass.m',1176,1)">1176 </a>                        jjj = obj.dofStart-1+jj;
+obj.variableHydro
 
-WEC-Sim Simulation Settings:
-	Start Time                     (sec) = 0
-	End Time                       (sec) = 400
-	Time Step Size                 (sec) = 0.1
-	Ramp Function Time             (sec) = 100
-	 Number of Time Steps     = 4000 
+ans = 
 
-Wave Environment: 
-	Wave Type                            = No Wave (Convolution Integral Calculation)
+  <a href="matlab:helpPopup('struct')" style="font-weight:bold">struct</a> with fields:
 
-List of Body:
- 
-Number of Hydro Bodies = 1 
+                    option: 0
+    hydroForceIndexInitial: 1
+       radiationIrfSurface: []
+                      mass: []
+                   inertia: []
+           inertiaProducts: []
 
-	***** Body Number 1, Name: float *****
-	Body CG                          (m) = [0,0,-0.72]
-	Body Mass                       (kg) = 725833 
-	Body Moments of Inertia       (kgm2) = [2.09073E+07,2.13061E+07,3.70855E+07]
-	Body Products of Inertia      (kgm2) = [0,0,0]
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbquit; end
+{Error using <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('griddedInterpolant')" style="font-weight:bold">griddedInterpolant</a>
+Interpolation requires at least two sample points for each grid dimension.
 
-List of PTO(s): Number of PTOs = 1 
+Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('interp1>Interp1DStripNaN', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\polyfun\interp1.m', 234)" style="font-weight:bold">interp1>Interp1DStripNaN</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\polyfun\interp1.m',234,0)">line 234</a>)
+    F = griddedInterpolant(xi,vi,method);
 
-	***** PTO Name: PTO1 *****
-	PTO Stiffness           (N/m;Nm/rad) = 0
-	PTO Damping           (Ns/m;Nsm/rad) = 1.2E+06
+Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('interp1', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\polyfun\interp1.m', 173)" style="font-weight:bold">interp1</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\polyfun\interp1.m',173,0)">line 173</a>)
+        VqLite = Interp1DStripNaN(X,V,Xq,F.Method);
 
-List of Constraint(s): Number of Constraints = 1 
+Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('bodyClass/irfInfAddedMassAndDamping', 'C:\Users\megande\Documents\GitHub\WEC-Sim\source\objects\bodyClass.m', 1177)" style="font-weight:bold">bodyClass/irfInfAddedMassAndDamping</a> (<a href="matlab: opentoline('C:\Users\megande\Documents\GitHub\WEC-Sim\source\objects\bodyClass.m',1177,0)">line 1177</a>)
+                        obj.hydroForce.(hfName).irkb(:,ii,jj) = interp1(irft,squeeze(irfk(ii,jjj,:)),cicTime,'spline');
 
-	***** Constraint Name: Constraint1 *****
+Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('bodyClass/hydroForcePre', 'C:\Users\megande\Documents\GitHub\WEC-Sim\source\objects\bodyClass.m', 503)" style="font-weight:bold">bodyClass/hydroForcePre</a> (<a href="matlab: opentoline('C:\Users\megande\Documents\GitHub\WEC-Sim\source\objects\bodyClass.m',503,0)">line 503</a>)
+                    obj.irfInfAddedMassAndDamping(cicTime, stateSpace, rho, B2B, iH);
 
-Elapsed time is 0.083461 seconds.
+Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('initializeWecSim', 'C:\Users\megande\Documents\GitHub\WEC-Sim\source\functions\initializeWecSim.m', 287)" style="font-weight:bold">initializeWecSim</a> (<a href="matlab: opentoline('C:\Users\megande\Documents\GitHub\WEC-Sim\source\functions\initializeWecSim.m',287,0)">line 287</a>)
+            body(ii).hydroForcePre(waves, simu, iH);
 
-Simulating the WEC device defined in the SimMechanics model C:\Users\megande\Documents\GitHub\WEC-Sim\examples\Variable_Hydro\variable_hydro.slx...   
-Elapsed time is 4.635092 seconds.
+Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('run', 'C:\Program Files\MATLAB\R2024a\toolbox\matlab\lang\run.m', 112)" style="font-weight:bold">run</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2024a\toolbox\matlab\lang\run.m',112,0)">line 112</a>)
+evalin('caller', strcat(scriptStem, ';'));
 
-Post-processing and saving...   
-Elapsed time is 0.106840 seconds.
+Error in <a href="matlab:matlab.lang.internal.introspective.errorDocCallback('wecSim', 'C:\Users\megande\Documents\GitHub\WEC-Sim\source\wecSim.m', 39)" style="font-weight:bold">wecSim</a> (<a href="matlab: opentoline('C:\Users\megande\Documents\GitHub\WEC-Sim\source\wecSim.m',39,0)">line 39</a>)
+run('initializeWecSim');
+} 
+
+Cannot acquire a MATLAB license.
+There will be 10 more attempt(s) to acquire a license before the application exits.
+Save any work now.
+
+clear all

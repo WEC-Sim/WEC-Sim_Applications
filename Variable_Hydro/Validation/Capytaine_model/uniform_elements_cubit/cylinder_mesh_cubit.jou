@@ -11,7 +11,7 @@
 
 reset
 
-create cylinder height 5 radius 25
+create cylinder height 5 radius 12.5
 
 webcut volume all with plane xplane offset 0
 webcut volume all with plane yplane offset 0
