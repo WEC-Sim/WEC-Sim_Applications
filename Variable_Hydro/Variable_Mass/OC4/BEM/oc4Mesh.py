@@ -1,101 +1,176 @@
-# Ocean Inertia RFTS 15
-# Task 1: Develop BEM models of the Ocean Inertia WEC device
-# This code creates a BEM model of the base WEC design
-# IMPROVED VERSION: Using pygmsh/gmsh for proper Boolean CSG operations
-#
-# This approach creates a proper watertight mesh with shared vertices at
-# boundaries - no overlapping faces or duplicate geometry.
-#
-# Requirements:
-#   pip install pygmsh gmsh
-
 import logging
-
 import capytaine as cpt
-import pygmsh
+# import pygmsh
 import numpy as np
 import xarray as xr
+import os as os
 
-# Enable logging to see mesh operations
-logging.basicConfig(level=logging.INFO)
+# Water density
+rho_w = 1025 # kg/m3
 
-## Dimensions of WEC
-w = 4
-h = 1
-l = 12
-Rb = 2.6
-Rw = 2
-d = 0.5
+## Height above the waterline
+Z_i = 6 # m (original)
+Z_min = 4 # m
+Z_max = 8 # m
 
-## Characteristic mesh lengths
-min_mesh = 0.1*1.25
-max_mesh = 0.2*1.25
-max_lid_mesh = max_mesh
+# Initial CG
+z_cgI = -13.46 # m
 
-## Offset from free surface
-z_fs = 0.001
+# INPUT: File name
+meshFile = 'OC4_size_1,25.gdf'
 
-## Create Mesh
-# Use pygmsh with OpenCASCADE geometry kernel for Boolean operations
-with pygmsh.occ.Geometry() as geom:
-    # Set mesh size (controls resolution)
-    geom.characteristic_length_min = min_mesh
-    geom.characteristic_length_max = max_mesh
+# INPUT: Mesh size
+meshSize = 1.25
 
-    # Create the main block centered at origin
-    # add_box takes corner point and extents
-    block = geom.add_box(
-        [-l / 2, -w / 2, -h / 2],  # corner
-        [l, w, h],  # extents (size)
-    )
+# Define function to write the hydrostatics file
+def write_hydrostatics(khs,cg,cb,volume):
+    # Function adapted from WEC-Sim/examples/BEMIO/Capytaine/call_capytaine.py
+    # This function takes in hydrostatic data and writes it in Nemoh's KH_1.dat
+    # and Hydrostatics_1.dat format. Capytaine currently does not have the 
+    # ability to write hydrostatics to its output file
+    # 
+    # NOTE: this function has been updated to assume that the input is heave only.
+    
+    
+    filename1 = 'KH.dat'
+    filename2 = 'Hydrostatics.dat'
+    
 
-    # Create bottom cylinder (along Y-axis, clipped to lower half)
-    # Cylinder is created along Z by default, so we create it horizontal
-    # add_cylinder(start_point, axis_vector, radius)
-    bottom_cyl = geom.add_cylinder(
-        [0, -0.8 * w / 2, 0],  # start point
-        [0, 0.8 * w, 0],  # axis (along Y)
-        Rb,  # radius
-    )
+    # Write hydrostatic stiffness to KH.dat file
+    khs_full = np.zeros([6,6])
+    khs_full[2:5, 2:5] += khs[2:5, 2:5]
+    np.savetxt(filename1, khs_full)
+    
+    # Write the other hydrostatics data to Hydrostatics.dat file
+    f = open(filename2,'w')
+    for j in [0,1,2]:
+        line =  f'XF = {cb[j]:7.3f} - XG = {cg[j]:7.3f} \n'
+        f.write(line)
+    line = f'Displacement = {volume:E}'
+    f.write(line)
+    f.close()
 
-    # Create top cylinder (along Y-axis)
-    top_cyl = geom.add_cylinder(
-        [0, -0.8 * w / 2, -d],  # start point (offset down by d)
-        [0, 0.8 * w, 0],  # axis (along Y)
-        Rw * 1.05,  # radius
-    )
-
-    # Create clipping plane at z=0 (to cut cylinders in half)
-    # We'll use a large box below z=0 to keep only the bottom half
-    clip_box = geom.add_box(
-        [-l, -w, -l],  # corner (large box below z=0)
-        [2 * l, 2 * w, l],  # extents (goes from z=-l to z=0)
-    )
-
-    # Clip bottom cylinder to keep only z <= 0
-    bottom_cyl_clipped = geom.boolean_intersection([bottom_cyl, clip_box])
-
-    # Boolean union of all parts
-    # This creates a proper watertight mesh with shared vertices
-    buoy = geom.boolean_union([block, bottom_cyl_clipped, top_cyl])
-
-    # Add lines along interface of bottom cylinder and block to refine mesh
-
-    # Generate surface mesh (dim=2 for surface mesh)
-    gmsh_mesh = geom.generate_mesh(dim=2)
-    geom.save_geometry("model.stl") 
 
 # Load the mesh into Capytaine
-buoy_mesh = cpt.load_mesh('model.stl')
-# buoy_mesh.keep_immersed_part(inplace=True)
-# xOy_Plane = cpt.Plane(point=(0, 0, -z_fs), normal=(0, 0, 1))
-# buoy_mesh.clipped(xOy_Plane)
-# lid_mesh = buoy_mesh.generate_lid(z=-z_fs, faces_max_radius=max_lid_mesh)
-
+buoy_mesh = cpt.load_mesh(meshFile)
 
 print(
-    f"Mesh created with {buoy_mesh.nb_faces} faces and {buoy_mesh.nb_vertices} vertices"
+    f"Mesh has {buoy_mesh.nb_faces} faces and {buoy_mesh.nb_vertices} vertices"
 )
-print("Using pygmsh/gmsh Boolean CSG - proper watertight mesh with shared vertices")
 
-buoy_mesh.show()
+# Adjust water level to reduce error
+buoy_mesh.translate_z(0.0001) 
+buoy_mesh.keep_immersed_part(inplace=True)
+
+
+## Create buoy for baseline depth
+buoyI_mesh = buoy_mesh.copy("buoyI")
+buoyI_mesh.translate_z(Z_i - Z_min)
+buoyI_mesh.keep_immersed_part(inplace=True)
+buoyI = cpt.FloatingBody(mesh=buoyI_mesh,
+                        name="buoyI",
+                        )
+
+# Calculate initial displaced volume & mass of base design
+V_i = buoyI.volume # m3
+# print(V_i)
+M_i = rho_w*V_i # kg
+
+
+# INPUT
+Z_j = Z_max # m (value being assessed)
+
+# INPUT Define the main directory
+meshFolder = f"Mesh Size = {meshSize}"
+# print(meshFolder)
+
+
+## Create buoy for baseline depth
+buoyF_mesh = buoy_mesh.copy("buoyF")
+buoyF_mesh.translate_z(Z_j - Z_min)
+buoyF_mesh.keep_immersed_part(inplace=True)
+buoyF = cpt.FloatingBody(mesh=buoyF_mesh,
+                        name="buoyF",
+                        )
+
+# Calculate new displaced volume & mass of new depth
+V_f = buoyF.volume # m3
+M_f = rho_w*V_f # kg
+
+# Calculate change in volume
+dV = V_f - V_i 
+print("Change in Volume = ", dV, "m3")
+
+# Determine the new (+/-) volumes of water in the upper (B) and lower (C) float cylinders
+V_b = dV/2 # total volume in cylinders
+V_c = V_b # assuming the volumes change about the same
+M_b = rho_w*V_b
+M_c = rho_w*V_c
+M_a = M_i
+
+# Determine center of gravity of the new volumes
+D_b = 12 - 0.12 # m
+D_c = 24 - 0.12 # m
+zeta_b = 32 - 5.1078 # m
+zeta_c = 12.17 # m
+H_b = V_b/3/(3.1415*(D_b/2)**2)
+H_c = V_c/3/(3.1415*(D_c/2)**2)
+z_cgB = -1*(zeta_b - H_b/2 - Z_j)
+z_cgC = -1*(zeta_c - H_c/2 - Z_j)
+z_cgA = z_cgI - (Z_i-Z_j)
+
+# Determine new center of gravity
+if dV == 0:
+    z_cg = z_cgI
+else:
+    z_cg = (M_a*z_cgA + M_b*z_cgB + M_c*z_cgC)/(M_a + M_b + M_c)
+
+print("Center of Gravity = ", z_cg, "m\n")
+
+# buoyF.center_of_mass = (0., 0., z_cg)
+# buoyF.dofs = cpt.rigid_body_dofs(rotation_center = (0., 0., z_cg))
+
+# # show mesh
+# buoyF_mesh.show()
+
+lid_mesh = buoyF_mesh.generate_lid(z=0, faces_max_radius=0.6)
+
+buoy = cpt.FloatingBody(mesh=buoyF_mesh,
+                        lid_mesh = lid_mesh,
+                        name="buoy",
+                        center_of_mass = (0., 0., z_cg),
+                        dofs = cpt.rigid_body_dofs(rotation_center = (0., 0., z_cg))
+                        )
+
+# buoy.show()
+
+## Compute hydrostatics and write the output for BEMIO
+buoy_hs = buoy.compute_hydrostatics(rho=rho_w, g=9.81)
+
+
+write_hydrostatics(buoy_hs['hydrostatic_stiffness'],
+                   buoy_hs['center_of_mass'],
+                   buoy_hs['center_of_buoyancy'],
+                   buoy_hs['disp_volume'])
+
+# Set-up hydrodynamic problems and solve
+problems = xr.Dataset(coords={
+    'omega': np.linspace(0.05, 10, 200),
+    'wave_direction': [0.],
+    'radiating_dof': list(buoy.dofs),
+    'water_depth': [np.inf],
+    })
+solver = cpt.BEMSolver()
+dataset = solver.fill_dataset(problems,buoy)
+
+# Change dof variable type here 
+dataset['radiating_dof'] = dataset['radiating_dof'].astype(str)
+dataset['influenced_dof'] = dataset['influenced_dof'].astype(str)
+
+
+# Save dataset to .nc
+cpt.io.xarray.separate_complex_values(dataset).to_netcdf(
+    "results.nc",
+    encoding={'radiating_dof': {'dtype': 'U'},
+                'influenced_dof': {'dtype': 'U'}}
+    )
