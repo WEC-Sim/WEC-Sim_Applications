@@ -39,20 +39,22 @@ def ceto(depth, resolution, output_dir, output_file, n_jobs=16):
     cg = (0, 0, depth)
 
     # for capytaine meshing
-    # mesh = cpt.mesh_vertical_cylinder(
-    #     length=5,
-    #     radius=12.5,
-    #     center=cg,
-    #     resolution=tuple(resolution),
-    # )
-    # mesh = mesh.translate_z(-cg[2])
-    # mesh_file = os.path.join(output_dir, output_file + ".gdf")
-    # cpt.io.mesh_writers.write_GDF(mesh_file, mesh.vertices, mesh.faces)
-    # mesh = mesh.translate_z(cg[2])
+    mesh = cpt.mesh_vertical_cylinder(
+        length=5,
+        radius=12.5,
+        center=cg,
+        resolution=tuple(resolution),
+    )
+    mesh = mesh.symmetrized(cpt.xOz_Plane).symmetrized(cpt.yOz_Plane)
+    mesh = mesh.translate_z(-cg[2])
+    mesh_file = os.path.join(output_dir, output_file + ".gdf")
+    cpt.io.mesh_writers.write_GDF(mesh_file, mesh.vertices, mesh.faces, ulen=1, isx=1, isy=1)
+    mesh = mesh.translate_z(cg[2])
 
+    # for v2 mesh resolution with cubit meshes. 
     # to read in cubit meshes (use resolution as the file path instead of nr, ntheta, nz)
-    mesh = cpt.load_mesh(resolution)
-    mesh.translate_z(depth)
+    # mesh = cpt.load_mesh(resolution)
+    # mesh.translate_z(depth)
 
     body = cpt.FloatingBody(
         mesh=mesh,

@@ -5,7 +5,7 @@ import numpy as np
 
 input_data_dir = os.path.dirname(".")
 
-depths = [-9]  # nominal depth about which the CETO will oscillate
+depths = [-3]  # nominal depth about which the CETO will oscillate
 
 nCases = 5
 resolutions = np.ones([nCases, 3], int)
@@ -18,7 +18,7 @@ resolutions[4][:] = resolutions[3][:] * 1.5 * 1.3
 nPanels = (
     2 * resolutions[:, 0] * resolutions[:, 1] + resolutions[:, 1] * resolutions[:, 2]
 )  # 2*nr*ntheta + ntheta*nz;
-nJobs = [16, 16, 16, 8, 2]
+nJobs = [16, 16, 16, 8, 1]
 
 for depth in depths:
     for i in np.arange(0, nCases):
