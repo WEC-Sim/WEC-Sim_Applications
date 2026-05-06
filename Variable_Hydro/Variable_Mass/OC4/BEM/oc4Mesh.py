@@ -17,10 +17,10 @@ Z_max = 8 # m
 z_cgI = -13.46 # m
 
 # INPUT: File name
-meshFile = 'OC4_size_1,25.gdf'
+meshFile = 'OC4_size_1.gdf'
 
 # INPUT: Mesh size
-meshSize = 1.25
+meshSize = 1
 
 # Define function to write the hydrostatics file
 def write_hydrostatics(khs,cg,cb,volume):
@@ -78,7 +78,7 @@ M_i = rho_w*V_i # kg
 
 
 # INPUT
-Z_j = Z_max # m (value being assessed)
+Z_j = Z_i # m (value being assessed)
 
 # INPUT Define the main directory
 meshFolder = f"Mesh Size = {meshSize}"
@@ -142,35 +142,35 @@ buoy = cpt.FloatingBody(mesh=buoyF_mesh,
                         dofs = cpt.rigid_body_dofs(rotation_center = (0., 0., z_cg))
                         )
 
-# buoy.show()
+buoy.show()
 
-## Compute hydrostatics and write the output for BEMIO
-buoy_hs = buoy.compute_hydrostatics(rho=rho_w, g=9.81)
-
-
-write_hydrostatics(buoy_hs['hydrostatic_stiffness'],
-                   buoy_hs['center_of_mass'],
-                   buoy_hs['center_of_buoyancy'],
-                   buoy_hs['disp_volume'])
-
-# Set-up hydrodynamic problems and solve
-problems = xr.Dataset(coords={
-    'omega': np.linspace(0.05, 10, 200),
-    'wave_direction': [0.],
-    'radiating_dof': list(buoy.dofs),
-    'water_depth': [np.inf],
-    })
-solver = cpt.BEMSolver()
-dataset = solver.fill_dataset(problems,buoy)
-
-# Change dof variable type here 
-dataset['radiating_dof'] = dataset['radiating_dof'].astype(str)
-dataset['influenced_dof'] = dataset['influenced_dof'].astype(str)
+# ## Compute hydrostatics and write the output for BEMIO
+# buoy_hs = buoy.compute_hydrostatics(rho=rho_w, g=9.81)
 
 
-# Save dataset to .nc
-cpt.io.xarray.separate_complex_values(dataset).to_netcdf(
-    "results.nc",
-    encoding={'radiating_dof': {'dtype': 'U'},
-                'influenced_dof': {'dtype': 'U'}}
-    )
+# write_hydrostatics(buoy_hs['hydrostatic_stiffness'],
+#                    buoy_hs['center_of_mass'],
+#                    buoy_hs['center_of_buoyancy'],
+#                    buoy_hs['disp_volume'])
+
+# # Set-up hydrodynamic problems and solve
+# problems = xr.Dataset(coords={
+#     'omega': np.linspace(0.05, 10, 200),
+#     'wave_direction': [0.],
+#     'radiating_dof': list(buoy.dofs),
+#     'water_depth': [np.inf],
+#     })
+# solver = cpt.BEMSolver()
+# dataset = solver.fill_dataset(problems,buoy)
+
+# # Change dof variable type here 
+# dataset['radiating_dof'] = dataset['radiating_dof'].astype(str)
+# dataset['influenced_dof'] = dataset['influenced_dof'].astype(str)
+
+
+# # Save dataset to .nc
+# cpt.io.xarray.separate_complex_values(dataset).to_netcdf(
+#     "results.nc",
+#     encoding={'radiating_dof': {'dtype': 'U'},
+#                 'influenced_dof': {'dtype': 'U'}}
+#     )
