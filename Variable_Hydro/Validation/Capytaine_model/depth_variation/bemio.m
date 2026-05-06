@@ -23,13 +23,14 @@ end
 % Plot all data
 plotBEMIO(hydroData{1:2:end});
 legendStr = string(depths(1:2:end))';
-for i = 1:6
+i1 = 7;
+for i = i1:i1+5
     f = figure(i);
     for j = 1:2:5
         f.Children(j).String = cellstr(legendStr);
     end
     for j = 2:2:6
-        if i ~= 3 && i ~= 6
+        if i ~= i1+2 && i ~= i1+5
             f.Children(j).XLim = [0 5];
         end
     end

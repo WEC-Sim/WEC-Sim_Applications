@@ -1,19 +1,28 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'variable_hydro.slx';      % Specify Simulink Model File
+simu.simMechanicsFile = 'ceto.slx';     % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
-simu.explorer = 'on';                   % Turn SimMechanics Explorer (on/off)
+if exist('mcr','var')
+    simu.explorer = 'off';               % Turn visualizer off in mcr cases
+end
 simu.startTime = 0;                     % Simulation Start Time [s]
-simu.rampTime = 100;                    % Wave Ramp Time [s]
-simu.endTime = 400;                     % Simulation End Time [s]
+simu.rampTime = 0;                      % Wave Ramp Time [s]
+simu.endTime = 200;                     % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-simu.dt = 0.1; 							% Simulation time-step [s]
-%simu.mcrMatFile = 'mcr_variablehydro.mat';
+simu.dt = 0.01; 						% Simulation time-step [s]
+simu.mcrMatFile = 'mcr_variablehydro.mat';
+simu.dtOut = 0.01;
+simu.cicEndTime = 30;
 
-PTO_motion_amplitude = 2.5;
+PTO_motion_amplitude = 6; % CFD cases at 2.5, 4, 5, 6m amplitudes
+PTO_motion_period = 20; % s period
+PTO_motion_frequency = 2*pi / PTO_motion_period;
 
 %% Wave Information 
 % % noWaveCIC, no waves with radiation CIC  
+% waves = waveClass('noWave');       % Initialize Wave Class and Specify Type  
+% waves.period = PTO_motion_period;
+
 waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
 
 % % Regular Waves  
@@ -59,9 +68,8 @@ waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type
 % waves.elevationFile = 'elevationData.mat';     % Name of User-Defined Time-Series File [:,2] = [time, eta]
 
 %% Body Data
-% Define h5 files for the cylinder
-bemDepths = -3.0; %-3.0:-0.5:-15.0;
-
+% Define depth discretization and h5 files for the cylinder
+bemDepths = -3.0:-0.1:-15.0;
 files = strcat('hydroData/depth_', arrayfun(@(x) num2str(x, '%.1f'), abs(bemDepths), 'UniformOutput', false), '.h5');
 
 % Cylinder
@@ -69,17 +77,12 @@ body(1) = bodyClass(files);  % Initialize bodyClass for Flap
 body(1).geometryFile = 'geometry/cylinder.stl';    % Location of Geomtry File 
 body(1).mass = 'equilibrium';                           % User-Defined mass [kg]
 body(1).inertia = [1.85e6 1.85e6 1.85e6];       % Moment of Inertia [kg-m^2]
-body(1).variableHydro.option = 0;
-%body(1).variableHydro.hydroForceIndexInitial = find(bemDepths==-9); % default = 10 deg incident wave
+body(1).variableHydro.option = 1;
+body(1).variableHydro.hydroForceIndexInitial = find(bemDepths==-9); % default = -9m depth
 
 
-%% PTO and Constraint Parameters
-% Floating (3DOF) Joint
-constraint(1) = constraintClass('Constraint1'); % Initialize Constraint Class for Constraint1
-constraint(1).location = [0 0 0];               % Constraint Location [m]
-
-% Translational PTO
+%% Translational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize PTO Class for PTO1
 pto(1).stiffness = 0;                           % PTO Stiffness [N/m]
-pto(1).damping = 1200000;                       % PTO Damping [N/(m/s)]
-pto(1).location = [0 0 0];                      % PTO Location [m]
+pto(1).damping = 0;                        % PTO Damping [N/(m/s)]
+pto(1).location = [0 0 -9];                      % PTO Location [m]

@@ -46,13 +46,14 @@ plotBEMIO(hydroData(1), hydroData(2), hydroData(3), hydroData(4), hydroData(5), 
     hydroCubit(1), hydroCubit(2), hydroCubit(3), hydroCubit(4),...
     hydroWAMIT(1), hydroWAMIT(2), hydroWAMIT(3));
 legendStr = [string(nPanels)' string(nPanels(1:4))'+" - cubit" string(nPanels(1:3))'+" - wamit"];
-for i = 1:6
+i1 = 1;
+for i = i1:i1+5
     f = figure(i);
     for j = 1:2:5
         f.Children(j).String = cellstr(legendStr);
     end
     for j = 2:2:6
-        if i ~= 3 && i ~= 6
+        if i ~= i1+2 && i ~= i1+5
             f.Children(j).XLim = [0 5];
         end
     end

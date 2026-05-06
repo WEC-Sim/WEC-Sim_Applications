@@ -1,0 +1,5 @@
+! generic configuration file:  config.wam
+ RAMGBMAX=64.0    (max RAM for all CPUs)
+ NCPU=16          (number of CPUs)
+ USERID_PATH=/usr/netpub/WAMIT/    (path to WAMIT license)
+ LICENSE_PATH=/usr/netpub/WAMIT/   (path to WAMIT license)
