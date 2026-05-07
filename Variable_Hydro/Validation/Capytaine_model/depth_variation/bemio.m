@@ -23,7 +23,7 @@ end
 % Plot all data
 plotBEMIO(hydroData{1:2:end});
 legendStr = string(depths(1:2:end))';
-i1 = 7;
+i1 = 1;
 for i = i1:i1+5
     f = figure(i);
     for j = 1:2:5

@@ -29,12 +29,12 @@ newDepths  = setdiff(newDepths, depths); % remove values repeated in depths
 depths(end+1:end+length(newDepths)) = newDepths;
 
 vars = {'A', 'Ainf', 'B', 'cg', 'cb',...
-    'ex_ma', 'ex_ph', 'ex_re', 'ex_im', ...
-    'sc_ma', 'sc_ph', 'sc_re', 'sc_im', ...
-    'fk_ma', 'fk_ph', 'fk_re', 'fk_im'}; % depth dependent BEM variables
+    'ex_re', 'ex_im', ...
+    'sc_re', 'sc_im', ...
+    'fk_re', 'fk_im'}; % depth dependent BEM variables
 
 %%
-% Append the interpolated direction and hydro structue to theta and
+% Append the interpolated direction and hydro structure to theta and
 % hydro_split respectively.
 for i = nDepths + 1 : length(depths)
     ind1 = depthInds(depths(i) > depths(1:nDepths));
@@ -52,6 +52,15 @@ for i = nDepths + 1 : length(depths)
         allHydro(i).(vars{iVar}) = allHydro(ind1).(vars{iVar}) * (1-dDepth) +...
                                    allHydro(ind2).(vars{iVar}) * dDepth;
     end
+
+    % Best to interpolate the real and imaginary components, then manually
+    % recalculate magnitude and phase.
+    allHydro(i).sc_ma = abs(allHydro(i).sc_re + 1j*allHydro(i).sc_im);
+    allHydro(i).sc_ph = angle(allHydro(i).sc_re + 1j*allHydro(i).sc_im);
+    allHydro(i).fk_ma = abs(allHydro(i).fk_re + 1j*allHydro(i).fk_im);
+    allHydro(i).fk_ph = angle(allHydro(i).fk_re + 1j*allHydro(i).fk_im);
+    allHydro(i).ex_ma = abs(allHydro(i).ex_re + 1j*allHydro(i).ex_im);
+    allHydro(i).ex_ph = angle(allHydro(i).ex_re + 1j*allHydro(i).ex_im);
 end
 
 % Sort theta and hydro_split into the correct order based on frequency
