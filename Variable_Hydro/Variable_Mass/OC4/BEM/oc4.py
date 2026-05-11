@@ -22,9 +22,9 @@ def oc4(draft, meshFile, directory):
     rho_w = 1025 # kg/m3
 
     ## Height above the waterline
-    Z_i = 6 # m (original)
-    Z_min = 4 # m
-    Z_max = 8 # m
+    Z_i = 12 # m (original)
+    Z_min = 10 # m
+    Z_max = 14 # m
 
     if Z_j < Z_min or Z_j > Z_max:
         print("Error: input height above waterline is out of bounds of the analysis")
@@ -47,7 +47,7 @@ def oc4(draft, meshFile, directory):
 
     ## Create buoy for baseline depth
     buoyI_mesh = buoy_mesh.copy("buoyI")
-    buoyI_mesh.translate_z(Z_i - Z_min)
+    buoyI_mesh.translate_z(Z_i - 4)
     buoyI_mesh.keep_immersed_part(inplace=True)
     buoyI = cpt.FloatingBody(mesh=buoyI_mesh,
                             name="buoyI",
@@ -59,7 +59,7 @@ def oc4(draft, meshFile, directory):
 
     ## Create buoy for baseline depth
     buoyF_mesh = buoy_mesh.copy("buoyF")
-    buoyF_mesh.translate_z(Z_j - Z_min)
+    buoyF_mesh.translate_z(Z_j - 4)
     buoyF_mesh.keep_immersed_part(inplace=True)
     buoyF = cpt.FloatingBody(mesh=buoyF_mesh,
                             name="buoyF",
@@ -83,12 +83,12 @@ def oc4(draft, meshFile, directory):
     # Determine center of gravity of the new volumes
     D_b = 12 - 0.12 # m
     D_c = 24 - 0.12 # m
-    zeta_b = 32 - 5.1078 # m
-    zeta_c = 12.17 # m
-    H_b = V_b/3/(3.1415*(D_b/2)**2)
-    H_c = V_c/3/(3.1415*(D_c/2)**2)
-    z_cgB = -1*(zeta_b - H_b/2 - Z_j)
-    z_cgC = -1*(zeta_c - H_c/2 - Z_j)
+    zeta_b = 6.17 + 32 - 20 # m
+    zeta_c = 32 - 5.1078 # m
+    H_b = V_b/3/(np.pi*(D_b/2)**2)
+    H_c = V_c/3/(np.pi*(D_c/2)**2)
+    z_cgB = -1*(zeta_b + H_b/2 - Z_j)
+    z_cgC = -1*(zeta_c + H_c/2 - Z_j)
     z_cgA = z_cgI - (Z_i-Z_j)
 
     # Determine new center of gravity

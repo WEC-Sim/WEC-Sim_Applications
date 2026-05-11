@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 rho_w = 1025 # kg/m3
 
 ## Height above the waterline
-Z_i = 6 # m (original)
-Z_min = 4 # m
-Z_max = 8 # m
+Z_i = 12 # m (original)
+Z_min = 10 # m
+Z_max = 14 # m
 
 # Initial CG
 z_cgI = -13.46 # m
@@ -21,35 +21,6 @@ meshFile = 'OC4_size_1.gdf'
 
 # INPUT: Mesh size
 meshSize = 1
-
-# Define function to write the hydrostatics file
-def write_hydrostatics(khs,cg,cb,volume):
-    # Function adapted from WEC-Sim/examples/BEMIO/Capytaine/call_capytaine.py
-    # This function takes in hydrostatic data and writes it in Nemoh's KH_1.dat
-    # and Hydrostatics_1.dat format. Capytaine currently does not have the 
-    # ability to write hydrostatics to its output file
-    # 
-    # NOTE: this function has been updated to assume that the input is heave only.
-    
-    
-    filename1 = 'KH.dat'
-    filename2 = 'Hydrostatics.dat'
-    
-
-    # Write hydrostatic stiffness to KH.dat file
-    khs_full = np.zeros([6,6])
-    khs_full[2:5, 2:5] += khs[2:5, 2:5]
-    np.savetxt(filename1, khs_full)
-    
-    # Write the other hydrostatics data to Hydrostatics.dat file
-    f = open(filename2,'w')
-    for j in [0,1,2]:
-        line =  f'XF = {cb[j]:7.3f} - XG = {cg[j]:7.3f} \n'
-        f.write(line)
-    line = f'Displacement = {volume:E}'
-    f.write(line)
-    f.close()
-
 
 # Load the mesh into Capytaine
 buoy_mesh = cpt.load_mesh(meshFile)
@@ -65,20 +36,40 @@ buoy_mesh.keep_immersed_part(inplace=True)
 
 ## Create buoy for baseline depth
 buoyI_mesh = buoy_mesh.copy("buoyI")
-buoyI_mesh.translate_z(Z_i - Z_min)
+buoyI_mesh.translate_z(Z_i - 4)
 buoyI_mesh.keep_immersed_part(inplace=True)
 buoyI = cpt.FloatingBody(mesh=buoyI_mesh,
                         name="buoyI",
                         )
 
+# buoyI.show()
+
 # Calculate initial displaced volume & mass of base design
 V_i = buoyI.volume # m3
 # print(V_i)
 M_i = rho_w*V_i # kg
+print("Mass of Entire Platform (Including Ballast) = ", round(M_i,2), "kg")
+
+# Calculation to find buoy mass without ballast water
+D_up = 12 - 0.12 # m
+D_lw = 24 - 0.12 # m
+H_up = 20 - 6.17 - 6 # m
+H_lw = 5.1078 - 0.06 # m
+V_up = 3*(3.1415*(D_up/2)**2)*H_up
+V_lw = 3*(3.1415*(D_lw/2)**2)*H_lw
+M_up = rho_w*V_up # kg
+print("Mass of Volume in Upper Ballast = ", round(M_up,2), " kg")
+M_lw = rho_w*V_lw # kg
+print("Mass of Volume in Lower Ballast = ", round(M_lw,2), " kg")
+M_struct = M_i - M_lw - M_up
+print("Mass of OC4 Without Water = ", round(M_struct,2), " kg")
+print("Mass of Ballast Water = ", round(M_up + M_lw,2), " kg")
+print("Difference in OC4 Mass (Structure Only) with Report = ", round(M_struct - 3852200), "kg")
+print("Percent Error for OC4 Structure Mass = ", round((M_struct - 3852200)/3852200*100, 2), "%")
 
 
 # INPUT
-draft = np.linspace(24, 28, 11)
+draft = np.linspace(18, 22, 11)
 z_cg = np.zeros(len(draft))
 z_cgA = np.zeros(len(draft))
 
@@ -89,7 +80,7 @@ for i in range(len(draft)):
 
     ## Create buoy for baseline depth
     buoyF_mesh = buoy_mesh.copy("buoyF")
-    buoyF_mesh.translate_z(Z_j - Z_min)
+    buoyF_mesh.translate_z(Z_j - 4)
     buoyF_mesh.keep_immersed_part(inplace=True)
     buoyF = cpt.FloatingBody(mesh=buoyF_mesh,
                             name="buoyF",
@@ -113,12 +104,12 @@ for i in range(len(draft)):
     # Determine center of gravity of the new volumes
     D_b = 12 - 0.12 # m
     D_c = 24 - 0.12 # m
-    zeta_b = 32 - 5.1078 # m
-    zeta_c = 12.17 # m
-    H_b = V_b/3/(3.1415*(D_b/2)**2)
-    H_c = V_c/3/(3.1415*(D_c/2)**2)
-    z_cgB = -1*(zeta_b - H_b/2 - Z_j)
-    z_cgC = -1*(zeta_c - H_c/2 - Z_j)
+    zeta_b = 6.17 + 32 - 20 # m
+    zeta_c = 32 - 5.1078 # m
+    H_b = V_b/3/(np.pi*(D_b/2)**2)
+    H_c = V_c/3/(np.pi*(D_c/2)**2)
+    z_cgB = -1*(zeta_b + H_b/2 - Z_j)
+    z_cgC = -1*(zeta_c + H_c/2 - Z_j)
     z_cgA[i] = z_cgI - (Z_i-Z_j)
 
     # Determine new center of gravity
@@ -135,6 +126,7 @@ plt.title("Change in Center of Gravity with Draft")
 plt.ylabel("Center of Gravity (m)")
 plt.xlabel("Draft (m)")
 plt.legend()
+plt.grid()
 plt.show()
 
 plt.plot(draft, (z_cg-z_cgA), label='Considering Change in Ballast Volume')
@@ -142,4 +134,5 @@ plt.title("Difference in Center of Gravity Calculation Between\nCalculating Chan
 plt.ylabel("Difference in Center of Gravity Calculated (m)")
 plt.xlabel("Draft (m)")
 plt.legend()
+plt.grid()
 plt.show()

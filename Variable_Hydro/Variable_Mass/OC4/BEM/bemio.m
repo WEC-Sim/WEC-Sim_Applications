@@ -8,7 +8,7 @@ c = 1;
 for i = 1:numMeshNames
     for j = 1:numDraftNames
         meshName(c) = 1.5 - 0.25*i;
-        draftName(c) = 24 + 0.4*(j-1);
+        draftName(c) = 18 + 0.4*(j-1);
         c = c+1;
     end
 end

@@ -11,7 +11,7 @@ c = 1;
 for i = 1:numDraftNames
     for j = 1:numMeshNames
         meshName(j) = 1.5 - 0.25*j;
-        draftName(i) = 24 + 0.4*(i-1);
+        draftName(i) = 18 + 0.4*(i-1);
     end
 end
 
@@ -54,7 +54,7 @@ hold off
 legend("Mesh Size: 1.25", "Mesh Size: 1", "Mesh Size: 0.75")
 xlabel("\omega (rad/s)")
 ylabel('$\bar{A}_{5,5} (\omega)$', 'Interpreter','latex')
-title("Normalized Added Mass in Pitch for Varying Mesh Sizes and Constant Draft of 24 m")
+title("Normalized Added Mass in Pitch for Varying Mesh Sizes and Constant Draft of 18 m")
 
 figure()
 for i = 1:3
@@ -65,7 +65,7 @@ hold off
 legend("Mesh Size: 1.25", "Mesh Size: 1", "Mesh Size: 0.75")
 xlabel("\omega (rad/s)")
 ylabel('$\bar{A}_{3,3} (\omega)$', 'Interpreter','latex')
-title("Normalized Added Mass in Heave for Varying Mesh Sizes and Constant Draft of 24 m")
+title("Normalized Added Mass in Heave for Varying Mesh Sizes and Constant Draft of 18 m")
 
 figure()
 for i = 1:3
@@ -76,7 +76,7 @@ hold off
 legend("Mesh Size: 1.25", "Mesh Size: 1", "Mesh Size: 0.75")
 xlabel("\omega (rad/s)")
 ylabel('$\bar{A}_{1,1} (\omega)$', 'Interpreter','latex')
-title("Normalized Added Mass in Surge for Varying Mesh Sizes and Constant Draft of 24 m")
+title("Normalized Added Mass in Surge for Varying Mesh Sizes and Constant Draft of 18 m")
 
 
 % Radiation Damping
@@ -90,7 +90,7 @@ hold off
 legend("Mesh Size: 1.25", "Mesh Size: 1", "Mesh Size: 0.75")
 xlabel("\omega (rad/s)")
 ylabel('$\bar{B}_{5,5} (\omega)$', 'Interpreter','latex')
-title("Normalized Radiation Damping in Pitch for Varying Mesh Sizes and Constant Draft of 24 m")
+title("Normalized Radiation Damping in Pitch for Varying Mesh Sizes and Constant Draft of 18 m")
 
 figure()
 for i = 1:3
@@ -102,7 +102,7 @@ hold off
 legend("Mesh Size: 1.25", "Mesh Size: 1", "Mesh Size: 0.75")
 xlabel("\omega (rad/s)")
 ylabel('$\bar{B}_{3,3} (\omega)$', 'Interpreter','latex')
-title("Normalized Radiation Damping in Heave for Varying Mesh Sizes and Constant Draft of 24 m")
+title("Normalized Radiation Damping in Heave for Varying Mesh Sizes and Constant Draft of 18 m")
 
 figure()
 for i = 1:3
@@ -114,7 +114,7 @@ hold off
 legend("Mesh Size: 1.25", "Mesh Size: 1", "Mesh Size: 0.75")
 xlabel("\omega (rad/s)")
 ylabel('$\bar{B}_{1,1} (\omega)$', 'Interpreter','latex')
-title("Normalized Radiation Damping in Surge for Varying Mesh Sizes and Constant Draft of 24 m")
+title("Normalized Radiation Damping in Surge for Varying Mesh Sizes and Constant Draft of 18 m")
 
 %% Draft Comparison
 % Added Mass
