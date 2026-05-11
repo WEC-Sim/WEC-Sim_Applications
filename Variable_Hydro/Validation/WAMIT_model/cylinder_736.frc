@@ -1,0 +1,10 @@
+! CETO mesh resolution study at shallow depth
+ 1   0   2   0   0   0   0   0   0       IOPTN(1:9)
+ 1000                                    RHO
+ 0. 0. -3.0                              XCG(1) YCG(1) ZCG(1)
+ 0                                       IMASS
+ 0                                       IDAMP
+ 0                                       ISTIF
+ -1                                      NBETA (array BETA follows)
+ 0 1                                     BETA
+ 0                                       NFIELD

@@ -1,0 +1,12 @@
+! CETO mesh resolution study at shallow depth
+ 30.0                        HBOT (-1 infinite depth)
+ 1   1                       IRAD,IDIFF (use all 6 dofs for rad/diff)
+ -402                        NPER (array PER follows)
+ -0.025 0.025                PER (frequency) start, spacing 
+ -1                          NBETA (array BETA follows)
+ 0 1                         BETA - start, spacing
+ 1                           NBODY
+ cylinder_1632.gdf
+ 0. 0. -3.0 0.               XBODY(1-4) - initial x,y,z,Mx position of body cg relative to SWL (body mesh should have origin at its own cg not SWL)
+ 1  1  1  1  1  1            IMODE(1-6) - 1, turn on each 6 standard dofs 
+

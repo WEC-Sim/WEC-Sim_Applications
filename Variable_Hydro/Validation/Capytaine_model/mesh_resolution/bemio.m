@@ -32,8 +32,9 @@ for i = 1:length(res_str)-1
     hydroCubit(i) = hydro;
 end
 
-for i = 1:length(res_str)-2
-    file = fullfile("..", "..", "WAMIT_model", res_str(i) + "_output.out");
+for i = 1:length(res_str)
+    % file = fullfile("..", "..", "WAMIT_model", res_str(i) + "_output.out");
+    file = fullfile("..", "..", "WAMIT_model", "cylinder_" + nPanels(i) + ".out");
     hydro = readWAMIT(struct(), file, []);
     hydro = radiationIRF(hydro, 60, [], [], [], []);
     hydro = excitationIRF(hydro, 60, [], [], [], []);
@@ -44,8 +45,8 @@ end
 % Plot all data
 plotBEMIO(hydroData(1), hydroData(2), hydroData(3), hydroData(4), hydroData(5), ...
     hydroCubit(1), hydroCubit(2), hydroCubit(3), hydroCubit(4),...
-    hydroWAMIT(1), hydroWAMIT(2), hydroWAMIT(3));
-legendStr = [string(nPanels)' string(nPanels(1:4))'+" - cubit" string(nPanels(1:3))'+" - wamit"];
+    hydroWAMIT(1), hydroWAMIT(2), hydroWAMIT(3), hydroWAMIT(4), hydroWAMIT(5));
+legendStr = [string(nPanels)' string(nPanels(1:4))'+" - cubit" string(nPanels(1:5))'+" - wamit"];
 i1 = 1;
 for i = i1:i1+5
     f = figure(i);
