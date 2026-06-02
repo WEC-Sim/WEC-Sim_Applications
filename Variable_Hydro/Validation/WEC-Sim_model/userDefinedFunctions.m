@@ -20,7 +20,6 @@ else
     % Save MCR data
     mcrOut.PTO_motion_amplitude(imcr) = PTO_motion_amplitude;
     mcrOut.PTO_motion_period(imcr) = PTO_motion_period;
-    mcrOut.PTO_motion_frequency(imcr) = PTO_motion_frequency;
     mcrOut.time(:,imcr) = output.bodies(1).time;
     mcrOut.position(:,imcr) = output.bodies(1).position(:,3);
     mcrOut.velocity(:,imcr) = output.bodies(1).velocity(:,3);
@@ -32,16 +31,21 @@ else
     % mcrOut.forceRestoring(:,imcr) = output.bodies(1).forceRestoring(:,3); % should always be zero
     % mcrOut.forceMorisonAndViscous(:,imcr) = output.bodies(1).forceMorisonAndViscous(:,3); % not variable hydro informed
     % mcrOut.forceLinearDamping(:,imcr) = output.bodies(1).forceLinearDamping(:,3); % not variable hydro informed
-    mcrOut.hydroForceIndex(:,imcr) = output.bodies(1).hydroForceIndex(:);
+    if body.variableHydro.option == 0
+        mcrOut.hydroForceIndex(:,imcr) = 0;
+    else
+        mcrOut.hydroForceIndex(:,imcr) = output.bodies(1).hydroForceIndex(:);
+    end
 
     if imcr == length(mcr.cases)
         if isequal(waves.type, 'noWave')
-            outputfile = ['mcr_output_' num2str(PTO_motion_period) 's_period.mat'];
+            str1 = [num2str(PTO_motion_period) 's_period'];
         elseif isequal(waves.type, 'noWaveCIC')
-            outputfile = ['mcr_output_' num2str(PTO_motion_period) 's_cic_period.mat'];
+            str1 = ['cic_' num2str(PTO_motion_period) 's_period'];
         end
+        outputfile = ['ws_output_' str1 '.mat'];
         save(outputfile, "mcrOut", '-v7.3');
 
-        plotMCR
+        % plotMCR
     end
 end 
