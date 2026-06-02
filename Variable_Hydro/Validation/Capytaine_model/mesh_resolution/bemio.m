@@ -21,14 +21,16 @@ for i = 1:length(res_str)
     hydro = readCAPYTAINE(struct(), file);
     hydro = radiationIRF(hydro, 60, [], [], [], []);
     hydro = excitationIRF(hydro, 60, [], [], [], []);
+    hydro.plotDofs = 3;
     hydroData(i) = hydro;
 end
 
-for i = 1:length(res_str)-1
+for i = 1:length(res_str)
     file = fullfile("..", "uniform_elements_cubit", res_str(i) + "_output.nc");
     hydro = readCAPYTAINE(struct(), file);
     hydro = radiationIRF(hydro, 60, [], [], [], []);
     hydro = excitationIRF(hydro, 60, [], [], [], []);
+    hydro.plotDofs = 3;
     hydroCubit(i) = hydro;
 end
 
@@ -38,24 +40,70 @@ for i = 1:length(res_str)
     hydro = readWAMIT(struct(), file, []);
     hydro = radiationIRF(hydro, 60, [], [], [], []);
     hydro = excitationIRF(hydro, 60, [], [], [], []);
+    hydro.plotDofs = 3;
     hydroWAMIT(i) = hydro;
 end
 
-%%
-% Plot all data
-plotBEMIO(hydroData(1), hydroData(2), hydroData(3), hydroData(4), hydroData(5), ...
-    hydroCubit(1), hydroCubit(2), hydroCubit(3), hydroCubit(4),...
-    hydroWAMIT(1), hydroWAMIT(2), hydroWAMIT(3), hydroWAMIT(4), hydroWAMIT(5));
-legendStr = [string(nPanels)' string(nPanels(1:4))'+" - cubit" string(nPanels(1:5))'+" - wamit"];
-i1 = 1;
-for i = i1:i1+5
-    f = figure(i);
-    for j = 1:2:5
-        f.Children(j).String = cellstr(legendStr);
+%% Plot capytaine data together
+myPlots(hydroData, hydroCubit, nPanels, "capy mesh, n = ", "cubit mesh, n = ");
+myPlots(hydroCubit, hydroWAMIT, nPanels, "capy, n = ", "wamit, n = ");
+
+
+function myPlots(data1, data2, nPanels, leg1, leg2)
+colors = orderedcolors("gem");
+figure()
+tiledlayout(2,3)
+for j = 1:2
+    nexttile
+    hold on
+    for i = 1:5
+        plot(squeeze(data1(i).w), squeeze(data1(i).A(3,3,:)), 'Color', colors(i,:));
     end
-    for j = 2:2:6
-        if i ~= i1+2 && i ~= i1+5
-            f.Children(j).XLim = [0 5];
-        end
+    for i = 1:5
+        plot(squeeze(data2(i).w), squeeze(data2(i).A(3,3,:)), 'Color', colors(i,:), 'LineStyle', '--');
     end
+    if j == 2
+        xlim([0.25 0.5]);
+    end
+    hold off
+    xlabel('Frequency (rad/s)');
+    ylabel('Added Mass (-)');
+    
+    nexttile
+    hold on
+    for i = 1:5
+        plot(squeeze(data1(i).w), squeeze(data1(i).B(3,3,:)), 'Color', colors(i,:));
+    end
+    for i = 1:5
+        plot(squeeze(data2(i).w), squeeze(data2(i).B(3,3,:)), 'Color', colors(i,:), 'LineStyle', '--');
+    end
+    if j == 2
+        xlim([0.25 0.5]);
+    end
+    hold off
+    xlabel('Frequency (rad/s)');
+    ylabel('Radiation Damping (-)');
+    
+    nexttile
+    hold on
+    for i = 1:5
+        plot(squeeze(data1(i).w), squeeze(data1(i).ex_ma(3,1,:)), 'Color', colors(i,:));
+    end
+    for i = 1:5
+        plot(squeeze(data2(i).w), squeeze(data2(i).ex_ma(3,1,:)), 'Color', colors(i,:), 'LineStyle', '--');
+    end
+    if j == 2
+        xlim([0.25 0.5]);
+    end
+    hold off
+    xlabel('Frequency (rad/s)');
+    ylabel('Excitation magnitude (-)');
+
+    if j == 1
+        legendStr = [leg1+string(nPanels)' ...
+            leg2+string(nPanels)'];
+        legend(legendStr);
+        sgtitle('Heave hydrodynamic coefficients (-)');
+    end
+end
 end
