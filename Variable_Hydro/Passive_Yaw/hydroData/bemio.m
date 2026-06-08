@@ -58,6 +58,7 @@ for i = nTheta0 + 1 : length(theta)
 
     dTheta = (theta(i) - theta(ind1)) / (theta(ind2) - theta(ind1));
     for iVar = 2:length(vars) % start at 2 to skip theta
+        TODO - some of this may be performed wrong... double check
         hydro_split(i).(vars{iVar}) = hydro_split(ind1).(vars{iVar}) * (1-dTheta) +...
                                       hydro_split(ind2).(vars{iVar}) * dTheta;
     end

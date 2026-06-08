@@ -7,23 +7,23 @@ if exist('mcr','var')
 end
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 0;                      % Wave Ramp Time [s]
-simu.endTime = 200;                     % Simulation End Time [s]
+simu.endTime = 100;                     % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01; 						% Simulation time-step [s]
-simu.mcrMatFile = 'mcr_variablehydro.mat';
-simu.dtOut = 0.01;
+simu.mcrMatFile = 'mcr_cases_5s_cic.mat';
+simu.dtOut = 0.05;
 simu.cicEndTime = 30;
+simu.reloadH5Data = 1;
 
 PTO_motion_amplitude = 6; % CFD cases at 2.5, 4, 5, 6m amplitudes
-PTO_motion_period = 20; % s period
-PTO_motion_frequency = 2*pi / PTO_motion_period;
+PTO_motion_period = 10; % s period
 
 %% Wave Information 
 % % noWaveCIC, no waves with radiation CIC  
-% waves = waveClass('noWave');       % Initialize Wave Class and Specify Type  
-% waves.period = PTO_motion_period;
+waves = waveClass('noWave');       % Initialize Wave Class and Specify Type  
+waves.period = PTO_motion_period;
 
-waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
+% waves = waveClass('noWaveCIC');       % Initialize Wave Class and Specify Type  
 
 % % Regular Waves  
 % waves = waveClass('regular');           % Initialize Wave Class and Specify Type                                 
@@ -78,8 +78,7 @@ body(1).geometryFile = 'geometry/cylinder.stl';    % Location of Geomtry File
 body(1).mass = 'equilibrium';                           % User-Defined mass [kg]
 body(1).inertia = [1.85e6 1.85e6 1.85e6];       % Moment of Inertia [kg-m^2]
 body(1).variableHydro.option = 1;
-body(1).variableHydro.hydroForceIndexInitial = find(bemDepths==-9); % default = -9m depth
-
+body(1).variableHydro.hydroForceIndexInitial = find(bemDepths==-6.5); % default = -9m depth
 
 %% Translational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize PTO Class for PTO1
