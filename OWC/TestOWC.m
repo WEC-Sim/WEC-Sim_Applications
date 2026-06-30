@@ -22,6 +22,14 @@ classdef TestOWC < matlab.unittest.TestCase
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemioOrifice(testCase)
             cd(testCase.h5DirOrifice);
             if isfile(testCase.h5NameOrifice)
@@ -58,7 +66,7 @@ classdef TestOWC < matlab.unittest.TestCase
         function testOWCOrifice(testCase)
             cd('OrificeModel')
             wecSim
-            close_system('OWC_rigid',0)
+            close_system('OWC_GBM',0)
         end
         function testOWCFloating(testCase)
             isCI = strcmpi(getenv("GITHUB_ACTIONS"), "true");
@@ -67,7 +75,7 @@ classdef TestOWC < matlab.unittest.TestCase
                 "MoorDyn is not installed");
             cd('FloatingOWC')
             wecSim
-            close_system('OWC_GBM',0)
+            close_system('OWC_rigid',0)
         end
     end
 end

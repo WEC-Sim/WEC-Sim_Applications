@@ -22,11 +22,17 @@ classdef TestRadiationForceOptions < matlab.unittest.TestCase
     end
     
     methods(TestClassSetup)
-
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
-
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemio(testCase)
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -52,6 +58,7 @@ classdef TestRadiationForceOptions < matlab.unittest.TestCase
     methods(Test)        
         function TestRadiation_Force_Options(testCase)
             compare_runs
+            close_system('RM3',0)
         end               
     end 
 

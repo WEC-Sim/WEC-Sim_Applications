@@ -24,11 +24,17 @@ classdef TestVariableHydro < matlab.unittest.TestCase
     end
     
     methods(TestClassSetup)
-        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0, 'DefaultFigureVisible');
         end
-        
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemioPY(testCase)
             cd(testCase.h5DirPY);
             if isfile(testCase.h5NamePY)
@@ -74,7 +80,7 @@ classdef TestVariableHydro < matlab.unittest.TestCase
         function testVM(testCase)
             cd('Variable_Mass')
             wecSim
-            close_system('OSWEC',0)
+            close_system('sphereVarMass',0)
         end
     end
     

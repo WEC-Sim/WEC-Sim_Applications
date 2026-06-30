@@ -23,7 +23,15 @@ classdef TestPTOSimRM3 < matlab.unittest.TestCase
     methods(TestClassSetup)        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
+        end
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -58,10 +66,12 @@ classdef TestPTOSimRM3 < matlab.unittest.TestCase
         function testRM3_cHydraulic_PTO(testCase)
             cd('RM3_cHydraulic_PTO')
             wecSim
+            close_system('RM3_cHydraulic_PTO',0)
         end        
         function testRM3_DD_PTO(testCase)
             cd('RM3_DD_PTO')
             wecSim
+            close_system('RM3_DD_PTO',0)
         end               
     end    
 end

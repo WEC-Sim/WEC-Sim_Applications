@@ -21,12 +21,18 @@ classdef TestMeanDrift < matlab.unittest.TestCase
         end
     end
     
-    methods(TestClassSetup)        
-        
+    methods(TestClassSetup)
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
-        
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -36,22 +42,20 @@ classdef TestMeanDrift < matlab.unittest.TestCase
             end
             cd(testCase.testDir)            
         end
-        
-    end    
+    end
     
     methods(TestClassTeardown)
-        
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),     ...
                                  testCase.OriginalDefault);
-        end       
-        
+        end
     end
     
     methods(Test)        
         function testMean_Drift(testCase)
             wecSim
+            close_system('sphere',0)
         end        
     end
     

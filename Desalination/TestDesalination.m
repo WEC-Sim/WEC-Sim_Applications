@@ -24,7 +24,15 @@ classdef TestDesalination < matlab.unittest.TestCase
     methods(TestClassSetup)        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
+        end   
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end     
         function runBemio(testCase)            
             % Check for Simscape Fluids
             assumeEqual(testCase,                               ...
@@ -38,7 +46,7 @@ classdef TestDesalination < matlab.unittest.TestCase
             end
             cd(testCase.testDir)            
             testCase.hasH5 = true;            
-        end        
+        end
     end
     
     methods(TestClassTeardown)        
@@ -52,6 +60,7 @@ classdef TestDesalination < matlab.unittest.TestCase
     methods(Test)        
         function testDesalination(testCase)
             wecSim
+            close_system('OSWEC_RO',0)
         end        
     end    
 end

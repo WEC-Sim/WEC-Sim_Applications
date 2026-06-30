@@ -22,7 +22,15 @@ classdef TestLoadMitigatingControls < matlab.unittest.TestCase
     methods(TestClassSetup)        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
+        end
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -52,14 +60,17 @@ classdef TestLoadMitigatingControls < matlab.unittest.TestCase
         function testLoad_Mitigating_Control_ControlTests(testCase)
             cd('ControlTests')
             wecSim
+            close_system('WaveBot3Dof_Control',0)
         end
         function testLoad_Mitigating_Control_CalcImpedance(testCase)
             cd('CalcImpedance')
             wecSim
+            close_system('WaveBot3Dof_ID',0)
         end
         function testLoad_Mitigating_Control_CalcImpedance_MCR(testCase)
             cd('CalcImpedance')
             wecSimMCR
+            close_system('WaveBot3Dof_ID',0)
         end
     end
 end

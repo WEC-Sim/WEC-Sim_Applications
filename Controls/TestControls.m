@@ -24,6 +24,14 @@ classdef TestControls < matlab.unittest.TestCase
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemio(testCase)
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -53,26 +61,32 @@ classdef TestControls < matlab.unittest.TestCase
         function testPassive(testCase)
             cd('Passive (P)')
             wecSim
+            close_system('passive',0)
         end        
         function testReactive(testCase)
             cd('Reactive (PI)')
             wecSim
+            close_system('reactive',0)
         end        
         function testLatching(testCase)
             cd('Latching')
             wecSim
+            close_system('latchTime',0)
         end        
         function testDeclutching(testCase)
             cd('Declutching')
             wecSim
+            close_system('declutch',0)
         end        
         function testMPC(testCase)
             cd('MPC')
             wecSim
+            close_system('sphereMPC',0)
         end     
         function testReactiveWithPTO(testCase)
             cd('ReactiveWithPTO')
             wecSim
+            close_system('reactiveWithPTO',0)
         end     
     end    
 end

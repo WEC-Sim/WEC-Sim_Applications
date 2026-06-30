@@ -23,7 +23,15 @@ classdef TestNonlinearHydro < matlab.unittest.TestCase
     methods(TestClassSetup)        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
+        end
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -59,16 +67,16 @@ classdef TestNonlinearHydro < matlab.unittest.TestCase
             cd(fullfile('ode4', 'RegularCIC'))
             wecSim
             close_system('ellipsoid',0)
-        end        
+        end
         function testNonlinear_Hydro_ode45_Regular(testCase)
             cd(fullfile('ode45', 'Regular'))
             wecSim
             close_system('ellipsoid',0)
-        end        
+        end
         function testNonlinear_Hydro_ode45_RegularCIC(testCase)
             cd(fullfile('ode45', 'RegularCIC'))
             wecSim
             close_system('ellipsoid',0)
-        end        
+        end
     end    
 end

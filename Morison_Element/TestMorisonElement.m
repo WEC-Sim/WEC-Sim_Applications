@@ -20,10 +20,18 @@ classdef TestMorisonElement < matlab.unittest.TestCase
         end        
     end
     
-    methods(TestClassSetup)        
+    methods(TestClassSetup)
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
-        end        
+        end
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemio(testCase)
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -38,7 +46,7 @@ classdef TestMorisonElement < matlab.unittest.TestCase
     methods(TestMethodTeardown)
         function returnHome(testCase)
             cd(testCase.testDir)
-        end        
+        end
     end
     
     methods(TestClassTeardown)

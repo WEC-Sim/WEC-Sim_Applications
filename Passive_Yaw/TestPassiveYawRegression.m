@@ -28,6 +28,14 @@ classdef TestPassiveYawRegression < matlab.unittest.TestCase
     end
     
     methods(TestClassSetup)
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runYawIrrTest(testCase)
             cd(fullfile(testCase.testDir,   ...
                         'PassiveYawRegression'))

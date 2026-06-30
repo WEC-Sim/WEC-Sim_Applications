@@ -8,6 +8,7 @@ enable_FIR         = 0;
 enable_ss          = 0;
 t_regular          = tic;
 wecSim
+close_system('RM3',0)
 run_time.baseline    = toc(t_regular);
 run_summary.baseline = output;
 clearvars -except run_summary run_time
@@ -19,6 +20,7 @@ enable_FIR         = 1;
 enable_ss          = 0;
 tStart_FIR = tic;
 wecSim
+close_system('RM3',0)
 run_time.FIR    = toc(tStart_FIR)/run_time.baseline;
 run_summary.FIR = output;
 clearvars -except run_summary run_time
@@ -30,6 +32,7 @@ enable_FIR         = 0;
 enable_ss          = 1;
 tStart_ss          = tic;
 wecSim
+close_system('RM3',0)
 run_time.state_space   = toc(tStart_ss)/run_time.baseline;
 run_summary.state_space = output;
 clearvars -except run_summary run_time
@@ -40,6 +43,7 @@ enable_FIR         = 0;
 enable_ss          = 0;
 t_conv             = tic;
 wecSim
+close_system('RM3',0)
 run_time.convolution    = toc(t_conv)/run_time.baseline;
 run_summary.convolution = output;
 clearvars -except run_summary run_time

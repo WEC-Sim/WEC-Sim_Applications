@@ -24,6 +24,14 @@ classdef TestOSWECNonLinearViz < matlab.unittest.TestCase
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemio(testCase)            
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -54,6 +62,7 @@ classdef TestOSWECNonLinearViz < matlab.unittest.TestCase
     methods(Test)        
         function testParaview_Visualization_OSWEC_NonLinear_Viz(testCase)
             wecSim
+            close_system('OSWEC',0)
         end        
     end    
 end

@@ -22,11 +22,17 @@ classdef TestCable < matlab.unittest.TestCase
     end
     
     methods(TestClassSetup)
-        
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0, 'DefaultFigureVisible');
         end
-        
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBemio(testCase)
             cd(testCase.h5Dir);
             if isfile(testCase.h5Name)
@@ -40,18 +46,17 @@ classdef TestCable < matlab.unittest.TestCase
     end
     
     methods(TestClassTeardown)
-        
         function checkVisibilityRestored(testCase)
             set(0, 'DefaultFigureVisible', testCase.OriginalDefault);
             testCase.assertEqual(get(0, 'DefaultFigureVisible'),    ...
                                  testCase.OriginalDefault);
         end
-        
     end
     
     methods(Test)
         function testCable(testCase)
             wecSim
+            close_system('MBARI_cable',0)
         end
     end
     

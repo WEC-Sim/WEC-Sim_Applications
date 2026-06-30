@@ -33,6 +33,14 @@ classdef TestMOST < matlab.unittest.TestCase
         function captureVisibility(testCase)
             testCase.OriginalDefault = get(0,'DefaultFigureVisible');
         end
+        function removeProjectFolder(~)
+            d = dir('**');
+            d = d([d.isdir]);
+            d = d(string({d.name})=="slprj");
+            for i = 1:length(d)
+                rmdir(fullfile(d(i).folder, d(i).name), 's')
+            end
+        end
         function runBEMIO(testCase)
             cd(fullfile(testCase.testDir, testCase.hydroDataDir));
             if isfile(testCase.h5Name)
@@ -52,6 +60,7 @@ classdef TestMOST < matlab.unittest.TestCase
         function runTurbulentTest(testCase)
             cd(fullfile(testCase.testDir,'turbulent'))
             runLoadTurbulent;
+            close_system('SModel_VolturnUS',0)
             testCase.turbulent = load('turbulent.mat').("turbulent");
             cd(testCase.testDir);
         end
@@ -63,6 +72,9 @@ classdef TestMOST < matlab.unittest.TestCase
             if testCase.plotComparison == 1
                 plotTests(testCase.turbulent.newCase,testCase.turbulent.orgCase);
             end
+        end
+        function closeModels(~)
+            bdclose('all');
         end
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
