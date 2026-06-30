@@ -73,9 +73,6 @@ classdef TestMOST < matlab.unittest.TestCase
                 plotTests(testCase.turbulent.newCase,testCase.turbulent.orgCase);
             end
         end
-        function closeModels(~)
-            bdclose('all');
-        end
         function checkVisibilityRestored(testCase)
             set(0,'DefaultFigureVisible',testCase.OriginalDefault);
             testCase.assertEqual(get(0,'DefaultFigureVisible'),...
