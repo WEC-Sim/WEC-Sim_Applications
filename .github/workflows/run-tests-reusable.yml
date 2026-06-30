@@ -33,7 +33,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           lfs: true
           ref: ${{ inputs.head_ref }}
@@ -41,14 +41,14 @@ jobs:
       - name: Checkout LFS objects
         run: git lfs checkout
       - name: Check out WEC-Sim
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: WEC-Sim/WEC-Sim
           ref: ${{ inputs.base_ref }}
           path: './WEC-Sim'
       - name: Check out MoorDyn
         if: matrix.folder == 'Mooring' || matrix.folder == 'OWC' || matrix.folder == 'Paraview_Visualization'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: WEC-Sim/MoorDyn
           path: './MoorDyn'
@@ -60,7 +60,7 @@ jobs:
         shell: bash
         working-directory: './MoorDyn'
       - name: Install MATLAB
-        uses: matlab-actions/setup-matlab@v2
+        uses: matlab-actions/setup-matlab@v3
         with:
           products: ${{ matrix.products }}
           release: ${{ matrix.release }}
@@ -71,7 +71,7 @@ jobs:
           Xvfb :99 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
       - name: Install WEC-Sim, run tests and generate artifacts
-        uses: matlab-actions/run-command@v2
+        uses: matlab-actions/run-command@v3
         with:
           command: |
             addpath(genpath('WEC-Sim/source'));
