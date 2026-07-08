@@ -4,6 +4,9 @@ cic = 'cic_'; % '' or 'cic_'
 outputfile = ['ws_output_' cic num2str(period) 's_period.mat'];
 load(outputfile);
 cicTime = 30;
+volume = pi/4*25^2*5;
+density = 1000;
+g = 9.81;
 
 %% Read CFD data
 cfdFile = 'CalmWater.xlsx';
@@ -89,10 +92,10 @@ for j = 1:2
     end
     hold on
     for i = 1:4
-        plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), mcrOut.forceTotal(:,i), 'Color', colors(i,:), 'LineStyle', '-');
+        plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), mcrOut.forceTotal(:,i)+volume*density*g, 'Color', colors(i,:), 'LineStyle', '-');
     end
     for i = 5:8
-        plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), mcrOut.forceTotal(:,i), 'Color', colors(i-4,:), 'LineStyle', '--');
+        plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), mcrOut.forceTotal(:,i)+volume*density*g, 'Color', colors(i-4,:), 'LineStyle', '--');
     end
     if period == 10
         for i = 1:3
