@@ -64,7 +64,7 @@ jobs:
         uses: egor-tensin/setup-mingw@v3
       - name: Add MATLAB MinGW environment variable
         if: (matrix.folder == 'Mooring' || matrix.folder == 'Paraview_Visualization') && matrix.os == 'windows-latest'
-        run: echo "MW_MINGW64_LOC=C:\ProgramData\chocolatey\lib\mingw\tools\install"
+        run: echo "MW_MINGW64_LOC=C:\ProgramData\chocolatey\lib\mingw\tools\install" >> $GITHUB_ENV
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
