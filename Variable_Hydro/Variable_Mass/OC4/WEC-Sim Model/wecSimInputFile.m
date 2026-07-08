@@ -5,7 +5,7 @@ simu.mode = 'normal';                           % Specify Simulation Mode ('norm
 simu.explorer = 'on';                           % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                             % Simulation Start Time [s]
 simu.rampTime = 100;                              % Wave Ramp Time [s]
-simu.endTime = 4100;                             % Simulation End Time [s]        
+simu.endTime = 8100;                             % Simulation End Time [s]        
 simu.solver = 'ode4';                           % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.1;                                 % Simulation Time-Step [s]
 % simu.cicEndTime = 15;                           % Specify CI Time [s]
@@ -21,7 +21,7 @@ waves.period = 8;                       % Wave Period [s]
 %% Body Data
 % Define h5 files for the sphere
 rho = 1025;
-draftVals = 18:0.1:22;
+draftVals = 18:0.05:22;
 numDraftVals = length(draftVals);
 
 for ii = 1:length(draftVals)
@@ -34,7 +34,7 @@ end
 body(1) = bodyClass(h5Files);
 body(1).geometryFile = '../BEM/OC4_Semisub.stl';
 body(1).mass = 'equilibrium';
-body(1).inertia = inertiaVals(21,:);
+body(1).inertia = inertiaVals(41,:);
 body(1).initial.displacement = [0, 0, 0];
 body(1).variableHydro.option = 1;
 body(1).variableHydro.hydroForceIndexInitial = 1;
