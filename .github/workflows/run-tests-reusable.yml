@@ -63,7 +63,7 @@ jobs:
         if: (matrix.folder == 'Mooring' || matrix.folder == 'Paraview_Visualization') && matrix.os == 'windows-latest'
         uses: egor-tensin/setup-mingw@v3
         with:
-          version: v8.1
+          version: 8.1
       - name: Add MATLAB MinGW environment variable
         if: (matrix.folder == 'Mooring' || matrix.folder == 'Paraview_Visualization') && matrix.os == 'windows-latest'
         run: echo "MW_MINGW64_LOC=C:\ProgramData\chocolatey\lib\mingw\tools\install" >> $GITHUB_ENV
