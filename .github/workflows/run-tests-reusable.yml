@@ -59,6 +59,9 @@ jobs:
             ls ../WEC-Sim/source/functions/moorDyn
         shell: bash
         working-directory: './MoorDyn'
+      - name: Install MinGW (for MATLAB accelerator/rapid-accelerator)
+        if: matrix.folder == 'Mooring' || matrix.folder == 'Paraview_Visualization'
+        uses: egor-tensin/setup-mingw@v3
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
@@ -70,9 +73,6 @@ jobs:
           sudo apt-get install xvfb
           Xvfb :99 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
-      - name: Install MinGW (for MATLAB accelerator/rapid-accelerator)
-        if: matrix.folder == 'Mooring' || matrix.folder == 'Paraview_Visualization'
-        uses: egor-tensin/setup-mingw@v3
       - name: Install WEC-Sim, run tests and generate artifacts
         uses: matlab-actions/run-command@v3
         with:
