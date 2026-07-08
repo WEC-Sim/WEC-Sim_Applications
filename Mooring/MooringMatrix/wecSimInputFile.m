@@ -45,5 +45,3 @@ mooring(1).matrix.stiffness = zeros(6,6);
 mooring(1).matrix.stiffness(1,1) = 1e5;
 mooring(1).matrix.damping = zeros(6,6);
 mooring(1).matrix.preTension = zeros(1,6);
-
-
