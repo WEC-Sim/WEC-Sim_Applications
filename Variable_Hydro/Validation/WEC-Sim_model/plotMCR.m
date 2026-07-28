@@ -37,7 +37,7 @@ hold on
 for i = 1:4
     plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), mcrOut.position(:,i), 'Color', colors(i,:), 'LineStyle', '-');
 end
-for i = 5:8
+for i = 7:10
     plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), mcrOut.position(:,i), 'Color', colors(i-4,:), 'LineStyle', '--');
 end
 if period == 10
@@ -59,7 +59,7 @@ hold on
 for i = 1:4
     plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), -mcrOut.forceRadiationDamping(:,i), 'Color', colors(i,:), 'LineStyle', '-');
 end
-for i = 5:8
+for i = 7:10
     plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), -mcrOut.forceRadiationDamping(:,i), 'Color', colors(i-4,:), 'LineStyle', '--');
 end
 hold off
@@ -74,7 +74,7 @@ hold on
 for i = 1:4
     plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), -mcrOut.forceAddedMass(:,i), 'Color', colors(i,:), 'LineStyle', '-');
 end
-for i = 5:8
+for i = 7:10
     plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), -mcrOut.forceAddedMass(:,i), 'Color', colors(i-4,:), 'LineStyle', '--');
 end
 hold off
@@ -94,7 +94,7 @@ for j = 1:2
     for i = 1:4
         plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), mcrOut.forceTotal(:,i)+volume*density*g, 'Color', colors(i,:), 'LineStyle', '-');
     end
-    for i = 5:8
+    for i = 7:10
         plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), mcrOut.forceTotal(:,i)+volume*density*g, 'Color', colors(i-4,:), 'LineStyle', '--');
     end
     if period == 10
@@ -110,3 +110,23 @@ for j = 1:2
     xlim(xlims);
 end
 
+%% plot hydro force index
+
+legendString = ["WSVH, A="+string(mcrOut.PTO_motion_amplitude(1:4)) ...
+    "WS, A="+string(mcrOut.PTO_motion_amplitude(1:4))];
+xlims = [2 4];
+
+figure()
+hold on
+for i = 1:4
+    plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), mcrOut.hydroForceIndex(:,i), 'Color', colors(i,:), 'LineStyle', '-');
+end
+for i = 7:10
+    plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), mcrOut.hydroForceIndex(:,i), 'Color', colors(i-4,:), 'LineStyle', '--');
+end
+hold off
+title(['Hydro Force index (' num2str(period) 's period)']);
+legend(legendString);
+xlabel('Normalized time (-)');
+ylabel('Index ()');
+xlim(xlims);
