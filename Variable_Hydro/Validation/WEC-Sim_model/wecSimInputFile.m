@@ -78,10 +78,16 @@ body(1).geometryFile = 'geometry/cylinder.stl';    % Location of Geomtry File
 body(1).mass = 'equilibrium';                           % User-Defined mass [kg]
 body(1).inertia = [1.85e6 1.85e6 1.85e6];       % Moment of Inertia [kg-m^2]
 body(1).variableHydro.option = 1;
-body(1).variableHydro.hydroForceIndexInitial = find(bemDepths==-6.5); % default = -9m depth
+body(1).variableHydro.hydroForceIndexInitial = find(bemDepths==-6.5);
+
+maxVelocity = [0.25 4]*2*pi/PTO_motion_period;
+Reynolds = simu.rho*maxVelocity*25/1.61e-3;
+% L/D = 0.2 for this geometry
+body(1).quadDrag.area = [0 0 pi/4*25^2 0 0 0];
+body(1).quadDrag.cd = [0 0 1.12 0 0 0]; % Munson, Young, Okiishi
 
 %% Translational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize PTO Class for PTO1
 pto(1).stiffness = 0;                           % PTO Stiffness [N/m]
-pto(1).damping = 0;                        % PTO Damping [N/(m/s)]
-pto(1).location = [0 0 -9];                      % PTO Location [m]
+pto(1).damping = 0;                             % PTO Damping [N/(m/s)]
+pto(1).location = [0 0 -9];                     % PTO Location [m]
