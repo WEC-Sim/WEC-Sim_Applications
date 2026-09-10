@@ -32,6 +32,7 @@ legendString = ["WSVH, A="+string(mcrOut.PTO_motion_amplitude(1:4)) ...
     "CFD, A="+string(cfdData.PTO_motion_amplitude)];
 xlims = [2 4];
 
+% skip 5m and 6m amplitudes at this depth (indices 5-6, 11-12)
 figure()
 hold on
 for i = 1:4
@@ -56,7 +57,7 @@ figure()
 tiledlayout(3,1);
 nexttile
 hold on
-for i = 1:4
+for i = 1:4 
     plot(mcrOut.time(:,i)/mcrOut.PTO_motion_period(:,i), -mcrOut.forceRadiationDamping(:,i), 'Color', colors(i,:), 'LineStyle', '-');
 end
 for i = 7:10

@@ -10,7 +10,7 @@ simu.rampTime = 0;                      % Wave Ramp Time [s]
 simu.endTime = 100;                     % Simulation End Time [s]
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01; 						% Simulation time-step [s]
-simu.mcrMatFile = 'mcr_cases_5s_cic.mat';
+simu.mcrMatFile = 'mcr_cases_10s_cic.mat';
 simu.dtOut = 0.05;
 simu.cicEndTime = 30;
 simu.reloadH5Data = 1;
