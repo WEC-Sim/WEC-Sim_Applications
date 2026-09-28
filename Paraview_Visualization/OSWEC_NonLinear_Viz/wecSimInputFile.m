@@ -47,3 +47,4 @@ pto(1) = ptoClass('PTO1');
 pto(1).stiffness = 0;                                  
 pto(1).damping = 0;                                  
 pto(1).location = [0 0 -8.9];                       
+
