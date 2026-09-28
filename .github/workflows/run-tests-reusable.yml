@@ -80,20 +80,31 @@ jobs:
           $mingwBin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
           gcc --version
+      - name: Debug MinGW env
+        if: (matrix.folder == 'Mooring' || matrix.folder == 'Paraview_Visualization') && matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          Write-Host "MW_MINGW64_LOC=$env:MW_MINGW64_LOC"
+          where.exe gcc
+          gcc --version
+          Test-Path "$env:MW_MINGW64_LOC\bin\gcc.exe"
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
           products: ${{ matrix.products }}
           release: ${{ matrix.release }}
       - name: Check MATLAB compiler
+        if: (matrix.folder == 'Mooring' || matrix.folder == 'Paraview_Visualization') && matrix.os == 'windows-latest'
         uses: matlab-actions/run-command@v3
         with:
           command: |
-            getenv('MW_MINGW64_LOC')
-            mex -setup C
-            mex -setup C++
+            disp(getenv('MW_MINGW64_LOC'))
+            system('where gcc')
+            system('gcc --version')
             mex.getCompilerConfigurations('C','Installed')
             mex.getCompilerConfigurations('C++','Installed')
+            mex -setup C
+            mex -setup C++
       - name: Start display server (Desalination on Linux)
         if: matrix.folder == 'Desalination' && matrix.os == 'ubuntu-latest'
         run: |
