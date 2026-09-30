@@ -1,0 +1,51 @@
+# MATLAB autosave/backup
+*.asv
+*.m~
+*.bak
+
+# MATLAB / Simulink generated files
+*.slxc
+slprj/
+codegen/
+work/
+*.log
+*.fig
+
+# Temporary batch files
+currentRun.mat
+latest_run.mat
+latest_damping_bounds.mat
+oswec_batch.mat
+oswec_results.mat
+oswec_optimization_summary.mat
+
+# Generated run outputs
+runs/*
+!runs/.gitkeep
+
+# Generated damping-bound outputs
+damping_bounds/*
+!damping_bounds/.gitkeep
+
+# Generated result files
+oswec_*_optimization_summary.mat
+oswec_*_optimization_summary.csv
+oswec_*_full_run_results.csv
+oswec_*_best_weighted_condition_results.csv
+oswec_*_best_damping_by_condition.csv
+oswec_*_weighted_vs_unweighted_power.png
+oswec_*_failed_runs_by_damping.png
+oswec_*_power_by_condition.png
+oswec_*_weighted_contribution_best_damping.png
+
+# Python cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Generated wave-condition files
+wave_conditions/*.mat
+
+# OS files
+.DS_Store
+Thumbs.db
