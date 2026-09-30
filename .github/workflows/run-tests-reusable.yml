@@ -59,6 +59,21 @@ jobs:
             ls ../WEC-Sim/source/functions/moorDyn
         shell: bash
         working-directory: './MoorDyn'
+      - name: Install MinGW for MATLAB accelerator
+        if: (matrix.folder == 'Mooring' || matrix.folder == 'Paraview_Visualization') && matrix.os == 'windows-latest'
+        uses: egor-tensin/setup-mingw@v3
+        with:
+          version: 8.1.0
+          platform: x64
+      - name: Expose MinGW to MATLAB
+        if: (matrix.folder == 'Mooring' || matrix.folder == 'Paraview_Visualization') && matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          $gcc = (where.exe gcc.exe | Select-String "mingw64\\bin\\gcc.exe" | Select-Object -First 1).ToString()
+          $mingwBin = Split-Path $gcc -Parent
+          $mingwRoot = Split-Path $mingwBin -Parent
+          Write-Host "MW_MINGW64_LOC: $mingwRoot"
+          "MW_MINGW64_LOC=$mingwRoot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
