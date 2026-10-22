@@ -93,5 +93,9 @@ classdef TestPassiveYawRegression < matlab.unittest.TestCase
             fprintf(['2nd Order Spectral Moment, Diff = '       ...
                      num2str(max(abs(org-new))) '\n']);
         end
+        function irregYaw_wave_elevation(testCase)
+            % Match the actual wave time history, not just its spectrum.
+            testCase.verifyEqual(testCase.IrrYaw.Wave_diff,0,'AbsTol',1e-10);
+        end
     end    
 end
