@@ -27,6 +27,7 @@ included in the reported flexible-body acceleration, but its previous direct
 excitation-only connection to the state-space path left the force out of the
 integrated flexible-body motion. The state-space block retains the existing
 flexible stiffness and damping terms.
+The corrected model is saved in the original R2023b Simulink format.
 
 The 130 s regular-wave case in `wecSimInputFile.m` uses `ode23t` and a 0.005 s
 output step. For a resolved comparison of the corrected motion and pneumatic
