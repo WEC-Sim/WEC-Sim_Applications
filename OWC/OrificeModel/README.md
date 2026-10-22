@@ -29,12 +29,13 @@ integrated flexible-body motion. The state-space block retains the existing
 flexible stiffness and damping terms.
 The corrected model is saved in the original R2023b Simulink format.
 
-The 130 s regular-wave case in `wecSimInputFile.m` uses `ode23t` and a 0.005 s
-output step. The corrected model saves a 0.00015625 s maximum solver step. At
-the original 0.005 s maximum step, the corrected model's surge differed by up
-to 1.687 m and its pneumatic work by 1.62% from the refined run despite
-identical waves and no Mach-limit warnings. The smaller step is part of the
-resolved source configuration.
+The 130 s irregular-wave case in `wecSimInputFile.m` uses `ode23t`, a
+0.00015625 s simulation step, and a 0.005 s output sampling step. WEC-Sim
+initialization sets the model's maximum solver step from `simu.dt`, so the
+simulation step must be specified in the input file. An audit with the old
+0.005 s step found up to 1.687 m difference in surge and 1.62% difference in
+pneumatic work against a refined solver run with identical waves and no
+Mach-limit warnings.
 
 **Relevant Citation(s)**
 
