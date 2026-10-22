@@ -30,9 +30,11 @@ flexible stiffness and damping terms.
 The corrected model is saved in the original R2023b Simulink format.
 
 The 130 s regular-wave case in `wecSimInputFile.m` uses `ode23t` and a 0.005 s
-output step. For a resolved comparison of the corrected motion and pneumatic
-work, set the Simulink model's maximum solver step to 0.00015625 s before
-running. The saved model keeps its original 0.005 s maximum step.
+output step. The corrected model saves a 0.00015625 s maximum solver step. At
+the original 0.005 s maximum step, the corrected model's surge differed by up
+to 1.687 m and its pneumatic work by 1.62% from the refined run despite
+identical waves and no Mach-limit warnings. The smaller step is part of the
+resolved source configuration.
 
 **Relevant Citation(s)**
 
