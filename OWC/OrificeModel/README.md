@@ -19,6 +19,20 @@ file with the _clean suffix.
 Run wecSimMCR for orifice area study in mcrOrifice.mat which will work with the
 userDefinedFunctions.m
 
+## Flexible-body piston force
+
+In `OWC_GBM.slx`, the orifice piston force and wave excitation are summed before
+the generalized-body-mode state-space input. The piston force was already
+included in the reported flexible-body acceleration, but its previous direct
+excitation-only connection to the state-space path left the force out of the
+integrated flexible-body motion. The state-space block retains the existing
+flexible stiffness and damping terms.
+
+The 130 s regular-wave case in `wecSimInputFile.m` uses `ode23t` and a 0.005 s
+output step. For a resolved comparison of the corrected motion and pneumatic
+work, set the Simulink model's maximum solver step to 0.00015625 s before
+running. The saved model keeps its original 0.005 s maximum step.
+
 **Relevant Citation(s)**
 
 Add relevant citaions. 
