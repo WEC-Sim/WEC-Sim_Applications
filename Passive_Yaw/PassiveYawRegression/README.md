@@ -25,8 +25,9 @@ version. The archived body, wave, and component CSV SHA-256 values are:
 | wave | `be5906bf1e1a0dfc8d5ec5075473202fe72239b1727cd849869847863163a507` |
 | components | `053265841734b875d53129e3dd5de92961a43f890a6004f3c68401ae5dcdb384` |
 
-The BEMIO-generated `oswec.h5` used for the comparison has SHA-256
-`b9ccf3a32e0893c23b1645c15a2baef4a0c6f678b90d177d5797e3c65de4b7d3`.
+The archived artifact also contains the BEMIO-generated `oswec.h5` used by
+that source run. Its byte hash varies with HDF5 serialization across runs;
+the CSV hashes above identify the stored trajectory and wave reference.
 
 The baseline was assembled from those archived numeric outputs rather
 than from source solver states during a comparison. To regenerate after an
