@@ -30,12 +30,13 @@ flexible stiffness and damping terms.
 The corrected model is saved in the original R2023b Simulink format.
 
 The 130 s irregular-wave case in `wecSimInputFile.m` uses `ode23t`, a
-0.00015625 s simulation step, and a 0.005 s output sampling step. WEC-Sim
+0.00015625 s simulation step, and 0.005 s output sampling. WEC-Sim
 initialization sets the model's maximum solver step from `simu.dt`, so the
-simulation step must be specified in the input file. An audit with the old
-0.005 s step found up to 1.687 m difference in surge and 1.62% difference in
-pneumatic work against a refined solver run with identical waves and no
-Mach-limit warnings.
+simulation step must be specified in the input file. The radiation convolution,
+nonlinear-force, and Morison-force sample times remain explicitly at their
+original 0.005 s setting. An audit with the old 0.005 s solver step found up
+to 1.687 m difference in surge and 1.62% difference in pneumatic work against
+a refined solver run with identical waves and no Mach-limit warnings.
 
 **Relevant Citation(s)**
 

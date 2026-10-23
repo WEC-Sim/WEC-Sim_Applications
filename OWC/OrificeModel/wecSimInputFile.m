@@ -10,6 +10,9 @@ simu.endTime = 130;                     % Simulation End Time [s]
 simu.solver = 'ode23t';                 % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.00015625;               % Simulation and maximum solver step [s]
 simu.dtOut = 0.005;                 % Output sampling step [s]
+simu.cicDt = 0.005;                 % Radiation convolution sampling step [s]
+simu.nonlinearDt = 0.005;           % Nonlinear-force sampling step [s]
+simu.morisonDt = 0.005;             % Morison-force sampling step [s]
 simu.cicEndTime = 15;
 simu.mcrMatFile = 'mcrOrifice.mat';
 
